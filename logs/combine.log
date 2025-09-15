@@ -4665,3 +4665,15 @@
 [32m[39m
 2025-07-27 10:31:47 [32minfo[39m [32mGET /api/v1/finance/transactions 200 5175.187 ms - 1869[39m
 [32m[39m
+2025-09-15 09:36:35 [31merror[39m [31mInternal Server Error [39m
+[31mInvalid `prisma.user.findFirst()` invocation:[39m
+
+
+[31mServer has closed the connection.[39m
+2025-09-15 09:36:35 [32minfo[39m [32mPOST /api/v1/auth/login 500 1807.156 ms - 49[39m
+[32m[39m
+2025-09-15 09:39:14 [31merror[39m [31mUser not found User not found[39m
+2025-09-15 09:39:14 [32minfo[39m [32mPOST /api/v1/auth/login 404 952.405 ms - 42[39m
+[32m[39m
+2025-09-15 09:40:07 [32minfo[39m [32mPOST /api/v1/auth/login 200 204.942 ms - 504[39m
+[32m[39m

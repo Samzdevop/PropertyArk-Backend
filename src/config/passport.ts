@@ -24,44 +24,44 @@ passport.use(
 	)
 );
 
-passport.use(
-	new GoogleStrategy(
-		{
-			clientID: process.env.GOOGLE_CLIENT_ID!,
-			clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-			callbackURL: process.env.GOOGLE_CALLBACK!,
-		},
-		async (_accessToken, _refreshToken, profile, done) => {
-			console.log(profile);
-			try {
-				const userObj = {
-					googleId: profile.id,
-					email: profile.emails![0].value,
-					fullName: profile.displayName,
-				};
+// passport.use(
+// 	new GoogleStrategy(
+// 		{
+// 			clientID: process.env.GOOGLE_CLIENT_ID!,
+// 			clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+// 			callbackURL: process.env.GOOGLE_CALLBACK!,
+// 		},
+// 		async (_accessToken, _refreshToken, profile, done) => {
+// 			console.log(profile);
+// 			try {
+// 				const userObj = {
+// 					googleId: profile.id,
+// 					email: profile.emails![0].value,
+// 					fullName: profile.displayName,
+// 				};
 
-				let userExist = await prisma.user.findFirst({
-					where: { OR: [{ email: userObj.email }, { googleId: profile.id }] },
-				});
-				let user;
-				let id: string = userExist?.id || '';
-				// Don't persist existing users in the database
-				if (!userExist) {
-					user = await prisma.user.create({
-						data: userObj,
-					});
-					id = user.id;
-				} else {
-					user = userExist;
-				}
+// 				let userExist = await prisma.user.findFirst({
+// 					where: { OR: [{ email: userObj.email }, { googleId: profile.id }] },
+// 				});
+// 				let user;
+// 				let id: string = userExist?.id || '';
+// 				// Don't persist existing users in the database
+// 				if (!userExist) {
+// 					user = await prisma.user.create({
+// 						data: userObj,
+// 					});
+// 					id = user.id;
+// 				} else {
+// 					user = userExist;
+// 				}
 
-				const token = generateToken({ email: userObj.email, id });
-				return done(null, { user, token });
-			} catch (err) {
-				return done(err, false);
-			}
-		}
-	)
-);
+// 				const token = generateToken({ email: userObj.email, id });
+// 				return done(null, { user, token });
+// 			} catch (err) {
+// 				return done(err, false);
+// 			}
+// 		}
+// 	)
+// );
 
 export default passport;

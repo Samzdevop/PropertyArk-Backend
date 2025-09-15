@@ -3591,3 +3591,9 @@
 [31m}[39m
 
 [31mArgument `currentQuantity`: Invalid value provided. Expected Float, provided Object.[39m
+2025-09-15 09:36:35 [31merror[39m [31mInternal Server Error [39m
+[31mInvalid `prisma.user.findFirst()` invocation:[39m
+
+
+[31mServer has closed the connection.[39m
+2025-09-15 09:39:14 [31merror[39m [31mUser not found User not found[39m
