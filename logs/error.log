@@ -3597,3 +3597,72 @@
 
 [31mServer has closed the connection.[39m
 2025-09-15 09:39:14 [31merror[39m [31mUser not found User not found[39m
+2025-10-07 14:49:32 [31merror[39m [31mPrisma error: [39m
+[31mInvalid `prisma.livestock.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:92:46[39m
+
+[31m  89   ...(type && { type: String(type) }) [39m
+[31m  90 };[39m
+[31m  91 [39m
+[31m→ 92 const livestock = await prisma.livestock.findMany([39m
+[31mThe column `Livestock.isDeleted` does not exist in the current database. [39m
+[31mInvalid `prisma.livestock.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:92:46[39m
+
+[31m  89   ...(type && { type: String(type) }) [39m
+[31m  90 };[39m
+[31m  91 [39m
+[31m→ 92 const livestock = await prisma.livestock.findMany([39m
+[31mThe column `Livestock.isDeleted` does not exist in the current database.[39m
+2025-10-07 14:49:46 [31merror[39m [31mPrisma error: [39m
+[31mInvalid `prisma.livestock.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:92:46[39m
+
+[31m  89   ...(type && { type: String(type) }) [39m
+[31m  90 };[39m
+[31m  91 [39m
+[31m→ 92 const livestock = await prisma.livestock.findMany([39m
+[31mThe column `Livestock.isDeleted` does not exist in the current database. [39m
+[31mInvalid `prisma.livestock.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:92:46[39m
+
+[31m  89   ...(type && { type: String(type) }) [39m
+[31m  90 };[39m
+[31m  91 [39m
+[31m→ 92 const livestock = await prisma.livestock.findMany([39m
+[31mThe column `Livestock.isDeleted` does not exist in the current database.[39m
+2025-10-07 14:50:03 [31merror[39m [31mPrisma error: [39m
+[31mInvalid `prisma.livestock.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:150:24[39m
+
+[31m  147     isDeleted: false[39m
+[31m  148   }[39m
+[31m  149 }),[39m
+[31m→ 150 prisma.livestock.count([39m
+[31mThe column `Livestock.isDeleted` does not exist in the current database. [39m
+[31mInvalid `prisma.livestock.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:150:24[39m
+
+[31m  147     isDeleted: false[39m
+[31m  148   }[39m
+[31m  149 }),[39m
+[31m→ 150 prisma.livestock.count([39m
+[31mThe column `Livestock.isDeleted` does not exist in the current database.[39m
+2025-10-07 14:56:24 [31merror[39m [31mExpected double-quoted property name in JSON at position 290 (line 11 column 1) Expected double-quoted property name in JSON at position 290 (line 11 column 1)[39m
+2025-10-07 14:56:38 [31merror[39m [31mPrisma error: [39m
+[31mInvalid `prisma.livestock.create()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:28:46[39m
+
+[31m  25 [39m
+[31m  26 const addedById = (req.user as any).id;[39m
+[31m  27 [39m
+[31m→ 28 const livestock = await prisma.livestock.create([39m
+[31mThe column `isDeleted` does not exist in the current database. [39m
+[31mInvalid `prisma.livestock.create()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:28:46[39m
+
+[31m  25 [39m
+[31m  26 const addedById = (req.user as any).id;[39m
+[31m  27 [39m
+[31m→ 28 const livestock = await prisma.livestock.create([39m
+[31mThe column `isDeleted` does not exist in the current database.[39m
