@@ -113,21 +113,20 @@ export const getTask = async (
   next: NextFunction
 ) => {
   try {
-    const userId = (req.user as any).id;
     const taskId = req.params.taskId;
 
-    const task = await prisma.task.findFirst({
+    const task = await prisma.task.findUnique({
       where: {
         id: taskId,
-        assignedToId: userId // Ensures the task belongs to the user
       },
       include: {
-        assignedBy: {select: userSelect } 
+        assignedBy: {select: userSelect },
+        assignedTo: { select: userSelect }
         }
     });
 
     if (!task) {
-      throw new NotFoundError('Task not found or you do not have permission to view it');
+      throw new NotFoundError('Task not found');
     }
 
     sendSuccessResponse(res, 'Task retrieved successfully', { task });

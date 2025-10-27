@@ -3666,3 +3666,7 @@
 [31m  27 [39m
 [31m→ 28 const livestock = await prisma.livestock.create([39m
 [31mThe column `isDeleted` does not exist in the current database.[39m
+2025-10-18 12:50:57 [31merror[39m [31mTask not found or you do not have permission to view it Task not found or you do not have permission to view it[39m
+2025-10-18 12:51:04 [31merror[39m [31mTask not found or you do not have permission to view it Task not found or you do not have permission to view it[39m
+2025-10-18 13:06:09 [31merror[39m [31mTask not found Task not found[39m
+2025-10-26 15:40:34 [31merror[39m [31mUser not found User not found[39m
