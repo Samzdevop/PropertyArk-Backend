@@ -3,26 +3,46 @@ import {
 	deleteUser,
 	getAllUsers,
 	getProfile,
-	updateProfile,
+	// updateProfile,
 	getUserById,
+	updateUserProfile,
+	adminUpdateUser,
 } from '../contollers/users.controllers';
 import { authenticateJWT } from '../middlewares/errorHandler';
 import { validateRequest } from '../middlewares/validateRequest';
-import { updateUserSchema } from '../schemas/users.schemas';
+import { adminUpdateUserSchema, changePasswordSchema, updateUserSchema } from '../schemas/users.schemas';
 import { requireRoles } from '../middlewares/roleCheck';
+import { changePassword } from '../contollers/auth.controller';
 
 export const usersRouter = Router();
 
-usersRouter.get('/profile', authenticateJWT, getProfile);
-
-usersRouter.patch(
-	'/update',
-	authenticateJWT,
-	validateRequest(updateUserSchema),
-	updateProfile
+usersRouter.get(
+	'/profile', 
+	authenticateJWT, 
+	getProfile
 );
 
-// Admin user management routes 
+usersRouter.patch(
+  '/update',
+  authenticateJWT,
+  validateRequest(updateUserSchema),
+  updateUserProfile
+);
+
+usersRouter.patch(
+  '/change-password',
+  authenticateJWT,
+  validateRequest(changePasswordSchema),
+  changePassword
+);
+
+// usersRouter.patch(
+// 	'/update',
+// 	authenticateJWT,
+// 	validateRequest(updateUserSchema),
+// 	updateProfile
+// );
+ 
 usersRouter.get(
 	'/', 
 	authenticateJWT,
@@ -45,4 +65,11 @@ usersRouter.delete(
 );
 
 
+usersRouter.patch(
+  '/:userId',
+  authenticateJWT,
+  requireRoles(['ADMIN']),
+  validateRequest(adminUpdateUserSchema),
+  adminUpdateUser
+);
 

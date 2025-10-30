@@ -5,11 +5,12 @@ export const userSelect = {
     phone: true,
     // password: false,
     // isSuspended: false,
+    companyName: true,
     role: true,
     isVerified: true,
     avatar: true,
     location: true,
     createdAt: true,
     updatedAt: true,
-    
+    lastLogin: true,
 }

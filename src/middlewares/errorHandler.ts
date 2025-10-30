@@ -9,7 +9,6 @@ import { BadRequestError } from '../errors/BadRequestError';
 import { ForbiddenError } from '../errors/ForbiddenError';
 import { NotFoundError } from '../errors/NotFoundError';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
-
 // export const authenticateJWT = passport.authenticate('jwt', { session: false });
 
 export const authenticateJWT = (
@@ -56,6 +55,7 @@ export const errorHandler = (
 	// Default error response
 	let statusCode = 500;
 	let errorMessage = 'Internal Server Error';
+	let details: any = undefined;
 
 	// Handle Prisma errors
 	if (err instanceof Prisma.PrismaClientKnownRequestError) {
@@ -64,6 +64,9 @@ export const errorHandler = (
 		if (err.code === 'P2002') {
 			statusCode = ERROR_CODES.CONFLICT;
 			errorMessage = 'Unique constraint failed. Duplicate entry.';
+
+			const field = err.meta?.target || 'field';
+			details = `A record with this ${ field } already exists`;
 		}
 	} else if (err instanceof Prisma.PrismaClientValidationError) {
 		statusCode = 422; // Unprocessable Entity

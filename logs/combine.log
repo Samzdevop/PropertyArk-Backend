@@ -4832,3 +4832,276 @@
 2025-10-26 15:40:34 [31merror[39m [31mUser not found User not found[39m
 2025-10-26 15:40:34 [32minfo[39m [32mPOST /api/v1/auth/login 404 368.914 ms - 42[39m
 [32m[39m
+2025-10-27 13:13:11 [32minfo[39m [32mPOST /api/v1/auth/register 401 15.577 ms - 70[39m
+[32m[39m
+2025-10-27 13:13:37 [32minfo[39m [32mPOST //api/v1/auth/login 404 0.859 ms - 123[39m
+[32m[39m
+2025-10-27 13:13:47 [32minfo[39m [32mPOST /api/v1/auth/login 200 1190.791 ms - 543[39m
+[32m[39m
+2025-10-27 13:14:06 [32minfo[39m [32mPOST /api/v1/auth/login 200 182.443 ms - 543[39m
+[32m[39m
+2025-10-27 13:15:15 [32minfo[39m [32mPOST /api/v1/auth/login 200 160.067 ms - 543[39m
+[32m[39m
+2025-10-27 13:15:34 [32minfo[39m [32mPOST /api/v1/auth/register 422 9.276 ms - 297[39m
+[32m[39m
+2025-10-27 13:17:44 [31merror[39m [31mInternal Server Error User already exists with this email[39m
+2025-10-27 13:17:44 [32minfo[39m [32mPOST /api/v1/auth/vet-reg 500 34.757 ms - 49[39m
+[32m[39m
+2025-10-27 13:18:23 [31merror[39m [31mInternal Server Error User already exists with this email[39m
+2025-10-27 13:18:23 [32minfo[39m [32mPOST /api/v1/auth/vet-reg 500 4.865 ms - 49[39m
+[32m[39m
+2025-10-27 13:20:42 [32minfo[39m [32mPOST /api/v1/auth/vet-reg 201 354.015 ms - 95[39m
+[32m[39m
+2025-10-27 13:20:45 [32minfo[39m [32mError sending message to vetcare@example.com[39m
+2025-10-27 13:20:45 [31merror[39m [31mError sending email: Invalid login: 535 Authentication failed[39m
+2025-10-27 13:25:45 [32minfo[39m [32mPUT /api/v1/auth/verify 200 194.217 ms - 70[39m
+[32m[39m
+2025-10-27 13:25:47 [32minfo[39m [32mError sending message to vetcare@example.com[39m
+2025-10-27 13:25:47 [31merror[39m [31mError sending email: Invalid login: 535 Authentication failed[39m
+2025-10-27 13:31:44 [31merror[39m [31mInternal Server Error User already exists with this email and phone[39m
+2025-10-27 13:31:44 [32minfo[39m [32mPOST /api/v1/auth/vet-reg 500 181.132 ms - 49[39m
+[32m[39m
+2025-10-27 13:32:10 [31merror[39m [31mInternal Server Error User already exists with this email and phone[39m
+2025-10-27 13:32:10 [32minfo[39m [32mPOST /api/v1/auth/vet-reg 500 135.820 ms - 49[39m
+[32m[39m
+2025-10-27 13:36:14 [31merror[39m [31mInternal Server Error User already exists with this email and phone[39m
+2025-10-27 13:36:14 [32minfo[39m [32mPOST /api/v1/auth/vet-reg 500 259.784 ms - 49[39m
+[32m[39m
+2025-10-27 13:43:23 [31merror[39m [31mUser already exists with this credentials User already exists with this credentials[39m
+2025-10-27 13:43:23 [32minfo[39m [32mPOST /api/v1/auth/vet-reg 403 136.448 ms - 69[39m
+[32m[39m
+2025-10-27 14:59:52 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 451.343 ms - 560[39m
+[32m[39m
+2025-10-27 15:04:48 [31merror[39m [31mVet account not found Vet account not found[39m
+2025-10-27 15:04:48 [32minfo[39m [32mPOST /api/v1/auth/vet-login 404 47.177 ms - 49[39m
+[32m[39m
+2025-10-27 15:05:08 [31merror[39m [31mVet account not found Vet account not found[39m
+2025-10-27 15:05:08 [32minfo[39m [32mPOST /api/v1/auth/vet-login 404 87.837 ms - 49[39m
+[32m[39m
+2025-10-27 15:05:26 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-10-27 15:05:26 [32minfo[39m [32mPOST /api/v1/auth/vet-login 401 122.786 ms - 47[39m
+[32m[39m
+2025-10-27 15:06:01 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-10-27 15:06:01 [32minfo[39m [32mPOST /api/v1/auth/vet-login 401 129.727 ms - 47[39m
+[32m[39m
+2025-10-27 15:06:40 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-10-27 15:06:40 [32minfo[39m [32mPOST /api/v1/auth/vet-login 401 136.059 ms - 47[39m
+[32m[39m
+2025-10-27 15:09:24 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-10-27 15:09:24 [32minfo[39m [32mPOST /api/v1/auth/vet-login 401 226.512 ms - 47[39m
+[32m[39m
+2025-10-27 15:10:04 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-10-27 15:10:04 [32minfo[39m [32mPOST /api/v1/auth/vet-login 401 262.097 ms - 47[39m
+[32m[39m
+2025-10-27 15:11:17 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-10-27 15:11:17 [32minfo[39m [32mPOST /api/v1/auth/vet-login 401 388.463 ms - 47[39m
+[32m[39m
+2025-10-27 15:12:14 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-10-27 15:12:14 [32minfo[39m [32mPOST /api/v1/auth/vet-login 400 507.621 ms - 47[39m
+[32m[39m
+2025-10-27 15:13:11 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-10-27 15:13:11 [32minfo[39m [32mPOST /api/v1/auth/vet-login 400 151.481 ms - 47[39m
+[32m[39m
+2025-10-27 15:13:35 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 190.595 ms - 560[39m
+[32m[39m
+2025-10-27 15:13:38 [32minfo[39m [32mGET /api/v1/livestock/counts 304 98.267 ms - -[39m
+[32m[39m
+2025-10-27 15:13:40 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 15.086 ms - -[39m
+[32m[39m
+2025-10-27 15:23:49 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-10-27 15:23:49 [32minfo[39m [32mPOST /api/v1/auth/login 401 224.219 ms - 47[39m
+[32m[39m
+2025-10-27 15:24:38 [32minfo[39m [32mPOST /api/v1/auth/login 200 164.627 ms - 543[39m
+[32m[39m
+2025-10-27 15:26:14 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 348.559 ms - 560[39m
+[32m[39m
+2025-10-27 15:27:03 [31merror[39m [31mFarm keepers can only assign tasks to coworkers Farm keepers can only assign tasks to coworkers[39m
+2025-10-27 15:27:03 [32minfo[39m [32mPOST /api/v1/tasks 403 31.851 ms - 75[39m
+[32m[39m
+2025-10-27 16:21:35 [32minfo[39m [32mPOST /api/v1/tasks 201 316.238 ms - 1103[39m
+[32m[39m
+2025-10-27 16:23:25 [32minfo[39m [32mPOST /api/v1/tasks 201 21.932 ms - 1101[39m
+[32m[39m
+2025-10-27 16:24:08 [32minfo[39m [32mPOST /api/v1/tasks 201 25.774 ms - 1099[39m
+[32m[39m
+2025-10-27 16:24:28 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.task.create()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\task.controller.ts:57:36[39m
+
+[31m  54 }[39m
+[31m  55 [39m
+[31m  56 [39m
+[31m→ 57 const task = await prisma.task.create({[39m
+[31m       data: {[39m
+[31m         name: "Fever Treatment",[39m
+[31m         description: "Give two Malaria 2ml for the next one week untill the animal is 5 weeks old",[39m
+[31m         priority: "HIGH",[39m
+[31m         dueDate: new Date("Invalid Date"),[39m
+[31m                  ~~~~~~~~~~~~~~~~~~~~~~~~[39m
+[31m         status: "PENDING",[39m
+[31m         assignedToId: "cmh93w4d20000t1tggcs12hvi",[39m
+[31m         assignedById: "cmcnjxm6s0000t1p8rcay1eoq"[39m
+[31m       },[39m
+[31m       include: {[39m
+[31m         assignedTo: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true[39m
+[31m           }[39m
+[31m         },[39m
+[31m         assignedBy: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true[39m
+[31m           }[39m
+[31m         }[39m
+[31m       }[39m
+[31m     })[39m
+
+[31mInvalid value for argument `dueDate`: Provided Date object is invalid. Expected Date. [39m
+[31mInvalid `prisma.task.create()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\task.controller.ts:57:36[39m
+
+[31m  54 }[39m
+[31m  55 [39m
+[31m  56 [39m
+[31m→ 57 const task = await prisma.task.create({[39m
+[31m       data: {[39m
+[31m         name: "Fever Treatment",[39m
+[31m         description: "Give two Malaria 2ml for the next one week untill the animal is 5 weeks old",[39m
+[31m         priority: "HIGH",[39m
+[31m         dueDate: new Date("Invalid Date"),[39m
+[31m                  ~~~~~~~~~~~~~~~~~~~~~~~~[39m
+[31m         status: "PENDING",[39m
+[31m         assignedToId: "cmh93w4d20000t1tggcs12hvi",[39m
+[31m         assignedById: "cmcnjxm6s0000t1p8rcay1eoq"[39m
+[31m       },[39m
+[31m       include: {[39m
+[31m         assignedTo: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true[39m
+[31m           }[39m
+[31m         },[39m
+[31m         assignedBy: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true[39m
+[31m           }[39m
+[31m         }[39m
+[31m       }[39m
+[31m     })[39m
+
+[31mInvalid value for argument `dueDate`: Provided Date object is invalid. Expected Date.[39m
+2025-10-27 16:24:28 [32minfo[39m [32mPOST /api/v1/tasks 422 78.086 ms - 1585[39m
+[32m[39m
+2025-10-27 16:25:04 [32minfo[39m [32mPOST /api/v1/tasks 401 3.241 ms - 64[39m
+[32m[39m
+2025-10-27 16:25:19 [32minfo[39m [32mPOST /api/v1/auth/login 200 218.351 ms - 543[39m
+[32m[39m
+2025-10-27 16:25:37 [32minfo[39m [32mPOST /api/v1/tasks 201 25.179 ms - 1097[39m
+[32m[39m
+2025-10-27 16:25:47 [32minfo[39m [32mPOST /api/v1/tasks 201 20.481 ms - 1097[39m
+[32m[39m
+2025-10-27 16:26:08 [32minfo[39m [32mPOST /api/v1/tasks 201 16.043 ms - 1091[39m
+[32m[39m
+2025-10-27 16:26:15 [32minfo[39m [32mPOST /api/v1/tasks 201 19.165 ms - 1091[39m
+[32m[39m
+2025-10-27 16:26:22 [32minfo[39m [32mPOST /api/v1/tasks 201 14.617 ms - 1091[39m
+[32m[39m
+2025-10-27 16:27:57 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 274.938 ms - 560[39m
+[32m[39m
+2025-10-27 16:30:15 [32minfo[39m [32mGET /api/v1/tasks/assigned/all 401 8.509 ms - 64[39m
+[32m[39m
+2025-10-27 16:31:01 [32minfo[39m [32mGET /api/v1/tasks/assigned/all 401 10.536 ms - 64[39m
+[32m[39m
+2025-10-27 16:31:20 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 322.591 ms - 560[39m
+[32m[39m
+2025-10-27 16:33:06 [32minfo[39m [32mPOST /api/v1/auth/login 200 436.006 ms - 543[39m
+[32m[39m
+2025-10-27 16:33:33 [32minfo[39m [32mGET /api/v1/tasks/assigned/all 200 216.220 ms - 5213[39m
+[32m[39m
+2025-10-29 13:06:29 [32minfo[39m [32mPOST /api/v1/auth/cvet-login 404 6.637 ms - 127[39m
+[32m[39m
+2025-10-29 13:06:38 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 1133.110 ms - 560[39m
+[32m[39m
+2025-10-29 13:07:21 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 169.523 ms - 560[39m
+[32m[39m
+2025-10-29 13:08:08 [32minfo[39m [32mGET /api/v1/tasks/assigned/all 403 10.261 ms - 86[39m
+[32m[39m
+2025-10-29 13:10:05 [31merror[39m [31mTask not found Task not found[39m
+2025-10-29 13:10:05 [32minfo[39m [32mGET /api/v1/tasks/cmgupquce000xlx01yhgz539a 404 49.936 ms - 42[39m
+[32m[39m
+2025-10-29 13:10:34 [31merror[39m [31mTask not found Task not found[39m
+2025-10-29 13:10:34 [32minfo[39m [32mGET /api/v1/tasks/cmh93w4d20000t1tggcs12hvi 404 9.937 ms - 42[39m
+[32m[39m
+2025-10-29 13:11:15 [31merror[39m [31mTask not found Task not found[39m
+2025-10-29 13:11:15 [32minfo[39m [32mGET /api/v1/tasks/cmh93w4d20000t1tggcs12hvi 404 186.414 ms - 42[39m
+[32m[39m
+2025-10-29 13:12:03 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 200 291.614 ms - 3981[39m
+[32m[39m
+2025-10-29 14:44:29 [31merror[39m [31mUser not found User not found[39m
+2025-10-29 14:44:29 [32minfo[39m [32mPOST /api/v1/auth/login 404 224.211 ms - 42[39m
+[32m[39m
+2025-10-29 14:44:53 [32minfo[39m [32mPOST /api/v1/auth/login 200 202.955 ms - 543[39m
+[32m[39m
+2025-10-29 14:46:32 [31merror[39m [31mUser not found User not found[39m
+2025-10-29 14:46:32 [32minfo[39m [32mPATCH /api/v1/users/profile 404 24.562 ms - 42[39m
+[32m[39m
+2025-10-29 14:47:06 [31merror[39m [31mUser not found User not found[39m
+2025-10-29 14:47:06 [32minfo[39m [32mPATCH /api/v1/users/profile 404 11.958 ms - 42[39m
+[32m[39m
+2025-10-29 14:47:42 [32minfo[39m [32mPATCH /api/v1/users/update 200 73.163 ms - 375[39m
+[32m[39m
+2025-10-29 14:58:12 [32minfo[39m [32mPOST /api/v1/auth/login 200 354.437 ms - 562[39m
+[32m[39m
+2025-10-29 22:45:41 [32minfo[39m [32mPOST /api/v1/auth/login 200 329.682 ms - 574[39m
+[32m[39m
+2025-10-29 22:52:33 [32minfo[39m [32mPOST /api/v1/auth/login 200 284.028 ms - 555[39m
+[32m[39m
+2025-10-29 22:55:21 [32minfo[39m [32mPOST /api/v1/auth/login 200 175.582 ms - 555[39m
+[32m[39m
+2025-10-29 22:57:09 [32minfo[39m [32mPOST /api/v1/auth/register 201 196.111 ms - 65[39m
+[32m[39m
+2025-10-29 22:57:41 [32minfo[39m [32mPOST /api/v1/auth/login 200 377.049 ms - 573[39m
+[32m[39m
+2025-10-29 22:59:15 [32minfo[39m [32mPOST /api/v1/auth/login 200 185.343 ms - 587[39m
+[32m[39m
+2025-10-29 23:00:02 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 200 125.756 ms - 3981[39m
+[32m[39m

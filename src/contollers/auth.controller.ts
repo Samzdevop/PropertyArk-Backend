@@ -24,7 +24,7 @@ export const adminRegister = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const { email, fullName, password } = req.body;
+    const { email, fullName, password, companyName } = req.body;
 
     const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser)
@@ -38,6 +38,7 @@ export const adminRegister = async (
       email,
       password: hashedPassword,
       fullName,
+      companyName,
       verificationCode,
       verificationExpires: new Date(new Date().getTime() + 30 * 60 * 1000),
     };
@@ -106,6 +107,20 @@ export const register = async (
       );
     }
 
+    const createdById = (req.user as any)?.id || req.body.createdById;
+    if (!createdById) {
+      throw new BadRequestError('Creator id not provided');
+    }
+
+    const creator = await prisma.user.findUnique({
+      where: { id: createdById },
+      select: { companyName: true }
+    });
+
+    if (!creator) {
+      throw new NotFoundError('Creator not found');
+    }
+
     const hashedPassword = await hash(password);
     const verificationCode = generateVerificationCode().toString();
     await prisma.user.create({
@@ -114,10 +129,11 @@ export const register = async (
       phone: normalizedPhone,
       password: hashedPassword,
       fullName,
+      companyName: creator?.companyName || undefined,
       verificationCode,
       verificationExpires: new Date(new Date().getTime() + 30 * 60 * 1000),
       role: role || "COWORKER",
-      isVerified: true
+      isVerified: true,
     }
   });
   sendSuccessResponse(res, "Registeration successfully", 
@@ -126,6 +142,155 @@ export const register = async (
     next(error);
   }
 };
+
+
+export const vetRegister = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const { email, phone, fullName, password, location } = req.body;
+
+    if (phone && !validatePhoneNumber(phone)) {
+      throw new BadRequestError(
+        'Phone must be in valid international format (+XXX...) or local Nigerian format (0XXX...)'
+      );
+    }
+
+    const normalizedPhone = phone ? normalizePhoneNumber(phone) : null;
+
+    // Check for existing user
+    const existingUser = await prisma.user.findFirst({
+      where: {
+        OR: [
+          { email: email || undefined },
+          { phone: normalizedPhone || undefined }
+        ]
+      }
+    });
+
+    if (existingUser) {
+      const conflicts = [];
+      if(existingUser.email === email) conflicts.push("email");
+      if(existingUser.phone === normalizedPhone) conflicts.push("phone");
+      throw new ForbiddenError(
+        `User already exists with this credentials`
+      );
+    }
+
+    const hashedPassword = await hash(password);
+    const verificationCode = generateVerificationCode().toString();
+    
+    // Create vet user with verification
+    await prisma.user.create({
+      data: {
+        email,
+        phone: normalizedPhone,
+        password: hashedPassword,
+        fullName,
+        location,
+        verificationCode,
+        verificationExpires: new Date(new Date().getTime() + 30 * 60 * 1000),
+        role: "VET", 
+        isVerified: false 
+      }
+    });
+
+    // Send verification email if email is provided
+    if (email) {
+      const html = render("verification", {
+        fullName,
+        verificationCode,
+        currentYear: new Date().getFullYear(),
+      });
+      const mailOptions: MailInterface = {
+        to: email,
+        from: `"Agritech" penetraliahub@gmail.com`,
+        subject: "Verify your Agritech Account",
+        text: "",
+        html,
+      };
+
+      if (process.env.NODE_ENV !== "test") sendCustomMail(mailOptions);
+    }
+    // If phone is provided, we add the logic to send SMS verification here
+
+    sendSuccessResponse(
+      res, 
+      "Vet registration successful. Please verify your account.", 
+      {}, 
+      201
+    );
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+export const vetLogin = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const { email, phone, password } = req.body;
+
+  try {
+    if (phone && !validatePhoneNumber(phone)) {
+      throw new BadRequestError(
+        'Phone must be in valid international format (+XXX...) or local Nigerian format (0XXX...)'
+      );
+    }
+
+    const normalizedPhone = phone ? normalizePhoneNumber(phone) : undefined;
+    
+    // Find user with VET role specifically
+    const user = await prisma.user.findFirst({
+      where: {
+        OR: [
+          { email: email ?? undefined },
+          { phone: normalizedPhone ?? undefined }
+        ],
+        role: "VET" //  only vets can login through this endpoint
+      },
+    });
+
+    if (!user) throw new NotFoundError("Vet account not found");
+
+    const isPasswordValid = await verify(
+      user.password || "$passwordless",
+      password
+    );
+    if (!isPasswordValid) throw new BadRequestError("Invalid credentials");
+
+    if (!user.isVerified) throw new BadRequestError("Account not verified! Please check your email/phone for verification code.");
+    if (user.isSuspended)
+      throw new UnauthorizedError(
+        "Account suspended! Kindly reach out to support"
+      );
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { lastLogin: new Date() }
+    });
+
+    const userData = await prisma.user.findUnique({
+      where: { id: user.id },
+      select: userSelect
+    });
+
+    const token = generateToken({
+      id: user.id,
+    });
+
+    sendSuccessResponse(res, "Vet login successful", { 
+      token, 
+      user: userData
+    });
+  } catch (error) {
+    next(error);
+  }
+}
 
 
 
@@ -315,6 +480,60 @@ export const resetPassword = async (
     };
     if (process.env.NODE_ENV !== "test") sendCustomMail(mailOptions);
     sendSuccessResponse(res, "Password reset successful");
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const changePassword = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = (req.user as any).id;
+    const { currentPassword, newPassword, confirmPassword } = req.body;
+
+    // Validate new password confirmation
+    if (newPassword !== confirmPassword) {
+      throw new BadRequestError('New password and confirmation do not match');
+    }
+
+    // Validate new password length
+    if (newPassword.length < 8) {
+      throw new BadRequestError('New password must be at least 8 characters long');
+    }
+
+    // Get user with password
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { ...userSelect, password: true }
+    });
+
+    if (!user) {
+      throw new NotFoundError('User not found');
+    }
+
+    // Verify current password
+    const isCurrentPasswordValid = await verify(
+      user.password || "$passwordless",
+      currentPassword
+    );
+
+    if (!isCurrentPasswordValid) {
+      throw new UnauthorizedError('Current password is incorrect');
+    }
+
+    // Hash new password
+    const hashedNewPassword = await hash(newPassword);
+
+    // Update password
+    await prisma.user.update({
+      where: { id: userId },
+      data: { password: hashedNewPassword }
+    });
+
+    sendSuccessResponse(res, 'Password changed successfully');
   } catch (error) {
     next(error);
   }

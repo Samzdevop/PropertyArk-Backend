@@ -29,35 +29,35 @@ export const getProfile = async (
 	}
 };
 
-export const updateProfile = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const userId = (req.user as any).id;
-    const { fullName, location, avatar, phone } = req.body;
+// export const updateProfile = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   try {
+//     const userId = (req.user as any).id;
+//     const { fullName, location, avatar, phone } = req.body;
 
-    if (phone && !validatePhoneNumber(phone)) {
-      throw new BadRequestError(
-        'Phone must be in valid international format (+XXX...) or local Nigerian format (0XXX...)'
-      );
-    }
+//     if (phone && !validatePhoneNumber(phone)) {
+//       throw new BadRequestError(
+//         'Phone must be in valid international format (+XXX...) or local Nigerian format (0XXX...)'
+//       );
+//     }
 
-    const normalizedPhone = phone ? normalizePhoneNumber(phone) : undefined;
+//     const normalizedPhone = phone ? normalizePhoneNumber(phone) : undefined;
 
 
-    const updatedUser = await prisma.user.update({
-      where: { id: userId },
-      data: { fullName, location, avatar, phone:normalizedPhone },
-      select: userSelect
-    });
+//     const updatedUser = await prisma.user.update({
+//       where: { id: userId },
+//       data: { fullName, location, avatar, phone:normalizedPhone },
+//       select: userSelect
+//     });
 
-    sendSuccessResponse(res, 'Profile updated successfully', updatedUser);
-  } catch (error) {
-    next(error);
-  }
-};
+//     sendSuccessResponse(res, 'Profile updated successfully', updatedUser);
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 
 export const getAllUsers = async (
   req: Request,
@@ -150,4 +150,108 @@ export const deleteUser = async (
     next(error);
   }
 };
- 
+
+
+export const updateUserProfile = async (
+   req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = (req.user as any).id;
+    const userRole = (req.user as any).role;
+    const { fullName, location, avatar, phone, companyName } = req.body;
+
+    // Validate phone if provided
+    if (phone && !validatePhoneNumber(phone)) {
+      throw new BadRequestError(
+        'Phone must be in valid international format (+XXX...) or local Nigerian format (0XXX...)'
+      );
+    }
+
+    const normalizedPhone = phone ? normalizePhoneNumber(phone) : undefined;
+
+    // Prepare update data
+    const updateData: any = {
+      fullName,
+      location,
+      avatar,
+      phone: normalizedPhone,
+    };
+
+    // Only allow admin to update companyName
+    if (companyName && userRole === 'ADMIN') {
+      updateData.companyName = companyName;
+    } else if (companyName && userRole !== 'ADMIN') {
+      throw new ForbiddenError('Only admin can update company name');
+    }
+
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: updateData,
+      select: userSelect
+    });
+
+    sendSuccessResponse(res, 'Profile updated successfully', updatedUser);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+export const adminUpdateUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const adminId = (req.user as any).id;
+    const adminRole = (req.user as any).role;
+    const { userId } = req.params;
+    const { fullName, location, avatar, phone, companyName, role, isSuspended } = req.body;
+
+    // Check if user is admin
+    if (adminRole !== 'ADMIN') {
+      throw new ForbiddenError('Only admin can update other users');
+    }
+
+    // Check if target user exists
+    const targetUser = await prisma.user.findUnique({
+      where: { id: userId }
+    });
+
+    if (!targetUser) {
+      throw new NotFoundError('User not found');
+    }
+
+    // Validate phone if provided
+    if (phone && !validatePhoneNumber(phone)) {
+      throw new BadRequestError(
+        'Phone must be in valid international format (+XXX...) or local Nigerian format (0XXX...)'
+      );
+    }
+
+    const normalizedPhone = phone ? normalizePhoneNumber(phone) : undefined;
+
+    // Prepare update data
+    const updateData: any = {
+      ...(fullName && { fullName }),
+      ...(location && { location }),
+      ...(avatar && { avatar }),
+      ...(phone && { phone: normalizedPhone }),
+      ...(companyName && { companyName }),
+      ...(role && { role }),
+      ...(isSuspended !== undefined && { isSuspended }),
+    };
+
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: updateData,
+      select: userSelect
+    });
+
+    sendSuccessResponse(res, 'User updated successfully', updatedUser);
+  } catch (error) {
+    next(error);
+  }
+};

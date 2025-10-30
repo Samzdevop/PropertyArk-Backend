@@ -3670,3 +3670,134 @@
 2025-10-18 12:51:04 [31merror[39m [31mTask not found or you do not have permission to view it Task not found or you do not have permission to view it[39m
 2025-10-18 13:06:09 [31merror[39m [31mTask not found Task not found[39m
 2025-10-26 15:40:34 [31merror[39m [31mUser not found User not found[39m
+2025-10-27 13:17:44 [31merror[39m [31mInternal Server Error User already exists with this email[39m
+2025-10-27 13:18:23 [31merror[39m [31mInternal Server Error User already exists with this email[39m
+2025-10-27 13:20:45 [31merror[39m [31mError sending email: Invalid login: 535 Authentication failed[39m
+2025-10-27 13:25:47 [31merror[39m [31mError sending email: Invalid login: 535 Authentication failed[39m
+2025-10-27 13:31:44 [31merror[39m [31mInternal Server Error User already exists with this email and phone[39m
+2025-10-27 13:32:10 [31merror[39m [31mInternal Server Error User already exists with this email and phone[39m
+2025-10-27 13:36:14 [31merror[39m [31mInternal Server Error User already exists with this email and phone[39m
+2025-10-27 13:43:23 [31merror[39m [31mUser already exists with this credentials User already exists with this credentials[39m
+2025-10-27 15:04:48 [31merror[39m [31mVet account not found Vet account not found[39m
+2025-10-27 15:05:08 [31merror[39m [31mVet account not found Vet account not found[39m
+2025-10-27 15:05:26 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-10-27 15:06:01 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-10-27 15:06:40 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-10-27 15:09:24 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-10-27 15:10:04 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-10-27 15:11:17 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-10-27 15:12:14 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-10-27 15:13:11 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-10-27 15:23:49 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-10-27 15:27:03 [31merror[39m [31mFarm keepers can only assign tasks to coworkers Farm keepers can only assign tasks to coworkers[39m
+2025-10-27 16:24:28 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.task.create()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\task.controller.ts:57:36[39m
+
+[31m  54 }[39m
+[31m  55 [39m
+[31m  56 [39m
+[31m→ 57 const task = await prisma.task.create({[39m
+[31m       data: {[39m
+[31m         name: "Fever Treatment",[39m
+[31m         description: "Give two Malaria 2ml for the next one week untill the animal is 5 weeks old",[39m
+[31m         priority: "HIGH",[39m
+[31m         dueDate: new Date("Invalid Date"),[39m
+[31m                  ~~~~~~~~~~~~~~~~~~~~~~~~[39m
+[31m         status: "PENDING",[39m
+[31m         assignedToId: "cmh93w4d20000t1tggcs12hvi",[39m
+[31m         assignedById: "cmcnjxm6s0000t1p8rcay1eoq"[39m
+[31m       },[39m
+[31m       include: {[39m
+[31m         assignedTo: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true[39m
+[31m           }[39m
+[31m         },[39m
+[31m         assignedBy: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true[39m
+[31m           }[39m
+[31m         }[39m
+[31m       }[39m
+[31m     })[39m
+
+[31mInvalid value for argument `dueDate`: Provided Date object is invalid. Expected Date. [39m
+[31mInvalid `prisma.task.create()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\task.controller.ts:57:36[39m
+
+[31m  54 }[39m
+[31m  55 [39m
+[31m  56 [39m
+[31m→ 57 const task = await prisma.task.create({[39m
+[31m       data: {[39m
+[31m         name: "Fever Treatment",[39m
+[31m         description: "Give two Malaria 2ml for the next one week untill the animal is 5 weeks old",[39m
+[31m         priority: "HIGH",[39m
+[31m         dueDate: new Date("Invalid Date"),[39m
+[31m                  ~~~~~~~~~~~~~~~~~~~~~~~~[39m
+[31m         status: "PENDING",[39m
+[31m         assignedToId: "cmh93w4d20000t1tggcs12hvi",[39m
+[31m         assignedById: "cmcnjxm6s0000t1p8rcay1eoq"[39m
+[31m       },[39m
+[31m       include: {[39m
+[31m         assignedTo: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true[39m
+[31m           }[39m
+[31m         },[39m
+[31m         assignedBy: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true[39m
+[31m           }[39m
+[31m         }[39m
+[31m       }[39m
+[31m     })[39m
+
+[31mInvalid value for argument `dueDate`: Provided Date object is invalid. Expected Date.[39m
+2025-10-29 13:10:05 [31merror[39m [31mTask not found Task not found[39m
+2025-10-29 13:10:34 [31merror[39m [31mTask not found Task not found[39m
+2025-10-29 13:11:15 [31merror[39m [31mTask not found Task not found[39m
+2025-10-29 14:44:29 [31merror[39m [31mUser not found User not found[39m
+2025-10-29 14:46:32 [31merror[39m [31mUser not found User not found[39m
+2025-10-29 14:47:06 [31merror[39m [31mUser not found User not found[39m

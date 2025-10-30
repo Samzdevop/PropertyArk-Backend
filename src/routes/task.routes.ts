@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import { 
   createTask, 
   createTaskObservation, 
@@ -21,6 +22,7 @@ router.post(
   requireRoles(['ADMIN', 'FARM_KEEPER']),
   validateRequest(createTaskSchema),
   createTask
+  
 );
 
 router.post(
@@ -53,7 +55,7 @@ router.patch(
 router.get(
   '/assigned/all',
   authenticateJWT,
-  requireRoles(['ADMIN', 'FARM_KEEPER']),
+  requireRoles(['ADMIN', 'FARM_KEEPER', ]),
   getAllAssignedTasks
 );
 

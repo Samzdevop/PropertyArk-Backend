@@ -29,14 +29,30 @@ export const createTask = async (
       throw new NotFoundError('Assignee not found');
     }
 
-    // Validate assignment permissions
-    if (assignedByRole === 'FARM_KEEPER' && assignee.role !== 'COWORKER') {
-      throw new ForbiddenError('Farm keepers can only assign tasks to coworkers');
+    // // Validate assignment permissions
+    // if (assignedByRole === 'FARM_KEEPER' && assignee.role !==  'COWORKER') {
+    //   throw new ForbiddenError('Farm keepers can only assign tasks to coworkers');
+    // }
+
+    // if (assignedByRole === 'ADMIN' && !['FARM_KEEPER', 'COWORKER'].includes(assignee.role)) {
+    //   throw new ForbiddenError('Admins can only assign tasks to farm keepers or coworkers');
+    // }
+
+    switch (assignedByRole) {
+      case 'FARM_KEEPER':
+        if (!['COWORKER', 'VET'].includes(assignee.role)) {
+          throw new ForbiddenError('Farm keepers can only assign tasks to coworkers or vets');
+        }
+        break;
+      case 'ADMIN':
+        if (!['FARM_KEEPER', 'COWORKER', 'VET'].includes(assignee.role)) {
+          throw new ForbiddenError('Admins can only assign tasks to farm keepers, coworkers, or vets');
+        }
+        break;
+      default:
+        throw new ForbiddenError('You do not have permission to assign tasks');
     }
 
-    if (assignedByRole === 'ADMIN' && !['FARM_KEEPER', 'COWORKER'].includes(assignee.role)) {
-      throw new ForbiddenError('Admins can only assign tasks to farm keepers or coworkers');
-    }
 
     const task = await prisma.task.create({
       data: {
@@ -85,7 +101,8 @@ export const getMyTasks = async (
             select: {
               id: true,
               fullName: true,
-              role: true
+              role: true,
+              companyName: true
             } 
           }
         }
@@ -187,18 +204,39 @@ export const getAllAssignedTasks = async (
     };
 
     // Role-specific filtering
-    if (userRole === 'FARM_KEEPER') {
-      // Farm keepers can only see tasks they've assigned or tasks assigned to their coworkers
-      where.OR = [
-        { assignedById: userId },
-        { 
-          assignedTo: { 
-            role: 'COWORKER',
-          } 
-        }
-      ];
-    } 
-    // Admin can see all tasks (no additional filtering needed)
+    // if (userRole === 'FARM_KEEPER') {
+    //   // Farm keepers can only see tasks they've assigned or tasks assigned to their coworkers
+    //   where.OR = [
+    //     { assignedById: userId },
+    //     { 
+    //       assignedTo: { 
+    //         role:{ in: ['COWORKER', 'VET'] },
+    //       } 
+    //     }
+    //   ];
+    // } 
+    switch (userRole) {
+      case 'FARM_KEEPER':
+        where.OR = [
+          { assignedById: userId },
+          { 
+            assignedTo: { 
+              role: { in: ['COWORKER', 'VET'] }
+            } 
+          }
+        ];
+        break;
+      
+      case 'ADMIN':
+        // Admin can see all tasks (no additional filtering needed)
+        break;
+      
+      case 'VET':
+          where.assignedToId = userId;
+        break;
+      default:
+        where.assignedToId = userId;
+    }
 
     const [tasks, total] = await Promise.all([
       prisma.task.findMany({

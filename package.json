@@ -48,6 +48,7 @@
     "db:push": "prisma db push --accept-data-loss",
     "test": "dotenv -e .env.test -- jest --verbose --detectOpenHandles --runInBand --forceExit",
     "dev": "ts-node-dev src/index.ts",
+    "update:companies": "ts-node ./src/scripts/updateUserCompanyNames.ts",
     "start": "node build/index.js",
     "render-build": "yarn prisma generate && yarn prisma migrate deploy",
     "lint": "eslint --ext .ts .",

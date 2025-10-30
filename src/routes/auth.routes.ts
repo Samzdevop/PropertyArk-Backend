@@ -6,6 +6,8 @@ import {
 	resetPassword,
 	verifyAccount,
 	register,
+	vetRegister,
+	vetLogin,
 } from '../contollers/auth.controller';
 import { validateRequest } from '../middlewares/validateRequest';
 import {
@@ -15,6 +17,7 @@ import {
 	resetPasswordSchema,
 	verifyAccountSchema,
 	registerSchema,
+	vetRegisterSchema,
 } from '../schemas/auth.schemas';
 import passport from 'passport';
 import { sendSuccessResponse } from '../utils/sendSuccessResponse';
@@ -33,7 +36,23 @@ authRouter.post(
 	register
 );
 
-authRouter.post('/login', validateRequest(loginSchema), login);
+authRouter.post(
+	'/login',
+	validateRequest(loginSchema), 
+	login
+);
+
+authRouter.post(
+  '/vet-reg',
+  validateRequest(vetRegisterSchema),
+  vetRegister
+);
+
+authRouter.post(
+	'/vet-login', 
+	validateRequest(loginSchema),
+	vetLogin
+);
 
 authRouter.post(
 	'/resend',

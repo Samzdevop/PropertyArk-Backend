@@ -6,6 +6,7 @@ export const adminRegisterSchema = z.object({
     fullName: z.string().min(1, "First Name is required"),
     email: z.string().email("Invalid email format"),
     password: z.string().min(8, "Password must be at least 8 characters long"),
+    companyName: z.string().min(1, "Company Name is required"),
   }),
 });
 
@@ -20,7 +21,25 @@ export const registerSchema = z.object({
       })
     .optional(),
     password: z.string().min(8, "Password must be at least 8 characters long"),
-    role: z.enum(['FARM_KEEPER', 'COWORKER', 'VET']).default('COWORKER'), // Default to COWORKER
+    role: z.enum(['FARM_KEEPER', 'COWORKER']).default('COWORKER'), // Default to COWORKER
+  }).refine(data => data.email || data.phone, {
+    message: "Either email or phone number is required",
+    path: ["email"],
+  }),
+});
+
+export const vetRegisterSchema = z.object({
+  body: z.object({
+    fullName: z.string().min(1, "First Name is required"),
+    email: z.string().email("Invalid email format").optional(),
+    phone: z.string()
+      .min(10, "Phone must be at least 10 digits")
+      .refine((val) => validatePhoneNumber(val), {
+        message: "Phone must be in valid international format (+XXX...) or local Nigerian format (0XXX...)"
+      })
+    .optional(),
+    password: z.string().min(8, "Password must be at least 8 characters long"),
+    location: z.string().optional(),
   }).refine(data => data.email || data.phone, {
     message: "Either email or phone number is required",
     path: ["email"],
