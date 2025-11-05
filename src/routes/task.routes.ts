@@ -6,6 +6,7 @@ import {
   getAllAssignedTasks, 
   getMyTasks, 
   getTask, 
+  getTasksByLivestock, 
   updateTaskStatus 
 } from '../contollers/task.controller';
 import { authenticateJWT } from '../middlewares/errorHandler';
@@ -28,7 +29,7 @@ router.post(
 router.post(
   '/:taskId/observations',
   authenticateJWT,
-  upload.array('media', 5), // Max 5 files
+  upload.array('media', 5), 
   validateRequest(createTaskObservationSchema),
   createTaskObservation
 );
@@ -58,5 +59,11 @@ router.get(
   requireRoles(['ADMIN', 'FARM_KEEPER', ]),
   getAllAssignedTasks
 );
+
+router.get(
+  '/livestocktask/:livestockId',
+  authenticateJWT,
+  getTasksByLivestock
+)
 
 export const taskRouter = router;

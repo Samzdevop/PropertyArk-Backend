@@ -18,7 +18,7 @@ model User {
   email               String?   @unique
   phone               String?   @unique
   googleId            String?   @unique
-  companyName         String? 
+  companyName         String?
   password            String?
   fullName            String
   avatar              String?
@@ -47,10 +47,9 @@ model User {
   FinancialTransaction FinancialTransaction[]
 
   // Creator relationship
-  createdBy           User?     @relation("UserCreator", fields: [createdById], references: [id])
-  createdById         String?
-  createdUsers        User[]    @relation("UserCreator")
-
+  createdBy    User?   @relation("UserCreator", fields: [createdById], references: [id])
+  createdById  String?
+  createdUsers User[]  @relation("UserCreator")
 }
 
 model Livestock {
@@ -83,6 +82,8 @@ model Livestock {
   updatedAt          DateTime        @updatedAt
   vaccinationRecords Vaccination[]
   OfftakeRecord      OfftakeRecord[]
+  tasks              Task[]          
+
 }
 
 model Vaccination {
@@ -161,8 +162,14 @@ model Task {
   assignedBy   User              @relation("CreatedTasks", fields: [assignedById], references: [id])
   assignedById String
 
+  livestock   Livestock? @relation(fields: [livestockId], references: [id])
+  livestockId String?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([assignedToId])
+  @@index([livestockId])
 }
 
 model TaskObservation {
@@ -229,6 +236,7 @@ model FinancialTransaction {
   recordedBy      User                     @relation(fields: [recordedById], references: [id])
   recordedById    String
   createdAt       DateTime                 @default(now())
+
   @@index([type])
   @@index([date])
 }

@@ -53,7 +53,16 @@
     "render-build": "yarn prisma generate && yarn prisma migrate deploy",
     "lint": "eslint --ext .ts .",
     "test:process": "yarn migration:test && yarn lint && yarn test",
-    "build": "tsc"
+    "build": "tsc",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:reset": "prisma migrate reset",
+    "prisma:seed": "ts-node src/prisma/seed.ts",
+    "db:reset": "yarn prisma:reset && yarn prisma:seed",
+    "db:refresh": "yarn prisma:migrate && yarn prisma:seed"
+  },
+   "prisma": {
+    "seed": "ts-node src/prisma/seed.ts"
   },
   "author": "Thepenetrailiahub",
   "license": "ISC"

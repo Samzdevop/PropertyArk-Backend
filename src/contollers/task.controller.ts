@@ -15,7 +15,7 @@ export const createTask = async (
   next: NextFunction
 ) => {
   try {
-    const { name, description, priority, dueDate, assignedToId } = req.body;
+    const { name, description, priority, dueDate, assignedToId, livestockId } = req.body;
     const assignedById = (req.user as any).id;
     const assignedByRole = (req.user as any).role;
 
@@ -53,6 +53,18 @@ export const createTask = async (
         throw new ForbiddenError('You do not have permission to assign tasks');
     }
 
+    if (livestockId) {
+      const livestock = await prisma.livestock.findUnique({
+        where: { 
+          id: livestockId,
+          isDeleted: false 
+        }
+      });
+
+      if (!livestock) {
+        throw new NotFoundError('Livestock not found or has been deleted');
+      }
+    }
 
     const task = await prisma.task.create({
       data: {
@@ -62,11 +74,13 @@ export const createTask = async (
         dueDate: new Date(dueDate),
         status: 'PENDING',
         assignedToId,
-        assignedById
+        assignedById,
+        livestockId: livestockId || null, 
       },
       include: {
         assignedTo: { select: userSelect },
-        assignedBy: { select: userSelect }
+        assignedBy: { select: userSelect },
+        livestock: { select: userSelect },
       }
     });
 
@@ -104,7 +118,8 @@ export const getMyTasks = async (
               role: true,
               companyName: true
             } 
-          }
+          },
+          livestock: true
         }
       }),
       prisma.task.count({ where })
@@ -138,7 +153,8 @@ export const getTask = async (
       },
       include: {
         assignedBy: {select: userSelect },
-        assignedTo: { select: userSelect }
+        assignedTo: { select: userSelect },
+        livestock: true,
         }
     });
 
@@ -258,7 +274,8 @@ export const getAllAssignedTasks = async (
               fullName: true,
               role: true
             } 
-          }
+          },
+          livestock: true
         }
       }),
       prisma.task.count({ where })
@@ -340,6 +357,76 @@ export const createTaskObservation = async (
         )
       );
     }
+    next(error);
+  }
+};
+
+
+export const getTasksByLivestock = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { livestockId } = req.params;
+    const { page = 1, limit = 10 } = req.query;
+
+    // Verify livestock exists
+    const livestock = await prisma.livestock.findUnique({
+      where: { 
+        id: livestockId,
+        isDeleted: false 
+      }
+    });
+
+    if (!livestock) {
+      throw new NotFoundError('Livestock not found');
+    }
+
+    const [tasks, total] = await Promise.all([
+      prisma.task.findMany({
+        where: { livestockId },
+        skip: (Number(page) - 1) * Number(limit),
+        take: Number(limit),
+        orderBy: { dueDate: 'asc' },
+        include: {
+          assignedBy: { 
+            select: {
+              id: true,
+              fullName: true,
+              role: true,
+              companyName: true,
+              email: true
+            } 
+          },
+          assignedTo: { 
+            select: {
+              id: true,
+              fullName: true,
+              role: true,
+              companyName: true,
+              email: true
+            } 
+          },
+          observations: {
+            orderBy: { reportedAt: 'desc' },
+            take: 1
+          }
+        }
+      }),
+      prisma.task.count({ where: { livestockId } })
+    ]);
+
+    sendSuccessResponse(res, 'Livestock tasks retrieved successfully', {
+      tasks,
+      pagination: {
+        page: Number(page),
+        limit: Number(limit),
+        total,
+        pages: Math.ceil(total / Number(limit))
+      }
+    });
+  } catch (error) {
     next(error);
   }
 };

@@ -4,6 +4,7 @@ import { sendSuccessResponse } from '../utils/sendSuccessResponse';
 import { NotFoundError } from '../errors/NotFoundError';
 import { userSelect } from '../prisma/selects';
 import { BadRequestError } from '../errors/BadRequestError';
+import { ForbiddenError } from '../errors/ForbiddenError';
 
 export const addLivestock = async (
   req: Request,
@@ -54,7 +55,7 @@ export const addLivestock = async (
   }
 };
 
-export const getLivestock = async (
+export const getLivestockById = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -205,7 +206,6 @@ export const updateLivestock = async (
 };
 
 // permenant delete livestock
-// This will remove the livestock record from the database
 export const deleteLivestock = async (
   req: Request,
   res: Response,
@@ -338,6 +338,110 @@ export const restoreLivestock = async (
     }
 
     sendSuccessResponse(res, 'Livestock restored successfully', { livestock });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getFarmLivestock = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const vetId = (req.user as any).id;
+    const vetRole = (req.user as any).role;
+    const { companyId } = req.params;
+    const { page = 1, limit = 10, healthStatus, type } = req.query;
+
+    // Only vets can access this endpoint
+    if (vetRole !== 'VET') {
+      throw new ForbiddenError('Only vets can access farm livestock');
+    }
+
+    // Verify the vet has tasks from this company
+    const hasAccess = await prisma.task.findFirst({
+      where: {
+        assignedToId: vetId,
+        assignedById: companyId
+      }
+    });
+
+    if (!hasAccess) {
+      throw new ForbiddenError('You do not have access to this farm\'s livestock');
+    }
+
+    // Get company name
+    const company = await prisma.user.findUnique({
+      where: { id: companyId },
+      select: { companyName: true }
+    });
+
+    if (!company) {
+      throw new NotFoundError('Farm not found');
+    }
+
+    const where: any = {
+      addedBy: {
+        companyName: company.companyName
+      },
+      isDeleted: false,
+      ...(healthStatus && { healthStatus: String(healthStatus) }),
+      ...(type && { type: String(type) })
+    };
+
+    const [livestock, total] = await Promise.all([
+      prisma.livestock.findMany({
+        where,
+        skip: (Number(page) - 1) * Number(limit),
+        take: Number(limit),
+        include: {
+          addedBy: {
+            select: {
+              id: true,
+              fullName: true,
+              role: true
+            }
+          },
+          vaccinationRecords: {
+            orderBy: { dateofVaccination: 'desc' },
+            take: 3,
+            select: {
+              id: true,
+              dateofVaccination: true,
+              vaccineType: true,
+              nextDueDate: true
+            }
+          },
+          sickness: {
+            orderBy: { dateOfObservation: 'desc' },
+            take: 3,
+            include: {
+              treatments: {
+                orderBy: { dateOfTreatment: 'desc' },
+                take: 1
+              }
+            }
+          },
+          treatments: {
+            orderBy: { dateOfTreatment: 'desc' },
+            take: 3
+          }
+        },
+        orderBy: { createdAt: 'desc' }
+      }),
+      prisma.livestock.count({ where })
+    ]);
+
+    sendSuccessResponse(res, 'Farm livestock retrieved successfully', {
+      livestock,
+      pagination: {
+        page: Number(page),
+        limit: Number(limit),
+        total,
+        pages: Math.ceil(total / Number(limit))
+      }
+    });
   } catch (error) {
     next(error);
   }

@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import {
   addLivestock,
-  getLivestock,
   updateLivestock,
   deleteLivestock,
   getAllLivestock,
@@ -9,6 +8,8 @@ import {
   softDeleteLivestock,
   getDeletedLivestock,
   restoreLivestock,
+  getLivestockById,
+  getFarmLivestock,
 } from '../contollers/livestock.controller';
 import { authenticateJWT } from '../middlewares/errorHandler';
 import { validateRequest } from '../middlewares/validateRequest';
@@ -43,7 +44,7 @@ livestockRouter.get(
 livestockRouter.get(
   '/:livestockId', 
   authenticateJWT, 
-  getLivestock
+  getLivestockById
 );
 
 livestockRouter.patch(
@@ -53,7 +54,7 @@ livestockRouter.patch(
   updateLivestock
 );
 
-// permanent delete livestock
+
 livestockRouter.delete(
   '/:livestockId', 
   authenticateJWT, 
@@ -84,3 +85,9 @@ livestockRouter.patch(
   restoreLivestock
 );
 
+livestockRouter.get(
+  '/vet/farm/:companyId',
+  authenticateJWT,
+  requireRoles(['VET']),
+  getFarmLivestock
+);

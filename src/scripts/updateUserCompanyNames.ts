@@ -6,7 +6,7 @@ async function updateUserCompanyNames() {
   try {
     console.log('Starting companyName migration...');
 
-    // Get all admins with companyName
+
     const adminsWithCompany = await prisma.user.findMany({
       where: {
         role: 'ADMIN',
@@ -23,10 +23,7 @@ async function updateUserCompanyNames() {
 
     let updatedCount = 0;
 
-    // For each admin, update their company users
     for (const admin of adminsWithCompany) {
-      // Find users created by this admin (you might need to track creatorId)
-      // Since we don't have creatorId, we'll update users with the same email domain as a heuristic
       if (!admin.email) {
         console.warn(`Skipping admin ${admin.id} because email is null`);
         continue;
@@ -37,7 +34,6 @@ async function updateUserCompanyNames() {
         where: {
           OR: [
             { email: { contains: adminDomain } },
-            // Or update all non-admin users in the system to this admin's company
             { role: { in: ['FARM_KEEPER', 'COWORKER'] } }
           ],
           companyName: null
@@ -66,5 +62,4 @@ async function updateUserCompanyNames() {
   }
 }
 
-// Run the migration
 updateUserCompanyNames();
