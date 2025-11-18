@@ -5571,3 +5571,2514 @@
 [32m[39m
 2025-11-03 11:13:49 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 15.713 ms - -[39m
 [32m[39m
+2025-11-09 14:51:36 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-11-09 14:51:36 [32minfo[39m [32mPOST /api/v1/auth/vet-login 400 414.406 ms - 47[39m
+[32m[39m
+2025-11-09 14:51:52 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-11-09 14:51:52 [32minfo[39m [32mPOST /api/v1/auth/vet-login 400 160.742 ms - 47[39m
+[32m[39m
+2025-11-09 14:52:03 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-11-09 14:52:03 [32minfo[39m [32mPOST /api/v1/auth/vet-login 400 255.803 ms - 47[39m
+[32m[39m
+2025-11-09 14:52:18 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 148.839 ms - 588[39m
+[32m[39m
+2025-11-09 14:52:19 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 110.549 ms - -[39m
+[32m[39m
+2025-11-09 14:52:35 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 21.484 ms - -[39m
+[32m[39m
+2025-11-09 14:53:15 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-11-09 14:53:15 [32minfo[39m [32mPOST /api/v1/auth/vet-login 400 128.467 ms - 47[39m
+[32m[39m
+2025-11-09 14:53:26 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 140.603 ms - 588[39m
+[32m[39m
+2025-11-09 14:53:28 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 15.862 ms - -[39m
+[32m[39m
+2025-11-09 14:54:06 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 12.617 ms - -[39m
+[32m[39m
+2025-11-09 14:54:08 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 11.666 ms - -[39m
+[32m[39m
+2025-11-09 14:54:15 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 8.776 ms - -[39m
+[32m[39m
+2025-11-09 14:54:16 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 10.650 ms - -[39m
+[32m[39m
+2025-11-09 14:54:16 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 10.490 ms - -[39m
+[32m[39m
+2025-11-09 15:08:57 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-11-09 15:08:57 [32minfo[39m [32mPOST /api/v1/auth/vet-login 400 323.414 ms - 47[39m
+[32m[39m
+2025-11-09 15:09:10 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 167.815 ms - 588[39m
+[32m[39m
+2025-11-09 15:09:12 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 130.264 ms - -[39m
+[32m[39m
+2025-11-09 15:09:14 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 18.920 ms - -[39m
+[32m[39m
+2025-11-09 15:09:55 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 219.413 ms - 588[39m
+[32m[39m
+2025-11-09 15:09:56 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 17.498 ms - -[39m
+[32m[39m
+2025-11-09 15:10:06 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 9.351 ms - -[39m
+[32m[39m
+2025-11-09 15:10:15 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 16.148 ms - -[39m
+[32m[39m
+2025-11-09 15:10:28 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 17.274 ms - -[39m
+[32m[39m
+2025-11-09 15:10:33 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 14.364 ms - -[39m
+[32m[39m
+2025-11-09 15:10:55 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 13.296 ms - -[39m
+[32m[39m
+2025-11-09 15:11:42 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 16.669 ms - -[39m
+[32m[39m
+2025-11-09 15:13:16 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 11.804 ms - -[39m
+[32m[39m
+2025-11-09 15:13:19 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 36.066 ms - -[39m
+[32m[39m
+2025-11-09 15:14:04 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 168.193 ms - 588[39m
+[32m[39m
+2025-11-09 15:14:06 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 202.483 ms - -[39m
+[32m[39m
+2025-11-09 15:14:08 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 13.245 ms - -[39m
+[32m[39m
+2025-11-09 15:14:23 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 26.752 ms - -[39m
+[32m[39m
+2025-11-09 15:14:26 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 52.529 ms - -[39m
+[32m[39m
+2025-11-09 15:14:53 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 26.327 ms - -[39m
+[32m[39m
+2025-11-09 15:15:18 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 357.317 ms - -[39m
+[32m[39m
+2025-11-09 15:15:26 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 12.718 ms - -[39m
+[32m[39m
+2025-11-09 15:20:26 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 263.336 ms - 588[39m
+[32m[39m
+2025-11-09 15:20:28 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 104.753 ms - -[39m
+[32m[39m
+2025-11-09 15:20:39 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 13.611 ms - -[39m
+[32m[39m
+2025-11-09 15:24:42 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 15.922 ms - -[39m
+[32m[39m
+2025-11-09 15:25:12 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 45.754 ms - -[39m
+[32m[39m
+2025-11-09 15:25:20 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 99.990 ms - -[39m
+[32m[39m
+2025-11-09 15:25:22 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 36.563 ms - -[39m
+[32m[39m
+2025-11-09 15:25:36 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 232.930 ms - -[39m
+[32m[39m
+2025-11-09 15:25:48 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 15.566 ms - -[39m
+[32m[39m
+2025-11-09 15:26:09 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 29.072 ms - -[39m
+[32m[39m
+2025-11-09 15:26:35 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 9.413 ms - -[39m
+[32m[39m
+2025-11-09 15:26:56 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 10.666 ms - -[39m
+[32m[39m
+2025-11-09 15:27:02 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 148.984 ms - -[39m
+[32m[39m
+2025-11-09 15:27:05 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 7.818 ms - -[39m
+[32m[39m
+2025-11-09 15:27:08 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 13.187 ms - -[39m
+[32m[39m
+2025-11-09 15:27:35 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 18.739 ms - -[39m
+[32m[39m
+2025-11-09 15:27:48 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 25.761 ms - -[39m
+[32m[39m
+2025-11-09 15:27:53 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 13.122 ms - -[39m
+[32m[39m
+2025-11-09 15:27:58 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 8.825 ms - -[39m
+[32m[39m
+2025-11-09 15:28:06 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 46.132 ms - -[39m
+[32m[39m
+2025-11-09 15:28:09 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 28.614 ms - -[39m
+[32m[39m
+2025-11-09 15:28:26 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 14.853 ms - -[39m
+[32m[39m
+2025-11-09 15:28:29 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 7.589 ms - -[39m
+[32m[39m
+2025-11-09 15:28:35 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 7.610 ms - -[39m
+[32m[39m
+2025-11-09 15:28:50 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 15.559 ms - -[39m
+[32m[39m
+2025-11-09 15:28:59 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 64.732 ms - -[39m
+[32m[39m
+2025-11-09 15:29:00 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 13.030 ms - -[39m
+[32m[39m
+2025-11-09 15:29:48 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 14.324 ms - -[39m
+[32m[39m
+2025-11-09 15:30:00 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 26.826 ms - -[39m
+[32m[39m
+2025-11-09 15:30:01 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 123.941 ms - -[39m
+[32m[39m
+2025-11-09 15:31:22 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 321.421 ms - 588[39m
+[32m[39m
+2025-11-09 15:31:22 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 94.175 ms - -[39m
+[32m[39m
+2025-11-09 15:31:25 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 9.984 ms - -[39m
+[32m[39m
+2025-11-09 15:31:56 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 24.096 ms - -[39m
+[32m[39m
+2025-11-09 15:31:58 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 9.510 ms - -[39m
+[32m[39m
+2025-11-09 15:32:15 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 11.774 ms - -[39m
+[32m[39m
+2025-11-09 15:32:21 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 9.616 ms - -[39m
+[32m[39m
+2025-11-09 15:32:23 [32minfo[39m [32mGET /api/v1/inventory/records 200 20.450 ms - 133[39m
+[32m[39m
+2025-11-09 15:32:39 [32minfo[39m [32mGET /api/v1/inventory/records?page=1&limit=10&type=ITEM 200 8.950 ms - 133[39m
+[32m[39m
+2025-11-09 15:32:39 [32minfo[39m [32mGET /api/v1/inventory/records?page=1&limit=10&type=USE 200 8.213 ms - 133[39m
+[32m[39m
+2025-11-09 15:32:40 [32minfo[39m [32mGET /api/v1/inventory/records 304 6.811 ms - -[39m
+[32m[39m
+2025-11-09 15:35:40 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 139.974 ms - 588[39m
+[32m[39m
+2025-11-09 15:35:42 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 14.334 ms - -[39m
+[32m[39m
+2025-11-09 15:35:43 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 10.346 ms - -[39m
+[32m[39m
+2025-11-09 15:39:37 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 626.074 ms - 588[39m
+[32m[39m
+2025-11-09 15:39:54 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 275.202 ms - 588[39m
+[32m[39m
+2025-11-09 15:39:58 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 118.416 ms - -[39m
+[32m[39m
+2025-11-09 15:40:04 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 30.889 ms - -[39m
+[32m[39m
+2025-11-09 15:40:16 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 17.367 ms - -[39m
+[32m[39m
+2025-11-09 15:41:06 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 352.465 ms - -[39m
+[32m[39m
+2025-11-09 15:41:08 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 578.596 ms - -[39m
+[32m[39m
+2025-11-09 16:04:40 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 327.956 ms - -[39m
+[32m[39m
+2025-11-09 16:04:41 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 118.649 ms - -[39m
+[32m[39m
+2025-11-09 16:04:47 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 15.432 ms - -[39m
+[32m[39m
+2025-11-09 16:05:46 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 31.219 ms - -[39m
+[32m[39m
+2025-11-09 16:05:49 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 20.159 ms - -[39m
+[32m[39m
+2025-11-09 16:07:17 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 1487.210 ms - 588[39m
+[32m[39m
+2025-11-09 16:07:19 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 51.720 ms - -[39m
+[32m[39m
+2025-11-09 16:07:28 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 43.956 ms - -[39m
+[32m[39m
+2025-11-09 16:08:48 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 401.537 ms - 588[39m
+[32m[39m
+2025-11-09 16:08:50 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 36.754 ms - -[39m
+[32m[39m
+2025-11-09 16:08:56 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 32.009 ms - -[39m
+[32m[39m
+2025-11-09 16:18:10 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 383.858 ms - 588[39m
+[32m[39m
+2025-11-09 16:18:13 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 219.051 ms - -[39m
+[32m[39m
+2025-11-09 16:18:20 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 22.069 ms - -[39m
+[32m[39m
+2025-11-09 16:19:09 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 26.402 ms - -[39m
+[32m[39m
+2025-11-09 16:28:49 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 175.834 ms - -[39m
+[32m[39m
+2025-11-09 16:28:51 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 15.650 ms - -[39m
+[32m[39m
+2025-11-09 16:28:54 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 112.831 ms - -[39m
+[32m[39m
+2025-11-09 16:29:52 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 32.404 ms - -[39m
+[32m[39m
+2025-11-09 16:29:53 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 40.321 ms - -[39m
+[32m[39m
+2025-11-09 16:33:39 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 39.229 ms - -[39m
+[32m[39m
+2025-11-09 16:44:17 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 396.809 ms - 588[39m
+[32m[39m
+2025-11-09 16:45:01 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 200 95.679 ms - 24892[39m
+[32m[39m
+2025-11-09 16:45:38 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 200 53.908 ms - 24892[39m
+[32m[39m
+2025-11-09 17:12:32 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 200 416.027 ms - 17889[39m
+[32m[39m
+2025-11-09 17:31:15 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 401 39.262 ms - 64[39m
+[32m[39m
+2025-11-09 17:39:33 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 381.613 ms - 588[39m
+[32m[39m
+2025-11-09 17:39:35 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 200 94.045 ms - 8887[39m
+[32m[39m
+2025-11-09 17:39:39 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 17.925 ms - -[39m
+[32m[39m
+2025-11-09 17:47:59 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 401 10.331 ms - 64[39m
+[32m[39m
+2025-11-09 17:48:34 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 703.984 ms - 588[39m
+[32m[39m
+2025-11-09 17:48:49 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 200 170.612 ms - 18258[39m
+[32m[39m
+2025-11-10 12:21:26 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 463.314 ms - 588[39m
+[32m[39m
+2025-11-10 12:21:34 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 152.885 ms - 588[39m
+[32m[39m
+2025-11-10 12:21:38 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 237.049 ms - -[39m
+[32m[39m
+2025-11-10 12:22:39 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 31.252 ms - -[39m
+[32m[39m
+2025-11-10 12:30:14 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 340.793 ms - 588[39m
+[32m[39m
+2025-11-10 12:30:15 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 103.195 ms - -[39m
+[32m[39m
+2025-11-10 12:30:20 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 15.877 ms - -[39m
+[32m[39m
+2025-11-10 12:30:25 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 16.584 ms - -[39m
+[32m[39m
+2025-11-10 12:41:17 [32minfo[39m [32mGET /api/v1/livestock/counts 200 604.186 ms - 103[39m
+[32m[39m
+2025-11-10 12:41:35 [32minfo[39m [32mGET /api/v1/livestock/ 200 41.296 ms - 9150[39m
+[32m[39m
+2025-11-10 14:57:22 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 1542.758 ms - 588[39m
+[32m[39m
+2025-11-10 14:58:09 [32minfo[39m [32mGET /api/v1/tasks/assigned/all 403 34.187 ms - 86[39m
+[32m[39m
+2025-11-10 14:59:59 [32minfo[39m [32mGET /api/v1/tasks/assigned/all 403 541.390 ms - 86[39m
+[32m[39m
+2025-11-10 15:00:05 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 200 1321.272 ms - 8887[39m
+[32m[39m
+2025-11-10 15:15:06 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 200 9183.491 ms - 18258[39m
+[32m[39m
+2025-11-10 15:36:02 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 331.543 ms - 588[39m
+[32m[39m
+2025-11-10 15:36:04 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 118.309 ms - -[39m
+[32m[39m
+2025-11-10 15:36:08 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 18.054 ms - -[39m
+[32m[39m
+2025-11-10 15:36:19 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9grte0006t19o95ule02l 200 69.060 ms - 1564[39m
+[32m[39m
+2025-11-10 15:36:21 [32minfo[39m [32mGET /api/v1/livestock 200 24.494 ms - 9150[39m
+[32m[39m
+2025-11-10 15:36:22 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 17.023 ms - -[39m
+[32m[39m
+2025-11-10 15:56:49 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 344.795 ms - -[39m
+[32m[39m
+2025-11-10 15:56:55 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 200 128.269 ms - 18258[39m
+[32m[39m
+2025-11-10 15:56:57 [32minfo[39m [32mGET /api/v1/livestock 304 27.443 ms - -[39m
+[32m[39m
+2025-11-10 15:56:57 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 101.383 ms - -[39m
+[32m[39m
+2025-11-10 15:57:30 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 12.461 ms - -[39m
+[32m[39m
+2025-11-10 15:57:32 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9grte0006t19o95ule02l 304 72.587 ms - -[39m
+[32m[39m
+2025-11-10 15:57:33 [32minfo[39m [32mGET /api/v1/livestock 304 22.917 ms - -[39m
+[32m[39m
+2025-11-10 15:57:34 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 12.188 ms - -[39m
+[32m[39m
+2025-11-10 16:03:45 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 358.220 ms - 588[39m
+[32m[39m
+2025-11-10 16:03:48 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 105.790 ms - -[39m
+[32m[39m
+2025-11-10 16:03:53 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 11.165 ms - -[39m
+[32m[39m
+2025-11-10 16:03:57 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 79.736 ms - -[39m
+[32m[39m
+2025-11-10 16:03:59 [32minfo[39m [32mGET /api/v1/livestock 304 16.480 ms - -[39m
+[32m[39m
+2025-11-10 16:04:00 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 15.469 ms - -[39m
+[32m[39m
+2025-11-10 16:04:34 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 11.167 ms - -[39m
+[32m[39m
+2025-11-10 16:04:36 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9grte0006t19o95ule02l 304 54.538 ms - -[39m
+[32m[39m
+2025-11-10 16:04:38 [32minfo[39m [32mGET /api/v1/livestock 304 15.022 ms - -[39m
+[32m[39m
+2025-11-10 16:04:40 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 24.297 ms - -[39m
+[32m[39m
+2025-11-10 16:05:18 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 11.886 ms - -[39m
+[32m[39m
+2025-11-10 16:10:43 [31merror[39m [31mUser not found User not found[39m
+2025-11-10 16:10:43 [32minfo[39m [32mPOST /api/v1/auth/login 404 162.609 ms - 42[39m
+[32m[39m
+2025-11-10 16:11:05 [31merror[39m [31mUser not found User not found[39m
+2025-11-10 16:11:05 [32minfo[39m [32mPOST /api/v1/auth/login 404 5.790 ms - 42[39m
+[32m[39m
+2025-11-10 16:12:37 [32minfo[39m [32mPOST /api/v1/auth/admin-login 404 1.028 ms - 128[39m
+[32m[39m
+2025-11-10 16:12:45 [32minfo[39m [32mPOST /api/v1/auth/login 200 169.679 ms - 587[39m
+[32m[39m
+2025-11-10 16:13:34 [32minfo[39m [32mGET /api/v1/livestock/ 200 73.899 ms - 9150[39m
+[32m[39m
+2025-11-10 16:13:55 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 196.602 ms - -[39m
+[32m[39m
+2025-11-10 16:13:55 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 200 18.258 ms - 1132[39m
+[32m[39m
+2025-11-10 16:14:04 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gr7s0003t19otkdt11zv 200 76.309 ms - 7245[39m
+[32m[39m
+2025-11-10 16:14:04 [32minfo[39m [32mGET /api/v1/livestock 304 15.317 ms - -[39m
+[32m[39m
+2025-11-10 16:14:07 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 10.373 ms - -[39m
+[32m[39m
+2025-11-10 16:14:22 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 9.995 ms - -[39m
+[32m[39m
+2025-11-10 16:14:34 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 14.989 ms - -[39m
+[32m[39m
+2025-11-10 16:14:35 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 8.176 ms - -[39m
+[32m[39m
+2025-11-10 16:14:38 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 60.172 ms - -[39m
+[32m[39m
+2025-11-10 16:14:40 [32minfo[39m [32mGET /api/v1/livestock 304 14.541 ms - -[39m
+[32m[39m
+2025-11-10 16:14:41 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 10.527 ms - -[39m
+[32m[39m
+2025-11-10 16:15:42 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 536.581 ms - -[39m
+[32m[39m
+2025-11-10 16:15:43 [32minfo[39m [32mGET /api/v1/livestock 304 101.585 ms - -[39m
+[32m[39m
+2025-11-10 16:15:45 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 512.007 ms - -[39m
+[32m[39m
+2025-11-10 16:15:47 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 158.963 ms - -[39m
+[32m[39m
+2025-11-10 16:15:47 [32minfo[39m [32mGET /api/v1/livestock 304 24.237 ms - -[39m
+[32m[39m
+2025-11-10 16:15:49 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 126.322 ms - -[39m
+[32m[39m
+2025-11-10 16:15:50 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 656.230 ms - -[39m
+[32m[39m
+2025-11-10 16:15:52 [32minfo[39m [32mGET /api/v1/livestock 304 134.144 ms - -[39m
+[32m[39m
+2025-11-10 16:15:53 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 22.266 ms - -[39m
+[32m[39m
+2025-11-10 16:16:55 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 718.822 ms - -[39m
+[32m[39m
+2025-11-10 16:16:57 [32minfo[39m [32mGET /api/v1/livestock 304 15.272 ms - -[39m
+[32m[39m
+2025-11-10 16:16:57 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 100.038 ms - -[39m
+[32m[39m
+2025-11-10 16:17:30 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 2217.103 ms - -[39m
+[32m[39m
+2025-11-10 16:17:33 [32minfo[39m [32mGET /api/v1/livestock 304 1243.168 ms - -[39m
+[32m[39m
+2025-11-10 16:17:34 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 21.569 ms - -[39m
+[32m[39m
+2025-11-10 16:21:53 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 363.120 ms - 588[39m
+[32m[39m
+2025-11-10 16:21:54 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 112.730 ms - -[39m
+[32m[39m
+2025-11-10 16:22:03 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 22.982 ms - -[39m
+[32m[39m
+2025-11-10 16:22:09 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 83.203 ms - -[39m
+[32m[39m
+2025-11-10 16:22:10 [32minfo[39m [32mGET /api/v1/livestock 304 25.104 ms - -[39m
+[32m[39m
+2025-11-10 16:22:11 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 13.842 ms - -[39m
+[32m[39m
+2025-11-10 16:22:39 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 285.628 ms - -[39m
+[32m[39m
+2025-11-10 16:22:40 [32minfo[39m [32mGET /api/v1/livestock 304 58.799 ms - -[39m
+[32m[39m
+2025-11-10 16:22:41 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 13.377 ms - -[39m
+[32m[39m
+2025-11-11 12:16:43 [32minfo[39m [32mPOST /api/v1/auth/login 200 1120.781 ms - 574[39m
+[32m[39m
+2025-11-11 12:16:48 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-11-11 12:16:48 [32minfo[39m [32mPOST /api/v1/auth/vet-login 400 212.352 ms - 47[39m
+[32m[39m
+2025-11-11 12:16:54 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 180.563 ms - 588[39m
+[32m[39m
+2025-11-11 12:16:57 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 200 334.951 ms - 8887[39m
+[32m[39m
+2025-11-11 12:17:44 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 200 28.982 ms - 1132[39m
+[32m[39m
+2025-11-11 12:17:50 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 200 105.151 ms - 18258[39m
+[32m[39m
+2025-11-11 12:17:54 [32minfo[39m [32mGET /api/v1/livestock 200 15.093 ms - 9150[39m
+[32m[39m
+2025-11-11 12:17:58 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 14.384 ms - -[39m
+[32m[39m
+2025-11-11 12:18:38 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 200 11.252 ms - 1132[39m
+[32m[39m
+2025-11-11 12:18:39 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 13.660 ms - -[39m
+[32m[39m
+2025-11-11 12:39:01 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 229.785 ms - 588[39m
+[32m[39m
+2025-11-11 12:39:03 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 200 99.360 ms - 8887[39m
+[32m[39m
+2025-11-11 12:39:07 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 200 12.510 ms - 1132[39m
+[32m[39m
+2025-11-11 12:49:03 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 202.493 ms - -[39m
+[32m[39m
+2025-11-11 12:55:48 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 106.249 ms - -[39m
+[32m[39m
+2025-11-11 12:55:49 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 93.447 ms - -[39m
+[32m[39m
+2025-11-11 12:55:50 [32minfo[39m [32mGET /api/v1/livestock 304 22.500 ms - -[39m
+[32m[39m
+2025-11-11 12:55:52 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 200 206.259 ms - 8887[39m
+[32m[39m
+2025-11-11 13:05:56 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 200 107.114 ms - 1132[39m
+[32m[39m
+2025-11-11 13:05:59 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 200 92.427 ms - 18258[39m
+[32m[39m
+2025-11-11 13:06:01 [32minfo[39m [32mGET /api/v1/livestock 304 21.350 ms - -[39m
+[32m[39m
+2025-11-11 13:06:02 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 216.028 ms - -[39m
+[32m[39m
+2025-11-11 13:06:25 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 200 13.068 ms - 1132[39m
+[32m[39m
+2025-11-11 13:06:28 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 91.615 ms - -[39m
+[32m[39m
+2025-11-11 13:06:29 [32minfo[39m [32mGET /api/v1/livestock 304 26.980 ms - -[39m
+[32m[39m
+2025-11-11 13:06:31 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 13.540 ms - -[39m
+[32m[39m
+2025-11-11 13:08:25 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-11-11 13:08:25 [32minfo[39m [32mPOST /api/v1/auth/vet-login 400 157.920 ms - 47[39m
+[32m[39m
+2025-11-11 13:08:39 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 140.995 ms - 588[39m
+[32m[39m
+2025-11-11 13:08:42 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 11.554 ms - -[39m
+[32m[39m
+2025-11-11 13:08:51 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 10.006 ms - -[39m
+[32m[39m
+2025-11-11 13:08:55 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 200 60.785 ms - 18258[39m
+[32m[39m
+2025-11-11 13:08:57 [32minfo[39m [32mGET /api/v1/livestock 304 14.023 ms - -[39m
+[32m[39m
+2025-11-11 13:08:58 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 10.618 ms - -[39m
+[32m[39m
+2025-11-11 13:09:10 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 9.549 ms - -[39m
+[32m[39m
+2025-11-11 13:09:12 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9grte0006t19o95ule02l 200 159.193 ms - 1564[39m
+[32m[39m
+2025-11-11 13:09:14 [32minfo[39m [32mGET /api/v1/livestock 304 16.982 ms - -[39m
+[32m[39m
+2025-11-11 13:09:14 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 43.233 ms - -[39m
+[32m[39m
+2025-11-11 13:09:46 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 9.831 ms - -[39m
+[32m[39m
+2025-11-11 13:09:48 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gr7s0003t19otkdt11zv 200 70.737 ms - 7245[39m
+[32m[39m
+2025-11-11 13:09:50 [32minfo[39m [32mGET /api/v1/livestock 304 14.575 ms - -[39m
+[32m[39m
+2025-11-11 13:09:51 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 18.788 ms - -[39m
+[32m[39m
+2025-11-11 13:10:41 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 200 11.610 ms - 1132[39m
+[32m[39m
+2025-11-11 13:10:45 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 200 70.198 ms - 18258[39m
+[32m[39m
+2025-11-11 13:10:46 [32minfo[39m [32mGET /api/v1/livestock 304 14.198 ms - -[39m
+[32m[39m
+2025-11-11 13:10:46 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 10.504 ms - -[39m
+[32m[39m
+2025-11-11 13:53:46 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 255.845 ms - 588[39m
+[32m[39m
+2025-11-11 13:53:49 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 118.648 ms - -[39m
+[32m[39m
+2025-11-11 13:54:53 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 200 14.053 ms - 1132[39m
+[32m[39m
+2025-11-11 13:55:00 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 98.643 ms - -[39m
+[32m[39m
+2025-11-11 13:55:01 [32minfo[39m [32mGET /api/v1/livestock 304 14.710 ms - -[39m
+[32m[39m
+2025-11-11 13:55:02 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 25.381 ms - -[39m
+[32m[39m
+2025-11-11 13:58:53 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 357.769 ms - 588[39m
+[32m[39m
+2025-11-11 14:01:36 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 401 6.879 ms - 66[39m
+[32m[39m
+2025-11-11 14:02:00 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 200 17.935 ms - 1132[39m
+[32m[39m
+2025-11-11 14:02:26 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 200 102.002 ms - 18258[39m
+[32m[39m
+2025-11-11 14:08:54 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 350.322 ms - 588[39m
+[32m[39m
+2025-11-11 14:08:56 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 130.247 ms - -[39m
+[32m[39m
+2025-11-11 14:09:21 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 200 13.989 ms - 1132[39m
+[32m[39m
+2025-11-11 14:09:29 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 73.815 ms - -[39m
+[32m[39m
+2025-11-11 14:09:30 [32minfo[39m [32mGET /api/v1/livestock 304 17.015 ms - -[39m
+[32m[39m
+2025-11-11 14:09:31 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 16.671 ms - -[39m
+[32m[39m
+2025-11-11 14:12:09 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 146.617 ms - 588[39m
+[32m[39m
+2025-11-11 14:12:11 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 24.074 ms - -[39m
+[32m[39m
+2025-11-11 14:12:15 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 13.861 ms - -[39m
+[32m[39m
+2025-11-11 14:12:30 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 200 74.366 ms - 18258[39m
+[32m[39m
+2025-11-11 14:12:30 [32minfo[39m [32mGET /api/v1/livestock 304 14.186 ms - -[39m
+[32m[39m
+2025-11-11 14:12:32 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 11.941 ms - -[39m
+[32m[39m
+2025-11-11 14:18:19 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 311.677 ms - 588[39m
+[32m[39m
+2025-11-11 14:18:23 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 95.382 ms - -[39m
+[32m[39m
+2025-11-11 14:18:44 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 11.353 ms - -[39m
+[32m[39m
+2025-11-11 14:18:58 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 76.551 ms - -[39m
+[32m[39m
+2025-11-11 14:18:59 [32minfo[39m [32mGET /api/v1/livestock 304 18.944 ms - -[39m
+[32m[39m
+2025-11-11 14:19:01 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 14.414 ms - -[39m
+[32m[39m
+2025-11-16 16:54:47 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 475.474 ms - 588[39m
+[32m[39m
+2025-11-16 16:54:49 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 137.721 ms - -[39m
+[32m[39m
+2025-11-16 16:55:30 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 20.992 ms - -[39m
+[32m[39m
+2025-11-16 16:55:39 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 96.884 ms - -[39m
+[32m[39m
+2025-11-16 16:55:41 [32minfo[39m [32mGET /api/v1/livestock 304 18.730 ms - -[39m
+[32m[39m
+2025-11-16 16:55:43 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 17.118 ms - -[39m
+[32m[39m
+2025-11-16 16:59:54 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 294.733 ms - 588[39m
+[32m[39m
+2025-11-16 16:59:56 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 206.137 ms - -[39m
+[32m[39m
+2025-11-16 17:00:02 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 16.894 ms - -[39m
+[32m[39m
+2025-11-16 17:00:07 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 84.228 ms - -[39m
+[32m[39m
+2025-11-16 17:00:09 [32minfo[39m [32mGET /api/v1/livestock 304 24.529 ms - -[39m
+[32m[39m
+2025-11-16 17:00:11 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 18.176 ms - -[39m
+[32m[39m
+2025-11-16 17:02:43 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 240.311 ms - -[39m
+[32m[39m
+2025-11-16 17:02:44 [32minfo[39m [32mGET /api/v1/livestock 304 48.593 ms - -[39m
+[32m[39m
+2025-11-16 17:02:46 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 26.792 ms - -[39m
+[32m[39m
+2025-11-16 17:03:16 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 111.637 ms - -[39m
+[32m[39m
+2025-11-16 17:03:18 [32minfo[39m [32mGET /api/v1/livestock 304 13.633 ms - -[39m
+[32m[39m
+2025-11-16 17:03:20 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 17.527 ms - -[39m
+[32m[39m
+2025-11-16 17:03:41 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 3316.444 ms - -[39m
+[32m[39m
+2025-11-16 17:03:43 [32minfo[39m [32mGET /api/v1/livestock 304 218.373 ms - -[39m
+[32m[39m
+2025-11-16 17:03:44 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 19.751 ms - -[39m
+[32m[39m
+2025-11-16 17:03:53 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 516.889 ms - -[39m
+[32m[39m
+2025-11-16 17:03:54 [32minfo[39m [32mGET /api/v1/livestock 304 35.034 ms - -[39m
+[32m[39m
+2025-11-16 17:03:55 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 24.993 ms - -[39m
+[32m[39m
+2025-11-16 17:10:02 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 922.160 ms - -[39m
+[32m[39m
+2025-11-16 17:10:04 [32minfo[39m [32mGET /api/v1/livestock 304 51.387 ms - -[39m
+[32m[39m
+2025-11-16 17:10:07 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 578.706 ms - -[39m
+[32m[39m
+2025-11-16 17:29:21 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 310.867 ms - 588[39m
+[32m[39m
+2025-11-16 17:29:24 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 221.098 ms - -[39m
+[32m[39m
+2025-11-16 17:29:29 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 22.103 ms - -[39m
+[32m[39m
+2025-11-16 17:29:38 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 74.325 ms - -[39m
+[32m[39m
+2025-11-16 17:29:39 [32minfo[39m [32mGET /api/v1/livestock 304 17.435 ms - -[39m
+[32m[39m
+2025-11-16 17:29:41 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 16.773 ms - -[39m
+[32m[39m
+2025-11-16 17:30:35 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 157.775 ms - 588[39m
+[32m[39m
+2025-11-16 17:30:36 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 13.820 ms - -[39m
+[32m[39m
+2025-11-16 17:30:49 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 9.060 ms - -[39m
+[32m[39m
+2025-11-16 17:31:16 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 48.293 ms - -[39m
+[32m[39m
+2025-11-16 17:39:04 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 267.007 ms - -[39m
+[32m[39m
+2025-11-16 17:54:02 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 908.144 ms - 588[39m
+[32m[39m
+2025-11-16 17:54:04 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 254.623 ms - -[39m
+[32m[39m
+2025-11-16 17:54:07 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 37.649 ms - -[39m
+[32m[39m
+2025-11-16 17:54:12 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 19.476 ms - -[39m
+[32m[39m
+2025-11-16 17:54:15 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 184.969 ms - -[39m
+[32m[39m
+2025-11-16 17:54:16 [32minfo[39m [32mGET /api/v1/livestock 304 109.160 ms - -[39m
+[32m[39m
+2025-11-16 17:54:18 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 31.082 ms - -[39m
+[32m[39m
+2025-11-16 17:55:12 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 116.616 ms - -[39m
+[32m[39m
+2025-11-16 17:55:12 [32minfo[39m [32mGET /api/v1/livestock 304 19.499 ms - -[39m
+[32m[39m
+2025-11-16 17:55:14 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 16.028 ms - -[39m
+[32m[39m
+2025-11-16 17:55:36 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 84.020 ms - -[39m
+[32m[39m
+2025-11-16 17:55:38 [32minfo[39m [32mGET /api/v1/livestock 304 20.453 ms - -[39m
+[32m[39m
+2025-11-16 17:55:39 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 11.242 ms - -[39m
+[32m[39m
+2025-11-16 18:06:05 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 697.118 ms - 588[39m
+[32m[39m
+2025-11-16 18:06:07 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 159.679 ms - -[39m
+[32m[39m
+2025-11-16 18:06:14 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 16.770 ms - -[39m
+[32m[39m
+2025-11-16 18:06:27 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9grte0006t19o95ule02l 304 81.777 ms - -[39m
+[32m[39m
+2025-11-16 18:06:29 [32minfo[39m [32mGET /api/v1/livestock 304 21.502 ms - -[39m
+[32m[39m
+2025-11-16 18:06:31 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 16.112 ms - -[39m
+[32m[39m
+2025-11-16 19:35:27 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 319.933 ms - 588[39m
+[32m[39m
+2025-11-16 19:37:31 [32minfo[39m [32mGET /api/v1/livestock/cmhh9gsvj003kt19ozowupath 200 37.366 ms - 959[39m
+[32m[39m
+2025-11-16 19:41:07 [32minfo[39m [32mGET /api/v1/sicknesssickness/ 404 8.525 ms - 129[39m
+[32m[39m
+2025-11-16 19:41:24 [32minfo[39m [32mGET /api/v1/sickness/ 200 266.573 ms - 16019[39m
+[32m[39m
+2025-11-16 19:47:19 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 205.087 ms - 588[39m
+[32m[39m
+2025-11-16 19:47:21 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 121.703 ms - -[39m
+[32m[39m
+2025-11-16 19:47:24 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 14.978 ms - -[39m
+[32m[39m
+2025-11-16 19:47:31 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 107.087 ms - -[39m
+[32m[39m
+2025-11-16 19:47:32 [32minfo[39m [32mGET /api/v1/livestock 304 17.208 ms - -[39m
+[32m[39m
+2025-11-16 19:47:34 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 13.506 ms - -[39m
+[32m[39m
+2025-11-16 19:47:57 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 71.084 ms - -[39m
+[32m[39m
+2025-11-16 19:47:57 [32minfo[39m [32mGET /api/v1/livestock 304 13.889 ms - -[39m
+[32m[39m
+2025-11-16 19:47:59 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 18.816 ms - -[39m
+[32m[39m
+2025-11-16 19:48:45 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 58.844 ms - -[39m
+[32m[39m
+2025-11-16 19:48:47 [32minfo[39m [32mGET /api/v1/livestock 304 18.767 ms - -[39m
+[32m[39m
+2025-11-16 19:48:47 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 15.314 ms - -[39m
+[32m[39m
+2025-11-16 19:48:51 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 61.263 ms - -[39m
+[32m[39m
+2025-11-16 19:48:51 [32minfo[39m [32mGET /api/v1/livestock 304 13.106 ms - -[39m
+[32m[39m
+2025-11-16 19:48:53 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 8.334 ms - -[39m
+[32m[39m
+2025-11-16 19:48:56 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 64.049 ms - -[39m
+[32m[39m
+2025-11-16 19:48:56 [32minfo[39m [32mGET /api/v1/livestock 304 15.045 ms - -[39m
+[32m[39m
+2025-11-16 19:48:57 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 8.562 ms - -[39m
+[32m[39m
+2025-11-16 19:49:02 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 104.089 ms - -[39m
+[32m[39m
+2025-11-16 19:49:02 [32minfo[39m [32mGET /api/v1/livestock 304 14.171 ms - -[39m
+[32m[39m
+2025-11-16 19:49:04 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 10.782 ms - -[39m
+[32m[39m
+2025-11-16 19:49:06 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 53.139 ms - -[39m
+[32m[39m
+2025-11-16 19:49:06 [32minfo[39m [32mGET /api/v1/livestock 304 13.972 ms - -[39m
+[32m[39m
+2025-11-16 19:49:07 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 9.080 ms - -[39m
+[32m[39m
+2025-11-16 19:49:12 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 52.270 ms - -[39m
+[32m[39m
+2025-11-16 19:49:14 [32minfo[39m [32mGET /api/v1/livestock 304 14.121 ms - -[39m
+[32m[39m
+2025-11-16 19:49:15 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 10.459 ms - -[39m
+[32m[39m
+2025-11-16 19:49:26 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 54.072 ms - -[39m
+[32m[39m
+2025-11-16 19:49:27 [32minfo[39m [32mGET /api/v1/livestock 304 12.119 ms - -[39m
+[32m[39m
+2025-11-16 19:49:28 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 12.622 ms - -[39m
+[32m[39m
+2025-11-16 19:49:33 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 51.707 ms - -[39m
+[32m[39m
+2025-11-16 19:49:34 [32minfo[39m [32mGET /api/v1/livestock 304 13.543 ms - -[39m
+[32m[39m
+2025-11-16 19:49:34 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 11.231 ms - -[39m
+[32m[39m
+2025-11-16 19:49:38 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 52.390 ms - -[39m
+[32m[39m
+2025-11-16 19:49:39 [32minfo[39m [32mGET /api/v1/livestock 304 21.462 ms - -[39m
+[32m[39m
+2025-11-16 19:49:39 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 8.952 ms - -[39m
+[32m[39m
+2025-11-16 19:49:41 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 54.367 ms - -[39m
+[32m[39m
+2025-11-16 19:49:41 [32minfo[39m [32mGET /api/v1/livestock 304 12.560 ms - -[39m
+[32m[39m
+2025-11-16 19:49:42 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 10.413 ms - -[39m
+[32m[39m
+2025-11-16 19:50:10 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 64.933 ms - -[39m
+[32m[39m
+2025-11-16 19:50:11 [32minfo[39m [32mGET /api/v1/livestock 304 13.269 ms - -[39m
+[32m[39m
+2025-11-16 19:50:12 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 11.462 ms - -[39m
+[32m[39m
+2025-11-16 19:50:16 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 61.544 ms - -[39m
+[32m[39m
+2025-11-16 19:50:17 [32minfo[39m [32mGET /api/v1/livestock 304 12.753 ms - -[39m
+[32m[39m
+2025-11-16 19:50:18 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 8.617 ms - -[39m
+[32m[39m
+2025-11-16 19:51:15 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 10.651 ms - -[39m
+[32m[39m
+2025-11-16 19:51:18 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9grte0006t19o95ule02l 304 53.956 ms - -[39m
+[32m[39m
+2025-11-16 19:51:18 [32minfo[39m [32mGET /api/v1/livestock 304 22.502 ms - -[39m
+[32m[39m
+2025-11-16 19:51:19 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 9.686 ms - -[39m
+[32m[39m
+2025-11-16 19:51:31 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 8.017 ms - -[39m
+[32m[39m
+2025-11-16 19:52:18 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gqno0000t19o3zuesovj 304 50.638 ms - -[39m
+[32m[39m
+2025-11-16 19:52:19 [32minfo[39m [32mGET /api/v1/livestock 304 12.375 ms - -[39m
+[32m[39m
+2025-11-16 19:52:22 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 269.395 ms - -[39m
+[32m[39m
+2025-11-16 19:52:34 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 10.545 ms - -[39m
+[32m[39m
+2025-11-16 19:52:37 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9grte0006t19o95ule02l 304 63.266 ms - -[39m
+[32m[39m
+2025-11-16 19:52:39 [32minfo[39m [32mGET /api/v1/livestock 304 13.643 ms - -[39m
+[32m[39m
+2025-11-16 19:52:41 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 15.080 ms - -[39m
+[32m[39m
+2025-11-16 19:52:58 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 10.476 ms - -[39m
+[32m[39m
+2025-11-16 19:53:02 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9gr7s0003t19otkdt11zv 304 58.667 ms - -[39m
+[32m[39m
+2025-11-16 19:53:03 [32minfo[39m [32mGET /api/v1/livestock 304 464.681 ms - -[39m
+[32m[39m
+2025-11-16 19:53:04 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 14.102 ms - -[39m
+[32m[39m
+2025-11-16 19:53:18 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 8.447 ms - -[39m
+[32m[39m
+2025-11-16 19:53:22 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmhh9grte0006t19o95ule02l 304 47.355 ms - -[39m
+[32m[39m
+2025-11-16 19:53:23 [32minfo[39m [32mGET /api/v1/livestock 304 12.615 ms - -[39m
+[32m[39m
+2025-11-16 19:53:23 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 14.273 ms - -[39m
+[32m[39m
+2025-11-16 19:54:46 [32minfo[39m [32mGET /api/v1/livestock/counts 200 14.076 ms - 103[39m
+[32m[39m
+2025-11-16 19:55:07 [32minfo[39m [32mGET /api/v1/livestock/ 200 18.425 ms - 9150[39m
+[32m[39m
+2025-11-16 20:20:03 [32minfo[39m [32mGET /api/v1/livestock/cmhh9gsvf003gt19olor3ef9q/health-history 200 334.804 ms - 270[39m
+[32m[39m
+2025-11-16 20:20:51 [32minfo[39m [32mGET /api/v1/livestock/cmhh9gsuz0034t19oyvphda31/health-history 200 33.653 ms - 270[39m
+[32m[39m
+2025-11-16 20:30:14 [32minfo[39m [32mGET /api/v1/livestock/ 401 257.664 ms - 77[39m
+[32m[39m
+2025-11-16 20:30:26 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 215.185 ms - 588[39m
+[32m[39m
+2025-11-16 20:30:51 [32minfo[39m [32mGET /api/v1/livestock/ 200 71.603 ms - 9167[39m
+[32m[39m
+2025-11-16 20:42:39 [31merror[39m [31mLivestock not found Livestock not found[39m
+2025-11-16 20:42:39 [32minfo[39m [32mGET /api/v1/livestock/cmhh9gsuz0034t19oyvphda31/health-history 404 416.786 ms - 47[39m
+[32m[39m
+2025-11-16 20:43:00 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrk7003mt1uork7wndqz/health-history 200 184.558 ms - 270[39m
+[32m[39m
+2025-11-16 20:43:44 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrk5003kt1uo5es24cyz/health-history 200 28.360 ms - 272[39m
+[32m[39m
+2025-11-16 20:47:13 [32minfo[39m [32mGET /api/v1/livestock/?page=1&limit=20 200 47.336 ms - 18195[39m
+[32m[39m
+2025-11-16 20:47:50 [32minfo[39m [32mGET /api/v1/livestock/?page=1&limit=60 200 263.820 ms - 62371[39m
+[32m[39m
+2025-11-16 20:48:27 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 200 226.052 ms - 3240[39m
+[32m[39m
+2025-11-16 21:00:43 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 300.738 ms - 588[39m
+[32m[39m
+2025-11-16 21:00:45 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 200 115.490 ms - 4795[39m
+[32m[39m
+2025-11-16 21:00:55 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 200 29.137 ms - 1132[39m
+[32m[39m
+2025-11-16 21:01:01 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 200 119.288 ms - 18022[39m
+[32m[39m
+2025-11-16 21:01:03 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 16.217 ms - 9167[39m
+[32m[39m
+2025-11-16 21:01:03 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 200 15.537 ms - 4795[39m
+[32m[39m
+2025-11-16 21:01:55 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 90.419 ms - -[39m
+[32m[39m
+2025-11-16 21:01:57 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 17.545 ms - -[39m
+[32m[39m
+2025-11-16 21:01:57 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 15.168 ms - -[39m
+[32m[39m
+2025-11-16 21:02:04 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 15.589 ms - -[39m
+[32m[39m
+2025-11-16 21:02:10 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zr4r0006t1uo7yv915n3 200 65.795 ms - 2513[39m
+[32m[39m
+2025-11-16 21:02:11 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 15.216 ms - -[39m
+[32m[39m
+2025-11-16 21:02:12 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 13.238 ms - -[39m
+[32m[39m
+2025-11-16 21:06:51 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 253.366 ms - 588[39m
+[32m[39m
+2025-11-16 21:06:54 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 137.064 ms - -[39m
+[32m[39m
+2025-11-16 21:07:02 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 9.325 ms - -[39m
+[32m[39m
+2025-11-16 21:07:06 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 98.690 ms - -[39m
+[32m[39m
+2025-11-16 21:07:08 [32minfo[39m [32mGET /api/v1/livestock 200 16.501 ms - 9167[39m
+[32m[39m
+2025-11-16 21:07:11 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 14.483 ms - -[39m
+[32m[39m
+2025-11-16 21:09:31 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 10.077 ms - -[39m
+[32m[39m
+2025-11-16 21:10:26 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 99.015 ms - -[39m
+[32m[39m
+2025-11-16 21:10:28 [32minfo[39m [32mGET /api/v1/livestock 304 15.728 ms - -[39m
+[32m[39m
+2025-11-16 21:10:30 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 19.530 ms - -[39m
+[32m[39m
+2025-11-16 21:12:46 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 244.874 ms - 588[39m
+[32m[39m
+2025-11-16 21:12:49 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 113.018 ms - -[39m
+[32m[39m
+2025-11-16 21:12:51 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 10.599 ms - -[39m
+[32m[39m
+2025-11-16 21:13:05 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 11.189 ms - -[39m
+[32m[39m
+2025-11-16 21:13:09 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 105.320 ms - -[39m
+[32m[39m
+2025-11-16 21:13:10 [32minfo[39m [32mGET /api/v1/livestock 304 30.055 ms - -[39m
+[32m[39m
+2025-11-16 21:13:12 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 14.659 ms - -[39m
+[32m[39m
+2025-11-16 21:19:00 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-11-16 21:19:00 [32minfo[39m [32mPOST /api/v1/auth/vet-login 400 442.114 ms - 47[39m
+[32m[39m
+2025-11-16 21:19:07 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 129.883 ms - 588[39m
+[32m[39m
+2025-11-16 21:19:10 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 196.547 ms - -[39m
+[32m[39m
+2025-11-16 21:19:14 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 17.246 ms - -[39m
+[32m[39m
+2025-11-16 21:19:28 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 97.852 ms - -[39m
+[32m[39m
+2025-11-16 21:19:30 [32minfo[39m [32mGET /api/v1/livestock 304 16.051 ms - -[39m
+[32m[39m
+2025-11-16 21:19:32 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 22.229 ms - -[39m
+[32m[39m
+2025-11-16 21:25:58 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 226.803 ms - 588[39m
+[32m[39m
+2025-11-16 21:26:00 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 103.215 ms - -[39m
+[32m[39m
+2025-11-16 21:26:07 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 12.030 ms - -[39m
+[32m[39m
+2025-11-16 21:26:13 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 94.873 ms - -[39m
+[32m[39m
+2025-11-16 21:26:15 [32minfo[39m [32mGET /api/v1/livestock 304 18.577 ms - -[39m
+[32m[39m
+2025-11-16 21:26:17 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 27.627 ms - -[39m
+[32m[39m
+2025-11-16 21:26:39 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 187.135 ms - -[39m
+[32m[39m
+2025-11-16 21:26:42 [32minfo[39m [32mGET /api/v1/livestock 304 428.255 ms - -[39m
+[32m[39m
+2025-11-16 21:26:45 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 143.506 ms - -[39m
+[32m[39m
+2025-11-16 21:26:46 [32minfo[39m [32mGET /api/v1/livestock 304 13.711 ms - -[39m
+[32m[39m
+2025-11-16 21:26:46 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 11.765 ms - -[39m
+[32m[39m
+2025-11-16 21:27:16 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 183.456 ms - -[39m
+[32m[39m
+2025-11-16 21:27:16 [32minfo[39m [32mGET /api/v1/livestock 304 27.430 ms - -[39m
+[32m[39m
+2025-11-16 21:27:17 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 23.733 ms - -[39m
+[32m[39m
+2025-11-16 21:27:22 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 82.431 ms - -[39m
+[32m[39m
+2025-11-16 21:27:23 [32minfo[39m [32mGET /api/v1/livestock 304 26.655 ms - -[39m
+[32m[39m
+2025-11-16 21:27:26 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 8.848 ms - -[39m
+[32m[39m
+2025-11-17 02:55:46 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 401 26.497 ms - 64[39m
+[32m[39m
+2025-11-17 02:55:51 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 344.290 ms - 588[39m
+[32m[39m
+2025-11-17 02:55:54 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 147.110 ms - -[39m
+[32m[39m
+2025-11-17 02:56:03 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 16.973 ms - -[39m
+[32m[39m
+2025-11-17 02:56:09 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 146.979 ms - -[39m
+[32m[39m
+2025-11-17 02:56:11 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 19.428 ms - -[39m
+[32m[39m
+2025-11-17 02:56:11 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 14.751 ms - -[39m
+[32m[39m
+2025-11-17 03:04:19 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 775.742 ms - 588[39m
+[32m[39m
+2025-11-17 03:04:21 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 456.462 ms - -[39m
+[32m[39m
+2025-11-17 03:04:27 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 30.537 ms - -[39m
+[32m[39m
+2025-11-17 03:04:39 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 676.607 ms - -[39m
+[32m[39m
+2025-11-17 03:04:41 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 73.724 ms - -[39m
+[32m[39m
+2025-11-17 03:04:41 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 345.721 ms - -[39m
+[32m[39m
+2025-11-17 03:05:34 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 2526.963 ms - -[39m
+[32m[39m
+2025-11-17 03:05:34 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 25.863 ms - -[39m
+[32m[39m
+2025-11-17 03:05:35 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 28.876 ms - -[39m
+[32m[39m
+2025-11-17 03:06:07 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 1279.673 ms - -[39m
+[32m[39m
+2025-11-17 03:06:08 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 284.304 ms - -[39m
+[32m[39m
+2025-11-17 03:06:08 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 109.762 ms - -[39m
+[32m[39m
+2025-11-17 03:06:13 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 2086.845 ms - -[39m
+[32m[39m
+2025-11-17 03:06:13 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 47.674 ms - -[39m
+[32m[39m
+2025-11-17 03:06:16 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 558.386 ms - -[39m
+[32m[39m
+2025-11-17 03:07:59 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 436.070 ms - -[39m
+[32m[39m
+2025-11-17 03:08:01 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 36.431 ms - -[39m
+[32m[39m
+2025-11-17 03:08:01 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 23.894 ms - -[39m
+[32m[39m
+2025-11-17 03:08:07 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 229.340 ms - -[39m
+[32m[39m
+2025-11-17 03:08:08 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 371.775 ms - -[39m
+[32m[39m
+2025-11-17 03:08:09 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 1105.625 ms - -[39m
+[32m[39m
+2025-11-17 03:08:19 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 200 2180.168 ms - 18022[39m
+[32m[39m
+2025-11-17 03:08:20 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 390.276 ms - -[39m
+[32m[39m
+2025-11-17 03:08:22 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 1118.314 ms - -[39m
+[32m[39m
+2025-11-17 03:09:33 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 2993.082 ms - -[39m
+[32m[39m
+2025-11-17 03:09:35 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 714.462 ms - -[39m
+[32m[39m
+2025-11-17 03:09:37 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 3589.108 ms - -[39m
+[32m[39m
+2025-11-17 03:10:46 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 220.902 ms - -[39m
+[32m[39m
+2025-11-17 03:10:47 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 369.978 ms - -[39m
+[32m[39m
+2025-11-17 03:10:48 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 50.314 ms - -[39m
+[32m[39m
+2025-11-17 03:10:54 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 232.614 ms - -[39m
+[32m[39m
+2025-11-17 03:10:56 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 23.333 ms - -[39m
+[32m[39m
+2025-11-17 03:10:56 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 30.622 ms - -[39m
+[32m[39m
+2025-11-17 03:11:07 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 103.615 ms - -[39m
+[32m[39m
+2025-11-17 03:11:07 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 22.447 ms - -[39m
+[32m[39m
+2025-11-17 03:11:08 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 26.083 ms - -[39m
+[32m[39m
+2025-11-17 03:12:03 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 528.104 ms - -[39m
+[32m[39m
+2025-11-17 03:12:05 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 69.241 ms - -[39m
+[32m[39m
+2025-11-17 03:12:05 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 24.869 ms - -[39m
+[32m[39m
+2025-11-17 03:13:10 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 173.351 ms - -[39m
+[32m[39m
+2025-11-17 03:13:11 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 19.308 ms - -[39m
+[32m[39m
+2025-11-17 03:13:11 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 26.752 ms - -[39m
+[32m[39m
+2025-11-17 03:13:32 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 164.322 ms - -[39m
+[32m[39m
+2025-11-17 03:13:33 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 69.748 ms - -[39m
+[32m[39m
+2025-11-17 03:13:33 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 202.864 ms - -[39m
+[32m[39m
+2025-11-17 03:14:45 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 138.555 ms - -[39m
+[32m[39m
+2025-11-17 03:14:47 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 25.088 ms - -[39m
+[32m[39m
+2025-11-17 03:14:47 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 19.431 ms - -[39m
+[32m[39m
+2025-11-17 03:15:23 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 1281.565 ms - -[39m
+[32m[39m
+2025-11-17 03:15:25 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 799.990 ms - -[39m
+[32m[39m
+2025-11-17 03:15:26 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 1242.978 ms - -[39m
+[32m[39m
+2025-11-17 03:15:30 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 2132.601 ms - -[39m
+[32m[39m
+2025-11-17 03:15:31 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 87.428 ms - -[39m
+[32m[39m
+2025-11-17 03:15:32 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 492.835 ms - -[39m
+[32m[39m
+2025-11-17 03:17:30 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 229.247 ms - -[39m
+[32m[39m
+2025-11-17 03:17:32 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 366.371 ms - -[39m
+[32m[39m
+2025-11-17 03:17:32 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 304 718.800 ms - -[39m
+[32m[39m
+2025-11-17 03:18:06 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 968.974 ms - -[39m
+[32m[39m
+2025-11-17 03:18:07 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 50.869 ms - -[39m
+[32m[39m
+2025-11-17 03:18:07 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=0 200 60.661 ms - 143[39m
+[32m[39m
+2025-11-17 03:19:04 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 219.087 ms - -[39m
+[32m[39m
+2025-11-17 03:19:05 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 200 49.060 ms - 62371[39m
+[32m[39m
+2025-11-17 03:19:06 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 137.967 ms - -[39m
+[32m[39m
+2025-11-17 03:20:52 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 245.405 ms - -[39m
+[32m[39m
+2025-11-17 03:20:52 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 14.775 ms - -[39m
+[32m[39m
+2025-11-17 03:20:53 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 300.562 ms - -[39m
+[32m[39m
+2025-11-17 03:21:07 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 421.173 ms - -[39m
+[32m[39m
+2025-11-17 03:21:07 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 107.006 ms - -[39m
+[32m[39m
+2025-11-17 03:21:08 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 55.279 ms - -[39m
+[32m[39m
+2025-11-17 03:21:17 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 1780.896 ms - -[39m
+[32m[39m
+2025-11-17 03:21:18 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 27.838 ms - -[39m
+[32m[39m
+2025-11-17 03:21:18 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 115.485 ms - -[39m
+[32m[39m
+2025-11-17 03:21:20 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 145.983 ms - -[39m
+[32m[39m
+2025-11-17 03:21:23 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 422.370 ms - -[39m
+[32m[39m
+2025-11-17 03:21:23 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 546.617 ms - -[39m
+[32m[39m
+2025-11-17 03:21:29 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 1648.230 ms - -[39m
+[32m[39m
+2025-11-17 03:21:30 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 185.512 ms - -[39m
+[32m[39m
+2025-11-17 03:21:30 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 635.961 ms - -[39m
+[32m[39m
+2025-11-17 03:21:35 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 933.233 ms - -[39m
+[32m[39m
+2025-11-17 03:21:35 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 67.809 ms - -[39m
+[32m[39m
+2025-11-17 03:21:35 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 134.459 ms - -[39m
+[32m[39m
+2025-11-17 03:22:27 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 402.267 ms - -[39m
+[32m[39m
+2025-11-17 03:22:27 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 84.266 ms - -[39m
+[32m[39m
+2025-11-17 03:22:28 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 86.747 ms - -[39m
+[32m[39m
+2025-11-17 03:22:51 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 1393.463 ms - -[39m
+[32m[39m
+2025-11-17 03:22:52 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 495.966 ms - -[39m
+[32m[39m
+2025-11-17 03:22:53 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 517.536 ms - -[39m
+[32m[39m
+2025-11-17 03:24:39 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 1367.490 ms - -[39m
+[32m[39m
+2025-11-17 03:24:41 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 239.427 ms - -[39m
+[32m[39m
+2025-11-17 03:24:41 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 566.963 ms - -[39m
+[32m[39m
+2025-11-17 03:24:46 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 2036.011 ms - -[39m
+[32m[39m
+2025-11-17 03:24:48 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 143.863 ms - -[39m
+[32m[39m
+2025-11-17 03:24:48 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 72.778 ms - -[39m
+[32m[39m
+2025-11-17 03:25:06 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 647.287 ms - -[39m
+[32m[39m
+2025-11-17 03:25:06 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 24.116 ms - -[39m
+[32m[39m
+2025-11-17 03:25:07 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 41.780 ms - -[39m
+[32m[39m
+2025-11-17 03:36:42 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 386.671 ms - 588[39m
+[32m[39m
+2025-11-17 03:36:44 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 131.147 ms - -[39m
+[32m[39m
+2025-11-17 03:36:48 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 26.492 ms - -[39m
+[32m[39m
+2025-11-17 03:36:52 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 126.303 ms - -[39m
+[32m[39m
+2025-11-17 03:36:54 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 36.354 ms - -[39m
+[32m[39m
+2025-11-17 03:36:54 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 20.305 ms - -[39m
+[32m[39m
+2025-11-17 03:43:26 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 3123.422 ms - -[39m
+[32m[39m
+2025-11-17 03:43:28 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 124.746 ms - -[39m
+[32m[39m
+2025-11-17 03:43:28 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 161.872 ms - -[39m
+[32m[39m
+2025-11-17 03:46:46 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 298.147 ms - 588[39m
+[32m[39m
+2025-11-17 03:46:48 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 28.505 ms - -[39m
+[32m[39m
+2025-11-17 03:46:53 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 37.299 ms - -[39m
+[32m[39m
+2025-11-17 03:46:59 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 16.422 ms - -[39m
+[32m[39m
+2025-11-17 03:47:01 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 36.178 ms - -[39m
+[32m[39m
+2025-11-17 03:47:03 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 24.123 ms - -[39m
+[32m[39m
+2025-11-17 03:47:15 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 75.028 ms - -[39m
+[32m[39m
+2025-11-17 03:47:25 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 13.963 ms - -[39m
+[32m[39m
+2025-11-17 03:47:30 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 191.587 ms - -[39m
+[32m[39m
+2025-11-17 03:47:32 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 50.163 ms - -[39m
+[32m[39m
+2025-11-17 03:47:32 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 23.469 ms - -[39m
+[32m[39m
+2025-11-17 03:51:02 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 141.336 ms - -[39m
+[32m[39m
+2025-11-17 03:51:05 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zr4r0006t1uo7yv915n3 304 135.088 ms - -[39m
+[32m[39m
+2025-11-17 03:51:06 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 50.366 ms - -[39m
+[32m[39m
+2025-11-17 03:51:07 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 147.418 ms - -[39m
+[32m[39m
+2025-11-17 03:51:26 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 22.370 ms - -[39m
+[32m[39m
+2025-11-17 03:51:29 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqnw0003t1uoq92wp7sc 200 121.444 ms - 12315[39m
+[32m[39m
+2025-11-17 03:51:30 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 47.857 ms - -[39m
+[32m[39m
+2025-11-17 03:51:31 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 47.644 ms - -[39m
+[32m[39m
+2025-11-17 03:52:42 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqnw0003t1uoq92wp7sc 304 105.328 ms - -[39m
+[32m[39m
+2025-11-17 03:52:44 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 18.700 ms - -[39m
+[32m[39m
+2025-11-17 03:52:44 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 68.637 ms - -[39m
+[32m[39m
+2025-11-17 03:53:17 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqnw0003t1uoq92wp7sc 304 101.424 ms - -[39m
+[32m[39m
+2025-11-17 03:53:18 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 38.063 ms - -[39m
+[32m[39m
+2025-11-17 03:53:19 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 13.526 ms - -[39m
+[32m[39m
+2025-11-17 04:16:58 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqnw0003t1uoq92wp7sc 304 470.974 ms - -[39m
+[32m[39m
+2025-11-17 04:17:00 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 143.604 ms - -[39m
+[32m[39m
+2025-11-17 04:17:00 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 534.135 ms - -[39m
+[32m[39m
+2025-11-17 04:17:34 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqnw0003t1uoq92wp7sc 304 109.954 ms - -[39m
+[32m[39m
+2025-11-17 04:17:36 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 15.675 ms - -[39m
+[32m[39m
+2025-11-17 04:17:36 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 33.946 ms - -[39m
+[32m[39m
+2025-11-17 04:18:23 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 16.071 ms - -[39m
+[32m[39m
+2025-11-17 04:18:25 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zr4r0006t1uo7yv915n3 304 74.566 ms - -[39m
+[32m[39m
+2025-11-17 04:18:27 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 12.389 ms - -[39m
+[32m[39m
+2025-11-17 04:18:27 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 33.565 ms - -[39m
+[32m[39m
+2025-11-17 04:25:11 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 460.077 ms - 588[39m
+[32m[39m
+2025-11-17 04:25:14 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 145.986 ms - -[39m
+[32m[39m
+2025-11-17 04:25:20 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 55.335 ms - -[39m
+[32m[39m
+2025-11-17 04:25:22 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 17.320 ms - -[39m
+[32m[39m
+2025-11-17 04:25:26 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 17.954 ms - -[39m
+[32m[39m
+2025-11-17 04:25:27 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 14.693 ms - -[39m
+[32m[39m
+2025-11-17 04:25:36 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 192.712 ms - -[39m
+[32m[39m
+2025-11-17 04:25:36 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 729.928 ms - -[39m
+[32m[39m
+2025-11-17 04:25:37 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 15.013 ms - -[39m
+[32m[39m
+2025-11-17 04:25:38 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 20.660 ms - -[39m
+[32m[39m
+2025-11-17 04:25:41 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 9.740 ms - -[39m
+[32m[39m
+2025-11-17 04:25:45 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 37.217 ms - -[39m
+[32m[39m
+2025-11-17 04:26:03 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 13.817 ms - -[39m
+[32m[39m
+2025-11-17 04:26:08 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zr4r0006t1uo7yv915n3 304 88.245 ms - -[39m
+[32m[39m
+2025-11-17 04:26:10 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 127.777 ms - -[39m
+[32m[39m
+2025-11-17 04:26:10 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 14.045 ms - -[39m
+[32m[39m
+2025-11-17 04:26:41 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 26.476 ms - -[39m
+[32m[39m
+2025-11-17 04:26:43 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 12.143 ms - -[39m
+[32m[39m
+2025-11-17 04:26:44 [32minfo[39m [32mGET /api/v1/finance/transactions?page=1 200 38.170 ms - 4738[39m
+[32m[39m
+2025-11-17 04:26:50 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 48.794 ms - -[39m
+[32m[39m
+2025-11-17 04:26:54 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 12.844 ms - -[39m
+[32m[39m
+2025-11-17 04:28:07 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 13.248 ms - -[39m
+[32m[39m
+2025-11-17 04:35:55 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 528.642 ms - -[39m
+[32m[39m
+2025-11-17 04:35:57 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 195.243 ms - -[39m
+[32m[39m
+2025-11-17 04:35:57 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 71.261 ms - -[39m
+[32m[39m
+2025-11-17 04:40:45 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 222.180 ms - 588[39m
+[32m[39m
+2025-11-17 04:42:01 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 200 479.731 ms - 3240[39m
+[32m[39m
+2025-11-17 04:48:24 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 381.729 ms - 588[39m
+[32m[39m
+2025-11-17 04:48:26 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 111.493 ms - -[39m
+[32m[39m
+2025-11-17 04:48:31 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 16.787 ms - -[39m
+[32m[39m
+2025-11-17 04:48:36 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 197.709 ms - -[39m
+[32m[39m
+2025-11-17 04:48:38 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 25.832 ms - -[39m
+[32m[39m
+2025-11-17 04:48:38 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 14.000 ms - -[39m
+[32m[39m
+2025-11-17 05:11:23 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 370.253 ms - 588[39m
+[32m[39m
+2025-11-17 05:11:24 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 104.029 ms - -[39m
+[32m[39m
+2025-11-17 05:14:33 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 136.737 ms - 588[39m
+[32m[39m
+2025-11-17 05:14:35 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 23.467 ms - -[39m
+[32m[39m
+2025-11-17 05:14:57 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 140.220 ms - 588[39m
+[32m[39m
+2025-11-17 05:15:00 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 200 14.184 ms - 4795[39m
+[32m[39m
+2025-11-17 05:15:18 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 200 17.165 ms - 1132[39m
+[32m[39m
+2025-11-17 05:15:28 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 200 153.509 ms - 18022[39m
+[32m[39m
+2025-11-17 05:15:30 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 200 34.763 ms - 62371[39m
+[32m[39m
+2025-11-17 05:15:30 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 200 14.860 ms - 4795[39m
+[32m[39m
+2025-11-17 05:16:29 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/health-history 200 343.876 ms - 966[39m
+[32m[39m
+2025-11-17 05:17:19 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/health-history 200 24.261 ms - 966[39m
+[32m[39m
+2025-11-17 05:17:53 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 281.212 ms - 588[39m
+[32m[39m
+2025-11-17 05:17:55 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 15.783 ms - -[39m
+[32m[39m
+2025-11-17 05:17:57 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 13.680 ms - -[39m
+[32m[39m
+2025-11-17 05:18:14 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 75.859 ms - -[39m
+[32m[39m
+2025-11-17 05:18:15 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 13.139 ms - -[39m
+[32m[39m
+2025-11-17 05:18:15 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 31.212 ms - -[39m
+[32m[39m
+2025-11-17 05:18:37 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 148.859 ms - 588[39m
+[32m[39m
+2025-11-17 05:18:39 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 11.060 ms - -[39m
+[32m[39m
+2025-11-17 05:18:45 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 11.415 ms - -[39m
+[32m[39m
+2025-11-17 05:18:47 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/health-history 200 14.120 ms - 966[39m
+[32m[39m
+2025-11-17 05:19:05 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/health-history 304 61.826 ms - -[39m
+[32m[39m
+2025-11-17 05:19:10 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/health-history 304 1025.511 ms - -[39m
+[32m[39m
+2025-11-17 05:19:11 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/health-history 304 20.532 ms - -[39m
+[32m[39m
+2025-11-17 05:19:23 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/health-history 304 261.730 ms - -[39m
+[32m[39m
+2025-11-17 05:38:43 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 294.028 ms - 588[39m
+[32m[39m
+2025-11-17 05:38:47 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 124.770 ms - -[39m
+[32m[39m
+2025-11-17 05:38:56 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 16.790 ms - -[39m
+[32m[39m
+2025-11-17 05:39:06 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 200 95.565 ms - 18022[39m
+[32m[39m
+2025-11-17 05:39:09 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 27.415 ms - -[39m
+[32m[39m
+2025-11-17 05:39:10 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 11.498 ms - -[39m
+[32m[39m
+2025-11-17 05:39:20 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/health-history 200 122.472 ms - 966[39m
+[32m[39m
+2025-11-17 05:39:32 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/health-history 200 16.288 ms - 966[39m
+[32m[39m
+2025-11-17 05:41:15 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/health-history 304 18.080 ms - -[39m
+[32m[39m
+2025-11-17 05:42:43 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/health-history 200 87.291 ms - 966[39m
+[32m[39m
+2025-11-17 05:43:24 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 174.063 ms - 588[39m
+[32m[39m
+2025-11-17 05:43:27 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 13.184 ms - -[39m
+[32m[39m
+2025-11-17 05:43:37 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 12.859 ms - -[39m
+[32m[39m
+2025-11-17 05:43:41 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 66.589 ms - -[39m
+[32m[39m
+2025-11-17 05:43:43 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 15.222 ms - -[39m
+[32m[39m
+2025-11-17 05:43:43 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 37.250 ms - -[39m
+[32m[39m
+2025-11-17 05:43:55 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/health-history 200 141.660 ms - 966[39m
+[32m[39m
+2025-11-17 05:44:12 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 86.239 ms - -[39m
+[32m[39m
+2025-11-17 05:44:13 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrga001ct1uoexd3j1kc/health-history 200 13.319 ms - 957[39m
+[32m[39m
+2025-11-17 05:44:13 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 34.003 ms - -[39m
+[32m[39m
+2025-11-17 05:44:14 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 20.541 ms - -[39m
+[32m[39m
+2025-11-17 05:44:18 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 91.952 ms - -[39m
+[32m[39m
+2025-11-17 05:44:19 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 12.016 ms - -[39m
+[32m[39m
+2025-11-17 05:44:19 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 25.443 ms - -[39m
+[32m[39m
+2025-11-17 05:44:21 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrg7001at1uo48ufkoxw/health-history 200 244.378 ms - 970[39m
+[32m[39m
+2025-11-17 05:44:28 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 82.807 ms - -[39m
+[32m[39m
+2025-11-17 05:44:29 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 17.560 ms - -[39m
+[32m[39m
+2025-11-17 05:44:29 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 29.109 ms - -[39m
+[32m[39m
+2025-11-17 05:44:30 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrg50018t1uoa7b3dyc0/health-history 200 13.119 ms - 964[39m
+[32m[39m
+2025-11-17 05:44:33 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 200 69.765 ms - 18022[39m
+[32m[39m
+2025-11-17 05:44:34 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 28.557 ms - -[39m
+[32m[39m
+2025-11-17 05:44:34 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 9.428 ms - -[39m
+[32m[39m
+2025-11-17 05:44:41 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrg7001at1uo48ufkoxw/health-history 304 24.211 ms - -[39m
+[32m[39m
+2025-11-17 05:44:49 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 63.325 ms - -[39m
+[32m[39m
+2025-11-17 05:44:50 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 30.143 ms - -[39m
+[32m[39m
+2025-11-17 05:44:50 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 11.341 ms - -[39m
+[32m[39m
+2025-11-17 05:45:59 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 162.365 ms - 588[39m
+[32m[39m
+2025-11-17 05:46:01 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 12.040 ms - -[39m
+[32m[39m
+2025-11-17 05:46:10 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 12.201 ms - -[39m
+[32m[39m
+2025-11-17 05:46:16 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 84.957 ms - -[39m
+[32m[39m
+2025-11-17 05:46:17 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 26.930 ms - -[39m
+[32m[39m
+2025-11-17 05:46:18 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 16.363 ms - -[39m
+[32m[39m
+2025-11-17 05:46:24 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/health-history 200 15.787 ms - 966[39m
+[32m[39m
+2025-11-17 05:47:21 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 338.633 ms - 588[39m
+[32m[39m
+2025-11-17 05:48:01 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/health-history 200 36.045 ms - 966[39m
+[32m[39m
+2025-11-17 05:48:30 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 77.670 ms - -[39m
+[32m[39m
+2025-11-17 05:48:30 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrg7001at1uo48ufkoxw/health-history 304 13.233 ms - -[39m
+[32m[39m
+2025-11-17 05:48:31 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 14.798 ms - -[39m
+[32m[39m
+2025-11-17 05:48:32 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 39.955 ms - -[39m
+[32m[39m
+2025-11-17 05:48:33 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 200 70.529 ms - 18022[39m
+[32m[39m
+2025-11-17 05:48:35 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 9.611 ms - -[39m
+[32m[39m
+2025-11-17 05:48:35 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 31.036 ms - -[39m
+[32m[39m
+2025-11-17 05:48:35 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 10.057 ms - -[39m
+[32m[39m
+2025-11-17 05:48:40 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zr4r0006t1uo7yv915n3 200 62.752 ms - 2513[39m
+[32m[39m
+2025-11-17 05:48:40 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 29.061 ms - -[39m
+[32m[39m
+2025-11-17 05:48:40 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 9.342 ms - -[39m
+[32m[39m
+2025-11-17 05:48:46 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrk7003mt1uork7wndqz/health-history 200 14.779 ms - 270[39m
+[32m[39m
+2025-11-17 05:48:52 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zr4r0006t1uo7yv915n3 304 57.920 ms - -[39m
+[32m[39m
+2025-11-17 05:48:53 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 14.742 ms - -[39m
+[32m[39m
+2025-11-17 05:48:54 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 25.008 ms - -[39m
+[32m[39m
+2025-11-17 05:48:56 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrjx003et1uosarcjls1/health-history 200 217.032 ms - 272[39m
+[32m[39m
+2025-11-17 05:49:00 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zr4r0006t1uo7yv915n3 304 80.730 ms - -[39m
+[32m[39m
+2025-11-17 05:49:01 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 16.817 ms - -[39m
+[32m[39m
+2025-11-17 05:49:01 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 33.103 ms - -[39m
+[32m[39m
+2025-11-17 05:49:01 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 14.413 ms - -[39m
+[32m[39m
+2025-11-17 05:49:04 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqnw0003t1uoq92wp7sc 200 78.625 ms - 12315[39m
+[32m[39m
+2025-11-17 05:49:05 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 25.994 ms - -[39m
+[32m[39m
+2025-11-17 05:49:06 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 11.550 ms - -[39m
+[32m[39m
+2025-11-17 05:49:11 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrih002it1uooqzkc7gf/health-history 200 12.769 ms - 270[39m
+[32m[39m
+2025-11-17 05:50:08 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 200 319.689 ms - 3240[39m
+[32m[39m
+2025-11-17 05:50:43 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqnw0003t1uoq92wp7sc 304 88.239 ms - -[39m
+[32m[39m
+2025-11-17 05:50:44 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 20.951 ms - -[39m
+[32m[39m
+2025-11-17 05:50:44 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 261.864 ms - -[39m
+[32m[39m
+2025-11-17 05:50:45 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 200 11.893 ms - 1132[39m
+[32m[39m
+2025-11-17 05:50:48 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqnw0003t1uoq92wp7sc 200 80.616 ms - 12315[39m
+[32m[39m
+2025-11-17 05:50:49 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 18.395 ms - -[39m
+[32m[39m
+2025-11-17 05:50:50 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 29.747 ms - -[39m
+[32m[39m
+2025-11-17 05:50:58 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 15.306 ms - -[39m
+[32m[39m
+2025-11-17 05:51:02 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zr4r0006t1uo7yv915n3 200 54.036 ms - 2513[39m
+[32m[39m
+2025-11-17 05:51:02 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 31.022 ms - -[39m
+[32m[39m
+2025-11-17 05:51:02 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 11.631 ms - -[39m
+[32m[39m
+2025-11-17 05:51:09 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 12.214 ms - -[39m
+[32m[39m
+2025-11-17 05:51:13 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 64.653 ms - -[39m
+[32m[39m
+2025-11-17 05:51:14 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 35.528 ms - -[39m
+[32m[39m
+2025-11-17 05:51:14 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 29.890 ms - -[39m
+[32m[39m
+2025-11-17 05:51:23 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 200 26.967 ms - 3240[39m
+[32m[39m
+2025-11-17 07:10:15 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 384.338 ms - 588[39m
+[32m[39m
+2025-11-17 07:11:23 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 200 490.128 ms - 4666[39m
+[32m[39m
+2025-11-17 07:21:50 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 354.556 ms - 588[39m
+[32m[39m
+2025-11-17 07:21:53 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 118.523 ms - -[39m
+[32m[39m
+2025-11-17 08:00:32 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 491.703 ms - 588[39m
+[32m[39m
+2025-11-17 08:00:40 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 219.578 ms - -[39m
+[32m[39m
+2025-11-17 08:01:40 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 26.545 ms - -[39m
+[32m[39m
+2025-11-17 08:01:52 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 200 107.892 ms - 18022[39m
+[32m[39m
+2025-11-17 08:01:53 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 19.297 ms - -[39m
+[32m[39m
+2025-11-17 08:01:54 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 55.898 ms - -[39m
+[32m[39m
+2025-11-17 08:02:09 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 113.768 ms - -[39m
+[32m[39m
+2025-11-17 08:02:11 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 200 257.977 ms - 4666[39m
+[32m[39m
+2025-11-17 08:05:25 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrf7000mt1uombze8dny/health-history 200 3625.788 ms - 3260[39m
+[32m[39m
+2025-11-17 08:05:27 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 8016.302 ms - -[39m
+[32m[39m
+2025-11-17 08:05:30 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrf7000mt1uombze8dny/activity-timeline 200 3575.712 ms - 4697[39m
+[32m[39m
+2025-11-17 08:07:34 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zr4r0006t1uo7yv915n3 - - ms - -[39m
+[32m[39m
+2025-11-17 08:07:42 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zr4r0006t1uo7yv915n3 304 1446.506 ms - -[39m
+[32m[39m
+2025-11-17 08:07:45 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 339.208 ms - -[39m
+[32m[39m
+2025-11-17 08:07:46 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 502.406 ms - -[39m
+[32m[39m
+2025-11-17 08:08:02 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrik002kt1uowlwswfp2/health-history 200 3176.085 ms - 271[39m
+[32m[39m
+2025-11-17 08:08:07 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrik002kt1uowlwswfp2/activity-timeline 200 2079.514 ms - 333[39m
+[32m[39m
+2025-11-17 08:21:29 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 2589.245 ms - 588[39m
+[32m[39m
+2025-11-17 08:21:32 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 546.958 ms - -[39m
+[32m[39m
+2025-11-17 08:21:46 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 200 323.154 ms - 1132[39m
+[32m[39m
+2025-11-17 08:21:53 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 945.789 ms - -[39m
+[32m[39m
+2025-11-17 08:21:56 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 393.976 ms - -[39m
+[32m[39m
+2025-11-17 08:21:56 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 211.416 ms - -[39m
+[32m[39m
+2025-11-17 08:22:16 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/health-history 304 1496.562 ms - -[39m
+[32m[39m
+2025-11-17 08:22:17 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/activity-timeline 200 2380.371 ms - 1224[39m
+[32m[39m
+2025-11-17 08:24:02 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/activity-timeline 401 29.128 ms - 64[39m
+[32m[39m
+2025-11-17 08:24:46 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 5289.805 ms - 588[39m
+[32m[39m
+2025-11-17 08:25:09 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/activity-timeline 200 740.259 ms - 1224[39m
+[32m[39m
+2025-11-17 08:33:31 [32minfo[39m [32mGET /api/v1/tasks/my-tasks - - ms - -[39m
+[32m[39m
+2025-11-17 08:33:33 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv - - ms - -[39m
+[32m[39m
+2025-11-17 08:56:44 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 737.388 ms - 588[39m
+[32m[39m
+2025-11-17 08:56:47 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 223.108 ms - -[39m
+[32m[39m
+2025-11-17 08:57:01 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 14.991 ms - -[39m
+[32m[39m
+2025-11-17 08:57:10 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 89.077 ms - -[39m
+[32m[39m
+2025-11-17 08:57:11 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 200 16.892 ms - 4795[39m
+[32m[39m
+2025-11-17 08:57:12 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 200 29.972 ms - 62371[39m
+[32m[39m
+2025-11-17 08:57:21 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/health-history 304 116.999 ms - -[39m
+[32m[39m
+2025-11-17 08:57:21 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrge001et1uo8xn86nj5/activity-timeline 304 143.403 ms - -[39m
+[32m[39m
+2025-11-17 08:59:27 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 105.279 ms - -[39m
+[32m[39m
+2025-11-17 08:59:30 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 37.458 ms - -[39m
+[32m[39m
+2025-11-17 08:59:31 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 28.671 ms - -[39m
+[32m[39m
+2025-11-17 09:01:19 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 78.412 ms - -[39m
+[32m[39m
+2025-11-17 09:01:19 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 200 19.119 ms - 3240[39m
+[32m[39m
+2025-11-17 09:03:39 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 358.115 ms - 588[39m
+[32m[39m
+2025-11-17 09:03:42 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 99.764 ms - -[39m
+[32m[39m
+2025-11-17 09:03:50 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 21.164 ms - -[39m
+[32m[39m
+2025-11-17 09:03:54 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 200 82.933 ms - 18022[39m
+[32m[39m
+2025-11-17 09:03:55 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 29.400 ms - -[39m
+[32m[39m
+2025-11-17 09:03:55 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 106.726 ms - -[39m
+[32m[39m
+2025-11-17 09:04:03 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 200 227.466 ms - 3240[39m
+[32m[39m
+2025-11-17 09:04:03 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 200 231.481 ms - 4666[39m
+[32m[39m
+2025-11-17 09:05:40 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 159.191 ms - 588[39m
+[32m[39m
+2025-11-17 09:05:42 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 15.985 ms - -[39m
+[32m[39m
+2025-11-17 09:05:50 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 10.344 ms - -[39m
+[32m[39m
+2025-11-17 09:05:56 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 74.851 ms - -[39m
+[32m[39m
+2025-11-17 09:05:56 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 12.856 ms - -[39m
+[32m[39m
+2025-11-17 09:05:57 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 28.567 ms - -[39m
+[32m[39m
+2025-11-17 09:06:03 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 18.303 ms - -[39m
+[32m[39m
+2025-11-17 09:06:05 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 22.684 ms - -[39m
+[32m[39m
+2025-11-17 09:06:40 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 210.265 ms - 588[39m
+[32m[39m
+2025-11-17 09:06:43 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 13.392 ms - -[39m
+[32m[39m
+2025-11-17 09:07:05 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 13.841 ms - -[39m
+[32m[39m
+2025-11-17 09:33:06 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 267.811 ms - 588[39m
+[32m[39m
+2025-11-17 09:33:08 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 112.604 ms - -[39m
+[32m[39m
+2025-11-17 09:33:14 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 16.518 ms - -[39m
+[32m[39m
+2025-11-17 09:33:30 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 159.158 ms - -[39m
+[32m[39m
+2025-11-17 09:33:31 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 15.757 ms - -[39m
+[32m[39m
+2025-11-17 09:33:32 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 39.257 ms - -[39m
+[32m[39m
+2025-11-17 09:34:03 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 200 123.382 ms - 3240[39m
+[32m[39m
+2025-11-17 09:36:40 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 182.198 ms - 588[39m
+[32m[39m
+2025-11-17 09:36:49 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 140.195 ms - 588[39m
+[32m[39m
+2025-11-17 09:36:50 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 19.326 ms - -[39m
+[32m[39m
+2025-11-17 09:36:54 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 17.621 ms - -[39m
+[32m[39m
+2025-11-17 09:37:06 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 115.527 ms - -[39m
+[32m[39m
+2025-11-17 09:37:07 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 13.142 ms - -[39m
+[32m[39m
+2025-11-17 09:37:08 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 49.120 ms - -[39m
+[32m[39m
+2025-11-17 09:37:22 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 200 273.661 ms - 4666[39m
+[32m[39m
+2025-11-17 09:37:24 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 200 21.787 ms - 3240[39m
+[32m[39m
+2025-11-17 09:38:23 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 261.526 ms - 588[39m
+[32m[39m
+2025-11-17 09:38:25 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 21.008 ms - -[39m
+[32m[39m
+2025-11-17 09:38:31 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 14.806 ms - -[39m
+[32m[39m
+2025-11-17 09:38:45 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 73.297 ms - -[39m
+[32m[39m
+2025-11-17 09:38:45 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 28.345 ms - -[39m
+[32m[39m
+2025-11-17 09:38:46 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 26.300 ms - -[39m
+[32m[39m
+2025-11-17 09:38:51 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 16.822 ms - -[39m
+[32m[39m
+2025-11-17 09:38:51 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 215.244 ms - -[39m
+[32m[39m
+2025-11-17 09:48:37 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 528.547 ms - 588[39m
+[32m[39m
+2025-11-17 09:48:39 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 138.549 ms - -[39m
+[32m[39m
+2025-11-17 09:48:47 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 21.243 ms - -[39m
+[32m[39m
+2025-11-17 09:48:54 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 97.413 ms - -[39m
+[32m[39m
+2025-11-17 09:48:55 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 442.105 ms - -[39m
+[32m[39m
+2025-11-17 09:48:55 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 545.467 ms - -[39m
+[32m[39m
+2025-11-17 09:49:23 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 114.069 ms - -[39m
+[32m[39m
+2025-11-17 09:49:24 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 159.673 ms - -[39m
+[32m[39m
+2025-11-17 09:56:14 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 400.287 ms - -[39m
+[32m[39m
+2025-11-17 09:56:15 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 1055.269 ms - -[39m
+[32m[39m
+2025-11-17 09:56:16 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 149.268 ms - -[39m
+[32m[39m
+2025-11-17 09:56:16 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 37.735 ms - -[39m
+[32m[39m
+2025-11-17 09:56:38 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 50.432 ms - -[39m
+[32m[39m
+2025-11-17 09:56:38 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 23.245 ms - -[39m
+[32m[39m
+2025-11-17 10:00:40 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 1044.178 ms - -[39m
+[32m[39m
+2025-11-17 10:00:41 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 625.678 ms - -[39m
+[32m[39m
+2025-11-17 10:01:04 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 3008.319 ms - -[39m
+[32m[39m
+2025-11-17 10:01:06 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 80.593 ms - -[39m
+[32m[39m
+2025-11-17 10:01:06 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 22.929 ms - -[39m
+[32m[39m
+2025-11-17 12:33:17 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 354.517 ms - 588[39m
+[32m[39m
+2025-11-17 12:33:19 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 210.955 ms - -[39m
+[32m[39m
+2025-11-17 12:33:55 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 17.989 ms - -[39m
+[32m[39m
+2025-11-17 12:34:54 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zr4r0006t1uo7yv915n3 304 84.321 ms - -[39m
+[32m[39m
+2025-11-17 12:34:54 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 23.740 ms - -[39m
+[32m[39m
+2025-11-17 12:34:55 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 39.122 ms - -[39m
+[32m[39m
+2025-11-17 12:35:32 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrik002kt1uowlwswfp2/health-history 200 213.390 ms - 271[39m
+[32m[39m
+2025-11-17 12:35:32 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrik002kt1uowlwswfp2/activity-timeline 200 242.508 ms - 333[39m
+[32m[39m
+2025-11-17 12:35:47 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 17.565 ms - -[39m
+[32m[39m
+2025-11-17 12:35:48 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zr4r0006t1uo7yv915n3 304 74.097 ms - -[39m
+[32m[39m
+2025-11-17 12:35:48 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 31.584 ms - -[39m
+[32m[39m
+2025-11-17 12:35:48 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 15.253 ms - -[39m
+[32m[39m
+2025-11-17 12:35:49 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 86.303 ms - -[39m
+[32m[39m
+2025-11-17 12:35:50 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 13.823 ms - -[39m
+[32m[39m
+2025-11-17 12:35:51 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 28.330 ms - -[39m
+[32m[39m
+2025-11-17 12:36:06 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 31.603 ms - -[39m
+[32m[39m
+2025-11-17 12:36:07 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 21.914 ms - -[39m
+[32m[39m
+2025-11-17 12:44:04 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 463.505 ms - 588[39m
+[32m[39m
+2025-11-17 12:44:06 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 129.418 ms - -[39m
+[32m[39m
+2025-11-17 12:44:14 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 14.700 ms - -[39m
+[32m[39m
+2025-11-17 12:44:18 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 108.896 ms - -[39m
+[32m[39m
+2025-11-17 12:44:20 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 33.973 ms - -[39m
+[32m[39m
+2025-11-17 12:44:20 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 23.042 ms - -[39m
+[32m[39m
+2025-11-17 12:44:27 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 111.393 ms - -[39m
+[32m[39m
+2025-11-17 12:44:27 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 166.610 ms - -[39m
+[32m[39m
+2025-11-17 12:47:23 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 828.034 ms - 588[39m
+[32m[39m
+2025-11-17 12:47:25 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 263.627 ms - -[39m
+[32m[39m
+2025-11-17 12:47:27 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 17.840 ms - -[39m
+[32m[39m
+2025-11-17 12:47:28 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 22.805 ms - -[39m
+[32m[39m
+2025-11-17 12:50:27 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 179.872 ms - -[39m
+[32m[39m
+2025-11-17 12:50:56 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 12.056 ms - -[39m
+[32m[39m
+2025-11-17 12:51:01 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 108.404 ms - -[39m
+[32m[39m
+2025-11-17 12:51:03 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 235.255 ms - -[39m
+[32m[39m
+2025-11-17 12:51:04 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 257.329 ms - -[39m
+[32m[39m
+2025-11-17 12:52:17 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 186.915 ms - -[39m
+[32m[39m
+2025-11-17 12:52:17 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 26.806 ms - -[39m
+[32m[39m
+2025-11-17 12:55:27 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 147.125 ms - 588[39m
+[32m[39m
+2025-11-17 12:55:29 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 14.525 ms - -[39m
+[32m[39m
+2025-11-17 12:55:34 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 15.855 ms - -[39m
+[32m[39m
+2025-11-17 12:56:41 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 154.728 ms - -[39m
+[32m[39m
+2025-11-17 12:56:49 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zr4r0006t1uo7yv915n3 304 69.742 ms - -[39m
+[32m[39m
+2025-11-17 12:56:50 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 21.067 ms - -[39m
+[32m[39m
+2025-11-17 12:56:50 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 34.716 ms - -[39m
+[32m[39m
+2025-11-17 13:07:45 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-11-17 13:07:45 [32minfo[39m [32mPOST /api/v1/auth/vet-login 400 418.754 ms - 47[39m
+[32m[39m
+2025-11-17 13:08:02 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 161.168 ms - 588[39m
+[32m[39m
+2025-11-17 13:08:05 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 580.679 ms - -[39m
+[32m[39m
+2025-11-17 13:08:12 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 18.123 ms - -[39m
+[32m[39m
+2025-11-17 13:08:17 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 78.375 ms - -[39m
+[32m[39m
+2025-11-17 13:08:19 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 12.340 ms - -[39m
+[32m[39m
+2025-11-17 13:08:19 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 31.945 ms - -[39m
+[32m[39m
+2025-11-17 13:08:28 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 232.537 ms - -[39m
+[32m[39m
+2025-11-17 13:08:29 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 172.133 ms - -[39m
+[32m[39m
+2025-11-17 13:11:38 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 149.005 ms - 588[39m
+[32m[39m
+2025-11-17 13:11:40 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 15.796 ms - -[39m
+[32m[39m
+2025-11-17 13:11:48 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 13.576 ms - -[39m
+[32m[39m
+2025-11-17 13:11:53 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 200 76.309 ms - 18022[39m
+[32m[39m
+2025-11-17 13:11:54 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 18.338 ms - -[39m
+[32m[39m
+2025-11-17 13:11:55 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 29.906 ms - -[39m
+[32m[39m
+2025-11-17 13:12:08 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 19.575 ms - -[39m
+[32m[39m
+2025-11-17 13:12:09 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 30.770 ms - -[39m
+[32m[39m
+2025-11-17 13:13:59 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 363.414 ms - 588[39m
+[32m[39m
+2025-11-17 13:14:01 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 196.273 ms - -[39m
+[32m[39m
+2025-11-17 13:14:12 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 20.193 ms - -[39m
+[32m[39m
+2025-11-17 13:14:17 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 79.204 ms - -[39m
+[32m[39m
+2025-11-17 13:14:18 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 12.948 ms - -[39m
+[32m[39m
+2025-11-17 13:14:19 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 28.486 ms - -[39m
+[32m[39m
+2025-11-17 13:14:28 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 200 256.615 ms - 3240[39m
+[32m[39m
+2025-11-17 13:14:28 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 200 181.063 ms - 4666[39m
+[32m[39m
+2025-11-17 13:22:33 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 259.518 ms - -[39m
+[32m[39m
+2025-11-17 13:22:38 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 152.579 ms - -[39m
+[32m[39m
+2025-11-17 13:22:38 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 164.030 ms - -[39m
+[32m[39m
+2025-11-17 13:22:41 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 15.361 ms - -[39m
+[32m[39m
+2025-11-17 13:23:24 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 147.325 ms - 588[39m
+[32m[39m
+2025-11-17 13:23:27 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 12.270 ms - -[39m
+[32m[39m
+2025-11-17 13:23:33 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 12.002 ms - -[39m
+[32m[39m
+2025-11-17 13:23:42 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 85.510 ms - -[39m
+[32m[39m
+2025-11-17 13:23:43 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 90.436 ms - -[39m
+[32m[39m
+2025-11-17 13:23:43 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 12.377 ms - -[39m
+[32m[39m
+2025-11-17 13:23:50 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 200 18.929 ms - 3240[39m
+[32m[39m
+2025-11-17 13:23:50 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 200 277.840 ms - 4666[39m
+[32m[39m
+2025-11-17 13:55:44 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 1229.592 ms - 588[39m
+[32m[39m
+2025-11-17 13:55:47 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 227.705 ms - -[39m
+[32m[39m
+2025-11-17 13:56:17 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 17.694 ms - -[39m
+[32m[39m
+2025-11-17 13:57:23 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 138.238 ms - -[39m
+[32m[39m
+2025-11-17 13:57:23 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 40.544 ms - -[39m
+[32m[39m
+2025-11-17 13:57:26 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 14.180 ms - -[39m
+[32m[39m
+2025-11-17 13:58:22 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 107.978 ms - -[39m
+[32m[39m
+2025-11-17 13:58:22 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 141.817 ms - -[39m
+[32m[39m
+2025-11-17 14:17:18 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 233.681 ms - 588[39m
+[32m[39m
+2025-11-17 14:17:20 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 95.479 ms - -[39m
+[32m[39m
+2025-11-17 14:17:24 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 200 12.348 ms - 1132[39m
+[32m[39m
+2025-11-17 14:17:30 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 200 74.334 ms - 18022[39m
+[32m[39m
+2025-11-17 14:17:31 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 34.704 ms - -[39m
+[32m[39m
+2025-11-17 14:17:32 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 13.840 ms - -[39m
+[32m[39m
+2025-11-17 14:17:46 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 200 244.575 ms - 3240[39m
+[32m[39m
+2025-11-17 14:17:46 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 200 284.504 ms - 4666[39m
+[32m[39m
+2025-11-17 14:20:56 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 134.031 ms - 588[39m
+[32m[39m
+2025-11-17 14:20:59 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 25.046 ms - -[39m
+[32m[39m
+2025-11-17 14:21:07 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 15.034 ms - -[39m
+[32m[39m
+2025-11-17 14:21:18 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 70.236 ms - -[39m
+[32m[39m
+2025-11-17 14:21:20 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 43.322 ms - -[39m
+[32m[39m
+2025-11-17 14:21:21 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 15.457 ms - -[39m
+[32m[39m
+2025-11-17 14:21:24 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 12.238 ms - -[39m
+[32m[39m
+2025-11-17 14:30:32 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 207.440 ms - 588[39m
+[32m[39m
+2025-11-17 14:30:35 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 195.153 ms - -[39m
+[32m[39m
+2025-11-17 14:30:43 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 18.429 ms - -[39m
+[32m[39m
+2025-11-17 14:33:33 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 128.019 ms - 588[39m
+[32m[39m
+2025-11-17 14:33:35 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 23.473 ms - -[39m
+[32m[39m
+2025-11-17 14:33:38 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 10.102 ms - -[39m
+[32m[39m
+2025-11-17 14:34:21 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 114.543 ms - 588[39m
+[32m[39m
+2025-11-17 14:34:23 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 17.635 ms - -[39m
+[32m[39m
+2025-11-17 14:34:28 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 8.337 ms - -[39m
+[32m[39m
+2025-11-17 14:35:23 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 119.581 ms - 588[39m
+[32m[39m
+2025-11-17 14:35:24 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 12.262 ms - -[39m
+[32m[39m
+2025-11-17 14:35:31 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 7.874 ms - -[39m
+[32m[39m
+2025-11-17 14:38:21 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 203.425 ms - 588[39m
+[32m[39m
+2025-11-17 14:38:24 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 88.410 ms - -[39m
+[32m[39m
+2025-11-17 14:38:28 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 9.585 ms - -[39m
+[32m[39m
+2025-11-17 14:39:27 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 116.589 ms - 588[39m
+[32m[39m
+2025-11-17 14:39:29 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 13.829 ms - -[39m
+[32m[39m
+2025-11-17 14:39:34 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 9.530 ms - -[39m
+[32m[39m
+2025-11-17 14:40:10 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 108.067 ms - 588[39m
+[32m[39m
+2025-11-17 14:40:11 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 19.590 ms - -[39m
+[32m[39m
+2025-11-17 14:40:16 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 7.662 ms - -[39m
+[32m[39m
+2025-11-17 14:41:00 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 121.044 ms - 588[39m
+[32m[39m
+2025-11-17 14:41:02 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 16.611 ms - -[39m
+[32m[39m
+2025-11-17 14:41:11 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 8.071 ms - -[39m
+[32m[39m
+2025-11-17 14:41:56 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 129.362 ms - 588[39m
+[32m[39m
+2025-11-17 14:41:59 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 18.549 ms - -[39m
+[32m[39m
+2025-11-17 14:42:05 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 8.394 ms - -[39m
+[32m[39m
+2025-11-17 14:42:09 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 9.088 ms - -[39m
+[32m[39m
+2025-11-17 14:42:14 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 10.030 ms - -[39m
+[32m[39m
+2025-11-17 14:42:19 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 8.099 ms - -[39m
+[32m[39m
+2025-11-17 14:42:25 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 62.792 ms - -[39m
+[32m[39m
+2025-11-17 14:42:26 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 33.074 ms - -[39m
+[32m[39m
+2025-11-17 14:42:26 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 13.874 ms - -[39m
+[32m[39m
+2025-11-17 14:42:47 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 230.484 ms - -[39m
+[32m[39m
+2025-11-17 14:42:47 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 141.667 ms - -[39m
+[32m[39m
+2025-11-17 17:01:07 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 534.641 ms - 588[39m
+[32m[39m
+2025-11-17 17:01:52 [32minfo[39m [32mPOST /api/v1/diagnosis 422 25.843 ms - 305[39m
+[32m[39m
+2025-11-17 17:05:56 [32minfo[39m [32mPOST /api/v1/diagnosis 422 11.448 ms - 305[39m
+[32m[39m
+2025-11-17 17:06:30 [32minfo[39m [32mPOST /api/v1/diagnosis 422 112.731 ms - 305[39m
+[32m[39m
+2025-11-17 17:08:45 [32minfo[39m [32mPOST /api/v1/diagnosis 422 8.201 ms - 305[39m
+[32m[39m
+2025-11-17 17:09:10 [32minfo[39m [32mPOST /api/v1/diagnosis 422 6.890 ms - 305[39m
+[32m[39m
+2025-11-17 17:09:56 [32minfo[39m [32mGET /api/v1/diagnosis 404 0.632 ms - 121[39m
+[32m[39m
+2025-11-17 17:10:07 [32minfo[39m [32mPOST /api/v1/diagnosis 422 6.509 ms - 305[39m
+[32m[39m
+2025-11-17 17:13:28 [32minfo[39m [32mPOST /api/v1/diagnosis 201 252.402 ms - 711[39m
+[32m[39m
+2025-11-17 19:33:14 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 343.244 ms - 588[39m
+[32m[39m
+2025-11-17 19:33:16 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 200 218.735 ms - 4795[39m
+[32m[39m
+2025-11-17 19:33:24 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 200 27.436 ms - 1132[39m
+[32m[39m
+2025-11-17 19:33:38 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 200 128.410 ms - 18022[39m
+[32m[39m
+2025-11-17 19:33:38 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 200 23.017 ms - 4795[39m
+[32m[39m
+2025-11-17 19:33:39 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 200 40.862 ms - 62371[39m
+[32m[39m
+2025-11-17 19:33:47 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 200 243.728 ms - 3240[39m
+[32m[39m
+2025-11-17 19:33:47 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 200 151.945 ms - 4666[39m
+[32m[39m
+2025-11-17 19:34:35 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 1463.998 ms - -[39m
+[32m[39m
+2025-11-17 19:34:35 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 82.891 ms - -[39m
+[32m[39m
+2025-11-17 20:02:47 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 410.117 ms - -[39m
+[32m[39m
+2025-11-17 20:02:49 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 44.596 ms - -[39m
+[32m[39m
+2025-11-17 20:02:49 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 183.862 ms - -[39m
+[32m[39m
+2025-11-17 20:04:20 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 151.361 ms - 588[39m
+[32m[39m
+2025-11-17 20:04:22 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 27.927 ms - -[39m
+[32m[39m
+2025-11-17 20:04:26 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 10.379 ms - -[39m
+[32m[39m
+2025-11-17 20:04:42 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zr4r0006t1uo7yv915n3 200 54.230 ms - 2513[39m
+[32m[39m
+2025-11-17 20:04:44 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 9.867 ms - -[39m
+[32m[39m
+2025-11-17 20:04:44 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 33.859 ms - -[39m
+[32m[39m
+2025-11-17 20:04:58 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrik002kt1uowlwswfp2/health-history 200 23.347 ms - 271[39m
+[32m[39m
+2025-11-17 20:04:58 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrik002kt1uowlwswfp2/activity-timeline 200 251.491 ms - 333[39m
+[32m[39m
+2025-11-17 22:54:35 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 326.404 ms - 588[39m
+[32m[39m
+2025-11-17 22:54:38 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 122.304 ms - -[39m
+[32m[39m
+2025-11-17 22:54:44 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 20.347 ms - -[39m
+[32m[39m
+2025-11-17 22:54:50 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 109.141 ms - -[39m
+[32m[39m
+2025-11-17 22:54:51 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 18.743 ms - -[39m
+[32m[39m
+2025-11-17 22:54:52 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 34.467 ms - -[39m
+[32m[39m
+2025-11-17 22:55:06 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 200 198.243 ms - 4666[39m
+[32m[39m
+2025-11-17 22:55:07 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 200 25.966 ms - 3240[39m
+[32m[39m
+2025-11-17 22:57:36 [32minfo[39m [32mPOST /api/v1/diagnosis/cmi23zrer000ct1uomy9y9z95 201 30.283 ms - 713[39m
+[32m[39m
+2025-11-17 23:05:45 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 200.343 ms - -[39m
+[32m[39m
+2025-11-17 23:05:48 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 26.210 ms - -[39m
+[32m[39m
+2025-11-17 23:05:48 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 213.183 ms - -[39m
+[32m[39m
+2025-11-17 23:12:02 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 200 225.438 ms - 3240[39m
+[32m[39m
+2025-11-17 23:12:03 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 200 475.584 ms - 6811[39m
+[32m[39m
+2025-11-17 23:13:48 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrex000et1uouk7boeg1/activity-timeline 200 40.867 ms - 4668[39m
+[32m[39m
+2025-11-17 23:13:48 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 200 91.517 ms - 18022[39m
+[32m[39m
+2025-11-17 23:13:49 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrex000et1uouk7boeg1/health-history 200 22.351 ms - 3230[39m
+[32m[39m
+2025-11-17 23:13:50 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 28.829 ms - -[39m
+[32m[39m
+2025-11-17 23:13:51 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 13.966 ms - -[39m
+[32m[39m
+2025-11-17 23:14:56 [32minfo[39m [32mPOST /api/v1/diagnosis/cmi23zrex000et1uouk7boeg1 201 33.472 ms - 642[39m
+[32m[39m
+2025-11-17 23:15:12 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 200 71.117 ms - 18022[39m
+[32m[39m
+2025-11-17 23:15:13 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 29.560 ms - -[39m
+[32m[39m
+2025-11-17 23:15:14 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrex000et1uouk7boeg1/activity-timeline 200 34.495 ms - 5584[39m
+[32m[39m
+2025-11-17 23:15:14 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrex000et1uouk7boeg1/health-history 200 41.466 ms - 3230[39m
+[32m[39m
+2025-11-17 23:15:14 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 14.898 ms - -[39m
+[32m[39m
+2025-11-18 06:58:17 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 343.252 ms - 588[39m
+[32m[39m
+2025-11-18 06:59:49 [32minfo[39m [32mGET /api/v1/treatment/cmi23zrer000ct1uomy9y9z95/prescribe 404 2.374 ms - 157[39m
+[32m[39m
+2025-11-18 07:00:16 [32minfo[39m [32mPOST /api/v1/treatment/cmi23zrer000ct1uomy9y9z95/prescribe 201 87.288 ms - 734[39m
+[32m[39m
+2025-11-18 07:34:47 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 173.144 ms - 588[39m
+[32m[39m
+2025-11-18 07:34:49 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 117.665 ms - -[39m
+[32m[39m
+2025-11-18 07:34:53 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 19.667 ms - -[39m
+[32m[39m
+2025-11-18 07:35:53 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 118.883 ms - -[39m
+[32m[39m
+2025-11-18 07:35:55 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 13.058 ms - -[39m
+[32m[39m
+2025-11-18 07:35:55 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 40.640 ms - -[39m
+[32m[39m
+2025-11-18 07:36:01 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 200 234.273 ms - 6811[39m
+[32m[39m
+2025-11-18 07:36:01 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 34.056 ms - -[39m
+[32m[39m
+2025-11-18 07:42:27 [32minfo[39m [32mPOST /api/v1/diagnosis/cmi23zrer000ct1uomy9y9z95 201 32.708 ms - 625[39m
+[32m[39m
+2025-11-18 07:42:36 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 111.243 ms - -[39m
+[32m[39m
+2025-11-18 07:42:38 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 116.781 ms - -[39m
+[32m[39m
+2025-11-18 07:42:38 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 37.130 ms - -[39m
+[32m[39m
+2025-11-18 07:42:40 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 46.874 ms - -[39m
+[32m[39m
+2025-11-18 07:42:41 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 200 320.571 ms - 7678[39m
+[32m[39m
+2025-11-18 07:44:43 [32minfo[39m [32mPOST /api/v1/treatment/cmi23zrer000ct1uomy9y9z95/prescribe 201 41.884 ms - 744[39m
+[32m[39m
+2025-11-18 07:44:53 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 112.925 ms - -[39m
+[32m[39m
+2025-11-18 07:44:54 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 24.932 ms - -[39m
+[32m[39m
+2025-11-18 07:44:54 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 39.367 ms - -[39m
+[32m[39m
+2025-11-18 07:44:54 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 39.272 ms - -[39m
+[32m[39m
+2025-11-18 07:44:54 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 16.935 ms - -[39m
+[32m[39m
+2025-11-18 07:45:54 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 134.091 ms - -[39m
+[32m[39m
+2025-11-18 07:45:54 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 13.824 ms - -[39m
+[32m[39m
+2025-11-18 07:45:55 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 47.518 ms - -[39m
+[32m[39m
+2025-11-18 07:45:55 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 12.826 ms - -[39m
+[32m[39m
+2025-11-18 07:45:58 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 9.348 ms - -[39m
+[32m[39m
+2025-11-18 07:46:09 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 12.310 ms - -[39m
+[32m[39m
+2025-11-18 07:46:13 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 11.684 ms - -[39m
+[32m[39m
+2025-11-18 07:46:14 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 12.457 ms - -[39m
+[32m[39m
+2025-11-18 07:46:22 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 141.751 ms - -[39m
+[32m[39m
+2025-11-18 07:46:23 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 9.684 ms - -[39m
+[32m[39m
+2025-11-18 07:46:24 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 37.488 ms - -[39m
+[32m[39m
+2025-11-18 07:50:17 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 487.909 ms - -[39m
+[32m[39m
+2025-11-18 07:50:17 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 200 389.231 ms - 9911[39m
+[32m[39m
+2025-11-18 09:09:04 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 399.776 ms - 588[39m
+[32m[39m
+2025-11-18 09:09:50 [32minfo[39m [32mGET /api/v1/auth/treatment/follow-up 404 4.274 ms - 136[39m
+[32m[39m
+2025-11-18 09:09:58 [32minfo[39m [32mPOST /api/v1/auth/treatment/follow-up 404 0.914 ms - 136[39m
+[32m[39m
+2025-11-18 09:10:13 [32minfo[39m [32mPOST /api/v1/treatment/follow-up 404 0.751 ms - 131[39m
+[32m[39m
+2025-11-18 09:10:31 [32minfo[39m [32mPOST /api/v1/treatment/follow-ups 403 16.630 ms - 72[39m
+[32m[39m
+2025-11-18 09:11:17 [32minfo[39m [32mPOST /api/v1/treatment/follow-ups 422 197.728 ms - 494[39m
+[32m[39m
+2025-11-18 09:11:46 [32minfo[39m [32mPOST /api/v1/treatment/follow-ups 201 125.209 ms - 759[39m
+[32m[39m
+2025-11-18 09:35:34 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 401 19.398 ms - 64[39m
+[32m[39m
+2025-11-18 09:35:34 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 401 2.855 ms - 64[39m
+[32m[39m
+2025-11-18 09:35:34 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 401 2.597 ms - 64[39m
+[32m[39m
+2025-11-18 09:37:03 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 182.290 ms - 588[39m
+[32m[39m
+2025-11-18 09:37:05 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 210.044 ms - -[39m
+[32m[39m
+2025-11-18 09:37:07 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 18.644 ms - -[39m
+[32m[39m
+2025-11-18 09:37:10 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 11.014 ms - -[39m
+[32m[39m
+2025-11-18 09:37:13 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 12.084 ms - -[39m
+[32m[39m
+2025-11-18 09:37:20 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 200 85.290 ms - 18022[39m
+[32m[39m
+2025-11-18 09:37:21 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 44.920 ms - -[39m
+[32m[39m
+2025-11-18 09:37:22 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 12.844 ms - -[39m
+[32m[39m
+2025-11-18 09:37:30 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 200 98.007 ms - 3240[39m
+[32m[39m
+2025-11-18 09:37:30 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 200 141.240 ms - 9911[39m
+[32m[39m
+2025-11-18 09:41:09 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 142.593 ms - 588[39m
+[32m[39m
+2025-11-18 09:41:11 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 17.696 ms - -[39m
+[32m[39m
+2025-11-18 09:41:13 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 9.919 ms - -[39m
+[32m[39m
+2025-11-18 09:41:19 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 68.769 ms - -[39m
+[32m[39m
+2025-11-18 09:41:21 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 12.885 ms - -[39m
+[32m[39m
+2025-11-18 09:41:21 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 27.158 ms - -[39m
+[32m[39m
+2025-11-18 09:41:28 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 16.249 ms - -[39m
+[32m[39m
+2025-11-18 09:41:28 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 217.391 ms - -[39m
+[32m[39m
+2025-11-18 09:43:14 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 128.768 ms - 588[39m
+[32m[39m
+2025-11-18 09:43:16 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 94.540 ms - -[39m
+[32m[39m
+2025-11-18 09:43:20 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 11.618 ms - -[39m
+[32m[39m
+2025-11-18 09:43:24 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 66.933 ms - -[39m
+[32m[39m
+2025-11-18 09:43:25 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 11.749 ms - -[39m
+[32m[39m
+2025-11-18 09:43:26 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 25.116 ms - -[39m
+[32m[39m
+2025-11-18 09:43:32 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 100.336 ms - -[39m
+[32m[39m
+2025-11-18 09:43:33 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 252.965 ms - -[39m
+[32m[39m
+2025-11-18 09:47:30 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 133.032 ms - 588[39m
+[32m[39m
+2025-11-18 09:47:33 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 25.107 ms - -[39m
+[32m[39m
+2025-11-18 09:47:40 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 11.253 ms - -[39m
+[32m[39m
+2025-11-18 09:47:44 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 71.169 ms - -[39m
+[32m[39m
+2025-11-18 09:47:46 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 24.799 ms - -[39m
+[32m[39m
+2025-11-18 09:47:47 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 13.535 ms - -[39m
+[32m[39m
+2025-11-18 09:47:57 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 200 102.805 ms - 9911[39m
+[32m[39m
+2025-11-18 09:47:58 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 200 27.143 ms - 3240[39m
+[32m[39m
+2025-11-18 11:27:08 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 183.672 ms - 588[39m
+[32m[39m
+2025-11-18 11:27:11 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 115.676 ms - -[39m
+[32m[39m
+2025-11-18 11:27:18 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 24.948 ms - -[39m
+[32m[39m
+2025-11-18 11:27:23 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 109.385 ms - -[39m
+[32m[39m
+2025-11-18 11:27:24 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 19.221 ms - -[39m
+[32m[39m
+2025-11-18 11:27:25 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 41.508 ms - -[39m
+[32m[39m
+2025-11-18 11:27:32 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 511.159 ms - -[39m
+[32m[39m
+2025-11-18 11:27:32 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 389.670 ms - -[39m
+[32m[39m
+2025-11-18 11:28:38 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 175.334 ms - 588[39m
+[32m[39m
+2025-11-18 11:28:39 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 21.369 ms - -[39m
+[32m[39m
+2025-11-18 11:28:47 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 13.009 ms - -[39m
+[32m[39m
+2025-11-18 11:28:54 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 94.061 ms - -[39m
+[32m[39m
+2025-11-18 11:28:55 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 38.437 ms - -[39m
+[32m[39m
+2025-11-18 11:28:56 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 15.157 ms - -[39m
+[32m[39m
+2025-11-18 11:29:06 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 22.807 ms - -[39m
+[32m[39m
+2025-11-18 11:29:07 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 245.436 ms - -[39m
+[32m[39m
+2025-11-18 11:41:20 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 190.108 ms - 588[39m
+[32m[39m
+2025-11-18 11:41:23 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 228.391 ms - -[39m
+[32m[39m
+2025-11-18 11:41:29 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 13.670 ms - -[39m
+[32m[39m
+2025-11-18 11:41:33 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 109.797 ms - -[39m
+[32m[39m
+2025-11-18 11:41:35 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 32.360 ms - -[39m
+[32m[39m
+2025-11-18 11:41:35 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 20.483 ms - -[39m
+[32m[39m
+2025-11-18 11:41:41 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 280.076 ms - -[39m
+[32m[39m
+2025-11-18 11:41:42 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 201.885 ms - -[39m
+[32m[39m
+2025-11-18 11:45:52 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 391.017 ms - 588[39m
+[32m[39m
+2025-11-18 11:45:55 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 25.487 ms - -[39m
+[32m[39m
+2025-11-18 11:46:01 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 16.052 ms - -[39m
+[32m[39m
+2025-11-18 11:46:08 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 181.791 ms - -[39m
+[32m[39m
+2025-11-18 11:46:09 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 33.651 ms - -[39m
+[32m[39m
+2025-11-18 11:46:09 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 38.755 ms - -[39m
+[32m[39m
+2025-11-18 11:46:15 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 31.082 ms - -[39m
+[32m[39m
+2025-11-18 11:46:16 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 162.240 ms - -[39m
+[32m[39m
+2025-11-18 11:48:08 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 173.806 ms - 588[39m
+[32m[39m
+2025-11-18 11:48:11 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 124.443 ms - -[39m
+[32m[39m
+2025-11-18 11:48:16 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 28.555 ms - -[39m
+[32m[39m
+2025-11-18 11:48:22 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 138.389 ms - -[39m
+[32m[39m
+2025-11-18 11:48:23 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 83.423 ms - -[39m
+[32m[39m
+2025-11-18 11:48:24 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 21.666 ms - -[39m
+[32m[39m
+2025-11-18 11:48:30 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 144.835 ms - -[39m
+[32m[39m
+2025-11-18 11:48:31 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 247.838 ms - -[39m
+[32m[39m
+2025-11-18 11:50:38 [32minfo[39m [32mPOST /api/v1/treatment/follow-ups 422 25.339 ms - 187[39m
+[32m[39m
+2025-11-18 11:51:06 [32minfo[39m [32mPOST /api/v1/treatment/follow-ups 201 42.958 ms - 804[39m
+[32m[39m
+2025-11-18 11:53:13 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-11-18 11:53:13 [32minfo[39m [32mPOST /api/v1/auth/vet-login 400 227.075 ms - 47[39m
+[32m[39m
+2025-11-18 11:53:21 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 157.840 ms - 588[39m
+[32m[39m
+2025-11-18 11:53:24 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 44.760 ms - -[39m
+[32m[39m
+2025-11-18 11:53:27 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 18.602 ms - -[39m
+[32m[39m
+2025-11-18 11:53:33 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 189.040 ms - -[39m
+[32m[39m
+2025-11-18 11:53:36 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 39.662 ms - -[39m
+[32m[39m
+2025-11-18 11:53:36 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 194.161 ms - -[39m
+[32m[39m
+2025-11-18 11:53:42 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 321.391 ms - -[39m
+[32m[39m
+2025-11-18 11:53:44 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 287.014 ms - -[39m
+[32m[39m
+2025-11-18 12:00:01 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-11-18 12:00:01 [32minfo[39m [32mPOST /api/v1/auth/vet-login 400 197.171 ms - 47[39m
+[32m[39m
+2025-11-18 12:00:12 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 178.014 ms - 588[39m
+[32m[39m
+2025-11-18 12:00:14 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 217.818 ms - -[39m
+[32m[39m
+2025-11-18 12:00:25 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 11.766 ms - -[39m
+[32m[39m
+2025-11-18 12:00:30 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 75.815 ms - -[39m
+[32m[39m
+2025-11-18 12:00:31 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 16.454 ms - -[39m
+[32m[39m
+2025-11-18 12:00:32 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 27.821 ms - -[39m
+[32m[39m
+2025-11-18 12:00:44 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 200 33.525 ms - 3240[39m
+[32m[39m
+2025-11-18 12:00:44 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 200 209.942 ms - 9911[39m
+[32m[39m
+2025-11-18 12:40:26 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 187.692 ms - 588[39m
+[32m[39m
+2025-11-18 12:40:30 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 116.029 ms - -[39m
+[32m[39m
+2025-11-18 12:43:23 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 142.452 ms - 588[39m
+[32m[39m
+2025-11-18 12:43:25 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 105.740 ms - -[39m
+[32m[39m
+2025-11-18 12:43:29 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 19.408 ms - -[39m
+[32m[39m
+2025-11-18 12:43:33 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 8.430 ms - -[39m
+[32m[39m
+2025-11-18 12:43:37 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 22.675 ms - -[39m
+[32m[39m
+2025-11-18 12:43:50 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 19.033 ms - -[39m
+[32m[39m
+2025-11-18 12:43:52 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 106.044 ms - -[39m
+[32m[39m
+2025-11-18 12:43:53 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 11.351 ms - -[39m
+[32m[39m
+2025-11-18 12:43:54 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 33.772 ms - -[39m
+[32m[39m
+2025-11-18 12:44:00 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 42.850 ms - -[39m
+[32m[39m
+2025-11-18 12:44:00 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 234.012 ms - -[39m
+[32m[39m
+2025-11-18 12:44:59 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 317.376 ms - -[39m
+[32m[39m
+2025-11-18 12:44:59 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 29.787 ms - -[39m
+[32m[39m
+2025-11-18 12:45:00 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 17.326 ms - -[39m
+[32m[39m
+2025-11-18 12:45:01 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 11.887 ms - -[39m
+[32m[39m
+2025-11-18 12:45:02 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 9.883 ms - -[39m
+[32m[39m
+2025-11-18 12:46:05 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 248.344 ms - -[39m
+[32m[39m
+2025-11-18 13:00:59 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-11-18 13:00:59 [32minfo[39m [32mPOST /api/v1/auth/vet-login 400 150.086 ms - 47[39m
+[32m[39m
+2025-11-18 13:01:11 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 220.418 ms - 588[39m
+[32m[39m
+2025-11-18 13:01:15 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 111.336 ms - -[39m
+[32m[39m
+2025-11-18 13:01:22 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 11.299 ms - -[39m
+[32m[39m
+2025-11-18 13:01:26 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 200 85.450 ms - 18022[39m
+[32m[39m
+2025-11-18 13:01:27 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 30.934 ms - -[39m
+[32m[39m
+2025-11-18 13:01:28 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 27.034 ms - -[39m
+[32m[39m
+2025-11-18 13:01:39 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 215.081 ms - -[39m
+[32m[39m
+2025-11-18 13:01:39 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 27.452 ms - -[39m
+[32m[39m
+2025-11-18 13:08:09 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 158.856 ms - 588[39m
+[32m[39m
+2025-11-18 13:08:11 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 110.446 ms - -[39m
+[32m[39m
+2025-11-18 13:08:16 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 13.305 ms - -[39m
+[32m[39m
+2025-11-18 13:08:21 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 99.116 ms - -[39m
+[32m[39m
+2025-11-18 13:08:22 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 31.175 ms - -[39m
+[32m[39m
+2025-11-18 13:08:23 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 14.267 ms - -[39m
+[32m[39m
+2025-11-18 13:08:30 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 200 118.226 ms - 3240[39m
+[32m[39m
+2025-11-18 13:08:31 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 200 176.620 ms - 9911[39m
+[32m[39m
+2025-11-18 13:16:05 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 160.836 ms - 588[39m
+[32m[39m
+2025-11-18 13:16:08 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 217.441 ms - -[39m
+[32m[39m
+2025-11-18 13:21:12 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 102.094 ms - -[39m
+[32m[39m
+2025-11-18 13:21:18 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 84.906 ms - -[39m
+[32m[39m
+2025-11-18 13:21:20 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 24.229 ms - -[39m
+[32m[39m
+2025-11-18 13:21:20 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 194.523 ms - -[39m
+[32m[39m
+2025-11-18 13:21:32 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/health-history 304 201.782 ms - -[39m
+[32m[39m
+2025-11-18 13:21:33 [32minfo[39m [32mGET /api/v1/livestock/cmi23zrer000ct1uomy9y9z95/activity-timeline 304 253.317 ms - -[39m
+[32m[39m
+2025-11-18 13:23:38 [32minfo[39m [32mPOST /api/v1/treatment/follow-ups 201 86.222 ms - 808[39m
+[32m[39m
+2025-11-18 13:23:48 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi23zqea0000t1uotwyqvezv 304 89.709 ms - -[39m
+[32m[39m
+2025-11-18 13:23:50 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 27.136 ms - -[39m
+[32m[39m
+2025-11-18 13:23:50 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 14.216 ms - -[39m
+[32m[39m
+2025-11-18 13:23:55 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 200 15.416 ms - 1132[39m
+[32m[39m

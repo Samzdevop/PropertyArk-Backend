@@ -35,7 +35,7 @@
     "morgan": "^1.10.0",
     "multer": "^2.0.2",
     "multer-s3": "^3.0.1",
-    "node-cron": "^3.0.3",
+    "node-cron": "^4.2.1",
     "nodemailer": "^6.9.16",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
@@ -61,7 +61,7 @@
     "db:reset": "yarn prisma:reset && yarn prisma:seed",
     "db:refresh": "yarn prisma:migrate && yarn prisma:seed"
   },
-   "prisma": {
+  "prisma": {
     "seed": "ts-node src/prisma/seed.ts"
   },
   "author": "Thepenetrailiahub",

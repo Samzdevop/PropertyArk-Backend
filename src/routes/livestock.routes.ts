@@ -10,6 +10,8 @@ import {
   restoreLivestock,
   getLivestockById,
   getFarmLivestock,
+  getLivestockHealthHistory,
+  getLivestockActivityTimeline,
 } from '../contollers/livestock.controller';
 import { authenticateJWT } from '../middlewares/errorHandler';
 import { validateRequest } from '../middlewares/validateRequest';
@@ -76,6 +78,18 @@ livestockRouter.get(
   authenticateJWT,
   requireRoles(['ADMIN']),
   getDeletedLivestock
+);
+
+livestockRouter.get(
+  '/:livestockId/health-history',
+  authenticateJWT,
+  getLivestockHealthHistory
+);
+
+livestockRouter.get(
+  '/:livestockId/activity-timeline',
+  authenticateJWT,
+  getLivestockActivityTimeline
 );
 
 livestockRouter.patch(

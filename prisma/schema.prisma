@@ -45,11 +45,17 @@ model User {
   TaskObservation      TaskObservation[]      @relation("UserTaskObservations")
   InventoryRecord      InventoryRecord[]
   FinancialTransaction FinancialTransaction[]
+  Diagnosis            Diagnosis[]
+  prescribedTreatments PrescribedTreatment[]
+  followUps           FollowUp[]
+  notifications       Notification[]
+
 
   // Creator relationship
   createdBy    User?   @relation("UserCreator", fields: [createdById], references: [id])
   createdById  String?
   createdUsers User[]  @relation("UserCreator")
+
 }
 
 model Livestock {
@@ -66,11 +72,11 @@ model Livestock {
   isSick           Boolean      @default(false)
   isTreatment      Boolean      @default(false)
 
-  isDeleted      Boolean   @default(false)
-  deletionReason String?
-  deletedAt      DateTime?
-  deletedBy      User?     @relation("LivestockDeletedBy", fields: [deletedById], references: [id]) // New relation
-  deletedById    String?
+  isDeleted        Boolean   @default(false)
+  deletionReason   String?
+  deletedAt        DateTime?
+  deletedBy        User?     @relation("LivestockDeletedBy", fields: [deletedById], references: [id]) // New relation
+  deletedById      String?
 
   sickness           Sickness[]
   treatments         Treatment[]
@@ -82,7 +88,10 @@ model Livestock {
   updatedAt          DateTime        @updatedAt
   vaccinationRecords Vaccination[]
   OfftakeRecord      OfftakeRecord[]
-  tasks              Task[]          
+  tasks              Task[]   
+  diagnoses          Diagnosis[]  
+  prescribedTreatments PrescribedTreatment[]
+  followUps          FollowUp[]     
 
 }
 
@@ -241,6 +250,123 @@ model FinancialTransaction {
   @@index([date])
 }
 
+model Diagnosis {
+  id              String           @id @default(cuid())
+  livestock       Livestock        @relation(fields: [livestockId], references: [id])
+  livestockId     String
+  diagnosis       String
+  labTests        String?
+  severity        DiagnosisSeverity @default(MILD)
+  prognosis       DiagnosisPrognosis @default(GOOD)
+  observations    String?
+  date            DateTime
+  recordedBy      User             @relation(fields: [recordedById], references: [id])
+  recordedById    String
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  @@index([livestockId])
+  @@index([date])
+  @@index([severity])
+  @@index([prognosis])
+}
+
+model PrescribedTreatment {
+  id              String               @id @default(cuid())
+  livestock       Livestock            @relation(fields: [livestockId], references: [id])
+  livestockId     String
+  treatmentType   String
+  medicationName  String 
+  dosage          String
+  frequency       Frequency
+  routine         AdministrationRoutine
+  additionalNotes String?
+  startDate       DateTime
+  endDate         DateTime?
+  isActive        Boolean              @default(true)
+  recordedBy      User                 @relation(fields: [recordedById], references: [id])
+  recordedById    String
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+  followUps       FollowUp[]
+  reminders       TreatmentReminder[]
+
+  @@index([livestockId])
+  @@index([isActive])
+  @@index([startDate])
+}
+
+model FollowUp {
+  id                String        @id @default(cuid())
+  prescribedTreatment PrescribedTreatment? @relation(fields: [prescribedTreatmentId], references: [id])
+  prescribedTreatmentId String?
+  reason            String
+  date              DateTime
+  time              DateTime
+  relatedAnimal     Livestock     @relation(fields: [relatedAnimalId], references: [id])
+  relatedAnimalId   String
+  relatedFarm       String
+  location          String
+  additionalNotes   String?
+  setReminder       Boolean       @default(false)
+  notifyFarmStaff   Boolean       @default(false)
+  status            String        @default("SCHEDULED") 
+  recordedBy        User          @relation(fields: [recordedById], references: [id])
+  recordedById      String
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  reminders         FollowUpReminder[]
+
+  @@index([date])
+  @@index([relatedAnimalId])
+  @@index([status])
+}
+
+model TreatmentReminder {
+  id                    String              @id @default(cuid())
+  prescribedTreatment   PrescribedTreatment @relation(fields: [prescribedTreatmentId], references: [id])
+  prescribedTreatmentId String
+  reminderType          String // "DAILY", "WEEKLY", etc.
+  dueDate               DateTime
+  isSent                Boolean             @default(false)
+  sentAt                DateTime?
+  createdAt             DateTime            @default(now())
+}
+
+model FollowUpReminder {
+  id            String   @id @default(cuid())
+  followUp      FollowUp @relation(fields: [followUpId], references: [id])
+  followUpId    String
+  reminderType  String   // "1_DAY_BEFORE", "1_HOUR_BEFORE"
+  dueDate       DateTime
+  isSent        Boolean  @default(false)
+  sentAt        DateTime?
+  createdAt     DateTime @default(now())
+}
+
+model Notification {
+  id          String             @id @default(cuid())
+  title       String
+  message     String
+  type        NotificationType
+  status      NotificationStatus @default(UNREAD)
+  recipient   User               @relation(fields: [recipientId], references: [id])
+  recipientId String
+  relatedEntityType String?      // e.g., "TASK", "FOLLOW_UP", "TREATMENT"
+  relatedEntityId   String?
+  metadata    Json?
+  sentAt      DateTime           @default(now())
+  readAt      DateTime?
+  createdAt   DateTime           @default(now())
+
+  @@index([recipientId])
+  @@index([status])
+  @@index([type])
+  @@index([sentAt])
+}
+
+
+
 enum HealthStatus {
   HEALTHY
   SICK
@@ -290,4 +416,52 @@ enum InventoryRecordType {
   NEW
   ITEM
   USE
+}
+
+enum DiagnosisSeverity {
+  MILD
+  MODERATE 
+  SEVERE
+  CRITICAL
+  CHRONIC
+}
+
+enum DiagnosisPrognosis {
+  GOOD
+  FAIR
+  GUARDED
+  POOR
+}
+
+enum Frequency {
+  DAILY
+  TWICE_DAILY
+  EVERY_OTHER_DAY
+  WEEKLY
+  BI_WEEKLY
+  MONTHLY
+  AS_NEEDED
+}
+
+enum AdministrationRoutine {
+  ORAL
+  INTRAMUSCULAR
+  SUBCUTANEOUS
+  INTRAVENOUS
+  TOPICAL
+  INTRAMAMMARY
+}
+
+enum NotificationType {
+  TASK_ASSIGNED
+  FOLLOW_UP_REMINDER
+  TREATMENT_REMINDER
+  ANNOUNCEMENT
+  SYSTEM_ALERT
+}
+
+enum NotificationStatus {
+  UNREAD
+  READ
+  DISMISSED
 }

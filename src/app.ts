@@ -17,6 +17,8 @@ import { offtakeRouter } from './routes/offtake.routes';
 import { taskRouter } from './routes/task.routes';
 import { inventoryRouter } from './routes/inventory.routes';
 import { financeRouter } from './routes/finance.routes';
+import { diagnosisRouter } from './routes/diagnosis.routes';
+import { notificationRouter } from './routes/notification.routes';
 
 export const app = express();
 
@@ -58,6 +60,8 @@ app.use('/api/v1/offtake', offtakeRouter);
 app.use('/api/v1/tasks', taskRouter)
 app.use('/api/v1/inventory', inventoryRouter)
 app.use('/api/v1/finance', financeRouter)
+app.use('/api/v1/diagnosis', diagnosisRouter)
+app.use('/api/v1/notifications', notificationRouter)
 
 app.use(notFoundHandler);
 app.use(errorHandler);
