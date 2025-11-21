@@ -24,7 +24,7 @@ export const adminRegister = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const { email, fullName, password, companyName } = req.body;
+    const { email, fullName, password, companyName, location, phone, } = req.body;
 
     const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser)
@@ -32,19 +32,57 @@ export const adminRegister = async (
         "User already registered! Please proceed to login."
       );
 
+    const existingCompany = await prisma.company.findUnique({
+      where: { name: companyName }
+    });
+
+    if (existingCompany) {
+      throw new ForbiddenError("Company name already exists");
+    }
+
     const hashedPassword = await hash(password);
     const verificationCode = generateVerificationCode().toString();
-    const data = {
-      email,
-      password: hashedPassword,
-      fullName,
-      companyName,
-      verificationCode,
-      verificationExpires: new Date(new Date().getTime() + 30 * 60 * 1000),
-    };
-    await prisma.user.create({
-      data,
+    const result = await prisma.$transaction(async (tx) => {
+      // 1. Create the company first
+      const company = await tx.company.create({
+        data: {
+          name: companyName,
+          location: location,
+          phone: phone,
+          isActive: true
+        }
+      });
+
+      // 2. Create the admin user linked to the company
+      const user = await tx.user.create({
+        data: {
+          email,
+          password: hashedPassword,
+          fullName,
+          companyName: company.name, // Keep companyName for compatibility
+          companyId: company.id,     // Link to company with unique ID
+          location,
+          phone,
+          verificationCode,
+          verificationExpires: new Date(new Date().getTime() + 30 * 60 * 1000),
+          role: "ADMIN",
+          isVerified: false
+        }
+      });
+
+      return { user, company };
     });
+    // const data = {
+    //   email,
+    //   password: hashedPassword,
+    //   fullName,
+    //   companyName,
+    //   verificationCode,
+    //   verificationExpires: new Date(new Date().getTime() + 30 * 60 * 1000),
+    // };
+    // await prisma.user.create({
+    //   data,
+    // });
     const html = render("verification", {
       fullName,
       verificationCode,

@@ -13,7 +13,7 @@ notificationRouter.get(
   getNotifications
 );
 notificationRouter.patch(
-  '/notifications/:notificationId/status',
+  '/:notificationId/status',
   authenticateJWT,
   validateRequest(updateNotificationStatusSchema),
   updateNotificationStatus

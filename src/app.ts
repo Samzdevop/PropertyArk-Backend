@@ -19,6 +19,8 @@ import { inventoryRouter } from './routes/inventory.routes';
 import { financeRouter } from './routes/finance.routes';
 import { diagnosisRouter } from './routes/diagnosis.routes';
 import { notificationRouter } from './routes/notification.routes';
+import { appointmentRouter } from './routes/appointment.routes';
+import { noteRouter } from './routes/note.routes';
 
 export const app = express();
 
@@ -62,6 +64,9 @@ app.use('/api/v1/inventory', inventoryRouter)
 app.use('/api/v1/finance', financeRouter)
 app.use('/api/v1/diagnosis', diagnosisRouter)
 app.use('/api/v1/notifications', notificationRouter)
+app.use('/api/v1/appointments', appointmentRouter)
+app.use('/api/v1/notes', noteRouter);
+
 
 app.use(notFoundHandler);
 app.use(errorHandler);

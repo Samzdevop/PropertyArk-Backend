@@ -6,6 +6,8 @@ export const adminRegisterSchema = z.object({
     fullName: z.string().min(1, "First Name is required"),
     email: z.string().email("Invalid email format"),
     password: z.string().min(8, "Password must be at least 8 characters long"),
+    location: z.string().min(1, "Location is required"),
+    phone: z.string().min(1, "Phone number is required"),
     companyName: z.string().min(1, "Company Name is required"),
   }),
 });

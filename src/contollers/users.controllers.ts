@@ -278,7 +278,12 @@ export const getVetAssignedFarms = async (
       },
       distinct: ['assignedById'],
       include: {
-        assignedBy: { select: userSelect }
+        assignedBy: {
+          select: {
+            ...userSelect,
+            companyId: true
+          }
+        }
       },
       orderBy: {
         assignedBy: {
@@ -1018,3 +1023,4 @@ export const getFarmDetails = async (
     next(error);
   }
 };
+

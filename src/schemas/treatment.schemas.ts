@@ -44,9 +44,6 @@ export const scheduleFollowUpSchema = z.object({
 });
 
 export const updateNotificationStatusSchema = z.object({
-  params: z.object({
-    notificationId: z.string().min(1, "Notification ID is required")
-  }),
   body: z.object({
     status: z.enum(['READ', 'DISMISSED'])
   })

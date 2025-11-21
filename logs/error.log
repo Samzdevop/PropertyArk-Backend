@@ -3822,3 +3822,62 @@
 2025-11-18 11:53:13 [31merror[39m [31mInvalid credentials Invalid credentials[39m
 2025-11-18 12:00:01 [31merror[39m [31mInvalid credentials Invalid credentials[39m
 2025-11-18 13:00:59 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-11-18 14:59:54 [31merror[39m [31mPrisma error: [39m
+[31mInvalid `prisma.notification.update()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\notification.controller.ts:66:52[39m
+
+[31m  63 const notificationId = req.params.notificationId;[39m
+[31m  64 const { status } = req.body;[39m
+[31m  65 [39m
+[31m→ 66 const notification = await prisma.notification.update([39m
+[31mAn operation failed because it depends on one or more records that were required but not found. No record was found for an update. [39m
+[31mInvalid `prisma.notification.update()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\notification.controller.ts:66:52[39m
+
+[31m  63 const notificationId = req.params.notificationId;[39m
+[31m  64 const { status } = req.body;[39m
+[31m  65 [39m
+[31m→ 66 const notification = await prisma.notification.update([39m
+[31mAn operation failed because it depends on one or more records that were required but not found. No record was found for an update.[39m
+2025-11-18 15:04:45 [31merror[39m [31mYou do not have permission to update this notification You do not have permission to update this notification[39m
+2025-11-18 15:37:37 [31merror[39m [31mPrisma error: [39m
+[31mInvalid `prisma.notification.update()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\notification.controller.ts:66:52[39m
+
+[31m  63 const notificationId = req.params.notificationId;[39m
+[31m  64 const { status } = req.body;[39m
+[31m  65 [39m
+[31m→ 66 const notification = await prisma.notification.update([39m
+[31mAn operation failed because it depends on one or more records that were required but not found. No record was found for an update. [39m
+[31mInvalid `prisma.notification.update()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\notification.controller.ts:66:52[39m
+
+[31m  63 const notificationId = req.params.notificationId;[39m
+[31m  64 const { status } = req.body;[39m
+[31m  65 [39m
+[31m→ 66 const notification = await prisma.notification.update([39m
+[31mAn operation failed because it depends on one or more records that were required but not found. No record was found for an update.[39m
+2025-11-18 15:38:15 [31merror[39m [31mPrisma error: [39m
+[31mInvalid `prisma.notification.update()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\notification.controller.ts:66:52[39m
+
+[31m  63 const notificationId = req.params.notificationId;[39m
+[31m  64 const { status } = req.body;[39m
+[31m  65 [39m
+[31m→ 66 const notification = await prisma.notification.update([39m
+[31mAn operation failed because it depends on one or more records that were required but not found. No record was found for an update. [39m
+[31mInvalid `prisma.notification.update()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\notification.controller.ts:66:52[39m
+
+[31m  63 const notificationId = req.params.notificationId;[39m
+[31m  64 const { status } = req.body;[39m
+[31m  65 [39m
+[31m→ 66 const notification = await prisma.notification.update([39m
+[31mAn operation failed because it depends on one or more records that were required but not found. No record was found for an update.[39m
+2025-11-20 10:53:20 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-11-20 14:23:09 [31merror[39m [31mExpected ',' or '}' after property value in JSON at position 356 (line 10 column 5) Expected ',' or '}' after property value in JSON at position 356 (line 10 column 5)[39m
+2025-11-20 14:23:56 [31merror[39m [31mExpected ',' or '}' after property value in JSON at position 356 (line 10 column 5) Expected ',' or '}' after property value in JSON at position 356 (line 10 column 5)[39m
+2025-11-20 14:33:40 [31merror[39m [31mExpected ',' or '}' after property value in JSON at position 356 (line 10 column 5) Expected ',' or '}' after property value in JSON at position 356 (line 10 column 5)[39m
+2025-11-20 14:37:16 [31merror[39m [31mExpected ',' or '}' after property value in JSON at position 356 (line 10 column 5) Expected ',' or '}' after property value in JSON at position 356 (line 10 column 5)[39m
+2025-11-20 15:53:46 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-11-20 19:35:02 [31merror[39m [31mVet account not found Vet account not found[39m

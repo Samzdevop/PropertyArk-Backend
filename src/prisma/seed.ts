@@ -1,154 +1,101 @@
+// Updated seed script
 import { PrismaClient, Role, HealthStatus, Priority, TaskStatus, InventoryType, FinancialTransactionType } from '@prisma/client';
 import { hash } from 'argon2';
 
 const prisma = new PrismaClient();
 
-interface Company {
+interface CompanyData {
   name: string;
   location: string;
-  emailDomain: string;
+  phone: string;
 }
 
 interface UserData {
   email: string;
   fullName: string;
   password: string;
-  companyName: string;
   location: string;
+  phone: string;
   role: Role;
   isVerified: boolean;
   lastLogin: Date;
 }
 
-interface LivestockData {
-  tagId: string;
-  type: string;
-  breed: string;
-  birthDate: Date;
-  healthStatus: HealthStatus;
-  weight: number;
-  gender: string;
-  livestockSource: string;
-  livestockPurpose: string;
-  addedById: string;
-}
-
-interface TaskData {
-  name: string;
-  description: string;
-  priority: Priority;
-  dueDate: Date;
-  status: TaskStatus;
-  assignedToId: string;
-  assignedById: string;
-  livestockId: string | null;
-}
-
-interface VaccinationData {
-  livestockId: string;
-  dateofVaccination: Date;
-  vaccineType: string;
-  dosage: number;
-  administeredBy: string;
-  nextDueDate: Date;
-  recordedById: string;
-}
-
-interface SicknessData {
-  livestockId: string;
-  dateOfObservation: Date;
-  observedSymptoms: string;
-  suspectedCause: string;
-  notes: string;
-  recordedById: string;
-}
-
-interface TreatmentData {
-  sicknessId: string;
-  livestockId: string;
-  dateOfTreatment: Date;
-  treatmentType: string;
-  dosage: number;
-  cause: string;
-  administeredBy: string;
-  nextDueDate: Date;
-  recordedById: string;
-}
-
-interface InventoryData {
-  type: InventoryType;
-  name: string;
-  currentQuantity: number;
-  unit: string;
-  purchasePrice: number;
-  reorderPoint: number;
-  supplier: string;
-  notes: string;
-  mediaUrls: string[];
-}
-
-interface FinancialTransactionData {
-  type: FinancialTransactionType;
-  referenceNumber: string;
-  title: string;
-  amount: number;
-  paymentMethod: string;
-  date: Date;
-  description: string;
-  partyName: string;
-  mediaUrls: string[];
-  recordedById: string;
-}
+// ... rest of your interfaces remain the same
 
 async function main() {
   console.log('🌱 Starting seed...');
 
-  // Clear existing data
-  // console.log('🗑️ Clearing existing data...');
-  // await prisma.taskObservation.deleteMany();
-  // await prisma.task.deleteMany();
-  // await prisma.vaccination.deleteMany();
-  // await prisma.treatment.deleteMany();
-  // await prisma.sickness.deleteMany();
-  // await prisma.offtakeRecord.deleteMany();
-  // await prisma.livestock.deleteMany();
-  // await prisma.inventoryRecord.deleteMany();
-  // await prisma.inventory.deleteMany();
-  // await prisma.financialTransaction.deleteMany();
-  // await prisma.user.deleteMany();
+  // Clear existing data in correct order to handle foreign key constraints
+  console.log('🗑️ Clearing existing data...');
+  await prisma.taskObservation.deleteMany();
+  await prisma.appointmentReminder.deleteMany();
+  await prisma.appointment.deleteMany();
+  await prisma.farmVisit.deleteMany();
+  await prisma.followUpReminder.deleteMany();
+  await prisma.followUp.deleteMany();
+  await prisma.treatmentReminder.deleteMany();
+  await prisma.prescribedTreatment.deleteMany();
+  await prisma.notification.deleteMany();
+  await prisma.treatment.deleteMany();
+  await prisma.sickness.deleteMany();
+  await prisma.vaccination.deleteMany();
+  await prisma.offtakeRecord.deleteMany();
+  await prisma.diagnosis.deleteMany();
+  await prisma.task.deleteMany();
+  await prisma.livestock.deleteMany();
+  await prisma.inventoryRecord.deleteMany();
+  await prisma.inventory.deleteMany();
+  await prisma.financialTransaction.deleteMany();
+  await prisma.user.deleteMany();
+  await prisma.company.deleteMany();
 
-  console.log('👥 Creating users...');
+  console.log('🏢 Creating companies and users...');
 
-  // Create multiple companies
-  const companies: Company[] = [
+  const companiesData: CompanyData[] = [
     {
       name: 'Green Valley Farm',
       location: 'Lagos, Nigeria',
-      emailDomain: 'greenvalley'
+      phone: '+2348012345001'
     },
     {
       name: 'Sunrise Ranch', 
       location: 'Abuja, Nigeria',
-      emailDomain: 'sunriseranch'
+      phone: '+2348012345002'
     },
     {
       name: 'Mountain View Farm',
       location: 'Port Harcourt, Nigeria',
-      emailDomain: 'mountainview'
+      phone: '+2348012345003'
     }
   ];
 
+  const createdCompanies: any[] = [];
   const createdUsers: any[] = [];
 
-  for (const company of companies) {
+  // Create companies and admin users
+  for (const companyData of companiesData) {
+    // Create company
+    const company = await prisma.company.create({
+      data: {
+        name: companyData.name,
+        location: companyData.location,
+        phone: companyData.phone,
+        isActive: true
+      }
+    });
+    createdCompanies.push(company);
+
     // Create company admin
     const adminPassword: string = await hash('password123');
-    const adminData: UserData = {
-      email: `admin@${company.emailDomain}.com`,
+    const adminData = {
+      email: `admin@${company.name.toLowerCase().replace(/\s+/g, '')}.com`,
       fullName: `${company.name} Owner`,
       password: adminPassword,
       companyName: company.name,
+      companyId: company.id,
       location: company.location,
+      phone: company.phone,
       role: 'ADMIN' as Role,
       isVerified: true,
       lastLogin: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000)
@@ -161,12 +108,14 @@ async function main() {
 
     // Create farm keeper for this company
     const farmKeeperPassword: string = await hash('password123');
-    const farmKeeperData: UserData = {
-      email: `farmkeeper@${company.emailDomain}.com`,
+    const farmKeeperData = {
+      email: `farmkeeper@${company.name.toLowerCase().replace(/\s+/g, '')}.com`,
       fullName: `${company.name} Farm Keeper`,
       password: farmKeeperPassword,
       companyName: company.name,
+      companyId: company.id,
       location: company.location,
+      phone: `+2348012345${String(createdUsers.length + 100).padStart(3, '0')}`,
       role: 'FARM_KEEPER' as Role,
       isVerified: true,
       lastLogin: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000)
@@ -179,12 +128,14 @@ async function main() {
 
     // Create coworker for this company
     const coworkerPassword: string = await hash('password123');
-    const coworkerData: UserData = {
-      email: `coworker@${company.emailDomain}.com`,
+    const coworkerData = {
+      email: `coworker@${company.name.toLowerCase().replace(/\s+/g, '')}.com`,
       fullName: `${company.name} Coworker`,
       password: coworkerPassword,
       companyName: company.name,
+      companyId: company.id,
       location: company.location,
+      phone: `+2348012345${String(createdUsers.length + 200).padStart(3, '0')}`,
       role: 'COWORKER' as Role,
       isVerified: true,
       lastLogin: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000)
@@ -196,37 +147,35 @@ async function main() {
     createdUsers.push(coworker);
   }
 
-  // Create vets
+  // Create vets (they don't belong to specific companies)
   const vetPassword: string = await hash('password123');
-  const vet1Data: UserData = {
-    email: 'vet.drbrown@animalclinic.com',
-    fullName: 'Dr. Sarah Brown',
-    password: vetPassword,
-    companyName: 'Animal Clinic Ltd',
-    location: 'Lagos, Nigeria',
-    role: 'VET' as Role,
-    isVerified: true,
-    lastLogin: new Date()
-  };
-
   const vet1 = await prisma.user.create({
-    data: vet1Data
+    data: {
+      email: 'vet.drbrown@animalclinic.com',
+      fullName: 'Dr. Sarah Brown',
+      password: vetPassword,
+      companyName: 'Animal Clinic Ltd',
+      location: 'Lagos, Nigeria',
+      phone: '+2348012345004',
+      role: 'VET' as Role,
+      isVerified: true,
+      lastLogin: new Date()
+    }
   });
   createdUsers.push(vet1);
 
-  const vet2Data: UserData = {
-    email: 'vet.drjohnson@vetcare.com',
-    fullName: 'Dr. Michael Johnson',
-    password: vetPassword,
-    companyName: 'Vet Care Services',
-    location: 'Abuja, Nigeria',
-    role: 'VET' as Role,
-    isVerified: true,
-    lastLogin: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
-  };
-
   const vet2 = await prisma.user.create({
-    data: vet2Data
+    data: {
+      email: 'vet.drjohnson@vetcare.com',
+      fullName: 'Dr. Michael Johnson',
+      password: vetPassword,
+      companyName: 'Vet Care Services',
+      location: 'Abuja, Nigeria',
+      phone: '+2348012345005',
+      role: 'VET' as Role,
+      isVerified: true,
+      lastLogin: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
+    }
   });
   createdUsers.push(vet2);
 
@@ -244,8 +193,8 @@ async function main() {
   const healthStatuses: HealthStatus[] = ['HEALTHY', 'SICK', 'IN_TREATMENT', 'RECOVERING', 'CRITICAL'];
   const createdLivestock: any[] = [];
 
-  for (const company of companies) {
-    const companyAdmin = createdUsers.find(u => u.companyName === company.name && u.role === 'ADMIN');
+  for (const company of createdCompanies) {
+    const companyAdmin = createdUsers.find(u => u.companyId === company.id && u.role === 'ADMIN');
     if (!companyAdmin) continue;
     
     for (let i = 1; i <= 20; i++) {
@@ -253,7 +202,7 @@ async function main() {
       const breed: string = breeds[type][Math.floor(Math.random() * breeds[type].length)];
       const healthStatus: HealthStatus = healthStatuses[Math.floor(Math.random() * healthStatuses.length)];
       
-      const livestockData: LivestockData = {
+      const livestockData = {
         tagId: `${company.name.substring(0, 3).toUpperCase()}-${String(i).padStart(3, '0')}`,
         type,
         breed,
@@ -263,6 +212,7 @@ async function main() {
         gender: Math.random() > 0.5 ? 'Male' : 'Female',
         livestockSource: ['Purchase', 'Birth', 'Transfer'][Math.floor(Math.random() * 3)],
         livestockPurpose: ['Meat', 'Milk', 'Breeding', 'Eggs'][Math.floor(Math.random() * 4)],
+        companyId: company.id,
         addedById: companyAdmin.id
       };
       
@@ -278,11 +228,14 @@ async function main() {
   const vaccineTypes: string[] = ['Rabies', 'Parvovirus', 'Distemper', 'Leptospirosis', 'Brucellosis', 'Anthrax'];
   
   for (const livestock of createdLivestock.slice(0, 30)) {
-    const companyAdmin = createdUsers.find(admin => admin.id === livestock.addedById);
-    const recordedBy = createdUsers.find(u => u.role === 'FARM_KEEPER' && u.companyName === companyAdmin?.companyName);
+    const company = createdCompanies.find(c => c.id === livestock.companyId);
+    const recordedBy = createdUsers.find(u => 
+      u.companyId === livestock.companyId && 
+      u.role === 'FARM_KEEPER'
+    );
     if (!recordedBy) continue;
     
-    const vaccinationData: VaccinationData = {
+    const vaccinationData = {
       livestockId: livestock.id,
       dateofVaccination: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
       vaccineType: vaccineTypes[Math.floor(Math.random() * vaccineTypes.length)],
@@ -307,11 +260,13 @@ async function main() {
   ).slice(0, 15);
 
   for (const livestock of sickLivestock) {
-    const companyAdmin = createdUsers.find(admin => admin.id === livestock.addedById);
-    const recordedBy = createdUsers.find(u => u.role === 'FARM_KEEPER' && u.companyName === companyAdmin?.companyName);
+    const recordedBy = createdUsers.find(u => 
+      u.companyId === livestock.companyId && 
+      u.role === 'FARM_KEEPER'
+    );
     if (!recordedBy) continue;
     
-    const sicknessData: SicknessData = {
+    const sicknessData = {
       livestockId: livestock.id,
       dateOfObservation: new Date(Date.now() - Math.random() * 14 * 24 * 60 * 60 * 1000),
       observedSymptoms: symptoms.slice(0, 2 + Math.floor(Math.random() * 3)).join(', '),
@@ -326,7 +281,7 @@ async function main() {
 
     // Create treatment for some sickness records
     if (Math.random() > 0.3) {
-      const treatmentData: TreatmentData = {
+      const treatmentData = {
         sicknessId: sickness.id,
         livestockId: livestock.id,
         dateOfTreatment: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000),
@@ -362,11 +317,11 @@ async function main() {
   const priorities: Priority[] = ['LOW', 'MEDIUM', 'HIGH'];
   const statuses: TaskStatus[] = ['PENDING', 'IN_PROGRESS', 'COMPLETED'];
 
-  for (const company of companies) {
-    const companyUsers = createdUsers.filter(u => u.companyName === company.name);
+  for (const company of createdCompanies) {
+    const companyUsers = createdUsers.filter(u => u.companyId === company.id);
     const companyAdmin = companyUsers.find(u => u.role === 'ADMIN');
     const farmKeeper = companyUsers.find(u => u.role === 'FARM_KEEPER');
-    const companyLivestock = createdLivestock.filter(l => l.addedById === companyAdmin?.id);
+    const companyLivestock = createdLivestock.filter(l => l.companyId === company.id);
     
     if (!companyAdmin || !farmKeeper) continue;
     
@@ -378,10 +333,11 @@ async function main() {
       const assignToVet: boolean = Math.random() > 0.5;
       const assignedTo = assignToVet ? (Math.random() > 0.5 ? vet1 : vet2) : farmKeeper;
       
-      const taskData: TaskData = {
+      const taskData = {
         name: taskNames[Math.floor(Math.random() * taskNames.length)],
         description: `Task description for ${livestock ? livestock.tagId : 'general farm maintenance'}`,
         priority: priorities[Math.floor(Math.random() * priorities.length)],
+        companyId: company.id,
         dueDate: new Date(Date.now() + Math.random() * 14 * 24 * 60 * 60 * 1000),
         status: statuses[Math.floor(Math.random() * statuses.length)],
         assignedToId: assignedTo.id,
@@ -413,13 +369,10 @@ async function main() {
   const feedItems: string[] = ['Corn Feed', 'Hay', 'Soybean Meal', 'Mineral Supplements'];
   const medicineItems: string[] = ['Antibiotics', 'Vaccines', 'Vitamins', 'Dewormer'];
 
-  for (const company of companies) {
-    const companyAdmin = createdUsers.find(u => u.companyName === company.name && u.role === 'ADMIN');
-    if (!companyAdmin) continue;
-    
+  for (const company of createdCompanies) {
     // Create feed inventory
     for (const item of feedItems) {
-      const inventoryData: InventoryData = {
+      const inventoryData = {
         type: 'FEED' as InventoryType,
         name: item,
         currentQuantity: 100 + Math.random() * 400,
@@ -438,7 +391,7 @@ async function main() {
 
     // Create medicine inventory
     for (const item of medicineItems) {
-      const inventoryData: InventoryData = {
+      const inventoryData = {
         type: 'MEDICINE' as InventoryType,
         name: item,
         currentQuantity: 20 + Math.random() * 80,
@@ -462,13 +415,13 @@ async function main() {
   const expenseCategories: string[] = ['Feed Purchase', 'Medical Supplies', 'Equipment Maintenance', 'Staff Salaries'];
   const paymentMethods: string[] = ['Cash', 'Bank Transfer', 'Mobile Money'];
 
-  for (const company of companies) {
-    const companyAdmin = createdUsers.find(u => u.companyName === company.name && u.role === 'ADMIN');
+  for (const company of createdCompanies) {
+    const companyAdmin = createdUsers.find(u => u.companyId === company.id && u.role === 'ADMIN');
     if (!companyAdmin) continue;
     
     for (let i = 0; i < 10; i++) {
       const isIncome: boolean = Math.random() > 0.4;
-      const transactionData: FinancialTransactionData = {
+      const transactionData = {
         type: isIncome ? 'INCOME' as FinancialTransactionType : 'EXPENSE' as FinancialTransactionType,
         referenceNumber: `REF-${company.name.substring(0, 3).toUpperCase()}-${String(i).padStart(4, '0')}`,
         title: isIncome 
@@ -489,34 +442,60 @@ async function main() {
     }
   }
 
+  // Create some appointments
+  console.log('📅 Creating appointments...');
+  for (const company of createdCompanies.slice(0, 2)) {
+    const vet = createdUsers.find(u => u.role === 'VET');
+    const companyLivestock = createdLivestock.filter(l => l.companyId === company.id);
+    
+    if (!vet || companyLivestock.length === 0) continue;
+
+    const appointmentData = {
+      visitType: 'FARM_VISIT' as any,
+      title: 'Routine Health Inspection',
+      date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      time: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      companyId: company.id,
+      relatedFarm: company.name,
+      relatedAnimal: companyLivestock[0].tagId,
+      purpose: 'Regular health check and vaccination',
+      setReminder: true,
+      notifyFarmStaff: true,
+      status: 'SCHEDULED',
+      recordedById: vet.id
+    };
+
+    await prisma.appointment.create({
+      data: appointmentData
+    });
+  }
+
   console.log('✅ Seed completed successfully!');
-  // console.log('\n📊 Seed Summary:');
+  // console.log(`\n📊 Seed Summary:`);
+  // console.log(`   Companies: ${createdCompanies.length}`);
   // console.log(`   Users: ${createdUsers.length}`);
   // console.log(`   Livestock: ${createdLivestock.length}`);
   // console.log(`   Tasks: ~24 (8 per company)`);
   // console.log(`   Vaccinations: 30`);
   // console.log(`   Sickness Records: ~15`);
-  // console.log(`   Inventory Items: ~21 (7 per company)`);
+  // console.log(`   Inventory Items: ~24 (8 per company)`);
   // console.log(`   Financial Transactions: 30 (10 per company)`);
+  // console.log(`   Appointments: 2`);
 
-  console.log('\n🔑 Test Credentials:');
-  console.log('   All passwords: "password123"');
+  // console.log('\n🔑 Test Credentials:');
+  // console.log('   All passwords: "password123"');
   // console.log('\n   Company Admins:');
-  // console.log('     - admin@greenvalley.com (Green Valley Farm)');
+  // console.log('     - admin@greenvalleyfarm.com (Green Valley Farm)');
   // console.log('     - admin@sunriseranch.com (Sunrise Ranch)');
-  // console.log('     - admin@mountainview.com (Mountain View Farm)');
+  // console.log('     - admin@mountainviewfarm.com (Mountain View Farm)');
   // console.log('\n   Vets:');
   // console.log('     - vet.drbrown@animalclinic.com');
   // console.log('     - vet.drjohnson@vetcare.com');
-  // console.log('\n   Farm Keepers:');
-  // console.log('     - farmkeeper@greenvalley.com');
-  // console.log('     - farmkeeper@sunriseranch.com');
-  // console.log('     - farmkeeper@mountainview.com');
 }
 
 main()
   .catch((e) => {
-    console.error('❌ Seed failed:', e);
+    console.error('Seed failed:', e);
     process.exit(1);
   })
   .finally(async () => {

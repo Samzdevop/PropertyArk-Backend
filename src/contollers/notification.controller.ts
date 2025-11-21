@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import prisma from '../prisma';
 import { sendSuccessResponse } from '../utils/sendSuccessResponse';
 import { NotFoundError } from '../errors/NotFoundError';
-import { ForbiddenError } from '../errors/ForbiddenError';
+
 
 export const getNotifications = async (
   req: Request,
@@ -85,5 +85,3 @@ export const updateNotificationStatus = async (
     next(error);
   }
 };
-
-
