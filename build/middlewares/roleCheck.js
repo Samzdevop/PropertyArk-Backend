@@ -4,6 +4,7 @@ exports.requireRoles = void 0;
 const requireRoles = (allowedRoles) => {
     return (req, res, next) => {
         const user = req.user;
+        // console.log('🔐 [requireRoles] req.user:', user);
         if (!user || !allowedRoles.includes(user.role)) {
             res.status(403).json({
                 success: false,

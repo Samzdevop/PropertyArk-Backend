@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateLivestockSchema = exports.addLivestockSchema = void 0;
+exports.deleteLivestockSchema = exports.updateLivestockSchema = exports.addLivestockSchema = void 0;
+const express_1 = require("express");
 const zod_1 = require("zod");
 exports.addLivestockSchema = zod_1.z.object({
     body: zod_1.z.object({
@@ -27,4 +28,18 @@ exports.updateLivestockSchema = zod_1.z.object({
         livestockSource: zod_1.z.string().optional(),
         livestockPurpose: zod_1.z.string().optional()
     }),
+});
+exports.deleteLivestockSchema = zod_1.z.object({
+    body: zod_1.z.object({
+        reason: zod_1.z.string().min(1, "Reason is required for farm keepers").optional()
+    }).refine(data => {
+        const userRole = express_1.request?.user?.role;
+        if (userRole === 'FARM_KEEPER') {
+            return !!data.reason;
+        }
+        return true;
+    }, {
+        message: "Deletion reason is required for farm keepers",
+        path: ["reason"]
+    })
 });

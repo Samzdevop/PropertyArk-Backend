@@ -40,6 +40,7 @@ const errorHandler = (err, _req, res, _next) => {
     // Default error response
     let statusCode = 500;
     let errorMessage = 'Internal Server Error';
+    let details = undefined;
     // Handle Prisma errors
     if (err instanceof client_1.Prisma.PrismaClientKnownRequestError) {
         statusCode = 400; // Bad Request
@@ -47,6 +48,8 @@ const errorHandler = (err, _req, res, _next) => {
         if (err.code === 'P2002') {
             statusCode = errorTypes_1.ERROR_CODES.CONFLICT;
             errorMessage = 'Unique constraint failed. Duplicate entry.';
+            const field = err.meta?.target || 'field';
+            details = `A record with this ${field} already exists`;
         }
     }
     else if (err instanceof client_1.Prisma.PrismaClientValidationError) {

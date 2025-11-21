@@ -1,0 +1,267 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getInventoryItem = exports.getInventoryItems = exports.getInventoryRecord = exports.getInventoryRecords = exports.createInventoryRecord = void 0;
+const prisma_1 = __importDefault(require("../prisma"));
+const sendSuccessResponse_1 = require("../utils/sendSuccessResponse");
+const NotFoundError_1 = require("../errors/NotFoundError");
+const upload_1 = require("../config/upload");
+const BadRequestError_1 = require("../errors/BadRequestError");
+const createInventoryRecord = async (req, res, next) => {
+    try {
+        const files = req.files;
+        const userId = req.user.id;
+        const mediaUrls = files?.map(file => (0, upload_1.getFileUrl)(file.filename)) || [];
+        const { recordType } = req.body;
+        switch (recordType) {
+            case 'NEW': {
+                const { type, name, quantity, purchasePricePerUnit, supplierName, reorderPoint, date, notes } = req.body;
+                const parsedQuantity = parseFloat(quantity);
+                const parsedPrice = parseFloat(purchasePricePerUnit);
+                const parsedReorderPoint = parseFloat(reorderPoint);
+                if (isNaN(parsedQuantity) || isNaN(parsedPrice) || isNaN(parsedReorderPoint)) {
+                    throw new BadRequestError_1.BadRequestError('Invalid number format in input');
+                }
+                const inventory = await prisma_1.default.inventory.create({
+                    data: {
+                        type,
+                        name,
+                        currentQuantity: parsedQuantity,
+                        purchasePrice: parsedPrice,
+                        reorderPoint: parsedReorderPoint,
+                        supplier: supplierName,
+                        notes,
+                        mediaUrls,
+                        records: {
+                            create: {
+                                recordType,
+                                quantity: parsedQuantity,
+                                pricePerUnit: parsedPrice,
+                                totalCost: parsedQuantity * parsedPrice,
+                                date: new Date(date),
+                                notes,
+                                mediaUrls,
+                                recordedById: userId
+                            }
+                        }
+                    },
+                    include: { records: true }
+                });
+                (0, sendSuccessResponse_1.sendSuccessResponse)(res, 'New inventory created', { inventory }, 201);
+                break;
+            }
+            case 'ITEM': {
+                const { itemToRestock, quantityReceived, purchasePricePerUnit, supplierName, date, notes, } = req.body;
+                const parsedQuantityRecieved = parseFloat(quantityReceived);
+                const parsedPrice = parseFloat(purchasePricePerUnit);
+                if (isNaN(parsedQuantityRecieved) || isNaN(parsedPrice)) {
+                    throw new BadRequestError_1.BadRequestError('Invalid number format in ITEM restock input');
+                }
+                const inventory = await prisma_1.default.inventory.update({
+                    where: { id: itemToRestock },
+                    data: {
+                        currentQuantity: { increment: parsedQuantityRecieved },
+                        supplier: supplierName,
+                        records: {
+                            create: {
+                                recordType,
+                                quantity: parsedQuantityRecieved,
+                                pricePerUnit: parsedPrice,
+                                totalCost: parsedQuantityRecieved * parsedPrice,
+                                date: new Date(date),
+                                notes,
+                                mediaUrls,
+                                recordedById: userId,
+                            },
+                        },
+                    },
+                    include: { records: true },
+                });
+                (0, sendSuccessResponse_1.sendSuccessResponse)(res, 'Inventory restocked', { inventory });
+                break;
+            }
+            case 'USE': {
+                const { itemToUse, quantityToUse, movementType, date, relatedAnimals, notes } = req.body;
+                const parsedQuantityToUse = parseFloat(quantityToUse);
+                if (isNaN(parsedQuantityToUse)) {
+                    throw new BadRequestError_1.BadRequestError('Invalid quantityToUse');
+                }
+                const inventory = await prisma_1.default.inventory.update({
+                    where: { id: itemToUse },
+                    data: {
+                        currentQuantity: { decrement: parsedQuantityToUse },
+                        records: {
+                            create: {
+                                recordType,
+                                quantity: parsedQuantityToUse,
+                                movementType,
+                                date: new Date(date),
+                                relatedAnimals,
+                                notes,
+                                mediaUrls,
+                                recordedById: userId
+                            }
+                        }
+                    },
+                    include: { records: true }
+                });
+                (0, sendSuccessResponse_1.sendSuccessResponse)(res, 'Inventory usage recorded', { inventory });
+                break;
+            }
+        }
+    }
+    catch (error) {
+        next(error);
+    }
+};
+exports.createInventoryRecord = createInventoryRecord;
+const getInventoryRecords = async (req, res, next) => {
+    try {
+        const { page = 1, limit = 10, recordType, inventoryId, startDate, endDate } = req.query;
+        const where = {};
+        if (recordType)
+            where.recordType = String(recordType);
+        if (inventoryId)
+            where.inventoryId = String(inventoryId);
+        if (startDate || endDate) {
+            where.date = {};
+            if (startDate)
+                where.date.gte = new Date(String(startDate));
+            if (endDate)
+                where.date.lte = new Date(String(endDate));
+        }
+        const [records, total] = await Promise.all([
+            prisma_1.default.inventoryRecord.findMany({
+                where,
+                skip: (Number(page) - 1) * Number(limit),
+                take: Number(limit),
+                orderBy: { date: 'desc' },
+                include: {
+                    inventory: {
+                        select: {
+                            id: true,
+                            name: true,
+                            type: true,
+                            reorderPoint: true,
+                            supplier: true,
+                            notes: true,
+                        }
+                    },
+                    recordedBy: {
+                        select: {
+                            id: true,
+                            fullName: true
+                        }
+                    }
+                }
+            }),
+            prisma_1.default.inventoryRecord.count({ where })
+        ]);
+        (0, sendSuccessResponse_1.sendSuccessResponse)(res, 'Inventory records retrieved', {
+            records,
+            pagination: {
+                page: Number(page),
+                limit: Number(limit),
+                total,
+                pages: Math.ceil(total / Number(limit))
+            }
+        });
+    }
+    catch (error) {
+        next(error);
+    }
+};
+exports.getInventoryRecords = getInventoryRecords;
+const getInventoryRecord = async (req, res, next) => {
+    try {
+        const { recordId } = req.params;
+        const record = await prisma_1.default.inventoryRecord.findUnique({
+            where: { id: recordId },
+            include: {
+                inventory: true,
+                recordedBy: {
+                    select: {
+                        id: true,
+                        fullName: true,
+                        role: true
+                    }
+                }
+            }
+        });
+        if (!record) {
+            throw new NotFoundError_1.NotFoundError('Inventory record not found');
+        }
+        (0, sendSuccessResponse_1.sendSuccessResponse)(res, 'Inventory record retrieved', { record });
+    }
+    catch (error) {
+        next(error);
+    }
+};
+exports.getInventoryRecord = getInventoryRecord;
+const getInventoryItems = async (req, res, next) => {
+    try {
+        const { page = 1, limit = 10, type, lowStock, search } = req.query;
+        const where = {};
+        if (type)
+            where.type = String(type);
+        if (search)
+            where.name = { contains: String(search), mode: 'insensitive' };
+        if (lowStock === 'true') {
+            where.currentQuantity = {
+                lte: prisma_1.default.inventory.fields.reorderPoint
+            };
+        }
+        const [items, total] = await Promise.all([
+            prisma_1.default.inventory.findMany({
+                where,
+                skip: (Number(page) - 1) * Number(limit),
+                take: Number(limit),
+                orderBy: { name: 'asc' },
+                include: {
+                    records: {
+                        take: 1,
+                        orderBy: { date: 'desc' }
+                    }
+                }
+            }),
+            prisma_1.default.inventory.count({ where })
+        ]);
+        (0, sendSuccessResponse_1.sendSuccessResponse)(res, 'Inventory items retrieved', {
+            items,
+            pagination: {
+                page: Number(page),
+                limit: Number(limit),
+                total,
+                pages: Math.ceil(total / Number(limit))
+            }
+        });
+    }
+    catch (error) {
+        next(error);
+    }
+};
+exports.getInventoryItems = getInventoryItems;
+const getInventoryItem = async (req, res, next) => {
+    try {
+        const { inventoryId } = req.params;
+        const item = await prisma_1.default.inventory.findUnique({
+            where: { id: inventoryId },
+            include: {
+                records: {
+                    orderBy: { date: 'desc' },
+                    take: 5
+                }
+            }
+        });
+        if (!item) {
+            throw new NotFoundError_1.NotFoundError('Inventory item not found');
+        }
+        (0, sendSuccessResponse_1.sendSuccessResponse)(res, 'Inventory item retrieved', { item });
+    }
+    catch (error) {
+        next(error);
+    }
+};
+exports.getInventoryItem = getInventoryItem;

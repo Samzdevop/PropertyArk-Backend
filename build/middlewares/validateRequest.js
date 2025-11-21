@@ -1,7 +1,4 @@
 "use strict";
-// // middleware/validateRequest.ts
-// import { ZodSchema } from 'zod';
-// import { Request, Response, NextFunction } from 'express';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateRequest = void 0;
 const validateRequest = (schema) => (req, _res, next) => {

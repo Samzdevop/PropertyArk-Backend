@@ -1,0 +1,425 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+// Updated seed script
+const client_1 = require("@prisma/client");
+const argon2_1 = require("argon2");
+const prisma = new client_1.PrismaClient();
+// ... rest of your interfaces remain the same
+async function main() {
+    console.log('🌱 Starting seed...');
+    // Clear existing data in correct order to handle foreign key constraints
+    console.log('🗑️ Clearing existing data...');
+    await prisma.taskObservation.deleteMany();
+    await prisma.appointmentReminder.deleteMany();
+    await prisma.appointment.deleteMany();
+    await prisma.farmVisit.deleteMany();
+    await prisma.followUpReminder.deleteMany();
+    await prisma.followUp.deleteMany();
+    await prisma.treatmentReminder.deleteMany();
+    await prisma.prescribedTreatment.deleteMany();
+    await prisma.notification.deleteMany();
+    await prisma.treatment.deleteMany();
+    await prisma.sickness.deleteMany();
+    await prisma.vaccination.deleteMany();
+    await prisma.offtakeRecord.deleteMany();
+    await prisma.diagnosis.deleteMany();
+    await prisma.task.deleteMany();
+    await prisma.livestock.deleteMany();
+    await prisma.inventoryRecord.deleteMany();
+    await prisma.inventory.deleteMany();
+    await prisma.financialTransaction.deleteMany();
+    await prisma.user.deleteMany();
+    await prisma.company.deleteMany();
+    console.log('🏢 Creating companies and users...');
+    const companiesData = [
+        {
+            name: 'Green Valley Farm',
+            location: 'Lagos, Nigeria',
+            phone: '+2348012345001'
+        },
+        {
+            name: 'Sunrise Ranch',
+            location: 'Abuja, Nigeria',
+            phone: '+2348012345002'
+        },
+        {
+            name: 'Mountain View Farm',
+            location: 'Port Harcourt, Nigeria',
+            phone: '+2348012345003'
+        }
+    ];
+    const createdCompanies = [];
+    const createdUsers = [];
+    // Create companies and admin users
+    for (const companyData of companiesData) {
+        // Create company
+        const company = await prisma.company.create({
+            data: {
+                name: companyData.name,
+                location: companyData.location,
+                phone: companyData.phone,
+                isActive: true
+            }
+        });
+        createdCompanies.push(company);
+        // Create company admin
+        const adminPassword = await (0, argon2_1.hash)('password123');
+        const adminData = {
+            email: `admin@${company.name.toLowerCase().replace(/\s+/g, '')}.com`,
+            fullName: `${company.name} Owner`,
+            password: adminPassword,
+            companyName: company.name,
+            companyId: company.id,
+            location: company.location,
+            phone: company.phone,
+            role: 'ADMIN',
+            isVerified: true,
+            lastLogin: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000)
+        };
+        const admin = await prisma.user.create({
+            data: adminData
+        });
+        createdUsers.push(admin);
+        // Create farm keeper for this company
+        const farmKeeperPassword = await (0, argon2_1.hash)('password123');
+        const farmKeeperData = {
+            email: `farmkeeper@${company.name.toLowerCase().replace(/\s+/g, '')}.com`,
+            fullName: `${company.name} Farm Keeper`,
+            password: farmKeeperPassword,
+            companyName: company.name,
+            companyId: company.id,
+            location: company.location,
+            phone: `+2348012345${String(createdUsers.length + 100).padStart(3, '0')}`,
+            role: 'FARM_KEEPER',
+            isVerified: true,
+            lastLogin: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000)
+        };
+        const farmKeeper = await prisma.user.create({
+            data: farmKeeperData
+        });
+        createdUsers.push(farmKeeper);
+        // Create coworker for this company
+        const coworkerPassword = await (0, argon2_1.hash)('password123');
+        const coworkerData = {
+            email: `coworker@${company.name.toLowerCase().replace(/\s+/g, '')}.com`,
+            fullName: `${company.name} Coworker`,
+            password: coworkerPassword,
+            companyName: company.name,
+            companyId: company.id,
+            location: company.location,
+            phone: `+2348012345${String(createdUsers.length + 200).padStart(3, '0')}`,
+            role: 'COWORKER',
+            isVerified: true,
+            lastLogin: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000)
+        };
+        const coworker = await prisma.user.create({
+            data: coworkerData
+        });
+        createdUsers.push(coworker);
+    }
+    // Create vets (they don't belong to specific companies)
+    const vetPassword = await (0, argon2_1.hash)('password123');
+    const vet1 = await prisma.user.create({
+        data: {
+            email: 'vet.drbrown@animalclinic.com',
+            fullName: 'Dr. Sarah Brown',
+            password: vetPassword,
+            companyName: 'Animal Clinic Ltd',
+            location: 'Lagos, Nigeria',
+            phone: '+2348012345004',
+            role: 'VET',
+            isVerified: true,
+            lastLogin: new Date()
+        }
+    });
+    createdUsers.push(vet1);
+    const vet2 = await prisma.user.create({
+        data: {
+            email: 'vet.drjohnson@vetcare.com',
+            fullName: 'Dr. Michael Johnson',
+            password: vetPassword,
+            companyName: 'Vet Care Services',
+            location: 'Abuja, Nigeria',
+            phone: '+2348012345005',
+            role: 'VET',
+            isVerified: true,
+            lastLogin: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
+        }
+    });
+    createdUsers.push(vet2);
+    console.log('🐄 Creating livestock...');
+    const livestockTypes = ['Cattle', 'Goat', 'Sheep', 'Pig', 'Chicken'];
+    const breeds = {
+        Cattle: ['Angus', 'Hereford', 'Holstein', 'Jersey'],
+        Goat: ['Boer', 'Nubian', 'Saanen', 'Alpine'],
+        Sheep: ['Dorper', 'Merino', 'Suffolk', 'Dorset'],
+        Pig: ['Duroc', 'Hampshire', 'Yorkshire', 'Berkshire'],
+        Chicken: ['Rhode Island Red', 'Leghorn', 'Plymouth Rock', 'Sussex']
+    };
+    const healthStatuses = ['HEALTHY', 'SICK', 'IN_TREATMENT', 'RECOVERING', 'CRITICAL'];
+    const createdLivestock = [];
+    for (const company of createdCompanies) {
+        const companyAdmin = createdUsers.find(u => u.companyId === company.id && u.role === 'ADMIN');
+        if (!companyAdmin)
+            continue;
+        for (let i = 1; i <= 20; i++) {
+            const type = livestockTypes[Math.floor(Math.random() * livestockTypes.length)];
+            const breed = breeds[type][Math.floor(Math.random() * breeds[type].length)];
+            const healthStatus = healthStatuses[Math.floor(Math.random() * healthStatuses.length)];
+            const livestockData = {
+                tagId: `${company.name.substring(0, 3).toUpperCase()}-${String(i).padStart(3, '0')}`,
+                type,
+                breed,
+                birthDate: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000 * 3),
+                healthStatus,
+                weight: 50 + Math.random() * 200,
+                gender: Math.random() > 0.5 ? 'Male' : 'Female',
+                livestockSource: ['Purchase', 'Birth', 'Transfer'][Math.floor(Math.random() * 3)],
+                livestockPurpose: ['Meat', 'Milk', 'Breeding', 'Eggs'][Math.floor(Math.random() * 4)],
+                companyId: company.id,
+                addedById: companyAdmin.id
+            };
+            const livestock = await prisma.livestock.create({
+                data: livestockData
+            });
+            createdLivestock.push(livestock);
+        }
+    }
+    console.log('💉 Creating vaccinations...');
+    const vaccineTypes = ['Rabies', 'Parvovirus', 'Distemper', 'Leptospirosis', 'Brucellosis', 'Anthrax'];
+    for (const livestock of createdLivestock.slice(0, 30)) {
+        const company = createdCompanies.find(c => c.id === livestock.companyId);
+        const recordedBy = createdUsers.find(u => u.companyId === livestock.companyId &&
+            u.role === 'FARM_KEEPER');
+        if (!recordedBy)
+            continue;
+        const vaccinationData = {
+            livestockId: livestock.id,
+            dateofVaccination: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
+            vaccineType: vaccineTypes[Math.floor(Math.random() * vaccineTypes.length)],
+            dosage: 1 + Math.random() * 4,
+            administeredBy: 'Farm Staff',
+            nextDueDate: new Date(Date.now() + Math.random() * 90 * 24 * 60 * 60 * 1000),
+            recordedById: recordedBy.id
+        };
+        await prisma.vaccination.create({
+            data: vaccinationData
+        });
+    }
+    console.log('🤒 Creating sickness records...');
+    const symptoms = ['Fever', 'Coughing', 'Diarrhea', 'Loss of appetite', 'Lethargy', 'Lameness', 'Respiratory distress'];
+    const causes = ['Bacterial infection', 'Viral infection', 'Parasites', 'Nutritional deficiency', 'Injury', 'Unknown'];
+    const sickLivestock = createdLivestock.filter(l => l.healthStatus === 'SICK' || l.healthStatus === 'CRITICAL' || l.healthStatus === 'IN_TREATMENT').slice(0, 15);
+    for (const livestock of sickLivestock) {
+        const recordedBy = createdUsers.find(u => u.companyId === livestock.companyId &&
+            u.role === 'FARM_KEEPER');
+        if (!recordedBy)
+            continue;
+        const sicknessData = {
+            livestockId: livestock.id,
+            dateOfObservation: new Date(Date.now() - Math.random() * 14 * 24 * 60 * 60 * 1000),
+            observedSymptoms: symptoms.slice(0, 2 + Math.floor(Math.random() * 3)).join(', '),
+            suspectedCause: causes[Math.floor(Math.random() * causes.length)],
+            notes: 'Animal showing signs of illness, requires monitoring',
+            recordedById: recordedBy.id
+        };
+        const sickness = await prisma.sickness.create({
+            data: sicknessData
+        });
+        // Create treatment for some sickness records
+        if (Math.random() > 0.3) {
+            const treatmentData = {
+                sicknessId: sickness.id,
+                livestockId: livestock.id,
+                dateOfTreatment: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000),
+                treatmentType: ['Antibiotics', 'Anti-inflammatory', 'Vitamins', 'Pain relief'][Math.floor(Math.random() * 4)],
+                dosage: 0.5 + Math.random() * 3,
+                cause: 'Prescribed treatment for observed symptoms',
+                administeredBy: 'Veterinarian',
+                nextDueDate: new Date(Date.now() + Math.random() * 7 * 24 * 60 * 60 * 1000),
+                recordedById: recordedBy.id
+            };
+            await prisma.treatment.create({
+                data: treatmentData
+            });
+        }
+    }
+    console.log('📋 Creating tasks...');
+    const taskNames = [
+        'Routine Health Check',
+        'Vaccination Schedule',
+        'Feed Distribution',
+        'Barn Cleaning',
+        'Livestock Monitoring',
+        'Medical Treatment',
+        'Breeding Program',
+        'Weight Measurement',
+        'Hoof Trimming',
+        'Milking Schedule'
+    ];
+    const priorities = ['LOW', 'MEDIUM', 'HIGH'];
+    const statuses = ['PENDING', 'IN_PROGRESS', 'COMPLETED'];
+    for (const company of createdCompanies) {
+        const companyUsers = createdUsers.filter(u => u.companyId === company.id);
+        const companyAdmin = companyUsers.find(u => u.role === 'ADMIN');
+        const farmKeeper = companyUsers.find(u => u.role === 'FARM_KEEPER');
+        const companyLivestock = createdLivestock.filter(l => l.companyId === company.id);
+        if (!companyAdmin || !farmKeeper)
+            continue;
+        for (let i = 0; i < 8; i++) {
+            const hasLivestock = Math.random() > 0.3;
+            const livestock = hasLivestock && companyLivestock.length > 0
+                ? companyLivestock[Math.floor(Math.random() * companyLivestock.length)]
+                : null;
+            const assignToVet = Math.random() > 0.5;
+            const assignedTo = assignToVet ? (Math.random() > 0.5 ? vet1 : vet2) : farmKeeper;
+            const taskData = {
+                name: taskNames[Math.floor(Math.random() * taskNames.length)],
+                description: `Task description for ${livestock ? livestock.tagId : 'general farm maintenance'}`,
+                priority: priorities[Math.floor(Math.random() * priorities.length)],
+                companyId: company.id,
+                dueDate: new Date(Date.now() + Math.random() * 14 * 24 * 60 * 60 * 1000),
+                status: statuses[Math.floor(Math.random() * statuses.length)],
+                assignedToId: assignedTo.id,
+                assignedById: companyAdmin.id,
+                livestockId: livestock?.id || null
+            };
+            const task = await prisma.task.create({
+                data: taskData
+            });
+            // Add observations for some tasks
+            if (Math.random() > 0.6) {
+                await prisma.taskObservation.create({
+                    data: {
+                        note: `Observation note for task ${task.name}. Work is in progress.`,
+                        mediaUrls: [],
+                        taskId: task.id,
+                        reportedById: assignedTo.id,
+                        reportedAt: new Date()
+                    }
+                });
+            }
+        }
+    }
+    console.log('📦 Creating inventory...');
+    const feedItems = ['Corn Feed', 'Hay', 'Soybean Meal', 'Mineral Supplements'];
+    const medicineItems = ['Antibiotics', 'Vaccines', 'Vitamins', 'Dewormer'];
+    for (const company of createdCompanies) {
+        // Create feed inventory
+        for (const item of feedItems) {
+            const inventoryData = {
+                type: 'FEED',
+                name: item,
+                currentQuantity: 100 + Math.random() * 400,
+                unit: 'kg',
+                purchasePrice: 10 + Math.random() * 40,
+                reorderPoint: 50,
+                supplier: 'Farm Supplies Ltd',
+                notes: `${item} for livestock feeding`,
+                mediaUrls: []
+            };
+            await prisma.inventory.create({
+                data: inventoryData
+            });
+        }
+        // Create medicine inventory
+        for (const item of medicineItems) {
+            const inventoryData = {
+                type: 'MEDICINE',
+                name: item,
+                currentQuantity: 20 + Math.random() * 80,
+                unit: 'units',
+                purchasePrice: 5 + Math.random() * 25,
+                reorderPoint: 10,
+                supplier: 'Medical Supplies Co',
+                notes: `${item} for veterinary use`,
+                mediaUrls: []
+            };
+            await prisma.inventory.create({
+                data: inventoryData
+            });
+        }
+    }
+    console.log('💰 Creating financial transactions...');
+    const incomeSources = ['Livestock Sales', 'Milk Production', 'Egg Sales', 'Breeding Services'];
+    const expenseCategories = ['Feed Purchase', 'Medical Supplies', 'Equipment Maintenance', 'Staff Salaries'];
+    const paymentMethods = ['Cash', 'Bank Transfer', 'Mobile Money'];
+    for (const company of createdCompanies) {
+        const companyAdmin = createdUsers.find(u => u.companyId === company.id && u.role === 'ADMIN');
+        if (!companyAdmin)
+            continue;
+        for (let i = 0; i < 10; i++) {
+            const isIncome = Math.random() > 0.4;
+            const transactionData = {
+                type: isIncome ? 'INCOME' : 'EXPENSE',
+                referenceNumber: `REF-${company.name.substring(0, 3).toUpperCase()}-${String(i).padStart(4, '0')}`,
+                title: isIncome
+                    ? incomeSources[Math.floor(Math.random() * incomeSources.length)]
+                    : expenseCategories[Math.floor(Math.random() * expenseCategories.length)],
+                amount: isIncome ? 500 + Math.random() * 2000 : 50 + Math.random() * 500,
+                paymentMethod: paymentMethods[Math.floor(Math.random() * paymentMethods.length)],
+                date: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
+                description: `${isIncome ? 'Revenue from' : 'Payment for'} ${isIncome ? 'farm products' : 'farm operations'}`,
+                partyName: isIncome ? 'Farm Products Buyer' : 'Farm Supplies Vendor',
+                mediaUrls: [],
+                recordedById: companyAdmin.id
+            };
+            await prisma.financialTransaction.create({
+                data: transactionData
+            });
+        }
+    }
+    // Create some appointments
+    console.log('📅 Creating appointments...');
+    for (const company of createdCompanies.slice(0, 2)) {
+        const vet = createdUsers.find(u => u.role === 'VET');
+        const companyLivestock = createdLivestock.filter(l => l.companyId === company.id);
+        if (!vet || companyLivestock.length === 0)
+            continue;
+        const appointmentData = {
+            visitType: 'FARM_VISIT',
+            title: 'Routine Health Inspection',
+            date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+            time: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+            companyId: company.id,
+            relatedFarm: company.name,
+            relatedAnimal: companyLivestock[0].tagId,
+            purpose: 'Regular health check and vaccination',
+            setReminder: true,
+            notifyFarmStaff: true,
+            status: 'SCHEDULED',
+            recordedById: vet.id
+        };
+        await prisma.appointment.create({
+            data: appointmentData
+        });
+    }
+    console.log('✅ Seed completed successfully!');
+    // console.log(`\n📊 Seed Summary:`);
+    // console.log(`   Companies: ${createdCompanies.length}`);
+    // console.log(`   Users: ${createdUsers.length}`);
+    // console.log(`   Livestock: ${createdLivestock.length}`);
+    // console.log(`   Tasks: ~24 (8 per company)`);
+    // console.log(`   Vaccinations: 30`);
+    // console.log(`   Sickness Records: ~15`);
+    // console.log(`   Inventory Items: ~24 (8 per company)`);
+    // console.log(`   Financial Transactions: 30 (10 per company)`);
+    // console.log(`   Appointments: 2`);
+    // console.log('\n🔑 Test Credentials:');
+    // console.log('   All passwords: "password123"');
+    // console.log('\n   Company Admins:');
+    // console.log('     - admin@greenvalleyfarm.com (Green Valley Farm)');
+    // console.log('     - admin@sunriseranch.com (Sunrise Ranch)');
+    // console.log('     - admin@mountainviewfarm.com (Mountain View Farm)');
+    // console.log('\n   Vets:');
+    // console.log('     - vet.drbrown@animalclinic.com');
+    // console.log('     - vet.drjohnson@vetcare.com');
+}
+main()
+    .catch((e) => {
+    console.error('Seed failed:', e);
+    process.exit(1);
+})
+    .finally(async () => {
+    await prisma.$disconnect();
+});
