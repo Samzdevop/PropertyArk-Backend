@@ -17915,3 +17915,86 @@
 [32m[39m
 2025-11-24 10:39:09 [32minfo[39m [32mGET /api/v1/notifications 200 8.888 ms - 2991[39m
 [32m[39m
+2025-11-24 10:43:25 [32minfo[39m [32mGET /api/v1/notifications 200 224.658 ms - 2991[39m
+[32m[39m
+2025-11-24 10:48:12 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-11-24 10:48:12 [32minfo[39m [32mPOST /api/v1/auth/vet-login 400 165.922 ms - 47[39m
+[32m[39m
+2025-11-24 10:48:21 [32minfo[39m [32mPOST /api/v1/auth/vet-login 200 160.584 ms - 617[39m
+[32m[39m
+2025-11-24 10:48:24 [32minfo[39m [32mGET /api/v1/notifications 200 208.431 ms - 2991[39m
+[32m[39m
+2025-11-24 10:48:24 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 25.947 ms - -[39m
+[32m[39m
+2025-11-24 10:48:35 [32minfo[39m [32mGET /api/v1/notifications 304 286.944 ms - -[39m
+[32m[39m
+2025-11-24 10:48:44 [32minfo[39m [32mPATCH /api/v1/notifications/cmic6txo9000ht13ga5fwboe3/status 200 11.020 ms - 722[39m
+[32m[39m
+2025-11-24 10:48:50 [32minfo[39m [32mGET /api/v1/notifications 200 8.516 ms - 3011[39m
+[32m[39m
+2025-11-24 10:48:54 [32minfo[39m [32mGET /api/v1/notifications 304 9.660 ms - -[39m
+[32m[39m
+2025-11-24 10:49:10 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 20.194 ms - -[39m
+[32m[39m
+2025-11-24 10:49:17 [32minfo[39m [32mGET /api/v1/tasks/my-tasks 304 14.220 ms - -[39m
+[32m[39m
+2025-11-24 10:49:22 [32minfo[39m [32mGET /api/v1/livestock/cmi9quzg9001st1i42bdjo2fw/activity-timeline 200 295.403 ms - 7645[39m
+[32m[39m
+2025-11-24 10:49:24 [32minfo[39m [32mGET /api/v1/notifications 304 13.816 ms - -[39m
+[32m[39m
+2025-11-24 10:49:42 [32minfo[39m [32mGET /api/v1/appointments 304 29.716 ms - -[39m
+[32m[39m
+2025-11-24 10:49:48 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 15.454 ms - -[39m
+[32m[39m
+2025-11-24 10:49:54 [32minfo[39m [32mGET /api/v1/notifications 304 8.846 ms - -[39m
+[32m[39m
+2025-11-24 10:50:22 [32minfo[39m [32mGET /api/v1/notifications 304 11.532 ms - -[39m
+[32m[39m
+2025-11-24 10:50:49 [32minfo[39m [32mGET /api/v1/notes 304 23.140 ms - -[39m
+[32m[39m
+2025-11-24 10:50:53 [32minfo[39m [32mGET /api/v1/notifications 200 9.066 ms - 3011[39m
+[32m[39m
+2025-11-24 10:50:54 [32minfo[39m [32mGET /api/v1/notes 304 9.414 ms - -[39m
+[32m[39m
+2025-11-24 10:51:07 [32minfo[39m [32mGET /api/v1/notifications/all-notification 200 10.227 ms - 325[39m
+[32m[39m
+2025-11-24 10:51:23 [32minfo[39m [32mGET /api/v1/notifications 200 11.359 ms - 3011[39m
+[32m[39m
+2025-11-24 10:51:53 [32minfo[39m [32mGET /api/v1/notifications 304 9.924 ms - -[39m
+[32m[39m
+2025-11-24 10:52:09 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 200 10.625 ms - 886[39m
+[32m[39m
+2025-11-24 10:52:18 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 9.098 ms - -[39m
+[32m[39m
+2025-11-24 10:52:22 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi9quyh00009t1i4ynm1n7gj 200 111.106 ms - 9525[39m
+[32m[39m
+2025-11-24 10:52:22 [32minfo[39m [32mGET /api/v1/notifications 200 10.784 ms - 3011[39m
+[32m[39m
+2025-11-24 10:52:23 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 40.966 ms - -[39m
+[32m[39m
+2025-11-24 10:52:23 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 13.972 ms - -[39m
+[32m[39m
+2025-11-24 10:52:53 [32minfo[39m [32mGET /api/v1/notifications 200 13.060 ms - 3011[39m
+[32m[39m
+2025-11-24 10:53:11 [32minfo[39m [32mGET /api/v1/livestock/cmi9quzg9001st1i42bdjo2fw/health-history 200 24.922 ms - 3155[39m
+[32m[39m
+2025-11-24 10:53:13 [32minfo[39m [32mGET /api/v1/livestock/cmi9quzg9001st1i42bdjo2fw/activity-timeline 304 37.117 ms - -[39m
+[32m[39m
+2025-11-24 10:53:22 [32minfo[39m [32mGET /api/v1/notifications 200 7.743 ms - 3011[39m
+[32m[39m
+2025-11-24 10:53:31 [32minfo[39m [32mGET /api/v1/livestock/cmi9quzg9001st1i42bdjo2fw/activity-timeline 304 154.579 ms - -[39m
+[32m[39m
+2025-11-24 10:53:50 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmi9quyh00009t1i4ynm1n7gj 200 127.596 ms - 9525[39m
+[32m[39m
+2025-11-24 10:53:51 [32minfo[39m [32mGET /api/v1/tasks/my-tasks?page=1&limit=10 304 13.436 ms - -[39m
+[32m[39m
+2025-11-24 10:53:52 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=60 304 29.861 ms - -[39m
+[32m[39m
+2025-11-24 10:53:52 [32minfo[39m [32mGET /api/v1/notifications 200 10.237 ms - 3011[39m
+[32m[39m
+2025-11-24 10:53:59 [32minfo[39m [32mGET /api/v1/users/vet/assigned-farms 304 9.174 ms - -[39m
+[32m[39m
+2025-11-24 10:54:22 [32minfo[39m [32mGET /api/v1/notifications 200 225.083 ms - 3011[39m
+[32m[39m
+2025-11-24 11:03:13 [32minfo[39m [32mGET /api/v1/notifications 200 163.153 ms - 3011[39m
+[32m[39m
