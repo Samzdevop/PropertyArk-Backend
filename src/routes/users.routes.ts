@@ -14,7 +14,6 @@ import { authenticateJWT } from '../middlewares/errorHandler';
 import { validateRequest } from '../middlewares/validateRequest';
 import { adminUpdateUserSchema, changePasswordSchema, updateUserSchema } from '../schemas/users.schemas';
 import { requireRoles } from '../middlewares/roleCheck';
-import { changePassword } from '../contollers/auth.controller';
 
 export const usersRouter = Router();
 
@@ -29,13 +28,6 @@ usersRouter.patch(
   authenticateJWT,
   validateRequest(updateUserSchema),
   updateUserProfile
-);
-
-usersRouter.patch(
-  '/change-password',
-  authenticateJWT,
-  validateRequest(changePasswordSchema),
-  changePassword
 );
 
 // usersRouter.patch(

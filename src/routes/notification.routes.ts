@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import { authenticateJWT } from '../middlewares/errorHandler';
 import { validateRequest } from '../middlewares/validateRequest';
-import { getNotifications, updateNotificationStatus } from '../contollers/notification.controller';
+import { getNotifications, getNotificationSettings, toggleNotificationSetting, updateNotificationSettings, updateNotificationStatus } from '../contollers/notification.controller';
 import { updateNotificationStatusSchema } from '../schemas/treatment.schemas';
+import { updateNotificationSettingsSchema } from '../schemas/notification.schemas';
 
 export const notificationRouter = Router();
 
@@ -17,4 +18,25 @@ notificationRouter.patch(
   authenticateJWT,
   validateRequest(updateNotificationStatusSchema),
   updateNotificationStatus
+);
+
+
+notificationRouter.get(
+  '/all-notification',
+  authenticateJWT,
+  getNotificationSettings
+);
+
+notificationRouter.put(
+  '/notification-settings',
+  authenticateJWT,
+  validateRequest(updateNotificationSettingsSchema),
+  updateNotificationSettings
+);
+
+
+notificationRouter.patch(
+  '/:settingType/toggle',
+  authenticateJWT,
+  toggleNotificationSetting
 );

@@ -1,11 +1,44 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.changePassword = exports.resetPassword = exports.verifyAccount = exports.requestVerificationCode = exports.login = exports.vetLogin = exports.vetRegister = exports.register = exports.adminRegister = void 0;
+exports.forgotPassword = exports.resetPassword = exports.changePassword = exports.verifyAccount = exports.requestVerificationCode = exports.login = exports.vetLogin = exports.vetRegister = exports.register = exports.adminRegister = void 0;
 const prisma_1 = __importDefault(require("../prisma"));
-const generateToken_1 = __importDefault(require("../utils/generateToken"));
+const generateToken_1 = __importStar(require("../utils/generateToken"));
 const argon2_1 = require("argon2");
 const sendSuccessResponse_1 = require("../utils/sendSuccessResponse");
 const NotFoundError_1 = require("../errors/NotFoundError");
@@ -380,6 +413,48 @@ const verifyAccount = async (req, res, next) => {
     }
 };
 exports.verifyAccount = verifyAccount;
+const changePassword = async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+        const { newPassword, confirmPassword } = req.body;
+        // Validate new password confirmation
+        if (newPassword !== confirmPassword) {
+            throw new BadRequestError_1.BadRequestError('New password and confirmation do not match');
+        }
+        // Validate new password length
+        if (newPassword.length < 8) {
+            throw new BadRequestError_1.BadRequestError('New password must be at least 8 characters long');
+        }
+        // Get user with password
+        const user = await prisma_1.default.user.findUnique({
+            where: { id: userId },
+            // select: { ...userSelect, password: true }
+        });
+        if (!user) {
+            throw new NotFoundError_1.NotFoundError('User not found');
+        }
+        // Verify current password
+        // const isCurrentPasswordValid = await verify(
+        //   user.password || "$passwordless",
+        //   currentPassword
+        // );
+        // if (!isCurrentPasswordValid) {
+        //   throw new UnauthorizedError('Current password is incorrect');
+        // }
+        // Hash new password
+        const hashedNewPassword = await (0, argon2_1.hash)(newPassword);
+        // Update password
+        await prisma_1.default.user.update({
+            where: { id: userId },
+            data: { password: hashedNewPassword }
+        });
+        (0, sendSuccessResponse_1.sendSuccessResponse)(res, 'Password changed successfully');
+    }
+    catch (error) {
+        next(error);
+    }
+};
+exports.changePassword = changePassword;
 const resetPassword = async (req, res, next) => {
     const { email, password, confirmPassword, verificationCode } = req.body;
     try {
@@ -417,42 +492,38 @@ const resetPassword = async (req, res, next) => {
     }
 };
 exports.resetPassword = resetPassword;
-const changePassword = async (req, res, next) => {
+const forgotPassword = async (req, res, next) => {
     try {
-        const userId = req.user.id;
-        const { currentPassword, newPassword, confirmPassword } = req.body;
-        // Validate new password confirmation
-        if (newPassword !== confirmPassword) {
-            throw new BadRequestError_1.BadRequestError('New password and confirmation do not match');
-        }
-        // Validate new password length
-        if (newPassword.length < 8) {
-            throw new BadRequestError_1.BadRequestError('New password must be at least 8 characters long');
-        }
-        // Get user with password
-        const user = await prisma_1.default.user.findUnique({
-            where: { id: userId },
-            select: { ...selects_1.userSelect, password: true }
-        });
+        const { email } = req.body;
+        // Find user by email
+        const user = await prisma_1.default.user.findUnique({ where: { email } });
         if (!user) {
-            throw new NotFoundError_1.NotFoundError('User not found');
+            (0, sendSuccessResponse_1.sendSuccessResponse)(res, "If an account with that email exists, a password reset link has been sent.");
+            return;
         }
-        // Verify current password
-        const isCurrentPasswordValid = await (0, argon2_1.verify)(user.password || "$passwordless", currentPassword);
-        if (!isCurrentPasswordValid) {
-            throw new UnauthorizedError_1.UnauthorizedError('Current password is incorrect');
-        }
-        // Hash new password
-        const hashedNewPassword = await (0, argon2_1.hash)(newPassword);
-        // Update password
-        await prisma_1.default.user.update({
-            where: { id: userId },
-            data: { password: hashedNewPassword }
+        // Generate reset token
+        const resetToken = (0, generateToken_1.generateResetToken)(email);
+        const resetLink = `${process.env.FRONTEND_URL}/reset-password?token=${resetToken}`;
+        // Send email with reset link
+        const html = (0, mailTemplate_1.render)("password-reset", {
+            fullName: user.fullName,
+            resetLink,
+            currentYear: new Date().getFullYear(),
         });
-        (0, sendSuccessResponse_1.sendSuccessResponse)(res, 'Password changed successfully');
+        const mailOptions = {
+            to: email,
+            from: `"Agritech" ${process.env.SMTP_FROM_EMAIL || 'noreply@agritech.com'}`,
+            subject: "Reset Your Agritech Password",
+            text: `Click the following link to reset your password: ${resetLink}`,
+            html,
+        };
+        if (process.env.NODE_ENV !== "test") {
+            await (0, mail_services_1.sendCustomMail)(mailOptions);
+        }
+        (0, sendSuccessResponse_1.sendSuccessResponse)(res, "If an account with that email exists, a password reset link has been sent.");
     }
     catch (error) {
         next(error);
     }
 };
-exports.changePassword = changePassword;
+exports.forgotPassword = forgotPassword;

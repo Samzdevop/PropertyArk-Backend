@@ -1,35 +1,34 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// Updated seed script
 const client_1 = require("@prisma/client");
 const argon2_1 = require("argon2");
 const prisma = new client_1.PrismaClient();
-// ... rest of your interfaces remain the same
 async function main() {
     console.log('🌱 Starting seed...');
     // Clear existing data in correct order to handle foreign key constraints
-    console.log('🗑️ Clearing existing data...');
-    await prisma.taskObservation.deleteMany();
-    await prisma.appointmentReminder.deleteMany();
-    await prisma.appointment.deleteMany();
-    await prisma.farmVisit.deleteMany();
-    await prisma.followUpReminder.deleteMany();
-    await prisma.followUp.deleteMany();
-    await prisma.treatmentReminder.deleteMany();
-    await prisma.prescribedTreatment.deleteMany();
-    await prisma.notification.deleteMany();
-    await prisma.treatment.deleteMany();
-    await prisma.sickness.deleteMany();
-    await prisma.vaccination.deleteMany();
-    await prisma.offtakeRecord.deleteMany();
-    await prisma.diagnosis.deleteMany();
-    await prisma.task.deleteMany();
-    await prisma.livestock.deleteMany();
-    await prisma.inventoryRecord.deleteMany();
-    await prisma.inventory.deleteMany();
-    await prisma.financialTransaction.deleteMany();
-    await prisma.user.deleteMany();
-    await prisma.company.deleteMany();
+    // console.log('🗑️ Clearing existing data...');
+    // await prisma.note.deleteMany();
+    // await prisma.followUpReminder.deleteMany();
+    // await prisma.treatmentReminder.deleteMany();
+    // await prisma.followUp.deleteMany();
+    // await prisma.prescribedTreatment.deleteMany();
+    // await prisma.diagnosis.deleteMany();
+    // await prisma.appointmentReminder.deleteMany();
+    // await prisma.appointment.deleteMany();
+    // await prisma.farmVisit.deleteMany();
+    // await prisma.notification.deleteMany();
+    // await prisma.taskObservation.deleteMany();
+    // await prisma.task.deleteMany();
+    // await prisma.treatment.deleteMany();
+    // await prisma.sickness.deleteMany();
+    // await prisma.vaccination.deleteMany();
+    // await prisma.offtakeRecord.deleteMany();
+    // await prisma.livestock.deleteMany();
+    // await prisma.inventoryRecord.deleteMany();
+    // await prisma.inventory.deleteMany();
+    // await prisma.financialTransaction.deleteMany();
+    // await prisma.user.deleteMany();
+    // await prisma.company.deleteMany();
     console.log('🏢 Creating companies and users...');
     const companiesData = [
         {
@@ -210,6 +209,7 @@ async function main() {
     const symptoms = ['Fever', 'Coughing', 'Diarrhea', 'Loss of appetite', 'Lethargy', 'Lameness', 'Respiratory distress'];
     const causes = ['Bacterial infection', 'Viral infection', 'Parasites', 'Nutritional deficiency', 'Injury', 'Unknown'];
     const sickLivestock = createdLivestock.filter(l => l.healthStatus === 'SICK' || l.healthStatus === 'CRITICAL' || l.healthStatus === 'IN_TREATMENT').slice(0, 15);
+    const createdSickness = [];
     for (const livestock of sickLivestock) {
         const recordedBy = createdUsers.find(u => u.companyId === livestock.companyId &&
             u.role === 'FARM_KEEPER');
@@ -226,6 +226,7 @@ async function main() {
         const sickness = await prisma.sickness.create({
             data: sicknessData
         });
+        createdSickness.push(sickness);
         // Create treatment for some sickness records
         if (Math.random() > 0.3) {
             const treatmentData = {
@@ -244,6 +245,42 @@ async function main() {
             });
         }
     }
+    console.log('🩺 Creating diagnoses...');
+    const diagnoses = ['Bacterial Pneumonia', 'Parasitic Infection', 'Nutritional Deficiency', 'Viral Infection', 'Metabolic Disorder'];
+    for (const livestock of sickLivestock.slice(0, 10)) {
+        const diagnosisData = {
+            livestockId: livestock.id,
+            diagnosis: diagnoses[Math.floor(Math.random() * diagnoses.length)],
+            labTests: ['Blood Test', 'Fecal Exam', 'Culture'][Math.floor(Math.random() * 3)],
+            severity: ['MILD', 'MODERATE', 'SEVERE', 'CRITICAL'][Math.floor(Math.random() * 4)],
+            prognosis: ['GOOD', 'FAIR', 'GUARDED', 'POOR'][Math.floor(Math.random() * 4)],
+            observations: 'Diagnosis based on clinical signs and lab results',
+            date: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000),
+            recordedById: vet1.id
+        };
+        await prisma.diagnosis.create({
+            data: diagnosisData
+        });
+    }
+    console.log('💊 Creating prescribed treatments...');
+    for (const livestock of sickLivestock.slice(0, 8)) {
+        const prescribedTreatmentData = {
+            livestockId: livestock.id,
+            treatmentType: 'Medication',
+            medicationName: ['Amoxicillin', 'Ivermectin', 'Vitamin Complex', 'Anti-inflammatory'][Math.floor(Math.random() * 4)],
+            dosage: '2ml per kg',
+            frequency: ['DAILY', 'TWICE_DAILY', 'WEEKLY'][Math.floor(Math.random() * 3)],
+            routine: ['ORAL', 'INTRAMUSCULAR', 'TOPICAL'][Math.floor(Math.random() * 3)],
+            additionalNotes: 'Administer with food',
+            startDate: new Date(Date.now() - Math.random() * 3 * 24 * 60 * 60 * 1000),
+            endDate: new Date(Date.now() + Math.random() * 7 * 24 * 60 * 60 * 1000),
+            isActive: true,
+            recordedById: vet1.id
+        };
+        await prisma.prescribedTreatment.create({
+            data: prescribedTreatmentData
+        });
+    }
     console.log('📋 Creating tasks...');
     const taskNames = [
         'Routine Health Check',
@@ -259,6 +296,7 @@ async function main() {
     ];
     const priorities = ['LOW', 'MEDIUM', 'HIGH'];
     const statuses = ['PENDING', 'IN_PROGRESS', 'COMPLETED'];
+    const createdTasks = [];
     for (const company of createdCompanies) {
         const companyUsers = createdUsers.filter(u => u.companyId === company.id);
         const companyAdmin = companyUsers.find(u => u.role === 'ADMIN');
@@ -287,6 +325,7 @@ async function main() {
             const task = await prisma.task.create({
                 data: taskData
             });
+            createdTasks.push(task);
             // Add observations for some tasks
             if (Math.random() > 0.6) {
                 await prisma.taskObservation.create({
@@ -369,7 +408,30 @@ async function main() {
             });
         }
     }
-    // Create some appointments
+    console.log('📤 Creating offtake records...');
+    for (const livestock of createdLivestock.slice(0, 10)) {
+        const recordedBy = createdUsers.find(u => u.companyId === livestock.companyId &&
+            u.role === 'FARM_KEEPER');
+        if (!recordedBy)
+            continue;
+        const offtakeType = ['SALE', 'DEATH', 'MISSING'][Math.floor(Math.random() * 3)];
+        const offtakeData = {
+            livestockId: livestock.id,
+            type: offtakeType,
+            dateOfEvent: new Date(Date.now() - Math.random() * 60 * 24 * 60 * 60 * 1000),
+            recordedById: recordedBy.id
+        };
+        if (offtakeType === 'SALE') {
+            offtakeData.destination = 'Local Market';
+            offtakeData.price = 200 + Math.random() * 800;
+        }
+        else if (offtakeType === 'DEATH') {
+            offtakeData.causeOfDeath = ['Disease', 'Injury', 'Old Age'][Math.floor(Math.random() * 3)];
+        }
+        await prisma.offtakeRecord.create({
+            data: offtakeData
+        });
+    }
     console.log('📅 Creating appointments...');
     for (const company of createdCompanies.slice(0, 2)) {
         const vet = createdUsers.find(u => u.role === 'VET');
@@ -394,30 +456,88 @@ async function main() {
             data: appointmentData
         });
     }
+    console.log('🏥 Creating farm visits...');
+    for (const company of createdCompanies.slice(0, 2)) {
+        const vet = createdUsers.find(u => u.role === 'VET');
+        if (!vet)
+            continue;
+        const farmVisitData = {
+            companyId: company.id,
+            relatedFarm: company.name,
+            date: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
+            time: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
+            reason: 'Routine farm inspection and consultation',
+            keyPersonnelMet: 'Farm Manager, Staff',
+            animalExamined: 'Multiple livestock checked',
+            farmObservation: 'Farm is in good condition, animals appear healthy',
+            farmRecommendation: 'Continue current feeding and healthcare regimen',
+            mediaUrls: [],
+            recordedById: vet.id
+        };
+        await prisma.farmVisit.create({
+            data: farmVisitData
+        });
+    }
+    console.log('📝 Creating notes...');
+    const noteFolders = ['Farm Observations', 'Medical Records', 'Breeding Notes', 'Financial Notes', 'General'];
+    for (const user of createdUsers.slice(0, 5)) {
+        for (let i = 0; i < 3; i++) {
+            const noteData = {
+                folderName: noteFolders[Math.floor(Math.random() * noteFolders.length)],
+                date: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
+                title: `Note ${i + 1} - ${new Date().toLocaleDateString()}`,
+                body: `This is a sample note content for ${user.fullName}. This note contains important information about farm operations and observations.`,
+                recordedById: user.id
+            };
+            await prisma.note.create({
+                data: noteData
+            });
+        }
+    }
+    console.log('🔔 Creating notifications...');
+    for (const user of createdUsers.slice(0, 8)) {
+        const notificationData = {
+            title: 'Welcome to Agritech System',
+            message: 'Your account has been successfully set up and is ready to use.',
+            type: 'SYSTEM_ALERT',
+            status: 'UNREAD',
+            recipientId: user.id,
+            sentAt: new Date()
+        };
+        await prisma.notification.create({
+            data: notificationData
+        });
+    }
     console.log('✅ Seed completed successfully!');
-    // console.log(`\n📊 Seed Summary:`);
-    // console.log(`   Companies: ${createdCompanies.length}`);
-    // console.log(`   Users: ${createdUsers.length}`);
-    // console.log(`   Livestock: ${createdLivestock.length}`);
-    // console.log(`   Tasks: ~24 (8 per company)`);
-    // console.log(`   Vaccinations: 30`);
-    // console.log(`   Sickness Records: ~15`);
-    // console.log(`   Inventory Items: ~24 (8 per company)`);
-    // console.log(`   Financial Transactions: 30 (10 per company)`);
-    // console.log(`   Appointments: 2`);
-    // console.log('\n🔑 Test Credentials:');
-    // console.log('   All passwords: "password123"');
-    // console.log('\n   Company Admins:');
-    // console.log('     - admin@greenvalleyfarm.com (Green Valley Farm)');
-    // console.log('     - admin@sunriseranch.com (Sunrise Ranch)');
-    // console.log('     - admin@mountainviewfarm.com (Mountain View Farm)');
-    // console.log('\n   Vets:');
-    // console.log('     - vet.drbrown@animalclinic.com');
-    // console.log('     - vet.drjohnson@vetcare.com');
+    //   console.log(`\n📊 Seed Summary:`);
+    //   console.log(`   Companies: ${createdCompanies.length}`);
+    //   console.log(`   Users: ${createdUsers.length}`);
+    //   console.log(`   Livestock: ${createdLivestock.length}`);
+    //   console.log(`   Vaccinations: 30`);
+    //   console.log(`   Sickness Records: ${createdSickness.length}`);
+    //   console.log(`   Diagnoses: 10`);
+    //   console.log(`   Prescribed Treatments: 8`);
+    //   console.log(`   Tasks: ${createdTasks.length}`);
+    //   console.log(`   Inventory Items: ~24 (8 per company)`);
+    //   console.log(`   Financial Transactions: 30 (10 per company)`);
+    //   console.log(`   Offtake Records: 10`);
+    //   console.log(`   Appointments: 2`);
+    //   console.log(`   Farm Visits: 2`);
+    //   console.log(`   Notes: 15`);
+    //   console.log(`   Notifications: 8`);
+    //   console.log('\n🔑 Test Credentials:');
+    //   console.log('   All passwords: "password123"');
+    //   console.log('\n   Company Admins:');
+    //   console.log('     - admin@greenvalleyfarm.com (Green Valley Farm)');
+    //   console.log('     - admin@sunriseranch.com (Sunrise Ranch)');
+    //   console.log('     - admin@mountainviewfarm.com (Mountain View Farm)');
+    //   console.log('\n   Vets:');
+    //   console.log('     - vet.drbrown@animalclinic.com');
+    //   console.log('     - vet.drjohnson@vetcare.com');
 }
 main()
     .catch((e) => {
-    console.error('Seed failed:', e);
+    console.error('❌ Seed failed:', e);
     process.exit(1);
 })
     .finally(async () => {

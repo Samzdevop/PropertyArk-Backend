@@ -13,6 +13,10 @@ class ReminderJob {
             console.log('⏰ Running reminder check...');
             await reminderService_1.ReminderService.checkDueReminders();
         });
+        node_cron_1.default.schedule('0 2 * * *', async () => {
+            console.log(' Cleaning up old reminders...');
+            await reminderService_1.ReminderService.cleanupOldReminders();
+        });
         console.log('✅ Reminder cronjob started - checking every minute');
     }
 }

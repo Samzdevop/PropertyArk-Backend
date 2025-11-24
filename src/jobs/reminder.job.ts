@@ -10,6 +10,11 @@ export class ReminderJob {
       await ReminderService.checkDueReminders();
     });
 
+     cron.schedule('0 2 * * *', async () => {
+      console.log(' Cleaning up old reminders...');
+      await ReminderService.cleanupOldReminders();
+    });
+
     console.log('✅ Reminder cronjob started - checking every minute');
   }
 }

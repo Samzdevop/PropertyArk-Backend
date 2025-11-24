@@ -85,3 +85,10 @@ export const resetPasswordSchema = z.object({
       .min(4, "Verification code must be at least 4 digits long"),
   }),
 });
+
+
+export const forgotPasswordSchema = z.object({
+  body: z.object({
+    email: z.string().email("Invalid email format"),
+  }),
+});

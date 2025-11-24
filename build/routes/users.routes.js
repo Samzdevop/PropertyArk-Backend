@@ -7,11 +7,9 @@ const errorHandler_1 = require("../middlewares/errorHandler");
 const validateRequest_1 = require("../middlewares/validateRequest");
 const users_schemas_1 = require("../schemas/users.schemas");
 const roleCheck_1 = require("../middlewares/roleCheck");
-const auth_controller_1 = require("../contollers/auth.controller");
 exports.usersRouter = (0, express_1.Router)();
 exports.usersRouter.get('/profile', errorHandler_1.authenticateJWT, users_controllers_1.getProfile);
 exports.usersRouter.patch('/update', errorHandler_1.authenticateJWT, (0, validateRequest_1.validateRequest)(users_schemas_1.updateUserSchema), users_controllers_1.updateUserProfile);
-exports.usersRouter.patch('/change-password', errorHandler_1.authenticateJWT, (0, validateRequest_1.validateRequest)(users_schemas_1.changePasswordSchema), auth_controller_1.changePassword);
 // usersRouter.patch(
 // 	'/update',
 // 	authenticateJWT,

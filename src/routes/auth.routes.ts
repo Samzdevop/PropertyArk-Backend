@@ -8,6 +8,8 @@ import {
 	register,
 	vetRegister,
 	vetLogin,
+	forgotPassword,
+	changePassword,
 } from '../contollers/auth.controller';
 import { validateRequest } from '../middlewares/validateRequest';
 import {
@@ -18,15 +20,20 @@ import {
 	verifyAccountSchema,
 	registerSchema,
 	vetRegisterSchema,
+	forgotPasswordSchema,
 } from '../schemas/auth.schemas';
 import passport from 'passport';
 import { sendSuccessResponse } from '../utils/sendSuccessResponse';
 import { authenticateJWT } from '../middlewares/errorHandler';
 import { requireRoles } from '../middlewares/roleCheck';
+import { changePasswordSchema } from '../schemas/users.schemas';
 
 export const authRouter = Router();
 
-authRouter.post('/admin-reg', validateRequest(adminRegisterSchema), adminRegister);
+authRouter.post('/admin-reg',
+	validateRequest(adminRegisterSchema),
+	adminRegister
+);
 
 authRouter.post(
 	'/register',
@@ -60,9 +67,15 @@ authRouter.post(
 	requestVerificationCode
 );
 
-authRouter.put('/verify', validateRequest(verifyAccountSchema), verifyAccount);
+authRouter.put('/verify', 
+	validateRequest(verifyAccountSchema),
+	verifyAccount
+);
 
-authRouter.put('/reset', validateRequest(resetPasswordSchema), resetPassword);
+authRouter.put('/reset', 
+	validateRequest(resetPasswordSchema), 
+	resetPassword
+);
 
 // Google Strategy
 authRouter.get(
@@ -87,3 +100,17 @@ authRouter.get(
 authRouter.get('/failure', (_req, res) => {
 	res.status(401).json({ error: 'Failed to authenticate' });
 });
+
+authRouter.post(
+	'/forgot-password',
+	validateRequest(forgotPasswordSchema),
+	forgotPassword
+);
+
+
+authRouter.patch(
+  '/change-password',
+  authenticateJWT,
+  validateRequest(changePasswordSchema),
+  changePassword
+);

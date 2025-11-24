@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TreatmentHelpers = void 0;
 // src/helpers/treatment.helpers.ts
+const notification_services_1 = require("../services/notification.services");
 const prisma_1 = __importDefault(require("../prisma"));
 const client_1 = require("@prisma/client");
 class TreatmentHelpers {
@@ -234,12 +235,39 @@ class TreatmentHelpers {
                 }
             });
             if (farmStaff.length === 0) {
-                console.log(`ℹNo farm staff found to notify for ${followUp.relatedFarm}`);
+                console.log(`No farm staff found to notify for ${followUp.relatedFarm}`);
                 return;
             }
-            // Create properly typed notification data
-            const notifications = farmStaff.map(staff => {
-                const notificationData = {
+            for (const staff of farmStaff) {
+                // Check if user wants follow-up notifications
+                const shouldNotify = await notification_services_1.NotificationService.shouldSendNotification(staff.id, 'FOLLOW_UP_REMINDER');
+                if (!shouldNotify) {
+                    console.log(`Skipping follow-up notification for user ${staff.id} - notifications disabled`);
+                    continue;
+                }
+                // Create properly typed notification data
+                // const notifications = farmStaff.map(staff => {
+                //   const notificationData = {
+                //     title: 'Veterinary Follow-up Scheduled',
+                //     message: `Dr. ${followUp.recordedBy.fullName} has scheduled a follow-up for ${animal.tagId} on ${followUp.date.toLocaleDateString()} at ${followUp.location}`,
+                //     type: NotificationType.FOLLOW_UP_REMINDER,
+                //     status: NotificationStatus.UNREAD,
+                //     recipientId: staff.id,
+                //     relatedEntityType: 'FOLLOW_UP',
+                //     relatedEntityId: followUp.id,
+                //     metadata: {
+                //       followUpId: followUp.id,
+                //       animalTag: animal.tagId,
+                //       date: followUp.date,
+                //       time: followUp.time,
+                //       reason: followUp.reason,
+                //       location: followUp.location,
+                //       vetName: followUp.recordedBy.fullName
+                //     }
+                //   };
+                //   return notificationData;
+                // });
+                await notification_services_1.NotificationService.createNotification({
                     title: 'Veterinary Follow-up Scheduled',
                     message: `Dr. ${followUp.recordedBy.fullName} has scheduled a follow-up for ${animal.tagId} on ${followUp.date.toLocaleDateString()} at ${followUp.location}`,
                     type: client_1.NotificationType.FOLLOW_UP_REMINDER,
@@ -256,12 +284,11 @@ class TreatmentHelpers {
                         location: followUp.location,
                         vetName: followUp.recordedBy.fullName
                     }
-                };
-                return notificationData;
-            });
-            await prisma_1.default.notification.createMany({
-                data: notifications
-            });
+                });
+            }
+            // await prisma.notification.createMany({
+            //   data: notifications
+            // });
             console.log(`Notified ${farmStaff.length} farm staff about follow-up for ${animal.tagId}`);
         }
         catch (error) {

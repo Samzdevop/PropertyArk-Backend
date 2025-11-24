@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.notifyFarmStaffAboutAppointment = exports.createAppointmentReminders = void 0;
+const notification_services_1 = require("../services/notification.services");
 const prisma_1 = __importDefault(require("../prisma"));
 const client_1 = require("@prisma/client");
 const createAppointmentReminders = async (appointment) => {
@@ -48,29 +49,37 @@ const notifyFarmStaffAboutAppointment = async (appointment, companyId) => {
             }
         });
         if (farmStaff.length === 0) {
-            console.log(`ℹ️ No farm staff found to notify for ${appointment.relatedFarm}`);
+            console.log(`No farm staff found to notify for ${appointment.relatedFarm}`);
             return;
         }
-        const notifications = farmStaff.map(staff => ({
-            title: 'New Appointment Scheduled',
-            message: `Dr. ${appointment.recordedBy.fullName} has scheduled a ${appointment.visitType.toLowerCase()}: ${appointment.title}`,
-            type: client_1.NotificationType.APPOINTMENT_REMINDER,
-            status: client_1.NotificationStatus.UNREAD,
-            recipientId: staff.id,
-            relatedEntityType: 'APPOINTMENT',
-            relatedEntityId: appointment.id,
-            metadata: {
-                appointmentId: appointment.id,
-                title: appointment.title,
-                visitType: appointment.visitType,
-                date: appointment.date,
-                purpose: appointment.purpose,
-                vetName: appointment.recordedBy.fullName
+        for (const staff of farmStaff) {
+            // Check if user wants appointment notifications
+            const shouldNotify = await notification_services_1.NotificationService.shouldSendNotification(staff.id, 'APPOINTMENT_REMINDER');
+            if (!shouldNotify) {
+                console.log(`Skipping appointment notification for user ${staff.id} - notifications disabled`);
+                continue;
             }
-        }));
-        await prisma_1.default.notification.createMany({
-            data: notifications
-        });
+            await notification_services_1.NotificationService.createNotification({
+                title: 'New Appointment Scheduled',
+                message: `Dr. ${appointment.recordedBy.fullName} has scheduled a ${appointment.visitType.toLowerCase()}: ${appointment.title}`,
+                type: client_1.NotificationType.APPOINTMENT_REMINDER,
+                status: client_1.NotificationStatus.UNREAD,
+                recipientId: staff.id,
+                relatedEntityType: 'APPOINTMENT',
+                relatedEntityId: appointment.id,
+                metadata: {
+                    appointmentId: appointment.id,
+                    title: appointment.title,
+                    visitType: appointment.visitType,
+                    date: appointment.date,
+                    purpose: appointment.purpose,
+                    vetName: appointment.recordedBy.fullName
+                }
+            });
+        }
+        // await prisma.notification.createMany({
+        //   data: notifications
+        // });
         console.log(`Notified ${farmStaff.length} farm staff about appointment`);
     }
     catch (error) {

@@ -75,7 +75,10 @@ model User {
   notifications        Notification[]
   appointments         Appointment[]  
   farmVisits           FarmVisit[]    
-  notes                Note[]                 
+  notes                Note[] 
+  notificationSettings NotificationSettings?
+  conversations        ConversationParticipant[]
+  sentMessages         Message[]                
 
   // Creator relationship
   createdBy    User?   @relation("UserCreator", fields: [createdById], references: [id])
@@ -478,6 +481,65 @@ model Note {
   @@index([date])
 }
 
+model NotificationSettings {
+  id                    String   @id @default(cuid())
+  userId                String   @unique
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Notification toggles
+  followUpReminders     Boolean  @default(true)
+  upcomingAppointments  Boolean  @default(true)
+  messageNotifications  Boolean  @default(true)
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@map("notification_settings")
+}
+
+
+model Conversation {
+  id        String   @id @default(cuid())
+  title     String?
+  type      ConversationType @default(DIRECT)
+  participants ConversationParticipant[]
+  messages  Message[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("conversations")
+}
+
+model ConversationParticipant {
+  id             String   @id @default(cuid())
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  conversationId String
+  user           User     @relation(fields: [userId], references: [id])
+  userId         String
+  joinedAt       DateTime @default(now())
+  
+  @@unique([conversationId, userId])
+  @@map("conversation_participants")
+}
+
+model Message {
+  id             String   @id @default(cuid())
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  conversationId String
+  sender         User     @relation(fields: [senderId], references: [id])
+  senderId       String
+  content        String
+  messageType    MessageType @default(TEXT)
+  mediaUrl       String?
+  isRead         Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("messages")
+  @@index([conversationId])
+  @@index([senderId])
+}
+
 
 enum HealthStatus {
   HEALTHY
@@ -571,6 +633,7 @@ enum NotificationType {
   ANNOUNCEMENT
   SYSTEM_ALERT
   APPOINTMENT_REMINDER
+  MESSAGE
 }
 
 enum NotificationStatus {
@@ -583,4 +646,15 @@ enum NotificationStatus {
 enum VisitType {
   FARM_VISIT
   MEETING
+}
+
+enum ConversationType {
+  DIRECT
+  GROUP
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+  FILE
 }

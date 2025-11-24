@@ -1,7 +1,7 @@
 
 import { NextFunction, Request, Response } from "express";
 import prisma from "../prisma";
-import generateToken from "../utils/generateToken";
+import generateToken, { generateResetToken } from "../utils/generateToken";
 import { hash, verify } from "argon2";
 import { sendSuccessResponse } from "../utils/sendSuccessResponse";
 import { NotFoundError } from "../errors/NotFoundError";
@@ -477,6 +477,63 @@ export const verifyAccount = async (
   }
 };
 
+export const changePassword = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = (req.user as any).id;
+    const { newPassword, confirmPassword } = req.body;
+
+    // Validate new password confirmation
+    if (newPassword !== confirmPassword) {
+      throw new BadRequestError('New password and confirmation do not match');
+    }
+
+    // Validate new password length
+    if (newPassword.length < 8) {
+      throw new BadRequestError('New password must be at least 8 characters long');
+    }
+
+    // Get user with password
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      // select: { ...userSelect, password: true }
+    });
+
+    if (!user) {
+      throw new NotFoundError('User not found');
+    }
+
+    // Verify current password
+    // const isCurrentPasswordValid = await verify(
+    //   user.password || "$passwordless",
+    //   currentPassword
+    // );
+
+    // if (!isCurrentPasswordValid) {
+    //   throw new UnauthorizedError('Current password is incorrect');
+    // }
+
+    // Hash new password
+    const hashedNewPassword = await hash(newPassword);
+
+    // Update password
+    await prisma.user.update({
+      where: { id: userId },
+      data: { password: hashedNewPassword }
+    });
+
+    sendSuccessResponse(res, 'Password changed successfully');
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+
+
 export const resetPassword = async (
   req: Request,
   res: Response,
@@ -523,55 +580,50 @@ export const resetPassword = async (
   }
 };
 
-export const changePassword = async (
+
+export const forgotPassword = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): Promise<void> => {
   try {
-    const userId = (req.user as any).id;
-    const { currentPassword, newPassword, confirmPassword } = req.body;
+    const { email } = req.body;
 
-    // Validate new password confirmation
-    if (newPassword !== confirmPassword) {
-      throw new BadRequestError('New password and confirmation do not match');
-    }
-
-    // Validate new password length
-    if (newPassword.length < 8) {
-      throw new BadRequestError('New password must be at least 8 characters long');
-    }
-
-    // Get user with password
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-      select: { ...userSelect, password: true }
-    });
-
+    // Find user by email
+    const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
-      throw new NotFoundError('User not found');
+      sendSuccessResponse(res, "If an account with that email exists, a password reset link has been sent.");
+      return;
     }
 
-    // Verify current password
-    const isCurrentPasswordValid = await verify(
-      user.password || "$passwordless",
-      currentPassword
-    );
-
-    if (!isCurrentPasswordValid) {
-      throw new UnauthorizedError('Current password is incorrect');
-    }
-
-    // Hash new password
-    const hashedNewPassword = await hash(newPassword);
-
-    // Update password
-    await prisma.user.update({
-      where: { id: userId },
-      data: { password: hashedNewPassword }
+    // Generate reset token
+    const resetToken = generateResetToken(email);
+    
+    const resetLink = `${process.env.FRONTEND_URL}/reset-password?token=${resetToken}`;
+    
+    // Send email with reset link
+    const html = render("password-reset", {
+      fullName: user.fullName,
+      resetLink,
+      currentYear: new Date().getFullYear(),
     });
+    
+    const mailOptions: MailInterface = {
+      to: email,
+      from: `"Agritech" ${process.env.SMTP_FROM_EMAIL || 'noreply@agritech.com'}`,
+      subject: "Reset Your Agritech Password",
+      text: `Click the following link to reset your password: ${resetLink}`,
+      html,
+    };
 
-    sendSuccessResponse(res, 'Password changed successfully');
+    if (process.env.NODE_ENV !== "test") {
+      await sendCustomMail(mailOptions);
+    }
+
+    sendSuccessResponse(
+      res,
+      "If an account with that email exists, a password reset link has been sent."
+    );
   } catch (error) {
     next(error);
   }

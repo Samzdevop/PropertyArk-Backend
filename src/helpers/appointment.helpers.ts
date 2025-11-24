@@ -1,3 +1,4 @@
+import { NotificationService } from '../services/notification.services';
 import prisma from '../prisma';
 import { NotificationType, NotificationStatus } from '@prisma/client';
 
@@ -49,31 +50,43 @@ export const notifyFarmStaffAboutAppointment = async (appointment: any, companyI
 
 
     if (farmStaff.length === 0) {
-      console.log(`ℹ️ No farm staff found to notify for ${appointment.relatedFarm}`);
+      console.log(`No farm staff found to notify for ${appointment.relatedFarm}`);
       return;
     }
 
-    const notifications = farmStaff.map(staff => ({
-      title: 'New Appointment Scheduled',
-      message: `Dr. ${appointment.recordedBy.fullName} has scheduled a ${appointment.visitType.toLowerCase()}: ${appointment.title}`,
-      type: NotificationType.APPOINTMENT_REMINDER,
-       status: NotificationStatus.UNREAD,
-      recipientId: staff.id,
-      relatedEntityType: 'APPOINTMENT',
-      relatedEntityId: appointment.id,
-      metadata: {
-        appointmentId: appointment.id,
-        title: appointment.title,
-        visitType: appointment.visitType,
-        date: appointment.date,
-        purpose: appointment.purpose,
-        vetName: appointment.recordedBy.fullName
-      }
-    }));
+      for (const staff of farmStaff) {
+      // Check if user wants appointment notifications
+      const shouldNotify = await NotificationService.shouldSendNotification(
+        staff.id, 
+        'APPOINTMENT_REMINDER'
+      );
 
-    await prisma.notification.createMany({
-      data: notifications
-    });
+      if (!shouldNotify) {
+        console.log(`Skipping appointment notification for user ${staff.id} - notifications disabled`);
+        continue;
+      }  
+
+      await NotificationService.createNotification({
+        title: 'New Appointment Scheduled',
+        message: `Dr. ${appointment.recordedBy.fullName} has scheduled a ${appointment.visitType.toLowerCase()}: ${appointment.title}`,
+        type: NotificationType.APPOINTMENT_REMINDER,
+        status: NotificationStatus.UNREAD,
+        recipientId: staff.id,
+        relatedEntityType: 'APPOINTMENT',
+        relatedEntityId: appointment.id,
+        metadata: {
+          appointmentId: appointment.id,
+          title: appointment.title,
+          visitType: appointment.visitType,
+          date: appointment.date,
+          purpose: appointment.purpose,
+          vetName: appointment.recordedBy.fullName
+        }
+      });
+    }
+    // await prisma.notification.createMany({
+    //   data: notifications
+    // });
 
     console.log(`Notified ${farmStaff.length} farm staff about appointment`);
 

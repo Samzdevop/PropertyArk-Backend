@@ -12,6 +12,7 @@ const passport_1 = __importDefault(require("passport"));
 const sendSuccessResponse_1 = require("../utils/sendSuccessResponse");
 const errorHandler_1 = require("../middlewares/errorHandler");
 const roleCheck_1 = require("../middlewares/roleCheck");
+const users_schemas_1 = require("../schemas/users.schemas");
 exports.authRouter = (0, express_1.Router)();
 exports.authRouter.post('/admin-reg', (0, validateRequest_1.validateRequest)(auth_schemas_1.adminRegisterSchema), auth_controller_1.adminRegister);
 exports.authRouter.post('/register', errorHandler_1.authenticateJWT, (0, roleCheck_1.requireRoles)(['ADMIN', 'FARM_KEEPER']), (0, validateRequest_1.validateRequest)(auth_schemas_1.registerSchema), auth_controller_1.register);
@@ -35,3 +36,5 @@ exports.authRouter.get('/google/callback', passport_1.default.authenticate('goog
 exports.authRouter.get('/failure', (_req, res) => {
     res.status(401).json({ error: 'Failed to authenticate' });
 });
+exports.authRouter.post('/forgot-password', (0, validateRequest_1.validateRequest)(auth_schemas_1.forgotPasswordSchema), auth_controller_1.forgotPassword);
+exports.authRouter.patch('/change-password', errorHandler_1.authenticateJWT, (0, validateRequest_1.validateRequest)(users_schemas_1.changePasswordSchema), auth_controller_1.changePassword);

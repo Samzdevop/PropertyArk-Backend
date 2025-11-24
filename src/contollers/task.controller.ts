@@ -6,6 +6,7 @@ import { NotFoundError } from '../errors/NotFoundError';
 import { ForbiddenError } from '../errors/ForbiddenError';
 import { userSelect } from '../prisma/selects';
 import { deleteFile, getFileUrl } from '../config/upload';
+import { NotificationHelpers } from '../helpers/notification.helpers';
 
 
 
@@ -83,6 +84,8 @@ export const createTask = async (
         livestock: { select: userSelect },
       }
     });
+
+    await NotificationHelpers.createTaskAssignmentNotification(task, task.assignedTo);
 
     sendSuccessResponse(res, 'Task created successfully', { task }, 201);
   } catch (error) {
