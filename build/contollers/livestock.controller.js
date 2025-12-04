@@ -61,7 +61,9 @@ exports.getLivestockById = getLivestockById;
 const getAllLivestock = async (req, res, next) => {
     try {
         const { page = 1, limit = 10, type } = req.query;
+        const currentUser = req.user;
         const where = {
+            companyId: currentUser.companyId,
             isDeleted: false,
             ...(type && { type: String(type) })
         };
@@ -144,10 +146,14 @@ exports.getLivestockCounts = getLivestockCounts;
 const updateLivestock = async (req, res, next) => {
     try {
         const livestockId = req.params.livestockId;
+        const currentUser = req.user;
         const updateData = req.body;
         const updatedById = req.user.id;
         const existingLivestock = await prisma_1.default.livestock.findUnique({
-            where: { id: livestockId }
+            where: {
+                id: livestockId,
+                companyId: currentUser.companyId
+            }
         });
         if (!existingLivestock) {
             throw new NotFoundError_1.NotFoundError('Livestock not found');
@@ -174,8 +180,12 @@ exports.updateLivestock = updateLivestock;
 // permenant delete livestock
 const deleteLivestock = async (req, res, next) => {
     try {
+        const currentUser = req.user;
         const livestock = await prisma_1.default.livestock.findUnique({
-            where: { id: req.params.livestockId },
+            where: {
+                id: req.params.livestockId,
+                companyId: currentUser.companyId
+            },
         });
         if (!livestock)
             throw new NotFoundError_1.NotFoundError('Livestock not found');

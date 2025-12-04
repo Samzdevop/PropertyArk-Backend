@@ -85,7 +85,9 @@ export const getAllLivestock = async (
 ): Promise<void> => {
   try {
     const { page = 1, limit = 10, type } = req.query;
+    const currentUser = (req.user as any);
     const where = { 
+        companyId: currentUser.companyId,
         isDeleted: false,
       ...(type && { type: String(type) }) 
     };
@@ -177,10 +179,14 @@ export const updateLivestock = async (
 ): Promise<void> => {
   try {
     const livestockId = req.params.livestockId;
+    const currentUser = (req.user as any);
     const updateData = req.body;
     const updatedById = (req.user as any).id;
     const existingLivestock = await prisma.livestock.findUnique({
-      where: { id: livestockId }
+      where: {
+        id: livestockId,
+        companyId: currentUser.companyId
+      }
     });
 
     if (!existingLivestock) {
@@ -212,8 +218,12 @@ export const deleteLivestock = async (
   next: NextFunction
 ): Promise<void> => {
   try {
+      const currentUser = (req.user as any);
     const livestock = await prisma.livestock.findUnique({
-      where: { id: req.params.livestockId },
+      where: { 
+        id: req.params.livestockId,
+        companyId: currentUser.companyId 
+      },
     });
 
     if (!livestock) throw new NotFoundError('Livestock not found');

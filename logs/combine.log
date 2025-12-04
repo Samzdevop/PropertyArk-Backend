@@ -17998,3 +17998,19 @@
 [32m[39m
 2025-11-24 11:03:13 [32minfo[39m [32mGET /api/v1/notifications 200 163.153 ms - 3011[39m
 [32m[39m
+2025-12-04 14:29:16 [32minfo[39m [32mPOST /api/v1/auth/login 200 153.849 ms - 643[39m
+[32m[39m
+2025-12-04 14:29:40 [32minfo[39m [32mPOST /api/v1/livestock 201 32.629 ms - 984[39m
+[32m[39m
+2025-12-04 14:30:54 [32minfo[39m [32mGET /api/v1/livestock/ 200 68.397 ms - 10082[39m
+[32m[39m
+2025-12-04 14:53:27 [32minfo[39m [32mPOST /api/v1/auth/login 200 330.859 ms - 632[39m
+[32m[39m
+2025-12-04 14:53:47 [32minfo[39m [32mGET /api/v1/livestock/ 200 30.401 ms - 10082[39m
+[32m[39m
+2025-12-04 14:54:41 [32minfo[39m [32mPOST /api/v1/auth/login 200 237.811 ms - 660[39m
+[32m[39m
+2025-12-04 14:55:39 [32minfo[39m [32mGET /api/v1/livestock/ 200 24.415 ms - 10082[39m
+[32m[39m
+2025-12-04 15:40:07 [32minfo[39m [32mGET /api/v1/livestock/ 200 61.989 ms - 13124[39m
+[32m[39m
