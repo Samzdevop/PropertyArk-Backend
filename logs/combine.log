@@ -26326,3 +26326,157 @@
 [32m[39m
 2025-12-19 15:52:15 [32minfo[39m [32mGET /api/v1/notifications/all-notification 200 5.731 ms - 324[39m
 [32m[39m
+2025-12-19 16:23:37 [32minfo[39m [32mGET /api/v1/notifications/all-notification 200 22.580 ms - 324[39m
+[32m[39m
+2025-12-19 16:23:37 [32minfo[39m [32mGET /api/v1/livestock/counts 200 152.293 ms - 103[39m
+[32m[39m
+2025-12-19 16:23:37 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 187.562 ms - 7403[39m
+[32m[39m
+2025-12-19 16:23:38 [32minfo[39m [32mGET /api/v1/notifications/all-notification 200 6.724 ms - 324[39m
+[32m[39m
+2025-12-19 16:23:38 [32minfo[39m [32mGET /api/v1/livestock/counts 200 17.060 ms - 103[39m
+[32m[39m
+2025-12-19 16:23:38 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 16.222 ms - 7403[39m
+[32m[39m
+2025-12-19 16:23:39 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 25.017 ms - 12740[39m
+[32m[39m
+2025-12-19 16:23:43 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 13.615 ms - 12740[39m
+[32m[39m
+2025-12-19 16:23:52 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 401 0.534 ms - 66[39m
+[32m[39m
+2025-12-19 16:23:52 [32minfo[39m [32mGET /api/v1/livestock/counts 401 0.322 ms - 66[39m
+[32m[39m
+2025-12-19 16:23:52 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 401 0.358 ms - 66[39m
+[32m[39m
+2025-12-19 16:23:54 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 401 0.313 ms - 66[39m
+[32m[39m
+2025-12-19 16:23:54 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 401 0.420 ms - 66[39m
+[32m[39m
+2025-12-19 16:24:28 [32minfo[39m [32mPOST /api/v1/auth/login 200 145.867 ms - 642[39m
+[32m[39m
+2025-12-19 16:24:34 [32minfo[39m [32mGET /api/v1/livestock/counts 200 14.753 ms - 103[39m
+[32m[39m
+2025-12-19 16:24:34 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 21.052 ms - 12740[39m
+[32m[39m
+2025-12-19 16:24:35 [32minfo[39m [32mGET /api/v1/livestock/counts 200 13.175 ms - 103[39m
+[32m[39m
+2025-12-19 16:24:35 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 16.459 ms - 12740[39m
+[32m[39m
+2025-12-19 16:24:37 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 10.257 ms - 7403[39m
+[32m[39m
+2025-12-19 16:24:38 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 12.290 ms - 7403[39m
+[32m[39m
+2025-12-19 16:24:45 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 14.410 ms - 12740[39m
+[32m[39m
+2025-12-19 16:24:46 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 14.555 ms - 12740[39m
+[32m[39m
+2025-12-19 16:24:54 [32minfo[39m [32mGET /api/v1/tasks/assigned/all 200 11.880 ms - 7403[39m
+[32m[39m
+2025-12-19 16:24:55 [32minfo[39m [32mGET /api/v1/tasks/assigned/all 200 11.048 ms - 7403[39m
+[32m[39m
+2025-12-19 16:25:09 [32minfo[39m [32mGET /api/v1/inventory/items?page=1 200 17.037 ms - 2518[39m
+[32m[39m
+2025-12-19 16:25:11 [32minfo[39m [32mGET /api/v1/inventory/items?page=1 200 8.876 ms - 2518[39m
+[32m[39m
+2025-12-19 16:33:42 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 401 1.840 ms - 70[39m
+[32m[39m
+2025-12-19 16:33:45 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 401 1.421 ms - 70[39m
+[32m[39m
+2025-12-19 16:34:30 [32minfo[39m [32mPOST /api/v1/auth/login 200 197.177 ms - 642[39m
+[32m[39m
+2025-12-19 16:34:35 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 96.186 ms - 7403[39m
+[32m[39m
+2025-12-19 16:34:36 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 17.228 ms - 12740[39m
+[32m[39m
+2025-12-19 16:34:36 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 19.594 ms - 7403[39m
+[32m[39m
+2025-12-19 16:34:37 [32minfo[39m [32mGET /api/v1/livestock/counts 200 9.375 ms - 103[39m
+[32m[39m
+2025-12-19 16:34:38 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 17.078 ms - 12740[39m
+[32m[39m
+2025-12-19 16:34:39 [32minfo[39m [32mGET /api/v1/livestock/counts 200 8.017 ms - 103[39m
+[32m[39m
+2025-12-19 16:34:51 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 16.869 ms - 12740[39m
+[32m[39m
+2025-12-19 16:34:53 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 46.556 ms - 12740[39m
+[32m[39m
+2025-12-19 16:35:03 [32minfo[39m [32mGET /api/v1/tasks/assigned/all 200 10.751 ms - 7403[39m
+[32m[39m
+2025-12-19 16:35:05 [32minfo[39m [32mGET /api/v1/tasks/assigned/all 200 10.049 ms - 7403[39m
+[32m[39m
+2025-12-19 16:35:10 [32minfo[39m [32mGET /api/v1/inventory/items?page=1 200 18.635 ms - 2518[39m
+[32m[39m
+2025-12-19 16:35:11 [32minfo[39m [32mGET /api/v1/inventory/items?page=1 200 7.307 ms - 2518[39m
+[32m[39m
+2025-12-19 16:35:18 [32minfo[39m [32mGET /api/v1/inventory/items?totalpage&page=1 200 10.923 ms - 2518[39m
+[32m[39m
+2025-12-19 16:35:19 [32minfo[39m [32mGET /api/v1/inventory/items?totalpage&page=1 200 8.123 ms - 2518[39m
+[32m[39m
+2025-12-19 16:35:21 [32minfo[39m [32mGET /api/v1/livestock/counts 200 5.959 ms - 103[39m
+[32m[39m
+2025-12-19 16:35:22 [32minfo[39m [32mGET /api/v1/livestock/counts 200 6.155 ms - 103[39m
+[32m[39m
+2025-12-19 16:35:24 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93/ 200 72.801 ms - 16955[39m
+[32m[39m
+2025-12-19 16:35:25 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93/ 200 56.096 ms - 16955[39m
+[32m[39m
+2025-12-19 16:35:48 [32minfo[39m [32mGET /api/v1/finance/transactions?page=1 200 21.721 ms - 1215[39m
+[32m[39m
+2025-12-19 16:35:50 [32minfo[39m [32mGET /api/v1/finance/transactions?page=1 200 8.597 ms - 1215[39m
+[32m[39m
+2025-12-19 17:15:46 [32minfo[39m [32mGET /api/v1/finance/transactions?page=1 200 301.652 ms - 1215[39m
+[32m[39m
+2025-12-19 17:15:48 [32minfo[39m [32mGET /api/v1/finance/transactions?page=1 200 14.318 ms - 1215[39m
+[32m[39m
+2025-12-19 17:15:52 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 27.371 ms - 12740[39m
+[32m[39m
+2025-12-19 17:15:53 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 17.334 ms - 12740[39m
+[32m[39m
+2025-12-19 17:15:53 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 37.368 ms - 7403[39m
+[32m[39m
+2025-12-19 17:15:54 [32minfo[39m [32mGET /api/v1/livestock/counts 200 10.400 ms - 103[39m
+[32m[39m
+2025-12-19 17:15:54 [32minfo[39m [32mGET /api/v1/livestock/counts 200 6.971 ms - 103[39m
+[32m[39m
+2025-12-19 17:15:55 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 28.741 ms - 7403[39m
+[32m[39m
+2025-12-19 18:48:24 [32minfo[39m [32mPOST /api/v1/auth/login 200 611.345 ms - 642[39m
+[32m[39m
+2025-12-19 18:48:29 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 347.757 ms - 7403[39m
+[32m[39m
+2025-12-19 18:48:29 [32minfo[39m [32mGET /api/v1/livestock/counts 200 276.955 ms - 103[39m
+[32m[39m
+2025-12-19 18:48:30 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 36.130 ms - 12740[39m
+[32m[39m
+2025-12-19 18:48:31 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 35.413 ms - 12740[39m
+[32m[39m
+2025-12-19 18:48:31 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 51.010 ms - 7403[39m
+[32m[39m
+2025-12-19 18:48:31 [32minfo[39m [32mGET /api/v1/livestock/counts 200 14.851 ms - 103[39m
+[32m[39m
+2025-12-19 18:48:55 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 23.595 ms - 12740[39m
+[32m[39m
+2025-12-19 18:48:57 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 18.149 ms - 12740[39m
+[32m[39m
+2025-12-19 18:49:00 [32minfo[39m [32mGET /api/v1/livestock?page=2&limit=10 200 21.279 ms - 12756[39m
+[32m[39m
+2025-12-19 18:49:02 [32minfo[39m [32mGET /api/v1/inventory/items?page=1 200 18.459 ms - 2518[39m
+[32m[39m
+2025-12-19 18:49:03 [32minfo[39m [32mGET /api/v1/inventory/items?page=1 200 12.784 ms - 2518[39m
+[32m[39m
+2025-12-19 18:49:36 [32minfo[39m [32mGET /api/v1/inventory/items?totalpage&page=1 200 11.327 ms - 2518[39m
+[32m[39m
+2025-12-19 18:49:38 [32minfo[39m [32mGET /api/v1/inventory/items?totalpage&page=1 200 7.674 ms - 2518[39m
+[32m[39m
+2025-12-19 18:49:40 [32minfo[39m [32mGET /api/v1/livestock/counts 200 8.853 ms - 103[39m
+[32m[39m
+2025-12-19 18:49:41 [32minfo[39m [32mGET /api/v1/livestock/counts 200 8.221 ms - 103[39m
+[32m[39m
+2025-12-19 18:49:42 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93/ 200 140.969 ms - 16955[39m
+[32m[39m
+2025-12-19 18:49:43 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93/ 200 322.907 ms - 16955[39m
+[32m[39m
+2025-12-19 18:50:02 [32minfo[39m [32mGET /api/v1/users 200 9.007 ms - 955[39m
+[32m[39m
+2025-12-19 18:50:03 [32minfo[39m [32mGET /api/v1/users 200 7.073 ms - 955[39m
+[32m[39m
