@@ -10,7 +10,7 @@ const roleCheck_1 = require("../middlewares/roleCheck");
 const upload_1 = require("../config/upload");
 exports.inventoryRouter = (0, express_1.Router)();
 // Create inventory records (NEW, ITEM, USE)
-exports.inventoryRouter.post('/records', errorHandler_1.authenticateJWT, (0, roleCheck_1.requireRoles)(['ADMIN', 'FARM_KEEPER']), upload_1.upload.array('media'), 
+exports.inventoryRouter.post('/records/:companyId', errorHandler_1.authenticateJWT, (0, roleCheck_1.requireRoles)(['ADMIN', 'FARM_KEEPER']), upload_1.upload.array('media'), 
 // (req, res, next) => {
 //   console.log('=== INCOMING REQUEST DATA ===');
 //   console.log('Headers:', req.headers);

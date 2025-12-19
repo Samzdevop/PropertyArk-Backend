@@ -15,3 +15,24 @@ export const userSelect = {
     lastLogin: true,
     companyId: true
 }
+
+export const livestockSelect = {
+  id: true,
+  tagId: true,
+  type: true,
+  breed: true,
+  birthDate: true,
+  healthStatus: true,
+  weight: true,
+  gender: true,
+  livestockSource: true,
+  livestockPurpose: true,
+  isSick: true,
+  isTreatment: true,
+  isDeleted: true,
+  deletionReason: true,
+  deletedAt: true,
+  addedById: true,
+  updatedById: true,
+  companyId: true,
+};

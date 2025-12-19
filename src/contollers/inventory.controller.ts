@@ -14,6 +14,7 @@ export const createInventoryRecord = async (
   try {
     const files = req.files as Express.Multer.File[];
     const userId = (req.user as any).id;
+    const { companyId } = req.params;
     const mediaUrls = files?.map(file => getFileUrl(file.filename)) || [];
     const { recordType } = req.body;
 
@@ -33,6 +34,9 @@ export const createInventoryRecord = async (
           data: {
             type,
             name,
+            company: {
+              connect: { id: companyId }
+            },
             currentQuantity: parsedQuantity,
             purchasePrice: parsedPrice,
             reorderPoint: parsedReorderPoint,
@@ -48,9 +52,10 @@ export const createInventoryRecord = async (
                 date: new Date(date),
                 notes,
                 mediaUrls,
-                recordedById: userId
+                recordedById: userId,
+                companyId,
               }
-            }
+            },
           },
           include: { records: true }
         });
@@ -91,6 +96,7 @@ export const createInventoryRecord = async (
                 notes,
                 mediaUrls,
                 recordedById: userId,
+                companyId,
               },
             },
           },
@@ -124,7 +130,8 @@ export const createInventoryRecord = async (
                 relatedAnimals,
                 notes,
                 mediaUrls,
-                recordedById: userId
+                recordedById: userId,
+                companyId,
               }
             }
           },
@@ -156,7 +163,20 @@ export const getInventoryRecords = async (
       endDate 
     } = req.query;
 
-    const where: any = {};
+    // const where: any = {};
+    const currentUser = req.user as any;
+
+    if (!currentUser?.companyId) {
+      res.status(403).json({
+        success: false,
+        message: 'User is not associated with a company',
+      });
+      return;
+    }
+
+    const where: any = {
+      companyId: currentUser.companyId,
+    };
 
     if (recordType) where.recordType = String(recordType);
     if (inventoryId) where.inventoryId = String(inventoryId);
@@ -254,7 +274,20 @@ export const getInventoryItems = async (
       search 
     } = req.query;
 
-    const where: any = {};
+    // const where: any = {};
+    const currentUser = req.user as any;
+
+    if (!currentUser?.companyId) {
+      res.status(403).json({
+        success: false,
+        message: 'User is not associated with a company',
+      });
+      return;
+    }
+
+    const where: any = {
+      companyId: currentUser.companyId,
+    };
 
     if (type) where.type = String(type);
     if (search) where.name = { contains: String(search), mode: 'insensitive' };

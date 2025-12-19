@@ -36,7 +36,7 @@ authRouter.post('/admin-reg',
 );
 
 authRouter.post(
-	'/register',
+	'/register/:companyId',
 	authenticateJWT,
 	requireRoles(['ADMIN', 'FARM_KEEPER']),
 	validateRequest(registerSchema),

@@ -27,6 +27,7 @@ const diagnosis_routes_1 = require("./routes/diagnosis.routes");
 const notification_routes_1 = require("./routes/notification.routes");
 const appointment_routes_1 = require("./routes/appointment.routes");
 const note_routes_1 = require("./routes/note.routes");
+const upload_1 = require("./config/upload");
 exports.app = (0, express_1.default)();
 exports.app.use(passport_1.default.initialize());
 // Configuration
@@ -49,6 +50,7 @@ exports.app.use((0, morgan_1.default)(':method :url :status :response-time ms - 
 exports.app.get('/', (_req, res) => {
     res.json({ success: true, message: 'Agritech API is working just fine!' });
 });
+exports.app.use("/uploads", express_1.default.static(upload_1.UPLOADS_PATH));
 exports.app.use('/api/v1/auth', auth_routes_1.authRouter);
 exports.app.use('/api/v1/users', users_routes_1.usersRouter);
 exports.app.use('/api/v1/livestock', livestock_routes_1.livestockRouter);

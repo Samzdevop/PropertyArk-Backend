@@ -25,6 +25,7 @@ export const addLivestock = async (
     } = req.body;
     
     const addedById = (req.user as any).id;
+    const { companyId } = req.params;
 
     const livestock = await prisma.livestock.create({
       data: {
@@ -38,9 +39,10 @@ export const addLivestock = async (
         livestockSource,
         livestockPurpose,
         addedById,
+        companyId,
       },
       include: {
-        addedBy: { select: userSelect}, // Include the user who added the livestock
+        addedBy: { select: userSelect}, 
       },
     });
 
@@ -144,9 +146,11 @@ export const getLivestockCounts = async (
   next: NextFunction
 ): Promise<void> => {
    try {
+    const currentUser = (req.user as any);
     const [totalLivestock, sickLivestock] = await Promise.all([
       prisma.livestock.count({
         where: { 
+          companyId: currentUser.companyId,
           isDeleted: false
         }
       }),
@@ -536,7 +540,16 @@ export const getLivestockHealthHistory = async (
               id: true,
               dateOfObservation: true,
               observedSymptoms: true
-            }
+            },
+             include: {
+              recordedBy: {
+                select: {
+                  id: true,
+                  fullName: true,
+                  role: true
+                }
+              }
+            },
           }
         },
         orderBy: {

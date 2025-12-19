@@ -9,6 +9,6 @@ const finance_schemas_1 = require("../schemas/finance.schemas");
 const roleCheck_1 = require("../middlewares/roleCheck");
 const upload_1 = require("../config/upload");
 exports.financeRouter = (0, express_1.Router)();
-exports.financeRouter.post('/transactions', errorHandler_1.authenticateJWT, (0, roleCheck_1.requireRoles)(['ADMIN', 'FARM_KEEPER']), upload_1.upload.array('media'), (0, validateRequest_1.validateRequest)(finance_schemas_1.financialTransactionSchema), finance_controller_1.recordFinancialTransaction);
+exports.financeRouter.post('/transactions/:companyId', errorHandler_1.authenticateJWT, (0, roleCheck_1.requireRoles)(['ADMIN', 'FARM_KEEPER']), upload_1.upload.array('media'), (0, validateRequest_1.validateRequest)(finance_schemas_1.financialTransactionSchema), finance_controller_1.recordFinancialTransaction);
 exports.financeRouter.get('/transactions', errorHandler_1.authenticateJWT, finance_controller_1.getFinancialTransactions);
 exports.financeRouter.get('/transactions/:transactionId', errorHandler_1.authenticateJWT, finance_controller_1.getFinancialTransaction);

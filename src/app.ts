@@ -21,6 +21,8 @@ import { diagnosisRouter } from './routes/diagnosis.routes';
 import { notificationRouter } from './routes/notification.routes';
 import { appointmentRouter } from './routes/appointment.routes';
 import { noteRouter } from './routes/note.routes';
+import path from 'path';
+import { UPLOADS_PATH } from './config/upload';
 
 export const app = express();
 
@@ -51,6 +53,8 @@ app.use(
 app.get('/', (_req: Request, res: Response) => {
 	res.json({ success: true, message: 'Agritech API is working just fine!' });
 });
+
+app.use("/uploads", express.static(UPLOADS_PATH));
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', usersRouter);

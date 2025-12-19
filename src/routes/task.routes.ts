@@ -18,7 +18,7 @@ import { upload } from '../config/upload';
 const router = Router();
 
 router.post(
-  '/',
+  '/:companyId',
   authenticateJWT,
   requireRoles(['ADMIN', 'FARM_KEEPER']),
   validateRequest(createTaskSchema),

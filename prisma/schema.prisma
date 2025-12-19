@@ -30,6 +30,9 @@ model Company {
   farmVisits  FarmVisit[]
   livestock   Livestock[]
   tasks       Task[]
+  inventories          Inventory[]
+  inventoryRecords     InventoryRecord[]
+  financialTransactions FinancialTransaction[]
   
   @@map("companies")
 }
@@ -239,6 +242,8 @@ model Inventory {
   id              String            @id @default(cuid())
   type            InventoryType
   name            String
+  company         Company? @relation(fields: [companyId], references: [id])
+  companyId       String?
   currentQuantity Float
   unit            String            @default("units")
   purchasePrice   Float?
@@ -258,6 +263,8 @@ model InventoryRecord {
   pricePerUnit   Float?
   totalCost      Float?
   date           DateTime
+  company     Company? @relation(fields: [companyId], references: [id])
+  companyId   String?
   movementType   String?
   relatedAnimals String?
   notes          String?
@@ -275,6 +282,8 @@ model FinancialTransaction {
   referenceNumber String
   title           String
   amount          Float
+  company     Company? @relation(fields: [companyId], references: [id])
+  companyId   String?
   paymentMethod   String
   date            DateTime
   description     String?

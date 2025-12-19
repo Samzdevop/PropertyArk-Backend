@@ -13,7 +13,7 @@ import { upload } from '../config/upload';
 export const financeRouter = Router();
 
 financeRouter.post(
-  '/transactions',
+  '/transactions/:companyId',
   authenticateJWT,
   requireRoles(['ADMIN', 'FARM_KEEPER']),
   upload.array('media'),

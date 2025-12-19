@@ -3895,3 +3895,1529 @@
 2025-11-24 10:26:53 [31merror[39m [31mInvalid credentials Invalid credentials[39m
 2025-11-24 10:32:05 [31merror[39m [31mInvalid credentials Invalid credentials[39m
 2025-11-24 10:48:12 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-12-11 14:03:12 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.task.create()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\task.controller.ts:70:36[39m
+
+[31m  67   }[39m
+[31m  68 }[39m
+[31m  69 [39m
+[31m→ 70 const task = await prisma.task.create({[39m
+[31m       data: {[39m
+[31m         name: "Live Stock Feeding ",[39m
+[31m         description: "Please feed all livestock",[39m
+[31m         priority: "LOW",[39m
+[31m         dueDate: new Date("2025-12-30T23:00:00.000Z"),[39m
+[31m         status: "PENDING",[39m
+[31m         assignedToId: "cmi9quyd60006t1i4qm0ggd7b",[39m
+[31m         assignedById: "cmi9quy0w0002t1i42v34y0q8",[39m
+[31m         livestockId: null[39m
+[31m       },[39m
+[31m       include: {[39m
+[31m         assignedTo: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             companyName: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true,[39m
+[31m             companyId: true[39m
+[31m           }[39m
+[31m         },[39m
+[31m         assignedBy: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             companyName: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true,[39m
+[31m             companyId: true[39m
+[31m           }[39m
+[31m         },[39m
+[31m         livestock: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             ~~~~~~~~[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             companyName: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true,[39m
+[31m             companyId: true,[39m
+[31m     ?       tagId?: true,[39m
+[31m     ?       type?: true,[39m
+[31m     ?       breed?: true,[39m
+[31m     ?       birthDate?: true,[39m
+[31m     ?       healthStatus?: true,[39m
+[31m     ?       weight?: true,[39m
+[31m     ?       gender?: true,[39m
+[31m     ?       livestockSource?: true,[39m
+[31m     ?       livestockPurpose?: true,[39m
+[31m     ?       isSick?: true,[39m
+[31m     ?       isTreatment?: true,[39m
+[31m     ?       isDeleted?: true,[39m
+[31m     ?       deletionReason?: true,[39m
+[31m     ?       deletedAt?: true,[39m
+[31m     ?       deletedById?: true,[39m
+[31m     ?       addedById?: true,[39m
+[31m     ?       updatedById?: true,[39m
+[31m     ?       company?: true,[39m
+[31m     ?       deletedBy?: true,[39m
+[31m     ?       sickness?: true,[39m
+[31m     ?       treatments?: true,[39m
+[31m     ?       addedBy?: true,[39m
+[31m     ?       updatedBy?: true,[39m
+[31m     ?       vaccinationRecords?: true,[39m
+[31m     ?       OfftakeRecord?: true,[39m
+[31m     ?       tasks?: true,[39m
+[31m     ?       diagnoses?: true,[39m
+[31m     ?       prescribedTreatments?: true,[39m
+[31m     ?       followUps?: true,[39m
+[31m     ?       _count?: true[39m
+[31m           }[39m
+[31m         }[39m
+[31m       }[39m
+[31m     })[39m
+
+[31mUnknown field `fullName` for select statement on model `Livestock`. Available options are marked with ?. [39m
+[31mInvalid `prisma.task.create()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\task.controller.ts:70:36[39m
+
+[31m  67   }[39m
+[31m  68 }[39m
+[31m  69 [39m
+[31m→ 70 const task = await prisma.task.create({[39m
+[31m       data: {[39m
+[31m         name: "Live Stock Feeding ",[39m
+[31m         description: "Please feed all livestock",[39m
+[31m         priority: "LOW",[39m
+[31m         dueDate: new Date("2025-12-30T23:00:00.000Z"),[39m
+[31m         status: "PENDING",[39m
+[31m         assignedToId: "cmi9quyd60006t1i4qm0ggd7b",[39m
+[31m         assignedById: "cmi9quy0w0002t1i42v34y0q8",[39m
+[31m         livestockId: null[39m
+[31m       },[39m
+[31m       include: {[39m
+[31m         assignedTo: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             companyName: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true,[39m
+[31m             companyId: true[39m
+[31m           }[39m
+[31m         },[39m
+[31m         assignedBy: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             companyName: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true,[39m
+[31m             companyId: true[39m
+[31m           }[39m
+[31m         },[39m
+[31m         livestock: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             ~~~~~~~~[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             companyName: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true,[39m
+[31m             companyId: true,[39m
+[31m     ?       tagId?: true,[39m
+[31m     ?       type?: true,[39m
+[31m     ?       breed?: true,[39m
+[31m     ?       birthDate?: true,[39m
+[31m     ?       healthStatus?: true,[39m
+[31m     ?       weight?: true,[39m
+[31m     ?       gender?: true,[39m
+[31m     ?       livestockSource?: true,[39m
+[31m     ?       livestockPurpose?: true,[39m
+[31m     ?       isSick?: true,[39m
+[31m     ?       isTreatment?: true,[39m
+[31m     ?       isDeleted?: true,[39m
+[31m     ?       deletionReason?: true,[39m
+[31m     ?       deletedAt?: true,[39m
+[31m     ?       deletedById?: true,[39m
+[31m     ?       addedById?: true,[39m
+[31m     ?       updatedById?: true,[39m
+[31m     ?       company?: true,[39m
+[31m     ?       deletedBy?: true,[39m
+[31m     ?       sickness?: true,[39m
+[31m     ?       treatments?: true,[39m
+[31m     ?       addedBy?: true,[39m
+[31m     ?       updatedBy?: true,[39m
+[31m     ?       vaccinationRecords?: true,[39m
+[31m     ?       OfftakeRecord?: true,[39m
+[31m     ?       tasks?: true,[39m
+[31m     ?       diagnoses?: true,[39m
+[31m     ?       prescribedTreatments?: true,[39m
+[31m     ?       followUps?: true,[39m
+[31m     ?       _count?: true[39m
+[31m           }[39m
+[31m         }[39m
+[31m       }[39m
+[31m     })[39m
+
+[31mUnknown field `fullName` for select statement on model `Livestock`. Available options are marked with ?.[39m
+2025-12-11 18:35:31 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.task.create()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\task.controller.ts:70:36[39m
+
+[31m  67   }[39m
+[31m  68 }[39m
+[31m  69 [39m
+[31m→ 70 const task = await prisma.task.create({[39m
+[31m       data: {[39m
+[31m         name: "Give vaccination",[39m
+[31m         description: "Give two vacination 2ml for the next one week untill the animal is 5 weeks old",[39m
+[31m         priority: "MEDIUM",[39m
+[31m         dueDate: new Date("2025-10-10T23:00:00.000Z"),[39m
+[31m         status: "PENDING",[39m
+[31m         assignedToId: "cmi9quy750004t1i4vr2mozgl",[39m
+[31m         assignedById: "cmi9quy0w0002t1i42v34y0q8",[39m
+[31m         livestockId: null[39m
+[31m       },[39m
+[31m       include: {[39m
+[31m         assignedTo: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             companyName: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true,[39m
+[31m             companyId: true[39m
+[31m           }[39m
+[31m         },[39m
+[31m         assignedBy: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             companyName: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true,[39m
+[31m             companyId: true[39m
+[31m           }[39m
+[31m         },[39m
+[31m         livestock: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             ~~~~~~~~[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             companyName: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true,[39m
+[31m             companyId: true,[39m
+[31m     ?       tagId?: true,[39m
+[31m     ?       type?: true,[39m
+[31m     ?       breed?: true,[39m
+[31m     ?       birthDate?: true,[39m
+[31m     ?       healthStatus?: true,[39m
+[31m     ?       weight?: true,[39m
+[31m     ?       gender?: true,[39m
+[31m     ?       livestockSource?: true,[39m
+[31m     ?       livestockPurpose?: true,[39m
+[31m     ?       isSick?: true,[39m
+[31m     ?       isTreatment?: true,[39m
+[31m     ?       isDeleted?: true,[39m
+[31m     ?       deletionReason?: true,[39m
+[31m     ?       deletedAt?: true,[39m
+[31m     ?       deletedById?: true,[39m
+[31m     ?       addedById?: true,[39m
+[31m     ?       updatedById?: true,[39m
+[31m     ?       company?: true,[39m
+[31m     ?       deletedBy?: true,[39m
+[31m     ?       sickness?: true,[39m
+[31m     ?       treatments?: true,[39m
+[31m     ?       addedBy?: true,[39m
+[31m     ?       updatedBy?: true,[39m
+[31m     ?       vaccinationRecords?: true,[39m
+[31m     ?       OfftakeRecord?: true,[39m
+[31m     ?       tasks?: true,[39m
+[31m     ?       diagnoses?: true,[39m
+[31m     ?       prescribedTreatments?: true,[39m
+[31m     ?       followUps?: true,[39m
+[31m     ?       _count?: true[39m
+[31m           }[39m
+[31m         }[39m
+[31m       }[39m
+[31m     })[39m
+
+[31mUnknown field `fullName` for select statement on model `Livestock`. Available options are marked with ?. [39m
+[31mInvalid `prisma.task.create()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\task.controller.ts:70:36[39m
+
+[31m  67   }[39m
+[31m  68 }[39m
+[31m  69 [39m
+[31m→ 70 const task = await prisma.task.create({[39m
+[31m       data: {[39m
+[31m         name: "Give vaccination",[39m
+[31m         description: "Give two vacination 2ml for the next one week untill the animal is 5 weeks old",[39m
+[31m         priority: "MEDIUM",[39m
+[31m         dueDate: new Date("2025-10-10T23:00:00.000Z"),[39m
+[31m         status: "PENDING",[39m
+[31m         assignedToId: "cmi9quy750004t1i4vr2mozgl",[39m
+[31m         assignedById: "cmi9quy0w0002t1i42v34y0q8",[39m
+[31m         livestockId: null[39m
+[31m       },[39m
+[31m       include: {[39m
+[31m         assignedTo: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             companyName: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true,[39m
+[31m             companyId: true[39m
+[31m           }[39m
+[31m         },[39m
+[31m         assignedBy: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             companyName: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true,[39m
+[31m             companyId: true[39m
+[31m           }[39m
+[31m         },[39m
+[31m         livestock: {[39m
+[31m           select: {[39m
+[31m             id: true,[39m
+[31m             fullName: true,[39m
+[31m             ~~~~~~~~[39m
+[31m             email: true,[39m
+[31m             phone: true,[39m
+[31m             companyName: true,[39m
+[31m             role: true,[39m
+[31m             isVerified: true,[39m
+[31m             avatar: true,[39m
+[31m             location: true,[39m
+[31m             createdAt: true,[39m
+[31m             updatedAt: true,[39m
+[31m             lastLogin: true,[39m
+[31m             companyId: true,[39m
+[31m     ?       tagId?: true,[39m
+[31m     ?       type?: true,[39m
+[31m     ?       breed?: true,[39m
+[31m     ?       birthDate?: true,[39m
+[31m     ?       healthStatus?: true,[39m
+[31m     ?       weight?: true,[39m
+[31m     ?       gender?: true,[39m
+[31m     ?       livestockSource?: true,[39m
+[31m     ?       livestockPurpose?: true,[39m
+[31m     ?       isSick?: true,[39m
+[31m     ?       isTreatment?: true,[39m
+[31m     ?       isDeleted?: true,[39m
+[31m     ?       deletionReason?: true,[39m
+[31m     ?       deletedAt?: true,[39m
+[31m     ?       deletedById?: true,[39m
+[31m     ?       addedById?: true,[39m
+[31m     ?       updatedById?: true,[39m
+[31m     ?       company?: true,[39m
+[31m     ?       deletedBy?: true,[39m
+[31m     ?       sickness?: true,[39m
+[31m     ?       treatments?: true,[39m
+[31m     ?       addedBy?: true,[39m
+[31m     ?       updatedBy?: true,[39m
+[31m     ?       vaccinationRecords?: true,[39m
+[31m     ?       OfftakeRecord?: true,[39m
+[31m     ?       tasks?: true,[39m
+[31m     ?       diagnoses?: true,[39m
+[31m     ?       prescribedTreatments?: true,[39m
+[31m     ?       followUps?: true,[39m
+[31m     ?       _count?: true[39m
+[31m           }[39m
+[31m         }[39m
+[31m       }[39m
+[31m     })[39m
+
+[31mUnknown field `fullName` for select statement on model `Livestock`. Available options are marked with ?.[39m
+2025-12-15 11:09:51 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.inventory.create()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\inventory.controller.ts:33:50[39m
+
+[31m  30   throw new BadRequestError('Invalid number format in input');[39m
+[31m  31 }[39m
+[31m  32 [39m
+[31m→ 33 const inventory = await prisma.inventory.create({[39m
+[31m       data: {[39m
+[31m         type: "EQUIPMENT",[39m
+[31m         name: "Poultry MEDICINE",[39m
+[31m         company: {[39m
+[31m           connect: {[39m
+[31m             id: undefined,[39m
+[31m     ?       name?: String,[39m
+[31m     ?       AND?: CompanyWhereInput | CompanyWhereInput[],[39m
+[31m     ?       OR?: CompanyWhereInput[],[39m
+[31m     ?       NOT?: CompanyWhereInput | CompanyWhereInput[],[39m
+[31m     ?       location?: StringNullableFilter | String | Null,[39m
+[31m     ?       phone?: StringNullableFilter | String | Null,[39m
+[31m     ?       isActive?: BoolFilter | Boolean,[39m
+[31m     ?       createdAt?: DateTimeFilter | DateTime,[39m
+[31m     ?       updatedAt?: DateTimeFilter | DateTime,[39m
+[31m     ?       notes?: NoteListRelationFilter,[39m
+[31m     ?       users?: UserListRelationFilter,[39m
+[31m     ?       appointments?: AppointmentListRelationFilter,[39m
+[31m     ?       farmVisits?: FarmVisitListRelationFilter,[39m
+[31m     ?       livestock?: LivestockListRelationFilter,[39m
+[31m     ?       tasks?: TaskListRelationFilter,[39m
+[31m     ?       inventories?: InventoryListRelationFilter,[39m
+[31m     ?       inventoryRecords?: InventoryRecordListRelationFilter,[39m
+[31m     ?       financialTransactions?: FinancialTransactionListRelationFilter[39m
+[31m           }[39m
+[31m         },[39m
+[31m         currentQuantity: 50,[39m
+[31m         purchasePrice: 3000,[39m
+[31m         reorderPoint: 10,[39m
+[31m         supplier: "Agro Supplier Ltd",[39m
+[31m         notes: "Initial stock",[39m
+[31m         mediaUrls: [[39m
+[31m           "/uploads/1765793390087-Michael.png"[39m
+[31m         ],[39m
+[31m         records: {[39m
+[31m           create: {[39m
+[31m             recordType: "NEW",[39m
+[31m             quantity: 50,[39m
+[31m             pricePerUnit: 3000,[39m
+[31m             totalCost: 150000,[39m
+[31m             date: new Date("2025-01-15T00:00:00.000Z"),[39m
+[31m             notes: "Initial stock",[39m
+[31m             mediaUrls: [[39m
+[31m               "/uploads/1765793390087-Michael.png"[39m
+[31m             ],[39m
+[31m             recordedById: "cmi9quy0w0002t1i42v34y0q8"[39m
+[31m           }[39m
+[31m         }[39m
+[31m       },[39m
+[31m       include: {[39m
+[31m         records: true[39m
+[31m       }[39m
+[31m     })[39m
+
+[31mArgument `connect` of type CompanyWhereUniqueInput needs at least one of `id` or `name` arguments. Available options are marked with ?. [39m
+[31mInvalid `prisma.inventory.create()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\inventory.controller.ts:33:50[39m
+
+[31m  30   throw new BadRequestError('Invalid number format in input');[39m
+[31m  31 }[39m
+[31m  32 [39m
+[31m→ 33 const inventory = await prisma.inventory.create({[39m
+[31m       data: {[39m
+[31m         type: "EQUIPMENT",[39m
+[31m         name: "Poultry MEDICINE",[39m
+[31m         company: {[39m
+[31m           connect: {[39m
+[31m             id: undefined,[39m
+[31m     ?       name?: String,[39m
+[31m     ?       AND?: CompanyWhereInput | CompanyWhereInput[],[39m
+[31m     ?       OR?: CompanyWhereInput[],[39m
+[31m     ?       NOT?: CompanyWhereInput | CompanyWhereInput[],[39m
+[31m     ?       location?: StringNullableFilter | String | Null,[39m
+[31m     ?       phone?: StringNullableFilter | String | Null,[39m
+[31m     ?       isActive?: BoolFilter | Boolean,[39m
+[31m     ?       createdAt?: DateTimeFilter | DateTime,[39m
+[31m     ?       updatedAt?: DateTimeFilter | DateTime,[39m
+[31m     ?       notes?: NoteListRelationFilter,[39m
+[31m     ?       users?: UserListRelationFilter,[39m
+[31m     ?       appointments?: AppointmentListRelationFilter,[39m
+[31m     ?       farmVisits?: FarmVisitListRelationFilter,[39m
+[31m     ?       livestock?: LivestockListRelationFilter,[39m
+[31m     ?       tasks?: TaskListRelationFilter,[39m
+[31m     ?       inventories?: InventoryListRelationFilter,[39m
+[31m     ?       inventoryRecords?: InventoryRecordListRelationFilter,[39m
+[31m     ?       financialTransactions?: FinancialTransactionListRelationFilter[39m
+[31m           }[39m
+[31m         },[39m
+[31m         currentQuantity: 50,[39m
+[31m         purchasePrice: 3000,[39m
+[31m         reorderPoint: 10,[39m
+[31m         supplier: "Agro Supplier Ltd",[39m
+[31m         notes: "Initial stock",[39m
+[31m         mediaUrls: [[39m
+[31m           "/uploads/1765793390087-Michael.png"[39m
+[31m         ],[39m
+[31m         records: {[39m
+[31m           create: {[39m
+[31m             recordType: "NEW",[39m
+[31m             quantity: 50,[39m
+[31m             pricePerUnit: 3000,[39m
+[31m             totalCost: 150000,[39m
+[31m             date: new Date("2025-01-15T00:00:00.000Z"),[39m
+[31m             notes: "Initial stock",[39m
+[31m             mediaUrls: [[39m
+[31m               "/uploads/1765793390087-Michael.png"[39m
+[31m             ],[39m
+[31m             recordedById: "cmi9quy0w0002t1i42v34y0q8"[39m
+[31m           }[39m
+[31m         }[39m
+[31m       },[39m
+[31m       include: {[39m
+[31m         records: true[39m
+[31m       }[39m
+[31m     })[39m
+
+[31mArgument `connect` of type CompanyWhereUniqueInput needs at least one of `id` or `name` arguments. Available options are marked with ?.[39m
+2025-12-16 02:09:56 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 02:11:14 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 02:15:30 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 02:16:16 [31merror[39m [31mOnly vets and admins can access farm details Only vets and admins can access farm details[39m
+2025-12-16 02:16:37 [31merror[39m [31mOnly vets and admins can access farm details Only vets and admins can access farm details[39m
+2025-12-16 02:22:22 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 02:25:23 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 02:29:13 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 02:31:36 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 02:34:50 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 02:35:01 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 02:36:05 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 02:36:12 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 02:38:19 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 02:39:41 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 11:25:50 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 11:26:53 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 11:33:26 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 11:34:29 [31merror[39m [31mFarm not found Farm not found[39m
+2025-12-16 11:37:39 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 11:38:08 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 11:38:45 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 12:21:13 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-12-16 12:28:39 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-12-16 12:30:04 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.treatment.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:526:24[39m
+
+[31m  523 }),[39m
+[31m  524 [39m
+[31m  525 // Treatment records (including those not linked to sickness)[39m
+[31m→ 526 prisma.treatment.findMany({[39m
+[31m        where: {[39m
+[31m          livestockId: "cmizyklv20001t18wche6ivor"[39m
+[31m        },[39m
+[31m        include: {[39m
+[31m          recordedBy: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              role: true[39m
+[31m            }[39m
+[31m          },[39m
+[31m          sickness: {[39m
+[31m            select: {[39m
+[31m            ~~~~~~[39m
+[31m              id: true,[39m
+[31m              dateOfObservation: true,[39m
+[31m              observedSymptoms: true[39m
+[31m            },[39m
+[31m            include: {[39m
+[31m            ~~~~~~~[39m
+[31m              recordedBy: {[39m
+[31m                select: {[39m
+[31m                  id: true,[39m
+[31m                  fullName: true,[39m
+[31m                  role: true[39m
+[31m                }[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        orderBy: {[39m
+[31m          dateOfTreatment: "desc"[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mPlease either use `include` or `select`, but not both at the same time. [39m
+[31mInvalid `prisma.treatment.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:526:24[39m
+
+[31m  523 }),[39m
+[31m  524 [39m
+[31m  525 // Treatment records (including those not linked to sickness)[39m
+[31m→ 526 prisma.treatment.findMany({[39m
+[31m        where: {[39m
+[31m          livestockId: "cmizyklv20001t18wche6ivor"[39m
+[31m        },[39m
+[31m        include: {[39m
+[31m          recordedBy: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              role: true[39m
+[31m            }[39m
+[31m          },[39m
+[31m          sickness: {[39m
+[31m            select: {[39m
+[31m            ~~~~~~[39m
+[31m              id: true,[39m
+[31m              dateOfObservation: true,[39m
+[31m              observedSymptoms: true[39m
+[31m            },[39m
+[31m            include: {[39m
+[31m            ~~~~~~~[39m
+[31m              recordedBy: {[39m
+[31m                select: {[39m
+[31m                  id: true,[39m
+[31m                  fullName: true,[39m
+[31m                  role: true[39m
+[31m                }[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        orderBy: {[39m
+[31m          dateOfTreatment: "desc"[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mPlease either use `include` or `select`, but not both at the same time.[39m
+2025-12-16 12:35:51 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 12:43:06 [31merror[39m [31mExpected ',' or '}' after property value in JSON at position 55 (line 3 column 5) Expected ',' or '}' after property value in JSON at position 55 (line 3 column 5)[39m
+2025-12-16 13:05:38 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 13:05:47 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 13:06:38 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 13:07:02 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 13:07:09 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 13:07:16 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 13:08:05 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 13:08:21 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 13:11:25 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 13:11:29 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 13:24:08 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 13:24:12 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 13:24:17 [31merror[39m [31mYou do not have access to this farm You do not have access to this farm[39m
+2025-12-16 13:35:41 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-12-16 14:02:46 [31merror[39m [31mFarm not found Farm not found[39m
+2025-12-16 14:15:07 [31merror[39m [31mFarm not found Farm not found[39m
+2025-12-16 14:16:57 [31merror[39m [31mFarm not found Farm not found[39m
+2025-12-16 14:21:20 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2025-12-16 20:52:09 [31merror[39m [31mLivestock not found Livestock not found[39m
+2025-12-16 20:52:09 [31merror[39m [31mLivestock not found Livestock not found[39m
+2025-12-16 20:52:16 [31merror[39m [31mLivestock not found Livestock not found[39m
+2025-12-16 20:52:16 [31merror[39m [31mLivestock not found Livestock not found[39m
+2025-12-16 20:52:23 [31merror[39m [31mLivestock not found Livestock not found[39m
+2025-12-16 20:52:24 [31merror[39m [31mLivestock not found Livestock not found[39m
+2025-12-16 20:55:20 [31merror[39m [31mInternal Server Error [39m
+[31mInvalid `prisma.inventory.create()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\inventory.controller.ts:33:50[39m
+
+[31m  30   throw new BadRequestError('Invalid number format in input');[39m
+[31m  31 }[39m
+[31m  32 [39m
+[31m→ 33 const inventory = await prisma.inventory.create([39m
+[31mCould not convert argument value Object {"$type": String("DateTime"), "value": String("+011111-01-10T23:00:00.000Z")} to ArgumentValue.[39m
+2025-12-17 13:44:03 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.financialTransaction.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\finance.controller.ts:136:35[39m
+
+[31m  133     }[39m
+[31m  134   }[39m
+[31m  135 }),[39m
+[31m→ 136 prisma.financialTransaction.count({[39m
+[31m        select: {[39m
+[31m          _count: {[39m
+[31m            select: {[39m
+[31m              _all: true[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        where: {[39m
+[31m          companyId: "cmj8izq2l0000t1l8yjb6du93",[39m
+[31m          isDeleted: false,[39m
+[31m          ~~~~~~~~~[39m
+[31m      ?   AND?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   OR?: FinancialTransactionWhereInput[],[39m
+[31m      ?   NOT?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   id?: StringFilter | String,[39m
+[31m      ?   type?: EnumFinancialTransactionTypeFilter | FinancialTransactionType,[39m
+[31m      ?   referenceNumber?: StringFilter | String,[39m
+[31m      ?   title?: StringFilter | String,[39m
+[31m      ?   amount?: FloatFilter | Float,[39m
+[31m      ?   paymentMethod?: StringFilter | String,[39m
+[31m      ?   date?: DateTimeFilter | DateTime,[39m
+[31m      ?   description?: StringNullableFilter | String | Null,[39m
+[31m      ?   partyName?: StringFilter | String,[39m
+[31m      ?   mediaUrls?: StringNullableListFilter,[39m
+[31m      ?   recordedById?: StringFilter | String,[39m
+[31m      ?   createdAt?: DateTimeFilter | DateTime,[39m
+[31m      ?   company?: CompanyNullableScalarRelationFilter | CompanyWhereInput | Null,[39m
+[31m      ?   recordedBy?: UserScalarRelationFilter | UserWhereInput[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mUnknown argument `isDeleted`. Available options are marked with ?. [39m
+[31mInvalid `prisma.financialTransaction.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\finance.controller.ts:136:35[39m
+
+[31m  133     }[39m
+[31m  134   }[39m
+[31m  135 }),[39m
+[31m→ 136 prisma.financialTransaction.count({[39m
+[31m        select: {[39m
+[31m          _count: {[39m
+[31m            select: {[39m
+[31m              _all: true[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        where: {[39m
+[31m          companyId: "cmj8izq2l0000t1l8yjb6du93",[39m
+[31m          isDeleted: false,[39m
+[31m          ~~~~~~~~~[39m
+[31m      ?   AND?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   OR?: FinancialTransactionWhereInput[],[39m
+[31m      ?   NOT?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   id?: StringFilter | String,[39m
+[31m      ?   type?: EnumFinancialTransactionTypeFilter | FinancialTransactionType,[39m
+[31m      ?   referenceNumber?: StringFilter | String,[39m
+[31m      ?   title?: StringFilter | String,[39m
+[31m      ?   amount?: FloatFilter | Float,[39m
+[31m      ?   paymentMethod?: StringFilter | String,[39m
+[31m      ?   date?: DateTimeFilter | DateTime,[39m
+[31m      ?   description?: StringNullableFilter | String | Null,[39m
+[31m      ?   partyName?: StringFilter | String,[39m
+[31m      ?   mediaUrls?: StringNullableListFilter,[39m
+[31m      ?   recordedById?: StringFilter | String,[39m
+[31m      ?   createdAt?: DateTimeFilter | DateTime,[39m
+[31m      ?   company?: CompanyNullableScalarRelationFilter | CompanyWhereInput | Null,[39m
+[31m      ?   recordedBy?: UserScalarRelationFilter | UserWhereInput[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mUnknown argument `isDeleted`. Available options are marked with ?.[39m
+2025-12-17 13:44:04 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.financialTransaction.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\finance.controller.ts:136:35[39m
+
+[31m  133     }[39m
+[31m  134   }[39m
+[31m  135 }),[39m
+[31m→ 136 prisma.financialTransaction.count({[39m
+[31m        select: {[39m
+[31m          _count: {[39m
+[31m            select: {[39m
+[31m              _all: true[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        where: {[39m
+[31m          companyId: "cmj8izq2l0000t1l8yjb6du93",[39m
+[31m          isDeleted: false,[39m
+[31m          ~~~~~~~~~[39m
+[31m      ?   AND?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   OR?: FinancialTransactionWhereInput[],[39m
+[31m      ?   NOT?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   id?: StringFilter | String,[39m
+[31m      ?   type?: EnumFinancialTransactionTypeFilter | FinancialTransactionType,[39m
+[31m      ?   referenceNumber?: StringFilter | String,[39m
+[31m      ?   title?: StringFilter | String,[39m
+[31m      ?   amount?: FloatFilter | Float,[39m
+[31m      ?   paymentMethod?: StringFilter | String,[39m
+[31m      ?   date?: DateTimeFilter | DateTime,[39m
+[31m      ?   description?: StringNullableFilter | String | Null,[39m
+[31m      ?   partyName?: StringFilter | String,[39m
+[31m      ?   mediaUrls?: StringNullableListFilter,[39m
+[31m      ?   recordedById?: StringFilter | String,[39m
+[31m      ?   createdAt?: DateTimeFilter | DateTime,[39m
+[31m      ?   company?: CompanyNullableScalarRelationFilter | CompanyWhereInput | Null,[39m
+[31m      ?   recordedBy?: UserScalarRelationFilter | UserWhereInput[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mUnknown argument `isDeleted`. Available options are marked with ?. [39m
+[31mInvalid `prisma.financialTransaction.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\finance.controller.ts:136:35[39m
+
+[31m  133     }[39m
+[31m  134   }[39m
+[31m  135 }),[39m
+[31m→ 136 prisma.financialTransaction.count({[39m
+[31m        select: {[39m
+[31m          _count: {[39m
+[31m            select: {[39m
+[31m              _all: true[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        where: {[39m
+[31m          companyId: "cmj8izq2l0000t1l8yjb6du93",[39m
+[31m          isDeleted: false,[39m
+[31m          ~~~~~~~~~[39m
+[31m      ?   AND?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   OR?: FinancialTransactionWhereInput[],[39m
+[31m      ?   NOT?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   id?: StringFilter | String,[39m
+[31m      ?   type?: EnumFinancialTransactionTypeFilter | FinancialTransactionType,[39m
+[31m      ?   referenceNumber?: StringFilter | String,[39m
+[31m      ?   title?: StringFilter | String,[39m
+[31m      ?   amount?: FloatFilter | Float,[39m
+[31m      ?   paymentMethod?: StringFilter | String,[39m
+[31m      ?   date?: DateTimeFilter | DateTime,[39m
+[31m      ?   description?: StringNullableFilter | String | Null,[39m
+[31m      ?   partyName?: StringFilter | String,[39m
+[31m      ?   mediaUrls?: StringNullableListFilter,[39m
+[31m      ?   recordedById?: StringFilter | String,[39m
+[31m      ?   createdAt?: DateTimeFilter | DateTime,[39m
+[31m      ?   company?: CompanyNullableScalarRelationFilter | CompanyWhereInput | Null,[39m
+[31m      ?   recordedBy?: UserScalarRelationFilter | UserWhereInput[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mUnknown argument `isDeleted`. Available options are marked with ?.[39m
+2025-12-17 13:44:17 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.financialTransaction.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\finance.controller.ts:136:35[39m
+
+[31m  133     }[39m
+[31m  134   }[39m
+[31m  135 }),[39m
+[31m→ 136 prisma.financialTransaction.count({[39m
+[31m        select: {[39m
+[31m          _count: {[39m
+[31m            select: {[39m
+[31m              _all: true[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        where: {[39m
+[31m          companyId: "cmj8izq2l0000t1l8yjb6du93",[39m
+[31m          isDeleted: false,[39m
+[31m          ~~~~~~~~~[39m
+[31m      ?   AND?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   OR?: FinancialTransactionWhereInput[],[39m
+[31m      ?   NOT?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   id?: StringFilter | String,[39m
+[31m      ?   type?: EnumFinancialTransactionTypeFilter | FinancialTransactionType,[39m
+[31m      ?   referenceNumber?: StringFilter | String,[39m
+[31m      ?   title?: StringFilter | String,[39m
+[31m      ?   amount?: FloatFilter | Float,[39m
+[31m      ?   paymentMethod?: StringFilter | String,[39m
+[31m      ?   date?: DateTimeFilter | DateTime,[39m
+[31m      ?   description?: StringNullableFilter | String | Null,[39m
+[31m      ?   partyName?: StringFilter | String,[39m
+[31m      ?   mediaUrls?: StringNullableListFilter,[39m
+[31m      ?   recordedById?: StringFilter | String,[39m
+[31m      ?   createdAt?: DateTimeFilter | DateTime,[39m
+[31m      ?   company?: CompanyNullableScalarRelationFilter | CompanyWhereInput | Null,[39m
+[31m      ?   recordedBy?: UserScalarRelationFilter | UserWhereInput[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mUnknown argument `isDeleted`. Available options are marked with ?. [39m
+[31mInvalid `prisma.financialTransaction.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\finance.controller.ts:136:35[39m
+
+[31m  133     }[39m
+[31m  134   }[39m
+[31m  135 }),[39m
+[31m→ 136 prisma.financialTransaction.count({[39m
+[31m        select: {[39m
+[31m          _count: {[39m
+[31m            select: {[39m
+[31m              _all: true[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        where: {[39m
+[31m          companyId: "cmj8izq2l0000t1l8yjb6du93",[39m
+[31m          isDeleted: false,[39m
+[31m          ~~~~~~~~~[39m
+[31m      ?   AND?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   OR?: FinancialTransactionWhereInput[],[39m
+[31m      ?   NOT?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   id?: StringFilter | String,[39m
+[31m      ?   type?: EnumFinancialTransactionTypeFilter | FinancialTransactionType,[39m
+[31m      ?   referenceNumber?: StringFilter | String,[39m
+[31m      ?   title?: StringFilter | String,[39m
+[31m      ?   amount?: FloatFilter | Float,[39m
+[31m      ?   paymentMethod?: StringFilter | String,[39m
+[31m      ?   date?: DateTimeFilter | DateTime,[39m
+[31m      ?   description?: StringNullableFilter | String | Null,[39m
+[31m      ?   partyName?: StringFilter | String,[39m
+[31m      ?   mediaUrls?: StringNullableListFilter,[39m
+[31m      ?   recordedById?: StringFilter | String,[39m
+[31m      ?   createdAt?: DateTimeFilter | DateTime,[39m
+[31m      ?   company?: CompanyNullableScalarRelationFilter | CompanyWhereInput | Null,[39m
+[31m      ?   recordedBy?: UserScalarRelationFilter | UserWhereInput[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mUnknown argument `isDeleted`. Available options are marked with ?.[39m
+2025-12-17 13:44:19 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.financialTransaction.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\finance.controller.ts:122:35[39m
+
+[31m  119 }[39m
+[31m  120 [39m
+[31m  121 const [transactions, total] = await Promise.all([[39m
+[31m→ 122   prisma.financialTransaction.findMany({[39m
+[31m          where: {[39m
+[31m            companyId: "cmj8izq2l0000t1l8yjb6du93",[39m
+[31m            isDeleted: false,[39m
+[31m            ~~~~~~~~~[39m
+[31m        ?   AND?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m        ?   OR?: FinancialTransactionWhereInput[],[39m
+[31m        ?   NOT?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m        ?   id?: StringFilter | String,[39m
+[31m        ?   type?: EnumFinancialTransactionTypeFilter | FinancialTransactionType,[39m
+[31m        ?   referenceNumber?: StringFilter | String,[39m
+[31m        ?   title?: StringFilter | String,[39m
+[31m        ?   amount?: FloatFilter | Float,[39m
+[31m        ?   paymentMethod?: StringFilter | String,[39m
+[31m        ?   date?: DateTimeFilter | DateTime,[39m
+[31m        ?   description?: StringNullableFilter | String | Null,[39m
+[31m        ?   partyName?: StringFilter | String,[39m
+[31m        ?   mediaUrls?: StringNullableListFilter,[39m
+[31m        ?   recordedById?: StringFilter | String,[39m
+[31m        ?   createdAt?: DateTimeFilter | DateTime,[39m
+[31m        ?   company?: CompanyNullableScalarRelationFilter | CompanyWhereInput | Null,[39m
+[31m        ?   recordedBy?: UserScalarRelationFilter | UserWhereInput[39m
+[31m          },[39m
+[31m          skip: 0,[39m
+[31m          take: 10,[39m
+[31m          orderBy: {[39m
+[31m            date: "desc"[39m
+[31m          },[39m
+[31m          include: {[39m
+[31m            recordedBy: {[39m
+[31m              select: {[39m
+[31m                id: true,[39m
+[31m                fullName: true[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        })[39m
+
+[31mUnknown argument `isDeleted`. Available options are marked with ?. [39m
+[31mInvalid `prisma.financialTransaction.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\finance.controller.ts:122:35[39m
+
+[31m  119 }[39m
+[31m  120 [39m
+[31m  121 const [transactions, total] = await Promise.all([[39m
+[31m→ 122   prisma.financialTransaction.findMany({[39m
+[31m          where: {[39m
+[31m            companyId: "cmj8izq2l0000t1l8yjb6du93",[39m
+[31m            isDeleted: false,[39m
+[31m            ~~~~~~~~~[39m
+[31m        ?   AND?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m        ?   OR?: FinancialTransactionWhereInput[],[39m
+[31m        ?   NOT?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m        ?   id?: StringFilter | String,[39m
+[31m        ?   type?: EnumFinancialTransactionTypeFilter | FinancialTransactionType,[39m
+[31m        ?   referenceNumber?: StringFilter | String,[39m
+[31m        ?   title?: StringFilter | String,[39m
+[31m        ?   amount?: FloatFilter | Float,[39m
+[31m        ?   paymentMethod?: StringFilter | String,[39m
+[31m        ?   date?: DateTimeFilter | DateTime,[39m
+[31m        ?   description?: StringNullableFilter | String | Null,[39m
+[31m        ?   partyName?: StringFilter | String,[39m
+[31m        ?   mediaUrls?: StringNullableListFilter,[39m
+[31m        ?   recordedById?: StringFilter | String,[39m
+[31m        ?   createdAt?: DateTimeFilter | DateTime,[39m
+[31m        ?   company?: CompanyNullableScalarRelationFilter | CompanyWhereInput | Null,[39m
+[31m        ?   recordedBy?: UserScalarRelationFilter | UserWhereInput[39m
+[31m          },[39m
+[31m          skip: 0,[39m
+[31m          take: 10,[39m
+[31m          orderBy: {[39m
+[31m            date: "desc"[39m
+[31m          },[39m
+[31m          include: {[39m
+[31m            recordedBy: {[39m
+[31m              select: {[39m
+[31m                id: true,[39m
+[31m                fullName: true[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        })[39m
+
+[31mUnknown argument `isDeleted`. Available options are marked with ?.[39m
+2025-12-17 13:44:34 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.financialTransaction.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\finance.controller.ts:136:35[39m
+
+[31m  133     }[39m
+[31m  134   }[39m
+[31m  135 }),[39m
+[31m→ 136 prisma.financialTransaction.count({[39m
+[31m        select: {[39m
+[31m          _count: {[39m
+[31m            select: {[39m
+[31m              _all: true[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        where: {[39m
+[31m          companyId: "cmj8izq2l0000t1l8yjb6du93",[39m
+[31m          isDeleted: false,[39m
+[31m          ~~~~~~~~~[39m
+[31m      ?   AND?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   OR?: FinancialTransactionWhereInput[],[39m
+[31m      ?   NOT?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   id?: StringFilter | String,[39m
+[31m      ?   type?: EnumFinancialTransactionTypeFilter | FinancialTransactionType,[39m
+[31m      ?   referenceNumber?: StringFilter | String,[39m
+[31m      ?   title?: StringFilter | String,[39m
+[31m      ?   amount?: FloatFilter | Float,[39m
+[31m      ?   paymentMethod?: StringFilter | String,[39m
+[31m      ?   date?: DateTimeFilter | DateTime,[39m
+[31m      ?   description?: StringNullableFilter | String | Null,[39m
+[31m      ?   partyName?: StringFilter | String,[39m
+[31m      ?   mediaUrls?: StringNullableListFilter,[39m
+[31m      ?   recordedById?: StringFilter | String,[39m
+[31m      ?   createdAt?: DateTimeFilter | DateTime,[39m
+[31m      ?   company?: CompanyNullableScalarRelationFilter | CompanyWhereInput | Null,[39m
+[31m      ?   recordedBy?: UserScalarRelationFilter | UserWhereInput[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mUnknown argument `isDeleted`. Available options are marked with ?. [39m
+[31mInvalid `prisma.financialTransaction.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\finance.controller.ts:136:35[39m
+
+[31m  133     }[39m
+[31m  134   }[39m
+[31m  135 }),[39m
+[31m→ 136 prisma.financialTransaction.count({[39m
+[31m        select: {[39m
+[31m          _count: {[39m
+[31m            select: {[39m
+[31m              _all: true[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        where: {[39m
+[31m          companyId: "cmj8izq2l0000t1l8yjb6du93",[39m
+[31m          isDeleted: false,[39m
+[31m          ~~~~~~~~~[39m
+[31m      ?   AND?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   OR?: FinancialTransactionWhereInput[],[39m
+[31m      ?   NOT?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   id?: StringFilter | String,[39m
+[31m      ?   type?: EnumFinancialTransactionTypeFilter | FinancialTransactionType,[39m
+[31m      ?   referenceNumber?: StringFilter | String,[39m
+[31m      ?   title?: StringFilter | String,[39m
+[31m      ?   amount?: FloatFilter | Float,[39m
+[31m      ?   paymentMethod?: StringFilter | String,[39m
+[31m      ?   date?: DateTimeFilter | DateTime,[39m
+[31m      ?   description?: StringNullableFilter | String | Null,[39m
+[31m      ?   partyName?: StringFilter | String,[39m
+[31m      ?   mediaUrls?: StringNullableListFilter,[39m
+[31m      ?   recordedById?: StringFilter | String,[39m
+[31m      ?   createdAt?: DateTimeFilter | DateTime,[39m
+[31m      ?   company?: CompanyNullableScalarRelationFilter | CompanyWhereInput | Null,[39m
+[31m      ?   recordedBy?: UserScalarRelationFilter | UserWhereInput[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mUnknown argument `isDeleted`. Available options are marked with ?.[39m
+2025-12-17 13:44:35 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.financialTransaction.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\finance.controller.ts:122:35[39m
+
+[31m  119 }[39m
+[31m  120 [39m
+[31m  121 const [transactions, total] = await Promise.all([[39m
+[31m→ 122   prisma.financialTransaction.findMany({[39m
+[31m          where: {[39m
+[31m            companyId: "cmj8izq2l0000t1l8yjb6du93",[39m
+[31m            isDeleted: false,[39m
+[31m            ~~~~~~~~~[39m
+[31m        ?   AND?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m        ?   OR?: FinancialTransactionWhereInput[],[39m
+[31m        ?   NOT?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m        ?   id?: StringFilter | String,[39m
+[31m        ?   type?: EnumFinancialTransactionTypeFilter | FinancialTransactionType,[39m
+[31m        ?   referenceNumber?: StringFilter | String,[39m
+[31m        ?   title?: StringFilter | String,[39m
+[31m        ?   amount?: FloatFilter | Float,[39m
+[31m        ?   paymentMethod?: StringFilter | String,[39m
+[31m        ?   date?: DateTimeFilter | DateTime,[39m
+[31m        ?   description?: StringNullableFilter | String | Null,[39m
+[31m        ?   partyName?: StringFilter | String,[39m
+[31m        ?   mediaUrls?: StringNullableListFilter,[39m
+[31m        ?   recordedById?: StringFilter | String,[39m
+[31m        ?   createdAt?: DateTimeFilter | DateTime,[39m
+[31m        ?   company?: CompanyNullableScalarRelationFilter | CompanyWhereInput | Null,[39m
+[31m        ?   recordedBy?: UserScalarRelationFilter | UserWhereInput[39m
+[31m          },[39m
+[31m          skip: 0,[39m
+[31m          take: 10,[39m
+[31m          orderBy: {[39m
+[31m            date: "desc"[39m
+[31m          },[39m
+[31m          include: {[39m
+[31m            recordedBy: {[39m
+[31m              select: {[39m
+[31m                id: true,[39m
+[31m                fullName: true[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        })[39m
+
+[31mUnknown argument `isDeleted`. Available options are marked with ?. [39m
+[31mInvalid `prisma.financialTransaction.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\finance.controller.ts:122:35[39m
+
+[31m  119 }[39m
+[31m  120 [39m
+[31m  121 const [transactions, total] = await Promise.all([[39m
+[31m→ 122   prisma.financialTransaction.findMany({[39m
+[31m          where: {[39m
+[31m            companyId: "cmj8izq2l0000t1l8yjb6du93",[39m
+[31m            isDeleted: false,[39m
+[31m            ~~~~~~~~~[39m
+[31m        ?   AND?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m        ?   OR?: FinancialTransactionWhereInput[],[39m
+[31m        ?   NOT?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m        ?   id?: StringFilter | String,[39m
+[31m        ?   type?: EnumFinancialTransactionTypeFilter | FinancialTransactionType,[39m
+[31m        ?   referenceNumber?: StringFilter | String,[39m
+[31m        ?   title?: StringFilter | String,[39m
+[31m        ?   amount?: FloatFilter | Float,[39m
+[31m        ?   paymentMethod?: StringFilter | String,[39m
+[31m        ?   date?: DateTimeFilter | DateTime,[39m
+[31m        ?   description?: StringNullableFilter | String | Null,[39m
+[31m        ?   partyName?: StringFilter | String,[39m
+[31m        ?   mediaUrls?: StringNullableListFilter,[39m
+[31m        ?   recordedById?: StringFilter | String,[39m
+[31m        ?   createdAt?: DateTimeFilter | DateTime,[39m
+[31m        ?   company?: CompanyNullableScalarRelationFilter | CompanyWhereInput | Null,[39m
+[31m        ?   recordedBy?: UserScalarRelationFilter | UserWhereInput[39m
+[31m          },[39m
+[31m          skip: 0,[39m
+[31m          take: 10,[39m
+[31m          orderBy: {[39m
+[31m            date: "desc"[39m
+[31m          },[39m
+[31m          include: {[39m
+[31m            recordedBy: {[39m
+[31m              select: {[39m
+[31m                id: true,[39m
+[31m                fullName: true[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        })[39m
+
+[31mUnknown argument `isDeleted`. Available options are marked with ?.[39m
+2025-12-17 13:45:30 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.financialTransaction.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\finance.controller.ts:122:35[39m
+
+[31m  119 }[39m
+[31m  120 [39m
+[31m  121 const [transactions, total] = await Promise.all([[39m
+[31m→ 122   prisma.financialTransaction.findMany({[39m
+[31m          where: {[39m
+[31m            companyId: "cmj8izq2l0000t1l8yjb6du93",[39m
+[31m            isDeleted: false,[39m
+[31m            ~~~~~~~~~[39m
+[31m        ?   AND?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m        ?   OR?: FinancialTransactionWhereInput[],[39m
+[31m        ?   NOT?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m        ?   id?: StringFilter | String,[39m
+[31m        ?   type?: EnumFinancialTransactionTypeFilter | FinancialTransactionType,[39m
+[31m        ?   referenceNumber?: StringFilter | String,[39m
+[31m        ?   title?: StringFilter | String,[39m
+[31m        ?   amount?: FloatFilter | Float,[39m
+[31m        ?   paymentMethod?: StringFilter | String,[39m
+[31m        ?   date?: DateTimeFilter | DateTime,[39m
+[31m        ?   description?: StringNullableFilter | String | Null,[39m
+[31m        ?   partyName?: StringFilter | String,[39m
+[31m        ?   mediaUrls?: StringNullableListFilter,[39m
+[31m        ?   recordedById?: StringFilter | String,[39m
+[31m        ?   createdAt?: DateTimeFilter | DateTime,[39m
+[31m        ?   company?: CompanyNullableScalarRelationFilter | CompanyWhereInput | Null,[39m
+[31m        ?   recordedBy?: UserScalarRelationFilter | UserWhereInput[39m
+[31m          },[39m
+[31m          skip: 0,[39m
+[31m          take: 10,[39m
+[31m          orderBy: {[39m
+[31m            date: "desc"[39m
+[31m          },[39m
+[31m          include: {[39m
+[31m            recordedBy: {[39m
+[31m              select: {[39m
+[31m                id: true,[39m
+[31m                fullName: true[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        })[39m
+
+[31mUnknown argument `isDeleted`. Available options are marked with ?. [39m
+[31mInvalid `prisma.financialTransaction.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\finance.controller.ts:122:35[39m
+
+[31m  119 }[39m
+[31m  120 [39m
+[31m  121 const [transactions, total] = await Promise.all([[39m
+[31m→ 122   prisma.financialTransaction.findMany({[39m
+[31m          where: {[39m
+[31m            companyId: "cmj8izq2l0000t1l8yjb6du93",[39m
+[31m            isDeleted: false,[39m
+[31m            ~~~~~~~~~[39m
+[31m        ?   AND?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m        ?   OR?: FinancialTransactionWhereInput[],[39m
+[31m        ?   NOT?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m        ?   id?: StringFilter | String,[39m
+[31m        ?   type?: EnumFinancialTransactionTypeFilter | FinancialTransactionType,[39m
+[31m        ?   referenceNumber?: StringFilter | String,[39m
+[31m        ?   title?: StringFilter | String,[39m
+[31m        ?   amount?: FloatFilter | Float,[39m
+[31m        ?   paymentMethod?: StringFilter | String,[39m
+[31m        ?   date?: DateTimeFilter | DateTime,[39m
+[31m        ?   description?: StringNullableFilter | String | Null,[39m
+[31m        ?   partyName?: StringFilter | String,[39m
+[31m        ?   mediaUrls?: StringNullableListFilter,[39m
+[31m        ?   recordedById?: StringFilter | String,[39m
+[31m        ?   createdAt?: DateTimeFilter | DateTime,[39m
+[31m        ?   company?: CompanyNullableScalarRelationFilter | CompanyWhereInput | Null,[39m
+[31m        ?   recordedBy?: UserScalarRelationFilter | UserWhereInput[39m
+[31m          },[39m
+[31m          skip: 0,[39m
+[31m          take: 10,[39m
+[31m          orderBy: {[39m
+[31m            date: "desc"[39m
+[31m          },[39m
+[31m          include: {[39m
+[31m            recordedBy: {[39m
+[31m              select: {[39m
+[31m                id: true,[39m
+[31m                fullName: true[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        })[39m
+
+[31mUnknown argument `isDeleted`. Available options are marked with ?.[39m
+2025-12-17 13:45:31 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.financialTransaction.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\finance.controller.ts:136:35[39m
+
+[31m  133     }[39m
+[31m  134   }[39m
+[31m  135 }),[39m
+[31m→ 136 prisma.financialTransaction.count({[39m
+[31m        select: {[39m
+[31m          _count: {[39m
+[31m            select: {[39m
+[31m              _all: true[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        where: {[39m
+[31m          companyId: "cmj8izq2l0000t1l8yjb6du93",[39m
+[31m          isDeleted: false,[39m
+[31m          ~~~~~~~~~[39m
+[31m      ?   AND?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   OR?: FinancialTransactionWhereInput[],[39m
+[31m      ?   NOT?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   id?: StringFilter | String,[39m
+[31m      ?   type?: EnumFinancialTransactionTypeFilter | FinancialTransactionType,[39m
+[31m      ?   referenceNumber?: StringFilter | String,[39m
+[31m      ?   title?: StringFilter | String,[39m
+[31m      ?   amount?: FloatFilter | Float,[39m
+[31m      ?   paymentMethod?: StringFilter | String,[39m
+[31m      ?   date?: DateTimeFilter | DateTime,[39m
+[31m      ?   description?: StringNullableFilter | String | Null,[39m
+[31m      ?   partyName?: StringFilter | String,[39m
+[31m      ?   mediaUrls?: StringNullableListFilter,[39m
+[31m      ?   recordedById?: StringFilter | String,[39m
+[31m      ?   createdAt?: DateTimeFilter | DateTime,[39m
+[31m      ?   company?: CompanyNullableScalarRelationFilter | CompanyWhereInput | Null,[39m
+[31m      ?   recordedBy?: UserScalarRelationFilter | UserWhereInput[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mUnknown argument `isDeleted`. Available options are marked with ?. [39m
+[31mInvalid `prisma.financialTransaction.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\finance.controller.ts:136:35[39m
+
+[31m  133     }[39m
+[31m  134   }[39m
+[31m  135 }),[39m
+[31m→ 136 prisma.financialTransaction.count({[39m
+[31m        select: {[39m
+[31m          _count: {[39m
+[31m            select: {[39m
+[31m              _all: true[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        where: {[39m
+[31m          companyId: "cmj8izq2l0000t1l8yjb6du93",[39m
+[31m          isDeleted: false,[39m
+[31m          ~~~~~~~~~[39m
+[31m      ?   AND?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   OR?: FinancialTransactionWhereInput[],[39m
+[31m      ?   NOT?: FinancialTransactionWhereInput | FinancialTransactionWhereInput[],[39m
+[31m      ?   id?: StringFilter | String,[39m
+[31m      ?   type?: EnumFinancialTransactionTypeFilter | FinancialTransactionType,[39m
+[31m      ?   referenceNumber?: StringFilter | String,[39m
+[31m      ?   title?: StringFilter | String,[39m
+[31m      ?   amount?: FloatFilter | Float,[39m
+[31m      ?   paymentMethod?: StringFilter | String,[39m
+[31m      ?   date?: DateTimeFilter | DateTime,[39m
+[31m      ?   description?: StringNullableFilter | String | Null,[39m
+[31m      ?   partyName?: StringFilter | String,[39m
+[31m      ?   mediaUrls?: StringNullableListFilter,[39m
+[31m      ?   recordedById?: StringFilter | String,[39m
+[31m      ?   createdAt?: DateTimeFilter | DateTime,[39m
+[31m      ?   company?: CompanyNullableScalarRelationFilter | CompanyWhereInput | Null,[39m
+[31m      ?   recordedBy?: UserScalarRelationFilter | UserWhereInput[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mUnknown argument `isDeleted`. Available options are marked with ?.[39m
+2025-12-17 14:10:18 [31merror[39m [31mFarm not found Farm not found[39m
+2025-12-17 19:32:34 [31merror[39m [31mUser not found User not found[39m
+2025-12-17 19:33:55 [31merror[39m [31mUser not found User not found[39m
+2025-12-17 19:34:43 [31merror[39m [31mUser not found User not found[39m
+2025-12-17 19:39:19 [31merror[39m [31mUser not found User not found[39m
+2025-12-17 19:39:47 [31merror[39m [31mUser not found User not found[39m
+2025-12-17 19:48:20 [31merror[39m [31mUser not found User not found[39m
+2025-12-17 19:50:28 [31merror[39m [31mUser not found User not found[39m
+2025-12-18 07:31:16 [31merror[39m [31mUser not found User not found[39m
+2025-12-18 07:39:28 [31merror[39m [31mUser not found User not found[39m
+2025-12-18 07:43:52 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.user.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\users.controllers.ts:1185:19[39m
+
+[31m  1182 }),[39m
+[31m  1183 [39m
+[31m  1184 // Get total count[39m
+[31m→ 1185 prisma.user.count({[39m
+[31m         select: {[39m
+[31m           _count: {[39m
+[31m             select: {[39m
+[31m               _all: true[39m
+[31m             }[39m
+[31m           }[39m
+[31m         },[39m
+[31m         where: {[39m
+[31m           role: "VET",[39m
+[31m           isDeleted: false,[39m
+[31m           ~~~~~~~~~[39m
+[31m       ?   AND?: UserWhereInput | UserWhereInput[],[39m
+[31m       ?   OR?: UserWhereInput[],[39m
+[31m       ?   NOT?: UserWhereInput | UserWhereInput[],[39m
+[31m       ?   id?: StringFilter | String,[39m
+[31m       ?   email?: StringNullableFilter | String | Null,[39m
+[31m       ?   phone?: StringNullableFilter | String | Null,[39m
+[31m       ?   googleId?: StringNullableFilter | String | Null,[39m
+[31m       ?   companyName?: StringNullableFilter | String | Null,[39m
+[31m       ?   companyId?: StringNullableFilter | String | Null,[39m
+[31m       ?   password?: StringNullableFilter | String | Null,[39m
+[31m       ?   fullName?: StringFilter | String,[39m
+[31m       ?   avatar?: StringNullableFilter | String | Null,[39m
+[31m       ?   location?: StringNullableFilter | String | Null,[39m
+[31m       ?   lastLogin?: DateTimeNullableFilter | DateTime | Null,[39m
+[31m       ?   verificationCode?: StringNullableFilter | String | Null,[39m
+[31m       ?   verificationExpires?: DateTimeNullableFilter | DateTime | Null,[39m
+[31m       ?   isVerified?: BoolFilter | Boolean,[39m
+[31m       ?   isSuspended?: BoolFilter | Boolean,[39m
+[31m       ?   createdAt?: DateTimeFilter | DateTime,[39m
+[31m       ?   updatedAt?: DateTimeFilter | DateTime,[39m
+[31m       ?   createdById?: StringNullableFilter | String | Null,[39m
+[31m       ?   company?: CompanyNullableScalarRelationFilter | CompanyWhereInput | Null,[39m
+[31m       ?   assignedTasks?: TaskListRelationFilter,[39m
+[31m       ?   createdTasks?: TaskListRelationFilter,[39m
+[31m       ?   livestockAdded?: LivestockListRelationFilter,[39m
+[31m       ?   livestockUpdated?: LivestockListRelationFilter,[39m
+[31m       ?   deletedLivestock?: LivestockListRelationFilter,[39m
+[31m       ?   vaccination?: VaccinationListRelationFilter,[39m
+[31m       ?   Sickness?: SicknessListRelationFilter,[39m
+[31m       ?   Treatment?: TreatmentListRelationFilter,[39m
+[31m       ?   OfftakeRecord?: OfftakeRecordListRelationFilter,[39m
+[31m       ?   TaskObservation?: TaskObservationListRelationFilter,[39m
+[31m       ?   InventoryRecord?: InventoryRecordListRelationFilter,[39m
+[31m       ?   FinancialTransaction?: FinancialTransactionListRelationFilter,[39m
+[31m       ?   Diagnosis?: DiagnosisListRelationFilter,[39m
+[31m       ?   prescribedTreatments?: PrescribedTreatmentListRelationFilter,[39m
+[31m       ?   followUps?: FollowUpListRelationFilter,[39m
+[31m       ?   notifications?: NotificationListRelationFilter,[39m
+[31m       ?   appointments?: AppointmentListRelationFilter,[39m
+[31m       ?   farmVisits?: FarmVisitListRelationFilter,[39m
+[31m       ?   notes?: NoteListRelationFilter,[39m
+[31m       ?   notificationSettings?: NotificationSettingsNullableScalarRelationFilter | NotificationSettingsWhereInput | Null,[39m
+[31m       ?   conversations?: ConversationParticipantListRelationFilter,[39m
+[31m       ?   sentMessages?: MessageListRelationFilter,[39m
+[31m       ?   createdBy?: UserNullableScalarRelationFilter | UserWhereInput | Null,[39m
+[31m       ?   createdUsers?: UserListRelationFilter[39m
+[31m         }[39m
+[31m       })[39m
+
+[31mUnknown argument `isDeleted`. Available options are marked with ?. [39m
+[31mInvalid `prisma.user.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\users.controllers.ts:1185:19[39m
+
+[31m  1182 }),[39m
+[31m  1183 [39m
+[31m  1184 // Get total count[39m
+[31m→ 1185 prisma.user.count({[39m
+[31m         select: {[39m
+[31m           _count: {[39m
+[31m             select: {[39m
+[31m               _all: true[39m
+[31m             }[39m
+[31m           }[39m
+[31m         },[39m
+[31m         where: {[39m
+[31m           role: "VET",[39m
+[31m           isDeleted: false,[39m
+[31m           ~~~~~~~~~[39m
+[31m       ?   AND?: UserWhereInput | UserWhereInput[],[39m
+[31m       ?   OR?: UserWhereInput[],[39m
+[31m       ?   NOT?: UserWhereInput | UserWhereInput[],[39m
+[31m       ?   id?: StringFilter | String,[39m
+[31m       ?   email?: StringNullableFilter | String | Null,[39m
+[31m       ?   phone?: StringNullableFilter | String | Null,[39m
+[31m       ?   googleId?: StringNullableFilter | String | Null,[39m
+[31m       ?   companyName?: StringNullableFilter | String | Null,[39m
+[31m       ?   companyId?: StringNullableFilter | String | Null,[39m
+[31m       ?   password?: StringNullableFilter | String | Null,[39m
+[31m       ?   fullName?: StringFilter | String,[39m
+[31m       ?   avatar?: StringNullableFilter | String | Null,[39m
+[31m       ?   location?: StringNullableFilter | String | Null,[39m
+[31m       ?   lastLogin?: DateTimeNullableFilter | DateTime | Null,[39m
+[31m       ?   verificationCode?: StringNullableFilter | String | Null,[39m
+[31m       ?   verificationExpires?: DateTimeNullableFilter | DateTime | Null,[39m
+[31m       ?   isVerified?: BoolFilter | Boolean,[39m
+[31m       ?   isSuspended?: BoolFilter | Boolean,[39m
+[31m       ?   createdAt?: DateTimeFilter | DateTime,[39m
+[31m       ?   updatedAt?: DateTimeFilter | DateTime,[39m
+[31m       ?   createdById?: StringNullableFilter | String | Null,[39m
+[31m       ?   company?: CompanyNullableScalarRelationFilter | CompanyWhereInput | Null,[39m
+[31m       ?   assignedTasks?: TaskListRelationFilter,[39m
+[31m       ?   createdTasks?: TaskListRelationFilter,[39m
+[31m       ?   livestockAdded?: LivestockListRelationFilter,[39m
+[31m       ?   livestockUpdated?: LivestockListRelationFilter,[39m
+[31m       ?   deletedLivestock?: LivestockListRelationFilter,[39m
+[31m       ?   vaccination?: VaccinationListRelationFilter,[39m
+[31m       ?   Sickness?: SicknessListRelationFilter,[39m
+[31m       ?   Treatment?: TreatmentListRelationFilter,[39m
+[31m       ?   OfftakeRecord?: OfftakeRecordListRelationFilter,[39m
+[31m       ?   TaskObservation?: TaskObservationListRelationFilter,[39m
+[31m       ?   InventoryRecord?: InventoryRecordListRelationFilter,[39m
+[31m       ?   FinancialTransaction?: FinancialTransactionListRelationFilter,[39m
+[31m       ?   Diagnosis?: DiagnosisListRelationFilter,[39m
+[31m       ?   prescribedTreatments?: PrescribedTreatmentListRelationFilter,[39m
+[31m       ?   followUps?: FollowUpListRelationFilter,[39m
+[31m       ?   notifications?: NotificationListRelationFilter,[39m
+[31m       ?   appointments?: AppointmentListRelationFilter,[39m
+[31m       ?   farmVisits?: FarmVisitListRelationFilter,[39m
+[31m       ?   notes?: NoteListRelationFilter,[39m
+[31m       ?   notificationSettings?: NotificationSettingsNullableScalarRelationFilter | NotificationSettingsWhereInput | Null,[39m
+[31m       ?   conversations?: ConversationParticipantListRelationFilter,[39m
+[31m       ?   sentMessages?: MessageListRelationFilter,[39m
+[31m       ?   createdBy?: UserNullableScalarRelationFilter | UserWhereInput | Null,[39m
+[31m       ?   createdUsers?: UserListRelationFilter[39m
+[31m         }[39m
+[31m       })[39m
+
+[31mUnknown argument `isDeleted`. Available options are marked with ?.[39m
+2025-12-18 07:49:13 [31merror[39m [31mPrisma error: [39m
+[31mInvalid `prisma.$queryRaw()` invocation:[39m
+
+
+[31mRaw query failed. Code: `42703`. Message: `column "updated_at" does not exist` [39m
+[31mInvalid `prisma.$queryRaw()` invocation:[39m
+
+
+[31mRaw query failed. Code: `42703`. Message: `column "updated_at" does not exist`[39m
+2025-12-18 07:52:15 [31merror[39m [31mPrisma error: [39m
+[31mInvalid `prisma.$queryRaw()` invocation:[39m
+
+
+[31mRaw query failed. Code: `42P01`. Message: `relation "task" does not exist` [39m
+[31mInvalid `prisma.$queryRaw()` invocation:[39m
+
+
+[31mRaw query failed. Code: `42P01`. Message: `relation "task" does not exist`[39m
+2025-12-18 14:45:42 [31merror[39m [31mUser not found User not found[39m
+2025-12-18 14:53:06 [31merror[39m [31mrequest entity too large request entity too large[39m
+2025-12-18 14:54:24 [31merror[39m [31mrequest entity too large request entity too large[39m
+2025-12-18 16:49:04 [31merror[39m [31mFarm not found Farm not found[39m

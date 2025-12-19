@@ -19,7 +19,7 @@ export const inventoryRouter = Router();
 
 // Create inventory records (NEW, ITEM, USE)
 inventoryRouter.post(
-  '/records',
+  '/records/:companyId',
   authenticateJWT,
   requireRoles(['ADMIN', 'FARM_KEEPER']),
   upload.array('media'),

@@ -14,6 +14,7 @@ const addLivestock = async (req, res, next) => {
     try {
         const { tagId, type, breed, birthDate, healthStatus, weight, gender, livestockSource, livestockPurpose } = req.body;
         const addedById = req.user.id;
+        const { companyId } = req.params;
         const livestock = await prisma_1.default.livestock.create({
             data: {
                 tagId,
@@ -26,9 +27,10 @@ const addLivestock = async (req, res, next) => {
                 livestockSource,
                 livestockPurpose,
                 addedById,
+                companyId,
             },
             include: {
-                addedBy: { select: selects_1.userSelect }, // Include the user who added the livestock
+                addedBy: { select: selects_1.userSelect },
             },
         });
         (0, sendSuccessResponse_1.sendSuccessResponse)(res, 'Livestock successfully added', { livestock }, 201);
@@ -115,9 +117,11 @@ const getAllLivestock = async (req, res, next) => {
 exports.getAllLivestock = getAllLivestock;
 const getLivestockCounts = async (req, res, next) => {
     try {
+        const currentUser = req.user;
         const [totalLivestock, sickLivestock] = await Promise.all([
             prisma_1.default.livestock.count({
                 where: {
+                    companyId: currentUser.companyId,
                     isDeleted: false
                 }
             }),
@@ -457,7 +461,16 @@ const getLivestockHealthHistory = async (req, res, next) => {
                             id: true,
                             dateOfObservation: true,
                             observedSymptoms: true
-                        }
+                        },
+                        include: {
+                            recordedBy: {
+                                select: {
+                                    id: true,
+                                    fullName: true,
+                                    role: true
+                                }
+                            }
+                        },
                     }
                 },
                 orderBy: {

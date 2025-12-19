@@ -8,11 +8,13 @@ const prisma_1 = __importDefault(require("../prisma"));
 const sendSuccessResponse_1 = require("../utils/sendSuccessResponse");
 const NotFoundError_1 = require("../errors/NotFoundError");
 const upload_1 = require("../config/upload");
+const ForbiddenError_1 = require("../errors/ForbiddenError");
 const recordFinancialTransaction = async (req, res, next) => {
     try {
         const files = req.files;
         const userId = req.user.id;
         const mediaUrls = files?.map(file => (0, upload_1.getFileUrl)(file.filename)) || [];
+        const { companyId } = req.params;
         const { type, referenceNumber, title, amount, paymentMethod, date, description, partyName } = req.body;
         const transaction = await prisma_1.default.financialTransaction.create({
             data: {
@@ -25,7 +27,8 @@ const recordFinancialTransaction = async (req, res, next) => {
                 description: description || null,
                 partyName,
                 mediaUrls,
-                recordedById: userId
+                recordedById: userId,
+                companyId,
             },
             include: {
                 recordedBy: {
@@ -46,11 +49,27 @@ exports.recordFinancialTransaction = recordFinancialTransaction;
 const getFinancialTransactions = async (req, res, next) => {
     try {
         const { page = 1, limit = 10, type, startDate, endDate, paymentMethod } = req.query;
-        const where = {};
-        if (type)
+        // const where: any = {};
+        // if (type) where.type = String(type);
+        // if (paymentMethod) where.paymentMethod = String(paymentMethod);
+        // if (startDate || endDate) {
+        //   where.date = {};
+        //   if (startDate) where.date.gte = new Date(String(startDate));
+        //   if (endDate) where.date.lte = new Date(String(endDate));
+        // }
+        const currentUser = req.user;
+        if (!currentUser.companyId) {
+            throw new ForbiddenError_1.ForbiddenError('User is not associated with a company');
+        }
+        const where = {
+            companyId: currentUser.companyId,
+        };
+        if (type) {
             where.type = String(type);
-        if (paymentMethod)
+        }
+        if (paymentMethod) {
             where.paymentMethod = String(paymentMethod);
+        }
         if (startDate || endDate) {
             where.date = {};
             if (startDate)

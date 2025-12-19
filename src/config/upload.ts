@@ -4,6 +4,9 @@ import path from 'path';
 import { S3Client } from '@aws-sdk/client-s3';
 import multerS3 from 'multer-s3';
 
+
+
+export const UPLOADS_PATH = path.join(process.cwd(), "uploads");
 // Determine storage driver from env
 const storageDriver = process.env.STORAGE_DRIVER === 's3' ? 's3' : 'local';
 
@@ -34,12 +37,23 @@ if (storageConfig.driver === 's3') {
     }
   });
 } else {
-  storage = multer.diskStorage({
+  // storage = multer.diskStorage({
+  //   destination: (req, file, cb) => {
+  //     if (!fs.existsSync(storageConfig.uploadsFolder)) {
+  //       fs.mkdirSync(storageConfig.uploadsFolder, { recursive: true });
+  //     }
+  //     cb(null, storageConfig.uploadsFolder);
+  //   },
+  //   filename: (req, file, cb) => {
+  //     cb(null, `${Date.now()}-${file.originalname}`);
+  //   }
+  // });
+    storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      if (!fs.existsSync(storageConfig.uploadsFolder)) {
-        fs.mkdirSync(storageConfig.uploadsFolder, { recursive: true });
+      if (!fs.existsSync(UPLOADS_PATH)) {
+        fs.mkdirSync(UPLOADS_PATH, { recursive: true });
       }
-      cb(null, storageConfig.uploadsFolder);
+      cb(null, UPLOADS_PATH);
     },
     filename: (req, file, cb) => {
       cb(null, `${Date.now()}-${file.originalname}`);

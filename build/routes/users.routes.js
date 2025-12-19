@@ -21,4 +21,5 @@ exports.usersRouter.get('/:userId', errorHandler_1.authenticateJWT, (0, roleChec
 exports.usersRouter.delete('/:userId', errorHandler_1.authenticateJWT, (0, roleCheck_1.requireRoles)(['ADMIN', 'FARM_KEEPER']), users_controllers_1.deleteUser);
 exports.usersRouter.patch('/:userId', errorHandler_1.authenticateJWT, (0, roleCheck_1.requireRoles)(['ADMIN']), (0, validateRequest_1.validateRequest)(users_schemas_1.adminUpdateUserSchema), users_controllers_1.adminUpdateUser);
 exports.usersRouter.get('/vet/assigned-farms', errorHandler_1.authenticateJWT, (0, roleCheck_1.requireRoles)(['VET']), users_controllers_1.getVetAssignedFarms);
-exports.usersRouter.get('/vet/farms/:companyId', errorHandler_1.authenticateJWT, (0, roleCheck_1.requireRoles)(['VET']), users_controllers_1.getFarmDetails);
+exports.usersRouter.get('/vet/farms/:companyId', errorHandler_1.authenticateJWT, (0, roleCheck_1.requireRoles)(['VET', 'ADMIN']), users_controllers_1.getFarmDetails);
+exports.usersRouter.get('/vets/profile', errorHandler_1.authenticateJWT, (0, roleCheck_1.requireRoles)(['ADMIN']), users_controllers_1.getAllVets);

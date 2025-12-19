@@ -25,28 +25,28 @@ async function main() {
 
   // Clear existing data in correct order to handle foreign key constraints
   // console.log('🗑️ Clearing existing data...');
-  // await prisma.note.deleteMany();
-  // await prisma.followUpReminder.deleteMany();
-  // await prisma.treatmentReminder.deleteMany();
-  // await prisma.followUp.deleteMany();
-  // await prisma.prescribedTreatment.deleteMany();
-  // await prisma.diagnosis.deleteMany();
-  // await prisma.appointmentReminder.deleteMany();
-  // await prisma.appointment.deleteMany();
-  // await prisma.farmVisit.deleteMany();
-  // await prisma.notification.deleteMany();
-  // await prisma.taskObservation.deleteMany();
-  // await prisma.task.deleteMany();
-  // await prisma.treatment.deleteMany();
-  // await prisma.sickness.deleteMany();
-  // await prisma.vaccination.deleteMany();
-  // await prisma.offtakeRecord.deleteMany();
-  // await prisma.livestock.deleteMany();
-  // await prisma.inventoryRecord.deleteMany();
-  // await prisma.inventory.deleteMany();
-  // await prisma.financialTransaction.deleteMany();
-  // await prisma.user.deleteMany();
-  // await prisma.company.deleteMany();
+  await prisma.note.deleteMany();
+  await prisma.followUpReminder.deleteMany();
+  await prisma.treatmentReminder.deleteMany();
+  await prisma.followUp.deleteMany();
+  await prisma.prescribedTreatment.deleteMany();
+  await prisma.diagnosis.deleteMany();
+  await prisma.appointmentReminder.deleteMany();
+  await prisma.appointment.deleteMany();
+  await prisma.farmVisit.deleteMany();
+  await prisma.notification.deleteMany();
+  await prisma.taskObservation.deleteMany();
+  await prisma.task.deleteMany();
+  await prisma.treatment.deleteMany();
+  await prisma.sickness.deleteMany();
+  await prisma.vaccination.deleteMany();
+  await prisma.offtakeRecord.deleteMany();
+  await prisma.livestock.deleteMany();
+  await prisma.inventoryRecord.deleteMany();
+  await prisma.inventory.deleteMany();
+  await prisma.financialTransaction.deleteMany();
+  await prisma.user.deleteMany();
+  await prisma.company.deleteMany();
 
   console.log('🏢 Creating companies and users...');
 
@@ -447,7 +447,8 @@ async function main() {
         reorderPoint: 10,
         supplier: 'Medical Supplies Co',
         notes: `${item} for veterinary use`,
-        mediaUrls: []
+        mediaUrls: [],
+        companyId: company.id,
       };
 
       await prisma.inventory.create({

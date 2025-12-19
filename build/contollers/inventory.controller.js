@@ -13,6 +13,7 @@ const createInventoryRecord = async (req, res, next) => {
     try {
         const files = req.files;
         const userId = req.user.id;
+        const { companyId } = req.params;
         const mediaUrls = files?.map(file => (0, upload_1.getFileUrl)(file.filename)) || [];
         const { recordType } = req.body;
         switch (recordType) {
@@ -28,6 +29,9 @@ const createInventoryRecord = async (req, res, next) => {
                     data: {
                         type,
                         name,
+                        company: {
+                            connect: { id: companyId }
+                        },
                         currentQuantity: parsedQuantity,
                         purchasePrice: parsedPrice,
                         reorderPoint: parsedReorderPoint,
@@ -43,9 +47,10 @@ const createInventoryRecord = async (req, res, next) => {
                                 date: new Date(date),
                                 notes,
                                 mediaUrls,
-                                recordedById: userId
+                                recordedById: userId,
+                                companyId,
                             }
-                        }
+                        },
                     },
                     include: { records: true }
                 });
@@ -74,6 +79,7 @@ const createInventoryRecord = async (req, res, next) => {
                                 notes,
                                 mediaUrls,
                                 recordedById: userId,
+                                companyId,
                             },
                         },
                     },
@@ -101,7 +107,8 @@ const createInventoryRecord = async (req, res, next) => {
                                 relatedAnimals,
                                 notes,
                                 mediaUrls,
-                                recordedById: userId
+                                recordedById: userId,
+                                companyId,
                             }
                         }
                     },
@@ -120,7 +127,18 @@ exports.createInventoryRecord = createInventoryRecord;
 const getInventoryRecords = async (req, res, next) => {
     try {
         const { page = 1, limit = 10, recordType, inventoryId, startDate, endDate } = req.query;
-        const where = {};
+        // const where: any = {};
+        const currentUser = req.user;
+        if (!currentUser?.companyId) {
+            res.status(403).json({
+                success: false,
+                message: 'User is not associated with a company',
+            });
+            return;
+        }
+        const where = {
+            companyId: currentUser.companyId,
+        };
         if (recordType)
             where.recordType = String(recordType);
         if (inventoryId)
@@ -203,7 +221,18 @@ exports.getInventoryRecord = getInventoryRecord;
 const getInventoryItems = async (req, res, next) => {
     try {
         const { page = 1, limit = 10, type, lowStock, search } = req.query;
-        const where = {};
+        // const where: any = {};
+        const currentUser = req.user;
+        if (!currentUser?.companyId) {
+            res.status(403).json({
+                success: false,
+                message: 'User is not associated with a company',
+            });
+            return;
+        }
+        const where = {
+            companyId: currentUser.companyId,
+        };
         if (type)
             where.type = String(type);
         if (search)

@@ -25,7 +25,7 @@ import { requireRoles } from '../middlewares/roleCheck';
 export const livestockRouter = Router();
 
 livestockRouter.post(
-  '/',
+  '/:companyId',
   authenticateJWT,
   validateRequest(addLivestockSchema),
   addLivestock

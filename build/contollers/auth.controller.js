@@ -130,6 +130,7 @@ exports.adminRegister = adminRegister;
 const register = async (req, res, next) => {
     try {
         const { email, phone, fullName, password, role } = req.body;
+        const { companyId } = req.params;
         if (phone && !(0, phoneFormat_1.validatePhoneNumber)(phone)) {
             throw new BadRequestError_1.BadRequestError('Phone must be in valid international format (+XXX...) or local Nigerian format (0XXX...)');
         }
@@ -174,6 +175,7 @@ const register = async (req, res, next) => {
                 verificationExpires: new Date(new Date().getTime() + 30 * 60 * 1000),
                 role: role || "COWORKER",
                 isVerified: true,
+                companyId: companyId
             }
         });
         (0, sendSuccessResponse_1.sendSuccessResponse)(res, "Registeration successfully", {}, 201);

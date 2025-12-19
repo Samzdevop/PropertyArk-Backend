@@ -9,7 +9,7 @@ const validateRequest_1 = require("../middlewares/validateRequest");
 const task_schemas_1 = require("../schemas/task.schemas");
 const upload_1 = require("../config/upload");
 const router = (0, express_1.Router)();
-router.post('/', errorHandler_1.authenticateJWT, (0, roleCheck_1.requireRoles)(['ADMIN', 'FARM_KEEPER']), (0, validateRequest_1.validateRequest)(task_schemas_1.createTaskSchema), task_controller_1.createTask);
+router.post('/:companyId', errorHandler_1.authenticateJWT, (0, roleCheck_1.requireRoles)(['ADMIN', 'FARM_KEEPER']), (0, validateRequest_1.validateRequest)(task_schemas_1.createTaskSchema), task_controller_1.createTask);
 router.post('/:taskId/observations', errorHandler_1.authenticateJWT, upload_1.upload.array('media', 5), (0, validateRequest_1.validateRequest)(task_schemas_1.createTaskObservationSchema), task_controller_1.createTaskObservation);
 router.get('/my-tasks', errorHandler_1.authenticateJWT, task_controller_1.getMyTasks);
 router.get('/:taskId', errorHandler_1.authenticateJWT, task_controller_1.getTask);

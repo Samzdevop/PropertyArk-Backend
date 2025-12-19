@@ -7,6 +7,7 @@ import { ForbiddenError } from '../errors/ForbiddenError';
 import { Role } from '@prisma/client';
 import { normalizePhoneNumber, validatePhoneNumber } from '../utils/phoneFormat';
 import { BadRequestError } from '../errors/BadRequestError';
+import { getVetStatistics } from '../helpers/vet.helpers';
 // import { Prisma } from '@prisma/client';
 
 export const getProfile = async (
@@ -65,8 +66,9 @@ export const getAllUsers = async (
   next: NextFunction
 ) => {
   try {
-    const requestingUser = (req as any).user; // Get the current user
+    const requestingUser = (req as any).user; 
     const { page = 1, limit = 10 } = req.query;
+    const currentUser = (req.user as any);
 
     // Determine which roles the current user can access
     let allowedRoles: Role[] = [];
@@ -81,12 +83,15 @@ export const getAllUsers = async (
 
     const where = {
       role: { in: allowedRoles },
-      id: { not: requestingUser.id } // Exclude the current user
+      id: { not: requestingUser.id } 
     };
 
     const [users, total] = await Promise.all([
       prisma.user.findMany({
-        where,
+         where: { 
+          companyId: currentUser.companyId,
+          ...where
+        },
         skip: (Number(page) - 1) * Number(limit),
         take: Number(limit),
         select: userSelect,
@@ -590,30 +595,21 @@ export const getFarmDetails = async (
   next: NextFunction
 ) => {
   try {
-    const vetId = (req.user as any).id;
-    const vetRole = (req.user as any).role;
+
+    const userId = (req.user as any).id;
+    const role = (req.user as any).role;
     const { companyId } = req.params;
 
-    // Only vets can access this endpoint
-    if (vetRole !== 'VET') {
-      throw new ForbiddenError('Only vets can access farm details');
+    console.log('🔐 User Info:', { userId, role, companyId });
+
+    if (role !== 'VET' && role !== "ADMIN") {
+      throw new ForbiddenError('Only vets and admins can access farm details');
     }
-
-    // Verify the vet has tasks from this company
-    const hasAccess = await prisma.task.findFirst({
-      where: {
-        assignedToId: vetId,
-        assignedById: companyId
-      }
-    });
-
-    if (!hasAccess) {
-      throw new ForbiddenError('You do not have access to this farm');
-    }
-
-    // Get company admin details
-    const companyAdmin = await prisma.user.findUnique({
-      where: { id: companyId },
+    const companyAdmin = await prisma.user.findFirst({
+      where: { 
+        companyId: companyId, 
+        role: 'ADMIN' 
+      },
       select: {
         id: true,
         fullName: true,
@@ -622,7 +618,8 @@ export const getFarmDetails = async (
         companyName: true,
         location: true,
         avatar: true,
-        createdAt: true
+        createdAt: true,
+        companyId: true
       }
     });
 
@@ -630,12 +627,51 @@ export const getFarmDetails = async (
       throw new NotFoundError('Farm not found');
     }
 
+    console.log('🏢 Company Admin:', {
+      adminId: companyAdmin.id,
+      companyId: companyAdmin.companyId,
+      companyName: companyAdmin.companyName
+    });
+
+    let hasAccess = false;
+
+    if (role === 'VET') {
+      const task = await prisma.task.findFirst({
+        where: {
+          assignedToId: userId, 
+          assignedById: companyAdmin.id 
+        }
+      });
+      hasAccess = !!task;
+    }
+
+    if (role === 'ADMIN') {
+      const currentUser = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { companyId: true, companyName: true }
+      });
+      hasAccess = currentUser?.companyId === companyId;
+      
+      // console.log('👑 ADMIN Access:', {
+      //   hasAccess,
+      //   userCompanyId: currentUser?.companyId,
+      //   targetCompanyId: companyId,
+      //   sameCompany: currentUser?.companyId === companyId
+      // });
+    }
+
+    if (!hasAccess) {
+      throw new ForbiddenError('You do not have access to this farm');
+    }
+
     // Get farm staff
     const farmStaff = await prisma.user.findMany({
       where: {
-        companyName: companyAdmin.companyName,
+  
+         companyId: companyId, 
         role: { in: ['ADMIN', 'FARM_KEEPER'] },
-        id: { not: companyId }
+        // id: { not: companyId }
+         id: { not: companyAdmin.id }
       },
       select: {
         id: true,
@@ -653,7 +689,8 @@ export const getFarmDetails = async (
     const livestockStats = await prisma.livestock.aggregate({
       where: {
         addedBy: {
-          companyName: companyAdmin.companyName
+          // companyName: companyAdmin.companyName
+           companyId: companyId
         },
         isDeleted: false
       },
@@ -670,7 +707,8 @@ export const getFarmDetails = async (
       by: ['healthStatus'],
       where: {
         addedBy: {
-          companyName: companyAdmin.companyName
+          // companyName: companyAdmin.companyName
+           companyId: companyId
         },
         isDeleted: false
       },
@@ -685,7 +723,8 @@ export const getFarmDetails = async (
       where: {
         livestock: {
           addedBy: {
-            companyName: companyAdmin.companyName
+            // companyName: companyAdmin.companyName
+             companyId: companyId
           }
         }
       },
@@ -702,7 +741,8 @@ export const getFarmDetails = async (
       where: {
         livestock: {
           addedBy: {
-            companyName: companyAdmin.companyName
+            // companyName: companyAdmin.companyName
+             companyId: companyId
           }
         },
         type: 'DEATH',
@@ -737,7 +777,8 @@ export const getFarmDetails = async (
       where: {
         livestock: {
           addedBy: {
-            companyName: companyAdmin.companyName
+            // companyName: companyAdmin.companyName
+             companyId: companyId
           }
         },
         type: 'DEATH',
@@ -753,7 +794,8 @@ export const getFarmDetails = async (
       where: {
         livestock: {
           addedBy: {
-            companyName: companyAdmin.companyName
+            // companyName: companyAdmin.companyName
+             companyId: companyId
           }
         }
       },
@@ -767,7 +809,8 @@ export const getFarmDetails = async (
       where: {
         livestock: {
           addedBy: {
-            companyName: companyAdmin.companyName
+            // companyName: companyAdmin.companyName
+             companyId: companyId
           }
         }
       },
@@ -781,7 +824,8 @@ export const getFarmDetails = async (
       where: {
         livestock: {
           addedBy: {
-            companyName: companyAdmin.companyName
+            // companyName: companyAdmin.companyName
+             companyId: companyId
           }
         }
       },
@@ -795,7 +839,8 @@ export const getFarmDetails = async (
       where: {
         livestock: {
           addedBy: {
-            companyName: companyAdmin.companyName
+            // companyName: companyAdmin.companyName
+             companyId: companyId
           }
         },
         nextDueDate: {
@@ -809,7 +854,8 @@ export const getFarmDetails = async (
       where: {
         livestock: {
           addedBy: {
-            companyName: companyAdmin.companyName
+            // companyName: companyAdmin.companyName
+             companyId: companyId
           }
         }
       },
@@ -852,7 +898,8 @@ export const getFarmDetails = async (
       where: {
         livestock: {
           addedBy: {
-            companyName: companyAdmin.companyName
+            // companyName: companyAdmin.companyName
+             companyId: companyId
           }
         },
         nextDueDate: {
@@ -882,7 +929,7 @@ export const getFarmDetails = async (
     // Get active tasks
     const activeTasks = await prisma.task.findMany({
       where: {
-        assignedToId: vetId,
+        assignedToId: userId,
         assignedById: companyId,
         status: { in: ['PENDING', 'IN_PROGRESS'] }
       },
@@ -1023,4 +1070,191 @@ export const getFarmDetails = async (
     next(error);
   }
 };
+
+
+export const getAllVets = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    console.log('🟢 getAllVets function STARTED');
+    const currentUser = (req.user as any);
+    const role = currentUser.role;
+    
+    console.log('👨‍⚕️ Fetching all vets requested by:', {
+      userId: currentUser.id,
+      userRole: role,
+      companyId: currentUser.companyId
+    });
+    if (role !== 'ADMIN') {
+      throw new ForbiddenError('Only admins can view all registered vets');
+    }
+
+    // Get query parameters for filtering, pagination, etc.
+    const {
+      page = 1,
+      limit = 20,
+      search = '',
+      sortBy = 'createdAt',
+      sortOrder = 'desc',
+      verified,
+      location
+    } = req.query;
+
+    const pageNum = parseInt(page as string);
+    const limitNum = parseInt(limit as string);
+    const skip = (pageNum - 1) * limitNum;
+
+    // Build the where clause
+    const whereClause: any = {
+      role: 'VET',
+    };
+
+    // Add search filter
+    if (search) {
+      whereClause.OR = [
+        { fullName: { contains: search as string, mode: 'insensitive' } },
+        { email: { contains: search as string, mode: 'insensitive' } },
+        { phone: { contains: search as string } },
+        { location: { contains: search as string, mode: 'insensitive' } }
+      ];
+    }
+
+    // Add verified filter
+    if (verified !== undefined) {
+      whereClause.isVerified = verified === 'true';
+    }
+
+    // Add location filter
+    if (location) {
+      whereClause.location = { contains: location as string, mode: 'insensitive' };
+    }
+
+    // Get vets with pagination and filters
+    const [vets, totalVets, activeVetsCount] = await Promise.all([
+      // Get paginated vets
+      prisma.user.findMany({
+        where: whereClause,
+        select: {
+          id: true,
+          fullName: true,
+          email: true,
+          phone: true,
+          avatar: true,
+          location: true,
+          isVerified: true,
+          isSuspended: true,
+          lastLogin: true,
+          createdAt: true,
+          updatedAt: true,
+          // Include additional vet-specific info if available
+          _count: {
+            select: {
+              assignedTasks: {
+                where: {
+                  status: { in: ['PENDING', 'IN_PROGRESS'] }
+                }
+              }
+            }
+          }
+        },
+        orderBy: {
+          [sortBy as string]: sortOrder
+        },
+        skip: skip,
+        take: limitNum
+      }),
+
+      // Get total count
+      prisma.user.count({
+        where: whereClause
+      }),
+
+      // Get count of active vets (logged in last 30 days)
+      prisma.user.count({
+        where: {
+          role: 'VET',
+          lastLogin: {
+            gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) 
+          }
+        }
+      })
+    ]);
+
+    // Get statistics about vets' performance/activity
+    const vetStatistics = await getVetStatistics();
+    // Format the response
+    const responseData = {
+      vets: vets.map(vet => ({
+        ...vet,
+        activeTasks: vet._count?.assignedTasks || 0
+      })),
+      pagination: {
+        page: pageNum,
+        limit: limitNum,
+        total: totalVets,
+        pages: Math.ceil(totalVets / limitNum)
+      },
+      statistics: {
+        totalVets,
+        activeVets: activeVetsCount,
+        verifiedVets: await prisma.user.count({
+          where: { role: 'VET', isVerified: true }
+        }),
+        suspendedVets: await prisma.user.count({
+          where: { role: 'VET', isSuspended: true }
+        }),
+        ...vetStatistics
+      }
+    };
+
+    sendSuccessResponse(res, 'Vets retrieved successfully', responseData);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// export const getAllVets = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ): Promise<void> => {
+//   try {
+//     const currentUser = (req.user as any);
+    
+//     console.log('👨‍⚕️ Fetching all vets requested by:', {
+//       userId: currentUser.id,
+//       userRole: currentUser.role
+//     });
+//     const vets = await prisma.user.findMany({
+//       where: {
+//         role: 'VET',
+//       },
+//       select: {
+//         id: true,
+//         fullName: true,
+//         email: true,
+//         phone: true,
+//         avatar: true,
+//         location: true,
+//         isVerified: true,
+//         lastLogin: true,
+//         createdAt: true
+//       },
+//       orderBy: {
+//         createdAt: 'desc'
+//       }
+//     });
+
+//     sendSuccessResponse(res, 'Vets retrieved successfully', {
+//       vets,
+//       total: vets.length
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
+
 

@@ -8,7 +8,7 @@ const validateRequest_1 = require("../middlewares/validateRequest");
 const livestock_schemas_1 = require("../schemas/livestock.schemas");
 const roleCheck_1 = require("../middlewares/roleCheck");
 exports.livestockRouter = (0, express_1.Router)();
-exports.livestockRouter.post('/', errorHandler_1.authenticateJWT, (0, validateRequest_1.validateRequest)(livestock_schemas_1.addLivestockSchema), livestock_controller_1.addLivestock);
+exports.livestockRouter.post('/:companyId', errorHandler_1.authenticateJWT, (0, validateRequest_1.validateRequest)(livestock_schemas_1.addLivestockSchema), livestock_controller_1.addLivestock);
 exports.livestockRouter.get('/counts', errorHandler_1.authenticateJWT, livestock_controller_1.getLivestockCounts);
 exports.livestockRouter.get('/', errorHandler_1.authenticateJWT, livestock_controller_1.getAllLivestock);
 exports.livestockRouter.get('/:livestockId', errorHandler_1.authenticateJWT, livestock_controller_1.getLivestockById);

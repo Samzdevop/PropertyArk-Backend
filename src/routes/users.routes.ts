@@ -9,6 +9,7 @@ import {
 	adminUpdateUser,
 	getFarmDetails,
 	getVetAssignedFarms,
+	getAllVets,
 } from '../contollers/users.controllers';
 import { authenticateJWT } from '../middlewares/errorHandler';
 import { validateRequest } from '../middlewares/validateRequest';
@@ -77,7 +78,13 @@ usersRouter.get(
 usersRouter.get(
 	'/vet/farms/:companyId',
 	authenticateJWT,
-	requireRoles(['VET']),
+	requireRoles(['VET', 'ADMIN']),
 	getFarmDetails
 );
 
+usersRouter.get(
+  '/vets/profile',
+  authenticateJWT,
+  requireRoles(['ADMIN']), 
+  getAllVets
+);

@@ -3,12 +3,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteFile = exports.getFileUrl = exports.upload = void 0;
+exports.deleteFile = exports.getFileUrl = exports.upload = exports.UPLOADS_PATH = void 0;
 const multer_1 = __importDefault(require("multer"));
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const client_s3_1 = require("@aws-sdk/client-s3");
 const multer_s3_1 = __importDefault(require("multer-s3"));
+exports.UPLOADS_PATH = path_1.default.join(process.cwd(), "uploads");
 // Determine storage driver from env
 const storageDriver = process.env.STORAGE_DRIVER === 's3' ? 's3' : 'local';
 const storageConfig = {
@@ -36,12 +37,23 @@ if (storageConfig.driver === 's3') {
     });
 }
 else {
+    // storage = multer.diskStorage({
+    //   destination: (req, file, cb) => {
+    //     if (!fs.existsSync(storageConfig.uploadsFolder)) {
+    //       fs.mkdirSync(storageConfig.uploadsFolder, { recursive: true });
+    //     }
+    //     cb(null, storageConfig.uploadsFolder);
+    //   },
+    //   filename: (req, file, cb) => {
+    //     cb(null, `${Date.now()}-${file.originalname}`);
+    //   }
+    // });
     storage = multer_1.default.diskStorage({
         destination: (req, file, cb) => {
-            if (!fs_1.default.existsSync(storageConfig.uploadsFolder)) {
-                fs_1.default.mkdirSync(storageConfig.uploadsFolder, { recursive: true });
+            if (!fs_1.default.existsSync(exports.UPLOADS_PATH)) {
+                fs_1.default.mkdirSync(exports.UPLOADS_PATH, { recursive: true });
             }
-            cb(null, storageConfig.uploadsFolder);
+            cb(null, exports.UPLOADS_PATH);
         },
         filename: (req, file, cb) => {
             cb(null, `${Date.now()}-${file.originalname}`);

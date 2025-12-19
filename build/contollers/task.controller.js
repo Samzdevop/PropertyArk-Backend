@@ -16,6 +16,7 @@ const createTask = async (req, res, next) => {
         const { name, description, priority, dueDate, assignedToId, livestockId } = req.body;
         const assignedById = req.user.id;
         const assignedByRole = req.user.role;
+        const { companyId } = req.params;
         // Check if assignee exists
         const assignee = await prisma_1.default.user.findUnique({
             where: { id: assignedToId },
@@ -66,11 +67,12 @@ const createTask = async (req, res, next) => {
                 assignedToId,
                 assignedById,
                 livestockId: livestockId || null,
+                companyId,
             },
             include: {
                 assignedTo: { select: selects_1.userSelect },
                 assignedBy: { select: selects_1.userSelect },
-                livestock: { select: selects_1.userSelect },
+                livestock: { select: selects_1.livestockSelect },
             }
         });
         await notification_helpers_1.NotificationHelpers.createTaskAssignmentNotification(task, task.assignedTo);
@@ -180,6 +182,7 @@ exports.updateTaskStatus = updateTaskStatus;
 const getAllAssignedTasks = async (req, res, next) => {
     try {
         const userId = req.user.id;
+        const currentUser = req.user;
         const userRole = req.user.role;
         const { status, page = 1, limit = 10 } = req.query;
         const where = {
@@ -219,7 +222,10 @@ const getAllAssignedTasks = async (req, res, next) => {
         }
         const [tasks, total] = await Promise.all([
             prisma_1.default.task.findMany({
-                where,
+                where: {
+                    companyId: currentUser.companyId,
+                    ...where
+                },
                 skip: (Number(page) - 1) * Number(limit),
                 take: Number(limit),
                 orderBy: { dueDate: 'asc' },
@@ -241,7 +247,12 @@ const getAllAssignedTasks = async (req, res, next) => {
                     livestock: true
                 }
             }),
-            prisma_1.default.task.count({ where })
+            prisma_1.default.task.count({
+                where: {
+                    companyId: currentUser.companyId,
+                    ...where
+                }
+            })
         ]);
         (0, sendSuccessResponse_1.sendSuccessResponse)(res, 'Assigned tasks retrieved successfully', {
             tasks,

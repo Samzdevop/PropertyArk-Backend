@@ -3,6 +3,7 @@ import prisma from '../prisma';
 import { sendSuccessResponse } from '../utils/sendSuccessResponse';
 import { NotFoundError } from '../errors/NotFoundError';
 import { getFileUrl } from '../config/upload';
+import { ForbiddenError } from '../errors/ForbiddenError';
 
 
 export const recordFinancialTransaction = async (
@@ -14,6 +15,7 @@ export const recordFinancialTransaction = async (
     const files = req.files as Express.Multer.File[];
     const userId = (req.user as any).id;
     const mediaUrls = files?.map(file => getFileUrl(file.filename)) || [];
+    const { companyId } = req.params;
 
     const {
       type,
@@ -37,7 +39,8 @@ export const recordFinancialTransaction = async (
         description: description || null,
         partyName,
         mediaUrls,
-        recordedById: userId
+        recordedById: userId,
+        companyId,
       },
       include: {
         recordedBy: {
@@ -75,16 +78,40 @@ export const getFinancialTransactions = async (
       paymentMethod
     } = req.query;
 
-    const where: any = {};
+    // const where: any = {};
 
-    if (type) where.type = String(type);
-    if (paymentMethod) where.paymentMethod = String(paymentMethod);
+    // if (type) where.type = String(type);
+    // if (paymentMethod) where.paymentMethod = String(paymentMethod);
+    // if (startDate || endDate) {
+    //   where.date = {};
+    //   if (startDate) where.date.gte = new Date(String(startDate));
+    //   if (endDate) where.date.lte = new Date(String(endDate));
+    // }
+
+        const currentUser = req.user as any;
+
+    if (!currentUser.companyId) {
+      throw new ForbiddenError('User is not associated with a company');
+    }
+
+    const where: any = {
+      companyId: currentUser.companyId,
+    };
+
+    if (type) {
+      where.type = String(type);
+    }
+
+    if (paymentMethod) {
+      where.paymentMethod = String(paymentMethod);
+    }
+
     if (startDate || endDate) {
       where.date = {};
       if (startDate) where.date.gte = new Date(String(startDate));
       if (endDate) where.date.lte = new Date(String(endDate));
     }
-
+  
     const [transactions, total] = await Promise.all([
       prisma.financialTransaction.findMany({
         where,

@@ -15,7 +15,7 @@ const roleCheck_1 = require("../middlewares/roleCheck");
 const users_schemas_1 = require("../schemas/users.schemas");
 exports.authRouter = (0, express_1.Router)();
 exports.authRouter.post('/admin-reg', (0, validateRequest_1.validateRequest)(auth_schemas_1.adminRegisterSchema), auth_controller_1.adminRegister);
-exports.authRouter.post('/register', errorHandler_1.authenticateJWT, (0, roleCheck_1.requireRoles)(['ADMIN', 'FARM_KEEPER']), (0, validateRequest_1.validateRequest)(auth_schemas_1.registerSchema), auth_controller_1.register);
+exports.authRouter.post('/register/:companyId', errorHandler_1.authenticateJWT, (0, roleCheck_1.requireRoles)(['ADMIN', 'FARM_KEEPER']), (0, validateRequest_1.validateRequest)(auth_schemas_1.registerSchema), auth_controller_1.register);
 exports.authRouter.post('/login', (0, validateRequest_1.validateRequest)(auth_schemas_1.loginSchema), auth_controller_1.login);
 exports.authRouter.post('/vet-reg', (0, validateRequest_1.validateRequest)(auth_schemas_1.vetRegisterSchema), auth_controller_1.vetRegister);
 exports.authRouter.post('/vet-login', (0, validateRequest_1.validateRequest)(auth_schemas_1.loginSchema), auth_controller_1.vetLogin);

@@ -117,6 +117,7 @@ export const register = async (
 ): Promise<void> => {
   try {
     const { email, phone, fullName, password, role } = req.body;
+    const { companyId } = req.params;
 
      if (phone && !validatePhoneNumber(phone)) {
       throw new BadRequestError(
@@ -172,6 +173,7 @@ export const register = async (
       verificationExpires: new Date(new Date().getTime() + 30 * 60 * 1000),
       role: role || "COWORKER",
       isVerified: true,
+      companyId: companyId
     }
   });
   sendSuccessResponse(res, "Registeration successfully", 

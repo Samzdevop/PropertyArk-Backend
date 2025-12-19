@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getFarmDetails = exports.getVetAssignedFarms = exports.adminUpdateUser = exports.updateUserProfile = exports.deleteUser = exports.getUserById = exports.getAllUsers = exports.getProfile = void 0;
+exports.getAllVets = exports.getFarmDetails = exports.getVetAssignedFarms = exports.adminUpdateUser = exports.updateUserProfile = exports.deleteUser = exports.getUserById = exports.getAllUsers = exports.getProfile = void 0;
 const prisma_1 = __importDefault(require("../prisma"));
 const sendSuccessResponse_1 = require("../utils/sendSuccessResponse");
 const NotFoundError_1 = require("../errors/NotFoundError");
@@ -11,6 +11,7 @@ const selects_1 = require("../prisma/selects");
 const ForbiddenError_1 = require("../errors/ForbiddenError");
 const phoneFormat_1 = require("../utils/phoneFormat");
 const BadRequestError_1 = require("../errors/BadRequestError");
+const vet_helpers_1 = require("../helpers/vet.helpers");
 // import { Prisma } from '@prisma/client';
 const getProfile = async (req, res, next) => {
     try {
@@ -54,8 +55,9 @@ exports.getProfile = getProfile;
 // };
 const getAllUsers = async (req, res, next) => {
     try {
-        const requestingUser = req.user; // Get the current user
+        const requestingUser = req.user;
         const { page = 1, limit = 10 } = req.query;
+        const currentUser = req.user;
         // Determine which roles the current user can access
         let allowedRoles = [];
         if (requestingUser.role === 'ADMIN') {
@@ -69,11 +71,14 @@ const getAllUsers = async (req, res, next) => {
         }
         const where = {
             role: { in: allowedRoles },
-            id: { not: requestingUser.id } // Exclude the current user
+            id: { not: requestingUser.id }
         };
         const [users, total] = await Promise.all([
             prisma_1.default.user.findMany({
-                where,
+                where: {
+                    companyId: currentUser.companyId,
+                    ...where
+                },
                 skip: (Number(page) - 1) * Number(limit),
                 take: Number(limit),
                 select: selects_1.userSelect,
@@ -510,26 +515,18 @@ exports.getVetAssignedFarms = getVetAssignedFarms;
 // };
 const getFarmDetails = async (req, res, next) => {
     try {
-        const vetId = req.user.id;
-        const vetRole = req.user.role;
+        const userId = req.user.id;
+        const role = req.user.role;
         const { companyId } = req.params;
-        // Only vets can access this endpoint
-        if (vetRole !== 'VET') {
-            throw new ForbiddenError_1.ForbiddenError('Only vets can access farm details');
+        console.log('🔐 User Info:', { userId, role, companyId });
+        if (role !== 'VET' && role !== "ADMIN") {
+            throw new ForbiddenError_1.ForbiddenError('Only vets and admins can access farm details');
         }
-        // Verify the vet has tasks from this company
-        const hasAccess = await prisma_1.default.task.findFirst({
+        const companyAdmin = await prisma_1.default.user.findFirst({
             where: {
-                assignedToId: vetId,
-                assignedById: companyId
-            }
-        });
-        if (!hasAccess) {
-            throw new ForbiddenError_1.ForbiddenError('You do not have access to this farm');
-        }
-        // Get company admin details
-        const companyAdmin = await prisma_1.default.user.findUnique({
-            where: { id: companyId },
+                companyId: companyId,
+                role: 'ADMIN'
+            },
             select: {
                 id: true,
                 fullName: true,
@@ -538,18 +535,51 @@ const getFarmDetails = async (req, res, next) => {
                 companyName: true,
                 location: true,
                 avatar: true,
-                createdAt: true
+                createdAt: true,
+                companyId: true
             }
         });
         if (!companyAdmin) {
             throw new NotFoundError_1.NotFoundError('Farm not found');
         }
+        console.log('🏢 Company Admin:', {
+            adminId: companyAdmin.id,
+            companyId: companyAdmin.companyId,
+            companyName: companyAdmin.companyName
+        });
+        let hasAccess = false;
+        if (role === 'VET') {
+            const task = await prisma_1.default.task.findFirst({
+                where: {
+                    assignedToId: userId,
+                    assignedById: companyAdmin.id
+                }
+            });
+            hasAccess = !!task;
+        }
+        if (role === 'ADMIN') {
+            const currentUser = await prisma_1.default.user.findUnique({
+                where: { id: userId },
+                select: { companyId: true, companyName: true }
+            });
+            hasAccess = currentUser?.companyId === companyId;
+            // console.log('👑 ADMIN Access:', {
+            //   hasAccess,
+            //   userCompanyId: currentUser?.companyId,
+            //   targetCompanyId: companyId,
+            //   sameCompany: currentUser?.companyId === companyId
+            // });
+        }
+        if (!hasAccess) {
+            throw new ForbiddenError_1.ForbiddenError('You do not have access to this farm');
+        }
         // Get farm staff
         const farmStaff = await prisma_1.default.user.findMany({
             where: {
-                companyName: companyAdmin.companyName,
+                companyId: companyId,
                 role: { in: ['ADMIN', 'FARM_KEEPER'] },
-                id: { not: companyId }
+                // id: { not: companyId }
+                id: { not: companyAdmin.id }
             },
             select: {
                 id: true,
@@ -566,7 +596,8 @@ const getFarmDetails = async (req, res, next) => {
         const livestockStats = await prisma_1.default.livestock.aggregate({
             where: {
                 addedBy: {
-                    companyName: companyAdmin.companyName
+                    // companyName: companyAdmin.companyName
+                    companyId: companyId
                 },
                 isDeleted: false
             },
@@ -582,7 +613,8 @@ const getFarmDetails = async (req, res, next) => {
             by: ['healthStatus'],
             where: {
                 addedBy: {
-                    companyName: companyAdmin.companyName
+                    // companyName: companyAdmin.companyName
+                    companyId: companyId
                 },
                 isDeleted: false
             },
@@ -596,7 +628,8 @@ const getFarmDetails = async (req, res, next) => {
             where: {
                 livestock: {
                     addedBy: {
-                        companyName: companyAdmin.companyName
+                        // companyName: companyAdmin.companyName
+                        companyId: companyId
                     }
                 }
             },
@@ -611,7 +644,8 @@ const getFarmDetails = async (req, res, next) => {
             where: {
                 livestock: {
                     addedBy: {
-                        companyName: companyAdmin.companyName
+                        // companyName: companyAdmin.companyName
+                        companyId: companyId
                     }
                 },
                 type: 'DEATH',
@@ -645,7 +679,8 @@ const getFarmDetails = async (req, res, next) => {
             where: {
                 livestock: {
                     addedBy: {
-                        companyName: companyAdmin.companyName
+                        // companyName: companyAdmin.companyName
+                        companyId: companyId
                     }
                 },
                 type: 'DEATH',
@@ -660,7 +695,8 @@ const getFarmDetails = async (req, res, next) => {
             where: {
                 livestock: {
                     addedBy: {
-                        companyName: companyAdmin.companyName
+                        // companyName: companyAdmin.companyName
+                        companyId: companyId
                     }
                 }
             },
@@ -673,7 +709,8 @@ const getFarmDetails = async (req, res, next) => {
             where: {
                 livestock: {
                     addedBy: {
-                        companyName: companyAdmin.companyName
+                        // companyName: companyAdmin.companyName
+                        companyId: companyId
                     }
                 }
             },
@@ -686,7 +723,8 @@ const getFarmDetails = async (req, res, next) => {
             where: {
                 livestock: {
                     addedBy: {
-                        companyName: companyAdmin.companyName
+                        // companyName: companyAdmin.companyName
+                        companyId: companyId
                     }
                 }
             },
@@ -699,7 +737,8 @@ const getFarmDetails = async (req, res, next) => {
             where: {
                 livestock: {
                     addedBy: {
-                        companyName: companyAdmin.companyName
+                        // companyName: companyAdmin.companyName
+                        companyId: companyId
                     }
                 },
                 nextDueDate: {
@@ -712,7 +751,8 @@ const getFarmDetails = async (req, res, next) => {
             where: {
                 livestock: {
                     addedBy: {
-                        companyName: companyAdmin.companyName
+                        // companyName: companyAdmin.companyName
+                        companyId: companyId
                     }
                 }
             },
@@ -754,7 +794,8 @@ const getFarmDetails = async (req, res, next) => {
             where: {
                 livestock: {
                     addedBy: {
-                        companyName: companyAdmin.companyName
+                        // companyName: companyAdmin.companyName
+                        companyId: companyId
                     }
                 },
                 nextDueDate: {
@@ -783,7 +824,7 @@ const getFarmDetails = async (req, res, next) => {
         // Get active tasks
         const activeTasks = await prisma_1.default.task.findMany({
             where: {
-                assignedToId: vetId,
+                assignedToId: userId,
                 assignedById: companyId,
                 status: { in: ['PENDING', 'IN_PROGRESS'] }
             },
@@ -913,3 +954,161 @@ const getFarmDetails = async (req, res, next) => {
     }
 };
 exports.getFarmDetails = getFarmDetails;
+const getAllVets = async (req, res, next) => {
+    try {
+        console.log('🟢 getAllVets function STARTED');
+        const currentUser = req.user;
+        const role = currentUser.role;
+        console.log('👨‍⚕️ Fetching all vets requested by:', {
+            userId: currentUser.id,
+            userRole: role,
+            companyId: currentUser.companyId
+        });
+        if (role !== 'ADMIN') {
+            throw new ForbiddenError_1.ForbiddenError('Only admins can view all registered vets');
+        }
+        // Get query parameters for filtering, pagination, etc.
+        const { page = 1, limit = 20, search = '', sortBy = 'createdAt', sortOrder = 'desc', verified, location } = req.query;
+        const pageNum = parseInt(page);
+        const limitNum = parseInt(limit);
+        const skip = (pageNum - 1) * limitNum;
+        // Build the where clause
+        const whereClause = {
+            role: 'VET',
+        };
+        // Add search filter
+        if (search) {
+            whereClause.OR = [
+                { fullName: { contains: search, mode: 'insensitive' } },
+                { email: { contains: search, mode: 'insensitive' } },
+                { phone: { contains: search } },
+                { location: { contains: search, mode: 'insensitive' } }
+            ];
+        }
+        // Add verified filter
+        if (verified !== undefined) {
+            whereClause.isVerified = verified === 'true';
+        }
+        // Add location filter
+        if (location) {
+            whereClause.location = { contains: location, mode: 'insensitive' };
+        }
+        // Get vets with pagination and filters
+        const [vets, totalVets, activeVetsCount] = await Promise.all([
+            // Get paginated vets
+            prisma_1.default.user.findMany({
+                where: whereClause,
+                select: {
+                    id: true,
+                    fullName: true,
+                    email: true,
+                    phone: true,
+                    avatar: true,
+                    location: true,
+                    isVerified: true,
+                    isSuspended: true,
+                    lastLogin: true,
+                    createdAt: true,
+                    updatedAt: true,
+                    // Include additional vet-specific info if available
+                    _count: {
+                        select: {
+                            assignedTasks: {
+                                where: {
+                                    status: { in: ['PENDING', 'IN_PROGRESS'] }
+                                }
+                            }
+                        }
+                    }
+                },
+                orderBy: {
+                    [sortBy]: sortOrder
+                },
+                skip: skip,
+                take: limitNum
+            }),
+            // Get total count
+            prisma_1.default.user.count({
+                where: whereClause
+            }),
+            // Get count of active vets (logged in last 30 days)
+            prisma_1.default.user.count({
+                where: {
+                    role: 'VET',
+                    lastLogin: {
+                        gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
+                    }
+                }
+            })
+        ]);
+        // Get statistics about vets' performance/activity
+        const vetStatistics = await (0, vet_helpers_1.getVetStatistics)();
+        // Format the response
+        const responseData = {
+            vets: vets.map(vet => ({
+                ...vet,
+                activeTasks: vet._count?.assignedTasks || 0
+            })),
+            pagination: {
+                page: pageNum,
+                limit: limitNum,
+                total: totalVets,
+                pages: Math.ceil(totalVets / limitNum)
+            },
+            statistics: {
+                totalVets,
+                activeVets: activeVetsCount,
+                verifiedVets: await prisma_1.default.user.count({
+                    where: { role: 'VET', isVerified: true }
+                }),
+                suspendedVets: await prisma_1.default.user.count({
+                    where: { role: 'VET', isSuspended: true }
+                }),
+                ...vetStatistics
+            }
+        };
+        (0, sendSuccessResponse_1.sendSuccessResponse)(res, 'Vets retrieved successfully', responseData);
+    }
+    catch (error) {
+        next(error);
+    }
+};
+exports.getAllVets = getAllVets;
+// export const getAllVets = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ): Promise<void> => {
+//   try {
+//     const currentUser = (req.user as any);
+//     console.log('👨‍⚕️ Fetching all vets requested by:', {
+//       userId: currentUser.id,
+//       userRole: currentUser.role
+//     });
+//     const vets = await prisma.user.findMany({
+//       where: {
+//         role: 'VET',
+//       },
+//       select: {
+//         id: true,
+//         fullName: true,
+//         email: true,
+//         phone: true,
+//         avatar: true,
+//         location: true,
+//         isVerified: true,
+//         lastLogin: true,
+//         createdAt: true
+//       },
+//       orderBy: {
+//         createdAt: 'desc'
+//       }
+//     });
+//     sendSuccessResponse(res, 'Vets retrieved successfully', {
+//       vets,
+//       total: vets.length
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
