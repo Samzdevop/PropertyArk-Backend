@@ -98,8 +98,8 @@ model Livestock {
   type             String
   breed            String?
   birthDate        DateTime?
-  company             Company?  @relation(fields: [companyId], references: [id])
-  companyId           String?
+  company          Company?  @relation(fields: [companyId], references: [id])
+  companyId        String?
   healthStatus     HealthStatus
   weight           Float?
   gender           String

@@ -1,12 +1,8 @@
-// src/helpers/notification.helpers.ts
 import { NotificationService } from '../services/notification.services';
 import prisma from '../prisma';
 import { NotificationType, NotificationStatus } from '@prisma/client';
 
 export class NotificationHelpers {
-  /**
-   * Create task assignment notification
-   */
   static async createTaskAssignmentNotification(task: any, assignedTo: any) {
     try {
 
@@ -37,35 +33,13 @@ export class NotificationHelpers {
         }
       });
 
-      // await prisma.notification.create({
-      //   data: {
-      //     title: 'New Task Assigned',
-      //     message: `You have been assigned a new task: ${task.name}`,
-      //     type: NotificationType.TASK_ASSIGNED,
-      //     status: NotificationStatus.UNREAD,
-      //     recipientId: assignedTo.id,
-      //     relatedEntityType: 'TASK',
-      //     relatedEntityId: task.id,
-      //     metadata: {
-      //       taskId: task.id,
-      //       taskName: task.name,
-      //       priority: task.priority,
-      //       dueDate: task.dueDate,
-      //       assignedByName: task.assignedBy.fullName
-      //     }
-      //   }
-      // });
-
-      console.log(`✅ Created task assignment notification for ${assignedTo.fullName}`);
+      // console.log(`✅ Created task assignment notification for ${assignedTo.fullName}`);
 
     } catch (error) {
       console.error('❌ Error creating task assignment notification:', error);
     }
   }
 
-  /**
-   * Create announcement notification for all farm members
-   */
   static async createAnnouncementNotification(announcement: any, farmName: string) {
     try {
       const farmMembers = await prisma.user.findMany({
@@ -105,27 +79,7 @@ export class NotificationHelpers {
         });
         notifiedCount++;
       }
-
-      // const notifications = farmMembers.map(member => ({
-      //   title: 'New Announcement',
-      //   message: announcement.title,
-      //   type: NotificationType.ANNOUNCEMENT,
-      //   status: NotificationStatus.UNREAD,
-      //   recipientId: member.id,
-      //   relatedEntityType: 'ANNOUNCEMENT',
-      //   relatedEntityId: announcement.id,
-      //   metadata: {
-      //     announcementId: announcement.id,
-      //     title: announcement.title,
-      //     content: announcement.content
-      //   }
-      // }));
-
-      // await prisma.notification.createMany({
-      //   data: notifications
-      // });
-
-      console.log(`Created announcement notifications for ${farmMembers.length} farm members`);
+      // console.log(`Created announcement notifications for ${farmMembers.length} farm members`);
 
     } catch (error) {
       console.error('Error creating announcement notifications:', error);
@@ -134,78 +88,144 @@ export class NotificationHelpers {
 }
 
 
+export class LivestockNotificationHelpers {
+  
+  static async createLivestockUpdateRequest(
+    livestockId: string,
+    requestType: 'WEIGHT_UPDATE' | 'HEALTH_STATUS_UPDATE' | 'COMBINED_UPDATE',
+    requestedBy: any,
+    additionalNotes: string = ''
+  ) {
+    try {
+      // Verify livestock exists and get its details
+      const livestock = await prisma.livestock.findUnique({
+        where: {
+          id: livestockId,
+          isDeleted: false
+        },
+        select: {
+          id: true,
+          tagId: true,
+          type: true,
+          breed: true,
+          gender: true,
+          weight: true,
+          healthStatus: true,
+          companyId: true
+        }
+      });
 
+      if (!livestock || !livestock.companyId) {
+        throw new Error('Livestock not found or not associated with a company');
+      }
 
+      // Get company and farmkeepers
+      const company = await prisma.company.findUnique({
+        where: {
+          id: livestock.companyId
+        },
+        include: {
+          users: {
+            where: {
+              role: 'FARM_KEEPER',
+              isSuspended: false,
+              isVerified: true
+            },
+            select: {
+              id: true,
+              fullName: true,
+              email: true,
+              phone: true
+            }
+          }
+        }
+      });
 
+      if (!company) {
+        throw new Error('Company not found');
+      }
 
+      const farmKeepers = company.users || [];
+      if (farmKeepers.length === 0) {
+        throw new Error('No farmkeeper found for this company');
+      }
 
+      let title = '';
+      let message = '';
 
-// import prisma from '../prisma';
+      switch (requestType) {
+        case 'WEIGHT_UPDATE':
+          title = 'Weight Update Requested';
+          message = `Please update the weight for livestock ${livestock.tagId} (${livestock.type})`;
+          break;
+        case 'HEALTH_STATUS_UPDATE':
+          title = 'Health Status Update Requested';
+          message = `Please update the health status for livestock ${livestock.tagId} (${livestock.type})`;
+          break;
+        case 'COMBINED_UPDATE':
+          title = 'Weight and Health Status Update Requested';
+          message = `Please update both weight and health status for livestock ${livestock.tagId} (${livestock.type})`;
+          break;
+      }
 
-// export class NotificationHelpers {
-//   /**
-//    * Create task assignment notification
-//    */
-//   static async createTaskAssignmentNotification(task: any, assignedTo: any) {
-//     try {
-//       await prisma.notification.create({
-//         data: {
-//           title: 'New Task Assigned',
-//           message: `You have been assigned a new task: ${task.name}`,
-//           type: 'TASK_ASSIGNED',
-//           recipientId: assignedTo.id,
-//           relatedEntityType: 'TASK',
-//           relatedEntityId: task.id,
-//           metadata: {
-//             taskId: task.id,
-//             taskName: task.name,
-//             priority: task.priority,
-//             dueDate: task.dueDate,
-//             assignedByName: task.assignedBy.fullName
-//           }
-//         }
-//       });
+      const notifications = [];
+      let skippedCount = 0;
 
-//       console.log(`✅ Created task assignment notification for ${assignedTo.fullName}`);
+      for (const farmKeeper of farmKeepers) {
+        // Check if farmkeeper wants message notifications
+        const shouldNotify = await NotificationService.shouldSendNotification(
+          farmKeeper.id,
+          'MESSAGE'
+        );
 
-//     } catch (error) {
-//       console.error('❌ Error creating task assignment notification:', error);
-//     }
-//   }
+        if (!shouldNotify) {
+          skippedCount++;
+          continue;
+        }
 
-//   /**
-//    * Create announcement notification for all farm members
-//    */
-//   static async createAnnouncementNotification(announcement: any, farmName: string) {
-//     try {
-//       const farmMembers = await prisma.user.findMany({
-//         where: {
-//           companyName: farmName
-//         }
-//       });
+        const notification = await NotificationService.createNotification({
+          title,
+          message,
+          type: NotificationType.TASK_ASSIGNED,
+          status: NotificationStatus.UNREAD,
+          recipientId: farmKeeper.id,
+          relatedEntityType: 'LIVESTOCK',
+          relatedEntityId: livestock.id,
+          metadata: {
+            livestockId: livestock.id,
+            tagId: livestock.tagId,
+            type: livestock.type,
+            breed: livestock.breed || 'Not specified',
+            gender: livestock.gender,
+            currentWeight: livestock.weight,
+            currentHealthStatus: livestock.healthStatus,
+            requestedBy: requestedBy.fullName,
+            requestedByRole: requestedBy.role,
+            requestedById: requestedBy.id,
+            companyId: livestock.companyId,
+            companyName: company.name,
+            additionalNotes,
+            requestType,
+            timestamp: new Date().toISOString()
+          }
+        });
 
-//       const notifications = farmMembers.map(member => ({
-//         title: 'New Announcement',
-//         message: announcement.title,
-//         type: 'ANNOUNCEMENT',
-//         recipientId: member.id,
-//         relatedEntityType: 'ANNOUNCEMENT',
-//         relatedEntityId: announcement.id,
-//         metadata: {
-//           announcementId: announcement.id,
-//           title: announcement.title,
-//           content: announcement.content
-//         }
-//       }));
+        if (notification) {
+          notifications.push(notification);
+        }
+      }
 
-//       await prisma.notification.createMany({
-//         data: notifications
-//       });
+      return {
+        livestock,
+        company,
+        farmKeepers,
+        notifications,
+        skippedCount
+      };
 
-//       console.log(`Created announcement notifications for ${farmMembers.length} farm members`);
-
-//     } catch (error) {
-//       console.error('Error creating announcement notifications:', error);
-//     }
-//   }
-// }
+    } catch (error) {
+      console.error(`Error creating livestock update request:`, error);
+      throw error;
+    }
+  }
+}

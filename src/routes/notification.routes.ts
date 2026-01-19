@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import { authenticateJWT } from '../middlewares/errorHandler';
 import { validateRequest } from '../middlewares/validateRequest';
-import { getNotifications, getNotificationSettings, toggleNotificationSetting, updateNotificationSettings, updateNotificationStatus } from '../contollers/notification.controller';
+import { getNotifications, getNotificationSettings, requestHealthStatusUpdate, requestWeightUpdate, toggleNotificationSetting, updateNotificationSettings, updateNotificationStatus } from '../contollers/notification.controller';
 import { updateNotificationStatusSchema } from '../schemas/treatment.schemas';
-import { updateNotificationSettingsSchema } from '../schemas/notification.schemas';
+import { requestUpdateSchema, updateNotificationSettingsSchema } from '../schemas/notification.schemas';
+import { requireRoles } from '../middlewares/roleCheck';
 
 export const notificationRouter = Router();
 
@@ -39,4 +40,20 @@ notificationRouter.patch(
   '/:settingType/toggle',
   authenticateJWT,
   toggleNotificationSetting
+);
+
+notificationRouter.post(
+  '/:livestockId/weight-update',
+  authenticateJWT,
+  requireRoles(['ADMIN']),
+  validateRequest(requestUpdateSchema),
+  requestWeightUpdate
+);
+
+notificationRouter.post(
+  '/:livestockId/request-health-update',
+  authenticateJWT,
+  requireRoles(['ADMIN', 'FARM_KEEPER', 'COWORKER', 'VET']),
+  validateRequest(requestUpdateSchema),
+  requestHealthStatusUpdate
 );

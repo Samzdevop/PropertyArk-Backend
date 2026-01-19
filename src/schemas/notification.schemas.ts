@@ -7,3 +7,10 @@ export const updateNotificationSettingsSchema = z.object({
     messageNotifications: z.boolean().optional()
   })
 });
+
+
+export const requestUpdateSchema = z.object({
+  body: z.object({
+    additionalNotes: z.string().optional()
+  })
+});

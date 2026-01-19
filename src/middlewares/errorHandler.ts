@@ -69,13 +69,13 @@ export const errorHandler = (
 			details = `A record with this ${ field } already exists`;
 		}
 	} else if (err instanceof Prisma.PrismaClientValidationError) {
-		statusCode = 422; // Unprocessable Entity
+		statusCode = 422; 
 		errorMessage = `Database validation error: ${err.message}`;
 	}
 
 	// Handle Zod validation errors
 	else if (err instanceof ZodError) {
-		statusCode = 422; // Unprocessable Entity
+		statusCode = 422;
 		errorMessage =  'Validation failed';
 		const issues = err.errors.map((issue) => ({
 			field: issue.path.join('.').replace(/^body\./, ''),

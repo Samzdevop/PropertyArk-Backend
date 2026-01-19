@@ -1,4 +1,3 @@
-// schemas/users.schemas.ts
 import { z } from 'zod';
 import { validatePhoneNumber } from '../utils/phoneFormat';
 

@@ -26480,3 +26480,35 @@
 [32m[39m
 2025-12-19 18:50:03 [32minfo[39m [32mGET /api/v1/users 200 7.073 ms - 955[39m
 [32m[39m
+2026-01-16 16:44:27 [32minfo[39m [32mPOST /api/v1/auth/login 200 1465.891 ms - 642[39m
+[32m[39m
+2026-01-16 16:44:57 [32minfo[39m [32mGET /api/v1/notifications/cmj8izqvw000ot1l8unli074h/request-weight-update 404 2.654 ms - 173[39m
+[32m[39m
+2026-01-16 16:45:00 [32minfo[39m [32mGET /api/v1/notifications/cmj8izqvw000ot1l8unli074h/request-weight-update 404 2.013 ms - 173[39m
+[32m[39m
+2026-01-16 16:45:03 [32minfo[39m [32mGET /api/v1/notifications/cmj8izqvw000ot1l8unli074h/request-weight-update 404 0.549 ms - 173[39m
+[32m[39m
+2026-01-16 16:46:35 [32minfo[39m [32mGET /api/v1/notifications/cmj8izqvw000ot1l8unli074h/request-weight-update 404 6.710 ms - 173[39m
+[32m[39m
+2026-01-16 16:49:18 [32minfo[39m [32mGET /api/v1/notifications/cmj8izqvw000ot1l8unli074h/weight-update 404 7.245 ms - 165[39m
+[32m[39m
+2026-01-16 16:50:06 [32minfo[39m [32mGET /api/v1/notifications/cmj8izqw2000qt1l8z39ox5p1/weight-update 404 2.042 ms - 165[39m
+[32m[39m
+2026-01-16 16:51:23 [32minfo[39m [32mGET /api/v1/notifications/cmj8izqw2000qt1l8z39ox5p1/weight-update 404 0.421 ms - 165[39m
+[32m[39m
+2026-01-16 16:53:23 [32minfo[39m [32mGET /api/v1/notifynotifications/notify/cmj8izqw2000qt1l8z39ox5p1/weight-update 404 6.048 ms - 178[39m
+[32m[39m
+2026-01-16 16:53:57 [32minfo[39m [32mGET /api/v1/notifynotifications/notify/cmj8izqw2000qt1l8z39ox5p1/weight-update 404 1.931 ms - 178[39m
+[32m[39m
+2026-01-16 16:55:12 [32minfo[39m [32mGET /api/v1/notifications/cmj8izqw2000qt1l8z39ox5p1/weight-update 404 11.567 ms - 165[39m
+[32m[39m
+2026-01-16 17:02:07 [32minfo[39m [32mGET /api/v1/notifications/cmj8izqw2000qt1l8z39ox5p1/weight-update 404 1.793 ms - 165[39m
+[32m[39m
+2026-01-16 17:03:38 [32minfo[39m [32mGET /api/v1/notifications//weight-update/cmj8iqw2000qt1l8z39ox5p1 404 9.713 ms - 165[39m
+[32m[39m
+2026-01-16 17:04:07 [32minfo[39m [32mGET /api/v1/notifications//weight-update/livestock 404 38.847 ms - 150[39m
+[32m[39m
+2026-01-16 17:04:25 [32minfo[39m [32mGET /api/v1/notifications/weight-update/livestock 404 4.083 ms - 149[39m
+[32m[39m
+2026-01-16 17:06:10 [32minfo[39m [32mGET /api/v1/notifications/cmj8izqw2000qt1l8z39ox5p1/weight-update 404 11.257 ms - 165[39m
+[32m[39m

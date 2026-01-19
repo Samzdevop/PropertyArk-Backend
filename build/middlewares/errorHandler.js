@@ -53,12 +53,12 @@ const errorHandler = (err, _req, res, _next) => {
         }
     }
     else if (err instanceof client_1.Prisma.PrismaClientValidationError) {
-        statusCode = 422; // Unprocessable Entity
+        statusCode = 422;
         errorMessage = `Database validation error: ${err.message}`;
     }
     // Handle Zod validation errors
     else if (err instanceof zod_1.ZodError) {
-        statusCode = 422; // Unprocessable Entity
+        statusCode = 422;
         errorMessage = 'Validation failed';
         const issues = err.errors.map((issue) => ({
             field: issue.path.join('.').replace(/^body\./, ''),

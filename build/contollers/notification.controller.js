@@ -3,11 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.toggleNotificationSetting = exports.updateNotificationSettings = exports.getNotificationSettings = exports.updateNotificationStatus = exports.getNotifications = void 0;
+exports.requestHealthStatusUpdate = exports.requestWeightUpdate = exports.toggleNotificationSetting = exports.updateNotificationSettings = exports.getNotificationSettings = exports.updateNotificationStatus = exports.getNotifications = void 0;
 const prisma_1 = __importDefault(require("../prisma"));
 const sendSuccessResponse_1 = require("../utils/sendSuccessResponse");
 const NotFoundError_1 = require("../errors/NotFoundError");
 const BadRequestError_1 = require("../errors/BadRequestError");
+const notification_helpers_1 = require("../helpers/notification.helpers");
 const getNotifications = async (req, res, next) => {
     try {
         const userId = req.user.id;
@@ -183,3 +184,80 @@ const toggleNotificationSetting = async (req, res, next) => {
     }
 };
 exports.toggleNotificationSetting = toggleNotificationSetting;
+// Simplified controller using the helper
+const requestWeightUpdate = async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+        const userRole = req.user.role;
+        const { livestockId } = req.params;
+        const { additionalNotes } = req.body;
+        const result = await notification_helpers_1.LivestockNotificationHelpers.createLivestockUpdateRequest(livestockId, 'WEIGHT_UPDATE', {
+            id: userId,
+            fullName: req.user.fullName,
+            role: userRole
+        }, additionalNotes);
+        (0, sendSuccessResponse_1.sendSuccessResponse)(res, `Weight update request sent to ${result.notifications.length} farmkeeper(s)`, {
+            livestock: result.livestock,
+            company: result.company,
+            notificationsSent: result.notifications.length,
+            skippedCount: result.skippedCount
+        }, 201);
+    }
+    catch (error) {
+        next(error);
+    }
+};
+exports.requestWeightUpdate = requestWeightUpdate;
+const requestHealthStatusUpdate = async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+        const userRole = req.user.role;
+        const { livestockId } = req.params;
+        const { additionalNotes } = req.body;
+        const result = await notification_helpers_1.LivestockNotificationHelpers.createLivestockUpdateRequest(livestockId, 'HEALTH_STATUS_UPDATE', {
+            id: userId,
+            fullName: req.user.fullName,
+            role: userRole
+        }, additionalNotes);
+        (0, sendSuccessResponse_1.sendSuccessResponse)(res, `Health status update request sent to ${result.notifications.length} farmkeeper(s)`, 201);
+    }
+    catch (error) {
+        if (error.message.includes('not found') || error.message.includes('No farmkeeper')) {
+            return next(new NotFoundError_1.NotFoundError(error.message));
+        }
+        next(error);
+    }
+};
+exports.requestHealthStatusUpdate = requestHealthStatusUpdate;
+// export const requestCombinedUpdate = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   try {
+//     const userId = (req.user as any).id;
+//     const userRole = (req.user as any).role;
+//     const { livestockId } = req.params;
+//     const { additionalNotes } = req.body;
+//     const result = await LivestockNotificationHelpers.createLivestockUpdateRequest(
+//       livestockId,
+//       'COMBINED_UPDATE',
+//       {
+//         id: userId,
+//         fullName: (req.user as any).fullName,
+//         role: userRole
+//       },
+//       additionalNotes
+//     );
+//     sendSuccessResponse(
+//       res,
+//       `Weight and health status update request sent to ${result.notifications.length} farmkeeper(s)`,
+//       201
+//     );
+//   } catch (error: any) {
+//     if (error.message.includes('not found') || error.message.includes('No farmkeeper')) {
+//       return next(new NotFoundError(error.message));
+//     }
+//     next(error);
+//   }
+// };

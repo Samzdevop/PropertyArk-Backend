@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.adminUpdateUserSchema = exports.changePasswordSchema = exports.updateUserSchema = void 0;
-// schemas/users.schemas.ts
 const zod_1 = require("zod");
 const phoneFormat_1 = require("../utils/phoneFormat");
 exports.updateUserSchema = zod_1.z.object({

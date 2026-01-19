@@ -3,7 +3,9 @@ import prisma from '../prisma';
 import { sendSuccessResponse } from '../utils/sendSuccessResponse';
 import { NotFoundError } from '../errors/NotFoundError';
 import { BadRequestError } from '../errors/BadRequestError';
-
+import { NotificationService } from '../services/notification.services';
+import { NotificationType, NotificationStatus } from '@prisma/client';
+import { LivestockNotificationHelpers } from '../helpers/notification.helpers';
 
 export const getNotifications = async (
   req: Request,
@@ -216,5 +218,112 @@ export const toggleNotificationSetting = async (
   }
 };
 
+// Simplified controller using the helper
+export const requestWeightUpdate = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = (req.user as any).id;
+    const userRole = (req.user as any).role;
+    const { livestockId } = req.params;
+    const { additionalNotes } = req.body;
+
+    const result = await LivestockNotificationHelpers.createLivestockUpdateRequest(
+      livestockId,
+      'WEIGHT_UPDATE',
+      {
+        id: userId,
+        fullName: (req.user as any).fullName,
+        role: userRole
+      },
+      additionalNotes
+    );
+
+    sendSuccessResponse(
+      res,
+      `Weight update request sent to ${result.notifications.length} farmkeeper(s)`,
+      {
+        livestock: result.livestock,
+        company: result.company,
+        notificationsSent: result.notifications.length,
+        skippedCount: result.skippedCount
+      },
+      201
+    );
+  } catch (error) {
+    next(error);
+  }
+};
 
 
+export const requestHealthStatusUpdate = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId = (req.user as any).id;
+    const userRole = (req.user as any).role;
+    const { livestockId } = req.params;
+    const { additionalNotes } = req.body;
+
+    const result = await LivestockNotificationHelpers.createLivestockUpdateRequest(
+      livestockId,
+      'HEALTH_STATUS_UPDATE',
+      {
+        id: userId,
+        fullName: (req.user as any).fullName,
+        role: userRole
+      },
+      additionalNotes
+    );
+
+    sendSuccessResponse(
+      res,
+      `Health status update request sent to ${result.notifications.length} farmkeeper(s)`,
+      201
+    );
+  } catch (error: any) {
+    if (error.message.includes('not found') || error.message.includes('No farmkeeper')) {
+      return next(new NotFoundError(error.message));
+    }
+    next(error);
+  }
+};
+
+// export const requestCombinedUpdate = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   try {
+//     const userId = (req.user as any).id;
+//     const userRole = (req.user as any).role;
+//     const { livestockId } = req.params;
+//     const { additionalNotes } = req.body;
+
+//     const result = await LivestockNotificationHelpers.createLivestockUpdateRequest(
+//       livestockId,
+//       'COMBINED_UPDATE',
+//       {
+//         id: userId,
+//         fullName: (req.user as any).fullName,
+//         role: userRole
+//       },
+//       additionalNotes
+//     );
+
+//     sendSuccessResponse(
+//       res,
+//       `Weight and health status update request sent to ${result.notifications.length} farmkeeper(s)`,
+//       201
+//     );
+//   } catch (error: any) {
+//     if (error.message.includes('not found') || error.message.includes('No farmkeeper')) {
+//       return next(new NotFoundError(error.message));
+//     }
+//     next(error);
+//   }
+// };
