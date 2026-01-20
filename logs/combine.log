@@ -26512,3 +26512,157 @@
 [32m[39m
 2026-01-16 17:06:10 [32minfo[39m [32mGET /api/v1/notifications/cmj8izqw2000qt1l8z39ox5p1/weight-update 404 11.257 ms - 165[39m
 [32m[39m
+2026-01-18 16:54:37 [32minfo[39m [32mGET /api/v1/notifications/cmj8izqvw000ot1l8unli074h/weight-update 404 6.367 ms - 165[39m
+[32m[39m
+2026-01-18 16:54:44 [32minfo[39m [32mPOST /api/v1/notifications/cmj8izqvw000ot1l8unli074h/weight-update 401 16.149 ms - 64[39m
+[32m[39m
+2026-01-18 16:56:02 [32minfo[39m [32mPOST /api/v1/auth/login 200 244.294 ms - 642[39m
+[32m[39m
+2026-01-18 16:56:19 [32minfo[39m [32mPOST /api/v1/notifications/cmj8izqvw000ot1l8unli074h/weight-update 201 142.279 ms - 704[39m
+[32m[39m
+2026-01-19 15:07:28 [32minfo[39m [32mPOST /auth/login 404 2.875 ms - 115[39m
+[32m[39m
+2026-01-19 15:07:44 [32minfo[39m [32mPOST /auth/login 404 0.862 ms - 115[39m
+[32m[39m
+2026-01-19 15:08:19 [32minfo[39m [32mPOST /api/v1/auth/login 200 346.853 ms - 642[39m
+[32m[39m
+2026-01-19 15:08:52 [32minfo[39m [32mPOST /auth/login 404 0.991 ms - 115[39m
+[32m[39m
+2026-01-19 15:10:20 [32minfo[39m [32mPOST /api/v1/auth/login 200 165.520 ms - 642[39m
+[32m[39m
+2026-01-19 15:10:27 [32minfo[39m [32mGET /api/v1/livestock/counts 200 195.754 ms - 103[39m
+[32m[39m
+2026-01-19 15:10:27 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 218.047 ms - 7403[39m
+[32m[39m
+2026-01-19 15:10:28 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 30.879 ms - 12740[39m
+[32m[39m
+2026-01-19 15:10:28 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 33.890 ms - 7403[39m
+[32m[39m
+2026-01-19 15:10:28 [32minfo[39m [32mGET /api/v1/livestock/counts 200 40.142 ms - 103[39m
+[32m[39m
+2026-01-19 15:10:31 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 18.486 ms - 12740[39m
+[32m[39m
+2026-01-19 15:10:38 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 13.533 ms - 12740[39m
+[32m[39m
+2026-01-19 15:10:39 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 17.963 ms - 12740[39m
+[32m[39m
+2026-01-19 15:20:54 [32minfo[39m [32mPOST /api/v1/notifications/cmj8izqvw000ot1l8unli074h/weight-update 201 118.553 ms - 704[39m
+[32m[39m
+2026-01-19 15:25:34 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 29.826 ms - 12740[39m
+[32m[39m
+2026-01-19 15:25:37 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 31.419 ms - 12740[39m
+[32m[39m
+2026-01-19 15:25:47 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 18.525 ms - 12740[39m
+[32m[39m
+2026-01-19 15:25:50 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 17.757 ms - 12740[39m
+[32m[39m
+2026-01-19 15:25:56 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 18.136 ms - 12740[39m
+[32m[39m
+2026-01-19 15:25:58 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 18.265 ms - 12740[39m
+[32m[39m
+2026-01-19 15:42:25 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 31.691 ms - 12740[39m
+[32m[39m
+2026-01-19 15:42:27 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 18.515 ms - 12740[39m
+[32m[39m
+2026-01-19 15:42:41 [32minfo[39m [32mPOST /api/v1/livestock/cmjbjp8je0003t1sgjof93x6m/weight-update 404 0.644 ms - 161[39m
+[32m[39m
+2026-01-19 15:43:18 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 26.573 ms - 12740[39m
+[32m[39m
+2026-01-19 15:43:19 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 18.558 ms - 12740[39m
+[32m[39m
+2026-01-19 15:43:24 [32minfo[39m [32mPOST /api/v1/notifications/cmjbjp8je0003t1sgjof93x6m/weight-update 201 34.493 ms - 684[39m
+[32m[39m
+2026-01-19 15:43:39 [32minfo[39m [32mPOST /api/v1/notifications/cmj8izqxn001qt1l8gnotz1v3/request-health-update 200 25.328 ms - 92[39m
+[32m[39m
+2026-01-19 15:44:00 [32minfo[39m [32mGET /api/v1/livestock?page=2&limit=10 200 25.840 ms - 12756[39m
+[32m[39m
+2026-01-19 15:44:23 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 17.432 ms - 12740[39m
+[32m[39m
+2026-01-19 15:44:26 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 24.201 ms - 12740[39m
+[32m[39m
+2026-01-19 16:11:25 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 401 5.342 ms - 64[39m
+[32m[39m
+2026-01-19 16:11:28 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 401 1.648 ms - 64[39m
+[32m[39m
+2026-01-19 16:12:09 [32minfo[39m [32mPOST /api/v1/auth/login 200 163.694 ms - 642[39m
+[32m[39m
+2026-01-19 16:12:14 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 109.487 ms - 7403[39m
+[32m[39m
+2026-01-19 16:12:15 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 21.991 ms - 12740[39m
+[32m[39m
+2026-01-19 16:12:16 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 15.274 ms - 7403[39m
+[32m[39m
+2026-01-19 16:12:17 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 19.663 ms - 12740[39m
+[32m[39m
+2026-01-19 16:12:17 [32minfo[39m [32mGET /api/v1/livestock/counts 200 13.476 ms - 103[39m
+[32m[39m
+2026-01-19 16:12:18 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 17.043 ms - 12740[39m
+[32m[39m
+2026-01-19 16:12:18 [32minfo[39m [32mGET /api/v1/livestock/counts 200 10.414 ms - 103[39m
+[32m[39m
+2026-01-19 16:12:18 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 14.526 ms - 12740[39m
+[32m[39m
+2026-01-19 16:13:20 [32minfo[39m [32mGET /api/v1/livestock?page=2&limit=10 200 20.325 ms - 12756[39m
+[32m[39m
+2026-01-19 16:13:25 [32minfo[39m [32mGET /api/v1/livestock?page=3&limit=10 200 15.960 ms - 1334[39m
+[32m[39m
+2026-01-19 16:15:02 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 30.830 ms - 12740[39m
+[32m[39m
+2026-01-19 16:15:05 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 19.535 ms - 12740[39m
+[32m[39m
+2026-01-19 16:15:09 [32minfo[39m [32mGET /api/v1/livestock?page=2&limit=10 200 18.857 ms - 12756[39m
+[32m[39m
+2026-01-19 16:15:14 [32minfo[39m [32mGET /api/v1/livestock?page=3&limit=10 200 21.807 ms - 1334[39m
+[32m[39m
+2026-01-19 16:15:32 [32minfo[39m [32mGET /api/v1/tasks/assigned/all 200 108.081 ms - 7403[39m
+[32m[39m
+2026-01-19 16:15:34 [32minfo[39m [32mGET /api/v1/users 200 20.847 ms - 955[39m
+[32m[39m
+2026-01-19 16:15:35 [32minfo[39m [32mGET /api/v1/tasks/assigned/all 200 28.377 ms - 7403[39m
+[32m[39m
+2026-01-19 16:15:35 [32minfo[39m [32mGET /api/v1/users 200 123.126 ms - 955[39m
+[32m[39m
+2026-01-19 16:23:06 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 23.253 ms - 12740[39m
+[32m[39m
+2026-01-19 16:23:08 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 23.697 ms - 12740[39m
+[32m[39m
+2026-01-19 16:26:21 [32minfo[39m [32mPOST /api/v1/livestock/cmj8izq2l0000t1l8yjb6du93 201 227.790 ms - 1027[39m
+[32m[39m
+2026-01-19 16:30:49 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 25.464 ms - 12355[39m
+[32m[39m
+2026-01-19 16:30:52 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 17.607 ms - 12355[39m
+[32m[39m
+2026-01-19 16:31:09 [32minfo[39m [32mGET /api/v1/tasks/assigned/all 200 103.493 ms - 7403[39m
+[32m[39m
+2026-01-19 16:31:10 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 53.512 ms - 12355[39m
+[32m[39m
+2026-01-19 16:31:10 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 142.666 ms - 7403[39m
+[32m[39m
+2026-01-19 16:31:10 [32minfo[39m [32mGET /api/v1/tasks/assigned/all 200 13.022 ms - 7403[39m
+[32m[39m
+2026-01-19 16:31:10 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 15.431 ms - 12355[39m
+[32m[39m
+2026-01-19 16:31:10 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 15.189 ms - 7403[39m
+[32m[39m
+2026-01-19 16:31:11 [32minfo[39m [32mGET /api/v1/livestock/counts 200 8.454 ms - 103[39m
+[32m[39m
+2026-01-19 16:31:12 [32minfo[39m [32mGET /api/v1/livestock/counts 200 8.849 ms - 103[39m
+[32m[39m
+2026-01-19 21:00:08 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 401 16.118 ms - 64[39m
+[32m[39m
+2026-01-19 21:00:11 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 401 1.761 ms - 64[39m
+[32m[39m
+2026-01-19 21:00:28 [32minfo[39m [32mPOST /api/v1/auth/login 200 185.474 ms - 642[39m
+[32m[39m
+2026-01-19 21:00:33 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 40.632 ms - 12355[39m
+[32m[39m
+2026-01-19 21:00:34 [32minfo[39m [32mGET /api/v1/livestock/counts 200 110.432 ms - 103[39m
+[32m[39m
+2026-01-19 21:00:34 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 21.324 ms - 12355[39m
+[32m[39m
+2026-01-19 21:00:35 [32minfo[39m [32mGET /api/v1/livestock/counts 200 11.935 ms - 103[39m
+[32m[39m
+2026-01-19 21:00:36 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 19.840 ms - 7403[39m
+[32m[39m
+2026-01-19 21:00:39 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 16.078 ms - 7403[39m
+[32m[39m
