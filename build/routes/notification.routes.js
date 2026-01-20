@@ -4,10 +4,10 @@ exports.notificationRouter = void 0;
 const express_1 = require("express");
 const errorHandler_1 = require("../middlewares/errorHandler");
 const validateRequest_1 = require("../middlewares/validateRequest");
-const notification_controller_1 = require("../contollers/notification.controller");
 const treatment_schemas_1 = require("../schemas/treatment.schemas");
 const notification_schemas_1 = require("../schemas/notification.schemas");
 const roleCheck_1 = require("../middlewares/roleCheck");
+const notification_controller_1 = require("../contollers/notification.controller");
 exports.notificationRouter = (0, express_1.Router)();
 // Create diagnosis - VET only
 exports.notificationRouter.get('/', errorHandler_1.authenticateJWT, notification_controller_1.getNotifications);
