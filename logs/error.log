@@ -5421,3 +5421,4 @@
 2025-12-18 14:53:06 [31merror[39m [31mrequest entity too large request entity too large[39m
 2025-12-18 14:54:24 [31merror[39m [31mrequest entity too large request entity too large[39m
 2025-12-18 16:49:04 [31merror[39m [31mFarm not found Farm not found[39m
+2026-01-23 05:54:28 [31merror[39m [31mBad escaped character in JSON at position 19 (line 2 column 17) Bad escaped character in JSON at position 19 (line 2 column 17)[39m

@@ -30,11 +30,10 @@ const note_routes_1 = require("./routes/note.routes");
 const upload_1 = require("./config/upload");
 exports.app = (0, express_1.default)();
 exports.app.use(passport_1.default.initialize());
-// Configuration
 exports.app.use((0, helmet_1.default)());
 exports.app.use((0, cors_1.default)({
-    origin: process.env.CORS_ORIGIN || '*', // Allow all origins by default
-    credentials: true, // Allow credentials if needed
+    origin: process.env.CORS_ORIGIN || '*',
+    credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 exports.app.use(express_1.default.json());

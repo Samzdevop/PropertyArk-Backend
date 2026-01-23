@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllVets = exports.getFarmDetails = exports.getVetAssignedFarms = exports.adminUpdateUser = exports.updateUserProfile = exports.deleteUser = exports.getUserById = exports.getAllUsers = exports.getProfile = void 0;
+exports.getAllVets = exports.getFarmDetails = exports.getVetAssignedFarms = exports.updateUserAvatar = exports.adminUpdateUser = exports.updateUserProfile = exports.deleteUser = exports.getUserById = exports.getAllUsers = exports.getProfile = void 0;
 const prisma_1 = __importDefault(require("../prisma"));
 const sendSuccessResponse_1 = require("../utils/sendSuccessResponse");
 const NotFoundError_1 = require("../errors/NotFoundError");
@@ -12,6 +12,7 @@ const ForbiddenError_1 = require("../errors/ForbiddenError");
 const phoneFormat_1 = require("../utils/phoneFormat");
 const BadRequestError_1 = require("../errors/BadRequestError");
 const vet_helpers_1 = require("../helpers/vet.helpers");
+const upload_1 = require("../config/upload");
 // import { Prisma } from '@prisma/client';
 const getProfile = async (req, res, next) => {
     try {
@@ -143,14 +144,12 @@ const updateUserProfile = async (req, res, next) => {
             throw new BadRequestError_1.BadRequestError('Phone must be in valid international format (+XXX...) or local Nigerian format (0XXX...)');
         }
         const normalizedPhone = phone ? (0, phoneFormat_1.normalizePhoneNumber)(phone) : undefined;
-        // Prepare update data
         const updateData = {
             fullName,
             location,
             avatar,
             phone: normalizedPhone,
         };
-        // Only allow admin to update companyName
         if (companyName && userRole === 'ADMIN') {
             updateData.companyName = companyName;
         }
@@ -189,7 +188,6 @@ const adminUpdateUser = async (req, res, next) => {
             throw new BadRequestError_1.BadRequestError('Phone must be in valid international format (+XXX...) or local Nigerian format (0XXX...)');
         }
         const normalizedPhone = phone ? (0, phoneFormat_1.normalizePhoneNumber)(phone) : undefined;
-        // Prepare update data
         const updateData = {
             ...(fullName && { fullName }),
             ...(location && { location }),
@@ -211,6 +209,54 @@ const adminUpdateUser = async (req, res, next) => {
     }
 };
 exports.adminUpdateUser = adminUpdateUser;
+const updateUserAvatar = async (req, res, next) => {
+    try {
+        const adminId = req.user.id;
+        const adminRole = req.user.role;
+        const { userId } = req.params;
+        if (adminRole !== 'ADMIN') {
+            throw new ForbiddenError_1.ForbiddenError('Only admin can update user avatars');
+        }
+        const targetUser = await prisma_1.default.user.findUnique({
+            where: { id: userId }
+        });
+        if (!targetUser) {
+            throw new NotFoundError_1.NotFoundError('User not found');
+        }
+        const file = req.file;
+        if (!file) {
+            throw new BadRequestError_1.BadRequestError('No avatar file uploaded');
+        }
+        const avatarUrl = (0, upload_1.getFileUrl)(file.filename);
+        if (targetUser.avatar) {
+            try {
+                const oldFilename = targetUser.avatar.split('/').pop();
+                if (oldFilename) {
+                    await (0, upload_1.deleteFile)(oldFilename);
+                }
+            }
+            catch (error) {
+                console.error('Error deleting old avatar:', error);
+            }
+        }
+        const updatedUser = await prisma_1.default.user.update({
+            where: { id: userId },
+            data: {
+                avatar: avatarUrl,
+                updatedAt: new Date()
+            },
+            select: selects_1.userSelect
+        });
+        (0, sendSuccessResponse_1.sendSuccessResponse)(res, 'User avatar updated successfully', updatedUser);
+    }
+    catch (error) {
+        if (req.file) {
+            await (0, upload_1.deleteFile)(req.file.filename);
+        }
+        next(error);
+    }
+};
+exports.updateUserAvatar = updateUserAvatar;
 const getVetAssignedFarms = async (req, res, next) => {
     try {
         const vetId = req.user.id;
@@ -956,7 +1002,7 @@ const getFarmDetails = async (req, res, next) => {
 exports.getFarmDetails = getFarmDetails;
 const getAllVets = async (req, res, next) => {
     try {
-        console.log('🟢 getAllVets function STARTED');
+        // console.log('🟢 getAllVets function STARTED');
         const currentUser = req.user;
         const role = currentUser.role;
         console.log('👨‍⚕️ Fetching all vets requested by:', {
@@ -985,17 +1031,13 @@ const getAllVets = async (req, res, next) => {
                 { location: { contains: search, mode: 'insensitive' } }
             ];
         }
-        // Add verified filter
         if (verified !== undefined) {
             whereClause.isVerified = verified === 'true';
         }
-        // Add location filter
         if (location) {
             whereClause.location = { contains: location, mode: 'insensitive' };
         }
-        // Get vets with pagination and filters
         const [vets, totalVets, activeVetsCount] = await Promise.all([
-            // Get paginated vets
             prisma_1.default.user.findMany({
                 where: whereClause,
                 select: {
@@ -1010,7 +1052,6 @@ const getAllVets = async (req, res, next) => {
                     lastLogin: true,
                     createdAt: true,
                     updatedAt: true,
-                    // Include additional vet-specific info if available
                     _count: {
                         select: {
                             assignedTasks: {
@@ -1027,11 +1068,9 @@ const getAllVets = async (req, res, next) => {
                 skip: skip,
                 take: limitNum
             }),
-            // Get total count
             prisma_1.default.user.count({
                 where: whereClause
             }),
-            // Get count of active vets (logged in last 30 days)
             prisma_1.default.user.count({
                 where: {
                     role: 'VET',

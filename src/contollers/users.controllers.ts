@@ -8,6 +8,7 @@ import { Role } from '@prisma/client';
 import { normalizePhoneNumber, validatePhoneNumber } from '../utils/phoneFormat';
 import { BadRequestError } from '../errors/BadRequestError';
 import { getVetStatistics } from '../helpers/vet.helpers';
+import { deleteFile, getFileUrl } from '../config/upload';
 // import { Prisma } from '@prisma/client';
 
 export const getProfile = async (
@@ -176,15 +177,12 @@ export const updateUserProfile = async (
 
     const normalizedPhone = phone ? normalizePhoneNumber(phone) : undefined;
 
-    // Prepare update data
     const updateData: any = {
       fullName,
       location,
       avatar,
       phone: normalizedPhone,
     };
-
-    // Only allow admin to update companyName
     if (companyName && userRole === 'ADMIN') {
       updateData.companyName = companyName;
     } else if (companyName && userRole !== 'ADMIN') {
@@ -232,10 +230,7 @@ export const adminUpdateUser = async (
         'Phone must be in valid international format (+XXX...) or local Nigerian format (0XXX...)'
       );
     }
-
     const normalizedPhone = phone ? normalizePhoneNumber(phone) : undefined;
-
-    // Prepare update data
     const updateData: any = {
       ...(fullName && { fullName }),
       ...(location && { location }),
@@ -254,6 +249,61 @@ export const adminUpdateUser = async (
 
     sendSuccessResponse(res, 'User updated successfully', updatedUser);
   } catch (error) {
+    next(error);
+  }
+};
+
+export const updateUserAvatar = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const adminId = (req.user as any).id;
+    const adminRole = (req.user as any).role;
+    const { userId } = req.params;
+
+    if (adminRole !== 'ADMIN') {
+      throw new ForbiddenError('Only admin can update user avatars');
+    }
+
+    const targetUser = await prisma.user.findUnique({
+      where: { id: userId }
+    });
+
+    if (!targetUser) {
+      throw new NotFoundError('User not found');
+    }
+    const file = req.file;
+    if (!file) {
+      throw new BadRequestError('No avatar file uploaded');
+    }
+
+    const avatarUrl = getFileUrl(file.filename);
+    if (targetUser.avatar) {
+      try {
+        const oldFilename = targetUser.avatar.split('/').pop();
+        if (oldFilename) {
+          await deleteFile(oldFilename);
+        }
+      } catch (error) {
+        console.error('Error deleting old avatar:', error);
+      }
+    }
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: { 
+        avatar: avatarUrl,
+        updatedAt: new Date() 
+      },
+      select: userSelect
+    });
+
+    sendSuccessResponse(res, 'User avatar updated successfully', updatedUser);
+  } catch (error) {
+    if (req.file) {
+      await deleteFile(req.file.filename);
+    }
     next(error);
   }
 };
@@ -1078,7 +1128,7 @@ export const getAllVets = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    console.log('🟢 getAllVets function STARTED');
+    // console.log('🟢 getAllVets function STARTED');
     const currentUser = (req.user as any);
     const role = currentUser.role;
     
@@ -1121,19 +1171,15 @@ export const getAllVets = async (
       ];
     }
 
-    // Add verified filter
     if (verified !== undefined) {
       whereClause.isVerified = verified === 'true';
     }
 
-    // Add location filter
     if (location) {
       whereClause.location = { contains: location as string, mode: 'insensitive' };
     }
 
-    // Get vets with pagination and filters
     const [vets, totalVets, activeVetsCount] = await Promise.all([
-      // Get paginated vets
       prisma.user.findMany({
         where: whereClause,
         select: {
@@ -1148,7 +1194,6 @@ export const getAllVets = async (
           lastLogin: true,
           createdAt: true,
           updatedAt: true,
-          // Include additional vet-specific info if available
           _count: {
             select: {
               assignedTasks: {
@@ -1166,12 +1211,10 @@ export const getAllVets = async (
         take: limitNum
       }),
 
-      // Get total count
       prisma.user.count({
         where: whereClause
       }),
 
-      // Get count of active vets (logged in last 30 days)
       prisma.user.count({
         where: {
           role: 'VET',

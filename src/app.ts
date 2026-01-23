@@ -28,11 +28,11 @@ export const app = express();
 
 app.use(passport.initialize());
 
-// Configuration
+
 app.use(helmet());
 app.use(cors({
-	origin: process.env.CORS_ORIGIN || '*', // Allow all origins by default
-	credentials: true, // Allow credentials if needed
+	origin: process.env.CORS_ORIGIN || '*', 
+	credentials: true, 
 	allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(express.json());
