@@ -16,7 +16,8 @@ exports.userSelect = {
     createdAt: true,
     updatedAt: true,
     lastLogin: true,
-    companyId: true
+    companyId: true,
+    fcmToken: true
 };
 exports.livestockSelect = {
     id: true,

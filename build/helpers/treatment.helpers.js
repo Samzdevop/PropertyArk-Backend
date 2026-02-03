@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TreatmentHelpers = void 0;
-// src/helpers/treatment.helpers.ts
 const notification_services_1 = require("../services/notification.services");
 const prisma_1 = __importDefault(require("../prisma"));
 const client_1 = require("@prisma/client");

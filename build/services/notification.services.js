@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NotificationService = void 0;
 const prisma_1 = __importDefault(require("../prisma"));
+const mail_services_1 = require("../services/mail.services");
+const client_1 = require("@prisma/client");
 class NotificationService {
     static async shouldSendNotification(userId, notificationType) {
         const settings = await prisma_1.default.notificationSettings.findUnique({
@@ -46,6 +48,48 @@ class NotificationService {
         catch (error) {
             console.error('Error creating notification:', error);
             return null;
+        }
+    }
+    static async sendMessageEmailNotification(messageId, recipientIds) {
+        const message = await prisma_1.default.message.findUnique({
+            where: { id: messageId },
+            include: {
+                sender: true,
+            },
+        });
+        if (!message)
+            return;
+        for (const recipientId of recipientIds) {
+            const user = await prisma_1.default.user.findUnique({
+                where: { id: recipientId },
+                select: { email: true, fullName: true },
+            });
+            if (!user?.email)
+                continue;
+            const shouldSend = await this.shouldSendNotification(recipientId, 'MESSAGE');
+            if (!shouldSend)
+                continue;
+            // Send email
+            await mail_services_1.transporter.sendMail({
+                from: `"AgriTech" <${process.env.SMTP_USER}>`,
+                to: user.email,
+                subject: `New message from ${message.sender.fullName}`,
+                html: `
+          <p>Hello ${user.fullName},</p>
+          <p>You received a new message:</p>
+          <blockquote>${message.content}</blockquote>
+          <p>Login to reply.</p>
+        `,
+            });
+            // Save notification
+            await this.createNotification({
+                recipientId,
+                senderId: message.senderId,
+                type: client_1.NotificationType.MESSAGE,
+                title: 'New message',
+                body: message.content,
+                metadata: { messageId },
+            });
         }
     }
     static async getUserNotificationSettings(userId) {

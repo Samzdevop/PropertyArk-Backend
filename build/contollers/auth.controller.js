@@ -187,7 +187,7 @@ const register = async (req, res, next) => {
 exports.register = register;
 const vetRegister = async (req, res, next) => {
     try {
-        const { email, phone, fullName, password, location } = req.body;
+        const { email, phone, fullName, password, location, bio, specializations, licenseNumber, consultationFee, yearsOfExperience, certifications } = req.body;
         if (phone && !(0, phoneFormat_1.validatePhoneNumber)(phone)) {
             throw new BadRequestError_1.BadRequestError('Phone must be in valid international format (+XXX...) or local Nigerian format (0XXX...)');
         }
@@ -211,7 +211,6 @@ const vetRegister = async (req, res, next) => {
         }
         const hashedPassword = await (0, argon2_1.hash)(password);
         const verificationCode = (0, generateVerificationCode_1.generateVerificationCode)().toString();
-        // Create vet user with verification
         await prisma_1.default.user.create({
             data: {
                 email,
@@ -222,10 +221,15 @@ const vetRegister = async (req, res, next) => {
                 verificationCode,
                 verificationExpires: new Date(new Date().getTime() + 30 * 60 * 1000),
                 role: "VET",
-                isVerified: false
+                isVerified: false,
+                bio: bio || null,
+                specializations: specializations ? JSON.parse(specializations) : [],
+                licenseNumber,
+                consultationFee: consultationFee ? parseFloat(consultationFee) : null,
+                yearsOfExperience: yearsOfExperience ? parseInt(yearsOfExperience) : null,
+                certifications: certifications ? JSON.parse(certifications) : []
             }
         });
-        // Send verification email if email is provided
         if (email) {
             const html = (0, mailTemplate_1.render)("verification", {
                 fullName,
@@ -242,7 +246,6 @@ const vetRegister = async (req, res, next) => {
             if (process.env.NODE_ENV !== "test")
                 (0, mail_services_1.sendCustomMail)(mailOptions);
         }
-        // If phone is provided, we add the logic to send SMS verification here
         (0, sendSuccessResponse_1.sendSuccessResponse)(res, "Vet registration successful. Please verify your account.", {}, 201);
     }
     catch (error) {

@@ -69,8 +69,6 @@ export const createDiagnosis = async (
   }
 };
 
-
-
 export const updateDiagnosis = async (
   req: Request,
   res: Response,

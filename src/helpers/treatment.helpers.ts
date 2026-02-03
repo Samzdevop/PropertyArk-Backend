@@ -1,4 +1,3 @@
-// src/helpers/treatment.helpers.ts
 import { NotificationService } from '../services/notification.services';
 import prisma from '../prisma';
 import { NotificationType, NotificationStatus } from '@prisma/client';

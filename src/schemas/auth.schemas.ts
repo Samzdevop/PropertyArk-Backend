@@ -42,6 +42,28 @@ export const vetRegisterSchema = z.object({
     .optional(),
     password: z.string().min(8, "Password must be at least 8 characters long"),
     location: z.string().optional(),
+      bio: z.string().max(500, "Bio cannot exceed 500 characters").optional(),
+    specializations: z.string().optional().transform(val => {
+      try {
+        return val ? JSON.parse(val) : [];
+      } catch {
+        return [];
+      }
+    }),
+    licenseNumber: z.string().min(1, "License number is required"),
+    consultationFee: z.string().optional().transform(val => {
+        return val ? parseFloat(val) : null;
+      }),
+    yearsOfExperience: z.string().optional().transform(val => {
+        return val ? parseInt(val) : null;
+    }),
+    certifications: z.string().optional().transform(val => {
+        try {
+          return val ? JSON.parse(val) : [];
+        } catch {
+          return [];
+        }
+      })
   }).refine(data => data.email || data.phone, {
     message: "Either email or phone number is required",
     path: ["email"],

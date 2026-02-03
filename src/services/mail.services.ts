@@ -1,8 +1,10 @@
 import { createTransport } from 'nodemailer';
 import Logger from '../config/logger';
 import { MailInterface } from '../interfaces/mail.interfaces';
+import nodemailer from 'nodemailer';
 
-const transporter = createTransport({
+
+export const transporter = nodemailer.createTransport({
 	host: process.env.SMTP_HOST,
 	port: Number(process.env.SMTP_PORT || 587),
 	secure:false,

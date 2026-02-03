@@ -10,7 +10,6 @@ const path_1 = __importDefault(require("path"));
 const client_s3_1 = require("@aws-sdk/client-s3");
 const multer_s3_1 = __importDefault(require("multer-s3"));
 exports.UPLOADS_PATH = path_1.default.join(process.cwd(), "uploads");
-// Determine storage driver from env
 const storageDriver = process.env.STORAGE_DRIVER === 's3' ? 's3' : 'local';
 const storageConfig = {
     driver: storageDriver,

@@ -190,7 +190,19 @@ export const vetRegister = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const { email, phone, fullName, password, location } = req.body;
+    const { 
+      email, 
+      phone, 
+      fullName, 
+      password, 
+      location,
+      bio,
+      specializations,
+      licenseNumber,
+      consultationFee,
+      yearsOfExperience,
+      certifications
+    } = req.body;
 
     if (phone && !validatePhoneNumber(phone)) {
       throw new BadRequestError(
@@ -221,8 +233,7 @@ export const vetRegister = async (
 
     const hashedPassword = await hash(password);
     const verificationCode = generateVerificationCode().toString();
-    
-    // Create vet user with verification
+     
     await prisma.user.create({
       data: {
         email,
@@ -233,11 +244,16 @@ export const vetRegister = async (
         verificationCode,
         verificationExpires: new Date(new Date().getTime() + 30 * 60 * 1000),
         role: "VET", 
-        isVerified: false 
+        isVerified: false,
+        bio: bio || null,
+        specializations: specializations ? JSON.parse(specializations) : [],
+        licenseNumber,
+        consultationFee: consultationFee ? parseFloat(consultationFee) : null,
+        yearsOfExperience: yearsOfExperience ? parseInt(yearsOfExperience) : null,
+        certifications: certifications ? JSON.parse(certifications) : []
       }
     });
 
-    // Send verification email if email is provided
     if (email) {
       const html = render("verification", {
         fullName,
@@ -254,8 +270,6 @@ export const vetRegister = async (
 
       if (process.env.NODE_ENV !== "test") sendCustomMail(mailOptions);
     }
-    // If phone is provided, we add the logic to send SMS verification here
-
     sendSuccessResponse(
       res, 
       "Vet registration successful. Please verify your account.", 

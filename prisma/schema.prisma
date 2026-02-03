@@ -14,29 +14,28 @@ datasource db {
 }
 
 model Company {
-  id          String   @id @default(cuid())
-  name        String   @unique
+  id          String       @id @default(cuid())
+  name        String       @unique
   location    String?
   phone       String?
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  notes       Note []
+  isActive    Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  notes       Note[]
+  vetRequests VetRequest[]
 
-  
   // Relations
-  users       User[]
-  appointments Appointment[]
-  farmVisits  FarmVisit[]
-  livestock   Livestock[]
-  tasks       Task[]
-  inventories          Inventory[]
-  inventoryRecords     InventoryRecord[]
+  users                 User[]
+  appointments          Appointment[]
+  farmVisits            FarmVisit[]
+  livestock             Livestock[]
+  tasks                 Task[]
+  inventories           Inventory[]
+  inventoryRecords      InventoryRecord[]
   financialTransactions FinancialTransaction[]
-  
+
   @@map("companies")
 }
-
 
 model User {
   id                  String    @id @default(cuid())
@@ -45,7 +44,7 @@ model User {
   googleId            String?   @unique
   companyName         String?
   company             Company?  @relation(fields: [companyId], references: [id])
-  companyId           String? 
+  companyId           String?
   password            String?
   fullName            String
   avatar              String?
@@ -59,29 +58,46 @@ model User {
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt
 
-  // Relations
-  assignedTasks        Task[]                 @relation("TaskAssignedTo")
-  createdTasks         Task[]                 @relation("CreatedTasks")
-  livestockAdded       Livestock[]            @relation("LivestockAddedBy")
-  livestockUpdated     Livestock[]            @relation("LivestockUpdatedBy")
-  deletedLivestock     Livestock[]            @relation("LivestockDeletedBy")
+  bio                 String?
+  specializations     String[]
+  fcmToken            String?
+  licenseNumber       String?           @unique
+  averageRating       Float             @default(0.0)
+  totalRatings        Int               @default(0)
+  availability        String[]
+  consultationFee     Float?
+  yearsOfExperience   Int?
+  certifications      String[]
+  deletedMessages     Message[]         @relation("MessageDeletions")
+  reactions           Reaction[]
+  messageDeliveries   MessageDelivery[]
+  initiatedCalls      Call[]
+  callParticipants    CallParticipant[]
+  vetRequestsSent     VetRequest[]      @relation("VetRequestsSent")
+  vetRequestsReceived VetRequest[]      @relation("VetRequestsReceived")
+
+  assignedTasks        Task[]                    @relation("TaskAssignedTo")
+  createdTasks         Task[]                    @relation("CreatedTasks")
+  livestockAdded       Livestock[]               @relation("LivestockAddedBy")
+  livestockUpdated     Livestock[]               @relation("LivestockUpdatedBy")
+  deletedLivestock     Livestock[]               @relation("LivestockDeletedBy")
   vaccination          Vaccination[]
   Sickness             Sickness[]
   Treatment            Treatment[]
   OfftakeRecord        OfftakeRecord[]
-  TaskObservation      TaskObservation[]      @relation("UserTaskObservations")
+  TaskObservation      TaskObservation[]         @relation("UserTaskObservations")
   InventoryRecord      InventoryRecord[]
   FinancialTransaction FinancialTransaction[]
   Diagnosis            Diagnosis[]
   prescribedTreatments PrescribedTreatment[]
   followUps            FollowUp[]
   notifications        Notification[]
-  appointments         Appointment[]  
-  farmVisits           FarmVisit[]    
-  notes                Note[] 
+  appointments         Appointment[]
+  farmVisits           FarmVisit[]
+  notes                Note[]
   notificationSettings NotificationSettings?
   conversations        ConversationParticipant[]
-  sentMessages         Message[]                
+  sentMessages         Message[]
 
   // Creator relationship
   createdBy    User?   @relation("UserCreator", fields: [createdById], references: [id])
@@ -89,7 +105,27 @@ model User {
   createdUsers User[]  @relation("UserCreator")
 
   @@index([companyId])
+}
 
+model VetRequest {
+  id         String    @id @default(cuid())
+  vetId      String
+  vet        User      @relation("VetRequestsReceived", fields: [vetId], references: [id])
+  companyId  String
+  company    Company   @relation(fields: [companyId], references: [id])
+  adminId    String
+  admin      User      @relation("VetRequestsSent", fields: [adminId], references: [id])
+  message    String?
+  status     String    @default("PENDING")
+  acceptedAt DateTime?
+  rejectedAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@index([vetId])
+  @@index([companyId])
+  @@index([adminId])
+  @@index([status])
 }
 
 model Livestock {
@@ -98,7 +134,7 @@ model Livestock {
   type             String
   breed            String?
   birthDate        DateTime?
-  company          Company?  @relation(fields: [companyId], references: [id])
+  company          Company?     @relation(fields: [companyId], references: [id])
   companyId        String?
   healthStatus     HealthStatus
   weight           Float?
@@ -108,29 +144,28 @@ model Livestock {
   isSick           Boolean      @default(false)
   isTreatment      Boolean      @default(false)
 
-  isDeleted        Boolean   @default(false)
-  deletionReason   String?
-  deletedAt        DateTime?
-  deletedBy        User?     @relation("LivestockDeletedBy", fields: [deletedById], references: [id]) // New relation
-  deletedById      String?
+  isDeleted      Boolean   @default(false)
+  deletionReason String?
+  deletedAt      DateTime?
+  deletedBy      User?     @relation("LivestockDeletedBy", fields: [deletedById], references: [id]) // New relation
+  deletedById    String?
 
-  sickness           Sickness[]
-  treatments         Treatment[]
-  addedBy            User            @relation("LivestockAddedBy", fields: [addedById], references: [id])
-  addedById          String
-  updatedBy          User?           @relation("LivestockUpdatedBy", fields: [updatedById], references: [id])
-  updatedById        String?
-  createdAt          DateTime        @default(now())
-  updatedAt          DateTime        @updatedAt
-  vaccinationRecords Vaccination[]
-  OfftakeRecord      OfftakeRecord[]
-  tasks              Task[]   
-  diagnoses          Diagnosis[]  
+  sickness             Sickness[]
+  treatments           Treatment[]
+  addedBy              User                  @relation("LivestockAddedBy", fields: [addedById], references: [id])
+  addedById            String
+  updatedBy            User?                 @relation("LivestockUpdatedBy", fields: [updatedById], references: [id])
+  updatedById          String?
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  vaccinationRecords   Vaccination[]
+  OfftakeRecord        OfftakeRecord[]
+  tasks                Task[]
+  diagnoses            Diagnosis[]
   prescribedTreatments PrescribedTreatment[]
-  followUps          FollowUp[]     
+  followUps            FollowUp[]
 
   @@index([companyId])
-
 }
 
 model Vaccination {
@@ -201,8 +236,8 @@ model Task {
   name         String
   description  String
   priority     Priority
-  company             Company?  @relation(fields: [companyId], references: [id])
-  companyId           String?
+  company      Company?          @relation(fields: [companyId], references: [id])
+  companyId    String?
   dueDate      DateTime
   status       TaskStatus        @default(PENDING)
   observations TaskObservation[]
@@ -242,7 +277,7 @@ model Inventory {
   id              String            @id @default(cuid())
   type            InventoryType
   name            String
-  company         Company? @relation(fields: [companyId], references: [id])
+  company         Company?          @relation(fields: [companyId], references: [id])
   companyId       String?
   currentQuantity Float
   unit            String            @default("units")
@@ -263,8 +298,8 @@ model InventoryRecord {
   pricePerUnit   Float?
   totalCost      Float?
   date           DateTime
-  company     Company? @relation(fields: [companyId], references: [id])
-  companyId   String?
+  company        Company?            @relation(fields: [companyId], references: [id])
+  companyId      String?
   movementType   String?
   relatedAnimals String?
   notes          String?
@@ -282,8 +317,8 @@ model FinancialTransaction {
   referenceNumber String
   title           String
   amount          Float
-  company     Company? @relation(fields: [companyId], references: [id])
-  companyId   String?
+  company         Company?                 @relation(fields: [companyId], references: [id])
+  companyId       String?
   paymentMethod   String
   date            DateTime
   description     String?
@@ -298,19 +333,19 @@ model FinancialTransaction {
 }
 
 model Diagnosis {
-  id              String           @id @default(cuid())
-  livestock       Livestock        @relation(fields: [livestockId], references: [id])
-  livestockId     String
-  diagnosis       String
-  labTests        String?
-  severity        DiagnosisSeverity @default(MILD)
-  prognosis       DiagnosisPrognosis @default(GOOD)
-  observations    String?
-  date            DateTime
-  recordedBy      User             @relation(fields: [recordedById], references: [id])
-  recordedById    String
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
+  id           String             @id @default(cuid())
+  livestock    Livestock          @relation(fields: [livestockId], references: [id])
+  livestockId  String
+  diagnosis    String
+  labTests     String?
+  severity     DiagnosisSeverity  @default(MILD)
+  prognosis    DiagnosisPrognosis @default(GOOD)
+  observations String?
+  date         DateTime
+  recordedBy   User               @relation(fields: [recordedById], references: [id])
+  recordedById String
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
 
   @@index([livestockId])
   @@index([date])
@@ -319,22 +354,22 @@ model Diagnosis {
 }
 
 model PrescribedTreatment {
-  id              String               @id @default(cuid())
-  livestock       Livestock            @relation(fields: [livestockId], references: [id])
+  id              String                @id @default(cuid())
+  livestock       Livestock             @relation(fields: [livestockId], references: [id])
   livestockId     String
   treatmentType   String
-  medicationName  String 
+  medicationName  String
   dosage          String
   frequency       Frequency
   routine         AdministrationRoutine
   additionalNotes String?
   startDate       DateTime
   endDate         DateTime?
-  isActive        Boolean              @default(true)
-  recordedBy      User                 @relation(fields: [recordedById], references: [id])
+  isActive        Boolean               @default(true)
+  recordedBy      User                  @relation(fields: [recordedById], references: [id])
   recordedById    String
-  createdAt       DateTime             @default(now())
-  updatedAt       DateTime             @updatedAt
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
   followUps       FollowUp[]
   reminders       TreatmentReminder[]
 
@@ -344,25 +379,25 @@ model PrescribedTreatment {
 }
 
 model FollowUp {
-  id                String        @id @default(cuid())
-  prescribedTreatment PrescribedTreatment? @relation(fields: [prescribedTreatmentId], references: [id])
+  id                    String               @id @default(cuid())
+  prescribedTreatment   PrescribedTreatment? @relation(fields: [prescribedTreatmentId], references: [id])
   prescribedTreatmentId String?
-  reason            String
-  date              DateTime
-  time              DateTime
-  relatedAnimal     Livestock     @relation(fields: [relatedAnimalId], references: [id])
-  relatedAnimalId   String
-  relatedFarm       String
-  location          String
-  additionalNotes   String?
-  setReminder       Boolean       @default(false)
-  notifyFarmStaff   Boolean       @default(false)
-  status            String        @default("SCHEDULED") 
-  recordedBy        User          @relation(fields: [recordedById], references: [id])
-  recordedById      String
-  createdAt         DateTime      @default(now())
-  updatedAt         DateTime      @updatedAt
-  reminders         FollowUpReminder[]
+  reason                String
+  date                  DateTime
+  time                  DateTime
+  relatedAnimal         Livestock            @relation(fields: [relatedAnimalId], references: [id])
+  relatedAnimalId       String
+  relatedFarm           String
+  location              String
+  additionalNotes       String?
+  setReminder           Boolean              @default(false)
+  notifyFarmStaff       Boolean              @default(false)
+  status                String               @default("SCHEDULED")
+  recordedBy            User                 @relation(fields: [recordedById], references: [id])
+  recordedById          String
+  createdAt             DateTime             @default(now())
+  updatedAt             DateTime             @updatedAt
+  reminders             FollowUpReminder[]
 
   @@index([date])
   @@index([relatedAnimalId])
@@ -381,30 +416,30 @@ model TreatmentReminder {
 }
 
 model FollowUpReminder {
-  id            String   @id @default(cuid())
-  followUp      FollowUp @relation(fields: [followUpId], references: [id])
-  followUpId    String
-  reminderType  String   // "1_DAY_BEFORE", "1_HOUR_BEFORE"
-  dueDate       DateTime
-  isSent        Boolean  @default(false)
-  sentAt        DateTime?
-  createdAt     DateTime @default(now())
+  id           String    @id @default(cuid())
+  followUp     FollowUp  @relation(fields: [followUpId], references: [id])
+  followUpId   String
+  reminderType String // "1_DAY_BEFORE", "1_HOUR_BEFORE"
+  dueDate      DateTime
+  isSent       Boolean   @default(false)
+  sentAt       DateTime?
+  createdAt    DateTime  @default(now())
 }
 
 model Notification {
-  id          String             @id @default(cuid())
-  title       String
-  message     String
-  type        NotificationType
-  status      NotificationStatus @default(UNREAD)
-  recipient   User               @relation(fields: [recipientId], references: [id])
-  recipientId String
-  relatedEntityType String?      // e.g., "TASK", "FOLLOW_UP", "TREATMENT"
+  id                String             @id @default(cuid())
+  title             String
+  message           String
+  type              NotificationType
+  status            NotificationStatus @default(UNREAD)
+  recipient         User               @relation(fields: [recipientId], references: [id])
+  recipientId       String
+  relatedEntityType String? // e.g., "TASK", "FOLLOW_UP", "TREATMENT"
   relatedEntityId   String?
-  metadata    Json?
-  sentAt      DateTime           @default(now())
-  readAt      DateTime?
-  createdAt   DateTime           @default(now())
+  metadata          Json?
+  sentAt            DateTime           @default(now())
+  readAt            DateTime?
+  createdAt         DateTime           @default(now())
 
   @@index([recipientId])
   @@index([status])
@@ -413,24 +448,25 @@ model Notification {
 }
 
 model Appointment {
-  id              String        @id @default(cuid())
+  id              String                @id @default(cuid())
   visitType       VisitType
   title           String
   date            DateTime
   time            DateTime
-  company             Company?  @relation(fields: [companyId], references: [id])
-  companyId           String?
+  company         Company?              @relation(fields: [companyId], references: [id])
+  companyId       String?
   relatedFarm     String
   relatedAnimal   String?
   purpose         String
-  setReminder     Boolean       @default(false)
-  notifyFarmStaff Boolean       @default(false)
-  status          String        @default("SCHEDULED") // SCHEDULED, COMPLETED, CANCELLED
-  recordedBy      User          @relation(fields: [recordedById], references: [id])
+  setReminder     Boolean               @default(false)
+  notifyFarmStaff Boolean               @default(false)
+  status          String                @default("SCHEDULED") // SCHEDULED, COMPLETED, CANCELLED
+  recordedBy      User                  @relation(fields: [recordedById], references: [id])
   recordedById    String
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
   reminders       AppointmentReminder[]
+
   @@index([companyId])
   @@index([date])
   @@index([status])
@@ -441,7 +477,7 @@ model AppointmentReminder {
   id            String      @id @default(cuid())
   appointment   Appointment @relation(fields: [appointmentId], references: [id])
   appointmentId String
-  reminderType  String     
+  reminderType  String
   dueDate       DateTime
   isSent        Boolean     @default(false)
   sentAt        DateTime?
@@ -449,22 +485,22 @@ model AppointmentReminder {
 }
 
 model FarmVisit {
-  id                String   @id @default(cuid())
-  company           Company?  @relation(fields: [companyId], references: [id])
-  companyId         String?
-  relatedFarm       String
-  date              DateTime
-  time              DateTime
-  reason            String
-  keyPersonnelMet   String
-  animalExamined    String
-  farmObservation   String
+  id                 String   @id @default(cuid())
+  company            Company? @relation(fields: [companyId], references: [id])
+  companyId          String?
+  relatedFarm        String
+  date               DateTime
+  time               DateTime
+  reason             String
+  keyPersonnelMet    String
+  animalExamined     String
+  farmObservation    String
   farmRecommendation String
-  mediaUrls         String[] // Store image URLs instead of files
-  recordedBy        User     @relation(fields: [recordedById], references: [id])
-  recordedById      String
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  mediaUrls          String[] // Store image URLs instead of files
+  recordedBy         User     @relation(fields: [recordedById], references: [id])
+  recordedById       String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 
   @@index([companyId])
   @@index([date])
@@ -472,83 +508,188 @@ model FarmVisit {
 }
 
 model Note {
-  id          String   @id @default(cuid())
-  folderName  String
-  date        DateTime
-  title       String
-  body        String
-  company     Company? @relation(fields: [companyId], references: [id])
-  companyId   String?
-  recordedBy  User     @relation(fields: [recordedById], references: [id])
+  id           String   @id @default(cuid())
+  folderName   String
+  date         DateTime
+  title        String
+  body         String
+  company      Company? @relation(fields: [companyId], references: [id])
+  companyId    String?
+  recordedBy   User     @relation(fields: [recordedById], references: [id])
   recordedById String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
-  @@map("notes")
   @@index([companyId])
   @@index([folderName])
   @@index([date])
+  @@map("notes")
 }
 
 model NotificationSettings {
-  id                    String   @id @default(cuid())
-  userId                String   @unique
-  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   // Notification toggles
-  followUpReminders     Boolean  @default(true)
-  upcomingAppointments  Boolean  @default(true)
-  messageNotifications  Boolean  @default(true)
-  
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
+  followUpReminders    Boolean @default(true)
+  upcomingAppointments Boolean @default(true)
+  messageNotifications Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("notification_settings")
 }
 
-
 model Conversation {
-  id        String   @id @default(cuid())
-  title     String?
-  type      ConversationType @default(DIRECT)
-  participants ConversationParticipant[]
-  messages  Message[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String                    @id @default(cuid())
+  participants  ConversationParticipant[]
+  messages      Message[]
+  lastMessageId String?                   @unique
+  lastMessage   Message?                  @relation("LastMessage", fields: [lastMessageId], references: [id])
+  lastMessageAt DateTime?
+  createdAt     DateTime                  @default(now())
+  updatedAt     DateTime                  @updatedAt
+  isGroup       Boolean                   @default(false)
+  groupName     String?
+  groupAdminId  String?
+  groupImage    String?
+  calls         Call[]
 
-  @@map("conversations")
+  @@index([lastMessageAt])
 }
 
 model ConversationParticipant {
-  id             String   @id @default(cuid())
+  id             String       @id @default(cuid())
   conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
   conversationId String
-  user           User     @relation(fields: [userId], references: [id])
+  user           User         @relation(fields: [userId], references: [id])
   userId         String
-  joinedAt       DateTime @default(now())
-  
+  joinedAt       DateTime     @default(now())
+
   @@unique([conversationId, userId])
   @@map("conversation_participants")
 }
 
 model Message {
-  id             String   @id @default(cuid())
-  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  conversationId String
-  sender         User     @relation(fields: [senderId], references: [id])
-  senderId       String
-  content        String
-  messageType    MessageType @default(TEXT)
-  mediaUrl       String?
-  isRead         Boolean  @default(false)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id              String            @id @default(cuid())
+  conversation    Conversation      @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  conversationId  String
+  sender          User              @relation(fields: [senderId], references: [id])
+  senderId        String
+  content         String
+  messageType     MessageType       @default(TEXT)
+  mediaUrl        String?
+  fileSize        Float?
+  fileName        String?
+  isRead          Boolean           @default(false)
+  readAt          DateTime?
+  deliveredAt     DateTime?
+  status          MessageStatus     @default(SENT)
+  parentMessageId String?
+  parentMessage   Message?          @relation("MessageReplies", fields: [parentMessageId], references: [id])
+  replies         Message[]         @relation("MessageReplies")
+  reactions       Reaction[]
+  deletedForUsers User[]            @relation("MessageDeletions")
+  encryptedKey    String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  lastMessageOf   Conversation?     @relation("LastMessage")
+  deliveries      MessageDelivery[]
 
-  @@map("messages")
   @@index([conversationId])
   @@index([senderId])
+  @@index([createdAt])
+  @@index([status])
 }
 
+model Reaction {
+  id        String   @id @default(cuid())
+  message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  messageId String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  emoji     String
+  createdAt DateTime @default(now())
+
+  @@unique([messageId, userId])
+}
+
+model MessageDelivery {
+  id          String        @id @default(cuid())
+  message     Message       @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  messageId   String
+  recipient   User          @relation(fields: [recipientId], references: [id])
+  recipientId String
+  status      MessageStatus @default(SENT)
+  deliveredAt DateTime?
+  readAt      DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@unique([messageId, recipientId])
+}
+
+model Call {
+  id             String            @id @default(cuid())
+  callId         String            @unique
+  conversationId String
+  conversation   Conversation      @relation(fields: [conversationId], references: [id])
+  initiatorId    String
+  initiator      User              @relation(fields: [initiatorId], references: [id])
+  callType       String
+  status         CallStatus        @default(RINGING)
+  startedAt      DateTime          @default(now())
+  endedAt        DateTime?
+  endReason      String?
+  duration       Int?
+  participants   CallParticipant[]
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  @@index([conversationId])
+  @@index([initiatorId])
+  @@index([status])
+  @@index([startedAt])
+}
+
+model CallParticipant {
+  id        String                @id @default(cuid())
+  callId    String
+  call      Call                  @relation(fields: [callId], references: [callId], onDelete: Cascade)
+  userId    String
+  user      User                  @relation(fields: [userId], references: [id])
+  status    CallParticipantStatus @default(RINGING)
+  joinedAt  DateTime?
+  leftAt    DateTime?
+  createdAt DateTime              @default(now())
+
+  @@unique([callId, userId])
+}
+
+enum MessageStatus {
+  SENT
+  DELIVERED
+  READ
+  FAILED
+}
+
+enum CallStatus {
+  RINGING
+  ACTIVE
+  ENDED
+  FAILED
+}
+
+enum CallParticipantStatus {
+  RINGING
+  JOINED
+  DECLINED
+  ENDED
+  LEFT
+  MISSED
+}
 
 enum HealthStatus {
   HEALTHY
@@ -603,7 +744,7 @@ enum InventoryRecordType {
 
 enum DiagnosisSeverity {
   MILD
-  MODERATE 
+  MODERATE
   SEVERE
   CRITICAL
   CHRONIC
@@ -643,6 +784,7 @@ enum NotificationType {
   SYSTEM_ALERT
   APPOINTMENT_REMINDER
   MESSAGE
+  VET_REQUEST
 }
 
 enum NotificationStatus {
@@ -650,7 +792,6 @@ enum NotificationStatus {
   READ
   DISMISSED
 }
-
 
 enum VisitType {
   FARM_VISIT
@@ -666,4 +807,9 @@ enum MessageType {
   TEXT
   IMAGE
   FILE
+  AUDIO
+  VIDEO
+  LOCATION
+  CONTACT
+  SYSTEM
 }

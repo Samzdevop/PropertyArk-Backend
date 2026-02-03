@@ -1,8 +1,12 @@
 import prisma from '../prisma';
+import {transporter} from '../services/mail.services'
 import { NotificationType, NotificationStatus } from '@prisma/client';
 
 export class NotificationService {
-  static async shouldSendNotification(userId: string, notificationType: string): Promise<boolean> {
+  static async shouldSendNotification(
+    userId: string, 
+    notificationType: string
+  ): Promise<boolean> {
     const settings = await prisma.notificationSettings.findUnique({
       where: { userId }
     });
@@ -51,6 +55,59 @@ export class NotificationService {
     } catch (error) {
       console.error('Error creating notification:', error);
       return null;
+    }
+  }
+
+  static async sendMessageEmailNotification(
+    messageId: string,
+    recipientIds: string[]
+  ) {
+    const message = await prisma.message.findUnique({
+      where: { id: messageId },
+      include: {
+        sender: true,
+      },
+    });
+
+    if (!message) return;
+
+    for (const recipientId of recipientIds) {
+      const user = await prisma.user.findUnique({
+        where: { id: recipientId },
+        select: { email: true, fullName: true },
+      });
+
+      if (!user?.email) continue;
+
+      const shouldSend = await this.shouldSendNotification(
+        recipientId,
+        'MESSAGE'
+      );
+
+      if (!shouldSend) continue;
+
+      // Send email
+      await transporter.sendMail({
+        from: `"AgriTech" <${process.env.SMTP_USER}>`,
+        to: user.email,
+        subject: `New message from ${message.sender.fullName}`,
+        html: `
+          <p>Hello ${user.fullName},</p>
+          <p>You received a new message:</p>
+          <blockquote>${message.content}</blockquote>
+          <p>Login to reply.</p>
+        `,
+      });
+
+      // Save notification
+      await this.createNotification({
+        recipientId,
+        senderId: message.senderId,
+        type: NotificationType.MESSAGE,
+        title: 'New message',
+        body: message.content,
+        metadata: { messageId },
+      });
     }
   }
 

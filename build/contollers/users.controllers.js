@@ -1052,6 +1052,10 @@ const getAllVets = async (req, res, next) => {
                     lastLogin: true,
                     createdAt: true,
                     updatedAt: true,
+                    bio: true,
+                    specializations: true,
+                    totalRatings: true,
+                    consultationFee: true,
                     _count: {
                         select: {
                             assignedTasks: {

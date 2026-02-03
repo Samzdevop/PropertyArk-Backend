@@ -7,7 +7,6 @@ import multerS3 from 'multer-s3';
 
 
 export const UPLOADS_PATH = path.join(process.cwd(), "uploads");
-// Determine storage driver from env
 const storageDriver = process.env.STORAGE_DRIVER === 's3' ? 's3' : 'local';
 
 const storageConfig = {

@@ -13,7 +13,8 @@ export const userSelect = {
     createdAt: true,
     updatedAt: true,
     lastLogin: true,
-    companyId: true
+    companyId: true,
+    fcmToken: true
 }
 
 export const livestockSelect = {

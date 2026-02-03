@@ -23,8 +23,99 @@ import { appointmentRouter } from './routes/appointment.routes';
 import { noteRouter } from './routes/note.routes';
 import path from 'path';
 import { UPLOADS_PATH } from './config/upload';
+import { chatRouter } from './routes/chat.routes';
+import { createServer } from 'http';
+import { Server as SocketServer } from 'socket.io'; 
+import { SocketAuth } from './middlewares/socketAuth';
 
 export const app = express();
+
+export const httpServer = createServer(app);
+
+export const io = new SocketServer(httpServer, {
+  cors: {
+    origin: process.env.FRONTEND_URL === "production" ? false :  ['http://localhost:3000', 'http://localhost:5173'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    allowedHeaders: ['Authorization', 'Content-Type']
+  },
+  transports: ['websocket', 'polling'],
+  pingTimeout: 60000,
+  pingInterval: 25000
+});
+
+
+// io.use(SocketAuth.authenticate);
+io.use((socket, next) => {
+  console.log(`🔑 Socket auth attempt - Headers:`, socket.handshake.headers);
+  console.log(`🔑 Socket auth token:`, socket.handshake.auth?.token);
+  
+  // Call your auth middleware but catch errors
+  SocketAuth.authenticate(socket, (error:any) => {
+    if (error) {
+      console.error(`❌ Socket auth failed:`, error.message);
+      console.error(`❌ Full error:`, error);
+    } else {
+      console.log(`✅ Socket auth successful for user:`, socket.data.user?.id);
+    }
+    next(error);
+  });
+});
+ 
+io.on('connection', (socket) => {
+  const userId = socket.data.user?.id;
+  const userName = socket.data.user?.fullName;
+   console.log(`
+  ============================================
+  🔌 NEW SOCKET CONNECTION
+  ============================================
+  👤 User ID:    ${userId}
+  👤 User Name:  ${userName || 'Unknown'}
+  🆔 Socket ID:  ${socket.id}
+  🌐 IP Address: ${socket.handshake.address}
+  📅 Connected:  ${new Date().toLocaleTimeString()}
+  ============================================
+  `);
+  Logger.info(`Socket connected - User: ${userId}, Socket: ${socket.id}`);
+  
+  socket.join(`user:${userId}`);
+  console.log(`📌 User ${userId} joined room: user:${userId}`);
+
+  socket.on('ping', (callback) => {
+	console.log(`🏓 Ping from ${userId} (${socket.id})`);
+    if (callback) callback('pong');
+  });
+  
+  socket.on('echo', (data, callback) => {
+	console.log(`🔁 Echo from ${userId}: "${data}"`);
+    if (callback) callback({ 
+      echo: data, 
+      timestamp: new Date().toISOString(),
+      socketId: socket.id 
+    });
+  });
+  
+  
+  socket.on('disconnect', () => {
+	 console.log(`
+    ============================================
+    🔌 SOCKET DISCONNECTED
+    ============================================
+    👤 User ID:    ${userId}
+    🆔 Socket ID:  ${socket.id}
+    📅 Disconnected: ${new Date().toLocaleTimeString()}
+    ============================================
+    `);
+    Logger.info(`Socket disconnected - User: ${userId}, Socket: ${socket.id}`);
+  });
+  
+  socket.on('error', (error) => {
+	console.error(`❌ Socket error for user ${userId}:`, error);
+    Logger.error(`Socket error for user ${userId}:`, error);
+  });
+});
+
+
 
 app.use(passport.initialize());
 
@@ -54,6 +145,18 @@ app.get('/', (_req: Request, res: Response) => {
 	res.json({ success: true, message: 'Agritech API is working just fine!' });
 });
 
+app.get('/socket-status', (_req: Request, res: Response) => {
+  res.json({
+    success: true,
+    socket: {
+      connected: io.engine.clientsCount,
+      server: 'Socket.IO running',
+      port: process.env.PORT || 5000,
+	  endpoint: `ws://localhost:${process.env.PORT || 5000}`
+    }
+  });
+});
+
 app.use("/uploads", express.static(UPLOADS_PATH));
 
 app.use('/api/v1/auth', authRouter);
@@ -70,6 +173,7 @@ app.use('/api/v1/diagnosis', diagnosisRouter)
 app.use('/api/v1/notifications', notificationRouter)
 app.use('/api/v1/appointments', appointmentRouter)
 app.use('/api/v1/notes', noteRouter);
+app.use('/api/v1/chat', chatRouter);
 
 
 app.use(notFoundHandler);
