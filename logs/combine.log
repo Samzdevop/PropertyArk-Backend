@@ -32958,3 +32958,1044 @@
 2026-02-03 11:57:05 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: _f6uQebYSa86x2YfAAAq[39m
 2026-02-03 11:57:12 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: _f6uQebYSa86x2YfAAAq[39m
 2026-02-03 11:57:19 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 8P4JNP1NSGhpSgGWAAAs[39m
+2026-02-03 15:17:48 [32minfo[39m [32mGET /api/v1/livestock/counts 401 22.189 ms - 64[39m
+[32m[39m
+2026-02-03 15:17:48 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 401 3.608 ms - 64[39m
+[32m[39m
+2026-02-03 15:17:48 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 401 2.455 ms - 64[39m
+[32m[39m
+2026-02-03 15:17:49 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 401 2.033 ms - 64[39m
+[32m[39m
+2026-02-03 15:18:20 [32minfo[39m [32mPOST /api/v1/auth/login 200 159.097 ms - 711[39m
+[32m[39m
+2026-02-03 15:18:26 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 62.527 ms - 13045[39m
+[32m[39m
+2026-02-03 15:18:26 [32minfo[39m [32mGET /api/v1/livestock/counts 200 189.253 ms - 103[39m
+[32m[39m
+2026-02-03 15:18:26 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 197.354 ms - 7403[39m
+[32m[39m
+2026-02-03 15:18:27 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 22.535 ms - 13045[39m
+[32m[39m
+2026-02-03 15:18:27 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 18.032 ms - 7403[39m
+[32m[39m
+2026-02-03 15:18:28 [32minfo[39m [32mGET /api/v1/livestock/counts 200 9.206 ms - 103[39m
+[32m[39m
+2026-02-03 15:18:37 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: pdjdxf6Iohe-M3vzAAAB[39m
+2026-02-03 15:18:37 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 40.808 ms - 1491[39m
+[32m[39m
+2026-02-03 15:18:39 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 14.065 ms - 1491[39m
+[32m[39m
+2026-02-03 15:18:40 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 17.139 ms - 1491[39m
+[32m[39m
+2026-02-03 15:18:41 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 20.115 ms - 1491[39m
+[32m[39m
+2026-02-03 15:20:25 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: pdjdxf6Iohe-M3vzAAAB[39m
+2026-02-03 15:36:29 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: GTiLI0efuZJgyBnNAAAD[39m
+2026-02-03 15:36:32 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 17.959 ms - 1491[39m
+[32m[39m
+2026-02-03 15:36:35 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 15.137 ms - 1491[39m
+[32m[39m
+2026-02-03 15:36:36 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: GTiLI0efuZJgyBnNAAAD[39m
+2026-02-03 15:36:49 [32minfo[39m [32mPOST /api/v1/auth/login 200 123.417 ms - 711[39m
+[32m[39m
+2026-02-03 15:36:53 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 180.473 ms - 7403[39m
+[32m[39m
+2026-02-03 15:36:54 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 23.742 ms - 13045[39m
+[32m[39m
+2026-02-03 15:36:54 [32minfo[39m [32mGET /api/v1/livestock/counts 200 91.688 ms - 103[39m
+[32m[39m
+2026-02-03 15:36:55 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 17.866 ms - 7403[39m
+[32m[39m
+2026-02-03 15:36:55 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 14.331 ms - 13045[39m
+[32m[39m
+2026-02-03 15:36:55 [32minfo[39m [32mGET /api/v1/livestock/counts 200 6.972 ms - 103[39m
+[32m[39m
+2026-02-03 15:36:58 [32minfo[39m [32mGET /api/v1/chat/available-users 200 26.819 ms - 930[39m
+[32m[39m
+2026-02-03 15:36:58 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 16.123 ms - 1491[39m
+[32m[39m
+2026-02-03 15:36:59 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: tpjE-XXvITYju6wpAAAF[39m
+2026-02-03 15:36:59 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 22.843 ms - 1491[39m
+[32m[39m
+2026-02-03 15:36:59 [32minfo[39m [32mGET /api/v1/chat/available-users 200 22.294 ms - 930[39m
+[32m[39m
+2026-02-03 15:37:00 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93 200 86.623 ms - 16512[39m
+[32m[39m
+2026-02-03 15:37:00 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 12.286 ms - 1491[39m
+[32m[39m
+2026-02-03 15:37:01 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93 200 56.147 ms - 16512[39m
+[32m[39m
+2026-02-03 15:37:01 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 12.469 ms - 1491[39m
+[32m[39m
+2026-02-03 15:39:39 [32minfo[39m [32mGET /api/v1/chat/conversations/cml3kr4zc0004t1i44smi05zd/messages?limit=50 200 33.638 ms - 2462[39m
+[32m[39m
+2026-02-03 15:42:08 [32minfo[39m [32mPOST /api/v1/chat/conversations/cml3kr4zc0004t1i44smi05zd/participants 200 196.175 ms - 612[39m
+[32m[39m
+2026-02-03 15:42:11 [32minfo[39m [32mGET /api/v1/chat/conversations/cml3kr4zc0004t1i44smi05zd/messages?limit=50 200 28.403 ms - 2462[39m
+[32m[39m
+2026-02-03 15:42:13 [32minfo[39m [32mGET /api/v1/chat/conversations/cml3kr4zc0004t1i44smi05zd 200 11.403 ms - 2147[39m
+[32m[39m
+2026-02-03 15:48:49 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: tpjE-XXvITYju6wpAAAF[39m
+2026-02-03 15:49:45 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: f3XcLHBRrY4iwDEbAAAH[39m
+2026-02-03 15:49:48 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 20.354 ms - 2246[39m
+[32m[39m
+2026-02-03 15:49:52 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 14.828 ms - 2246[39m
+[32m[39m
+2026-02-03 15:49:55 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 16.879 ms - 2246[39m
+[32m[39m
+2026-02-03 15:49:58 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 15.436 ms - 2246[39m
+[32m[39m
+2026-02-03 15:50:16 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: f3XcLHBRrY4iwDEbAAAH[39m
+2026-02-03 15:50:45 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: sPunxDs5a0Y04hm4AAAM[39m
+2026-02-03 15:50:57 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: sPunxDs5a0Y04hm4AAAM[39m
+2026-02-03 15:58:46 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: UwIbL8gyjP_g28tBAAAO[39m
+2026-02-03 15:58:49 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 26.904 ms - 2246[39m
+[32m[39m
+2026-02-03 15:58:52 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 14.853 ms - 2246[39m
+[32m[39m
+2026-02-03 15:58:55 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 15.249 ms - 2246[39m
+[32m[39m
+2026-02-03 15:58:56 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 14.675 ms - 2246[39m
+[32m[39m
+2026-02-03 15:59:14 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: UwIbL8gyjP_g28tBAAAO[39m
+2026-02-03 15:59:25 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: GnLZ-bhRGmGztdKdAAAQ[39m
+2026-02-03 15:59:41 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: GnLZ-bhRGmGztdKdAAAQ[39m
+2026-02-03 16:00:00 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: TZjmQRsXiSiSzzq9AAAS[39m
+2026-02-03 16:00:01 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: TZjmQRsXiSiSzzq9AAAS[39m
+2026-02-03 16:00:08 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: ilohT7HSnXw7aj2WAAAU[39m
+2026-02-03 16:00:37 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: ilohT7HSnXw7aj2WAAAU[39m
+2026-02-03 16:01:24 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: sshjd5PoctG9QTPSAAAW[39m
+2026-02-03 16:01:39 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: sshjd5PoctG9QTPSAAAW[39m
+2026-02-03 16:02:09 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: snBij-UM8vDynt6pAAAY[39m
+2026-02-03 16:02:13 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: snBij-UM8vDynt6pAAAY[39m
+2026-02-03 16:02:41 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 31fSnhT9QFqL-e2vAAAa[39m
+2026-02-03 16:02:53 [32minfo[39m [32mPOST /api/v1/chat/conversations 201 32.867 ms - 1046[39m
+[32m[39m
+2026-02-03 16:02:54 [32minfo[39m [32mPOST /api/v1/chat/conversations 201 21.780 ms - 1023[39m
+[32m[39m
+2026-02-03 16:02:54 [32minfo[39m [32mPOST /api/v1/chat/conversations 200 8.098 ms - 306[39m
+[32m[39m
+2026-02-03 16:02:54 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-03 16:02:54 [32minfo[39m [32mPOST /api/v1/chat/conversations 200 103.033 ms - 306[39m
+[32m[39m
+2026-02-03 16:02:54 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-03 16:02:55 [32minfo[39m [32mPOST /api/v1/chat/conversations 200 10.786 ms - 306[39m
+[32m[39m
+2026-02-03 16:02:55 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-03 16:02:55 [32minfo[39m [32mPOST /api/v1/chat/conversations 200 12.624 ms - 306[39m
+[32m[39m
+2026-02-03 16:02:55 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-03 16:02:55 [32minfo[39m [32mPOST /api/v1/chat/conversations 200 7.712 ms - 306[39m
+[32m[39m
+2026-02-03 16:02:55 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-03 16:02:55 [32minfo[39m [32mPOST /api/v1/chat/conversations 200 8.170 ms - 306[39m
+[32m[39m
+2026-02-03 16:02:55 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-03 16:02:55 [32minfo[39m [32mPOST /api/v1/chat/conversations 200 7.299 ms - 306[39m
+[32m[39m
+2026-02-03 16:02:55 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-03 16:03:13 [32minfo[39m [32mGET /api/v1/livestock/counts 200 156.367 ms - 103[39m
+[32m[39m
+2026-02-03 16:03:13 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 166.089 ms - 7403[39m
+[32m[39m
+2026-02-03 16:03:13 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 19.325 ms - 13045[39m
+[32m[39m
+2026-02-03 16:03:14 [32minfo[39m [32mGET /api/v1/livestock/counts 200 22.215 ms - 103[39m
+[32m[39m
+2026-02-03 16:03:14 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 32.351 ms - 13045[39m
+[32m[39m
+2026-02-03 16:03:14 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 12.316 ms - 7403[39m
+[32m[39m
+2026-02-03 16:03:16 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa0zn0008t1f49772aure/messages?limit=50 200 34.253 ms - 99[39m
+[32m[39m
+2026-02-03 16:03:16 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa0zn0008t1f49772aure/messages?limit=50 200 42.190 ms - 99[39m
+[32m[39m
+2026-02-03 16:03:16 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa0zn0008t1f49772aure/messages?limit=50 200 29.417 ms - 99[39m
+[32m[39m
+2026-02-03 16:03:16 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa0zn0008t1f49772aure/messages?limit=50 200 33.642 ms - 99[39m
+[32m[39m
+2026-02-03 16:03:16 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa0zn0008t1f49772aure/messages?limit=50 200 25.773 ms - 99[39m
+[32m[39m
+2026-02-03 16:03:18 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 32.312 ms - 7403[39m
+[32m[39m
+2026-02-03 16:03:18 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 37.961 ms - 13045[39m
+[32m[39m
+2026-02-03 16:03:18 [32minfo[39m [32mGET /api/v1/livestock/counts 200 123.282 ms - 103[39m
+[32m[39m
+2026-02-03 16:03:19 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 21.203 ms - 7403[39m
+[32m[39m
+2026-02-03 16:03:19 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 16.889 ms - 13045[39m
+[32m[39m
+2026-02-03 16:03:19 [32minfo[39m [32mGET /api/v1/livestock/counts 200 10.592 ms - 103[39m
+[32m[39m
+2026-02-03 16:03:20 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 31fSnhT9QFqL-e2vAAAa[39m
+2026-02-03 16:03:34 [32minfo[39m [32mPOST /api/v1/auth/login 200 138.106 ms - 711[39m
+[32m[39m
+2026-02-03 16:03:38 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 12.729 ms - 7403[39m
+[32m[39m
+2026-02-03 16:03:40 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 15.995 ms - 7403[39m
+[32m[39m
+2026-02-03 16:03:40 [32minfo[39m [32mGET /api/v1/livestock/counts 200 6.811 ms - 103[39m
+[32m[39m
+2026-02-03 16:03:40 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 23.691 ms - 13045[39m
+[32m[39m
+2026-02-03 16:03:41 [32minfo[39m [32mGET /api/v1/livestock/counts 200 13.810 ms - 103[39m
+[32m[39m
+2026-02-03 16:03:41 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 28.152 ms - 13045[39m
+[32m[39m
+2026-02-03 16:03:48 [32minfo[39m [32mGET /api/v1/chat/available-users 200 31.079 ms - 930[39m
+[32m[39m
+2026-02-03 16:03:48 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 36.094 ms - 12049[39m
+[32m[39m
+2026-02-03 16:03:49 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 0tmIc9DwRvRFlvtYAAAc[39m
+2026-02-03 16:03:49 [32minfo[39m [32mGET /api/v1/chat/available-users 200 22.441 ms - 930[39m
+[32m[39m
+2026-02-03 16:03:49 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 18.460 ms - 12049[39m
+[32m[39m
+2026-02-03 16:03:50 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 29.578 ms - 12049[39m
+[32m[39m
+2026-02-03 16:03:50 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93 200 117.061 ms - 16512[39m
+[32m[39m
+2026-02-03 16:03:51 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 26.585 ms - 12049[39m
+[32m[39m
+2026-02-03 16:03:51 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93 200 88.407 ms - 16512[39m
+[32m[39m
+2026-02-03 16:04:05 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa2et0010t1f4lfv0ai7n/messages?limit=50 200 18.210 ms - 99[39m
+[32m[39m
+2026-02-03 16:04:12 [32minfo[39m [32mPOST /api/v1/chat/messages 201 34.536 ms - 730[39m
+[32m[39m
+2026-02-03 16:04:31 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa1sx000kt1f4s481hun0/messages?limit=50 200 16.985 ms - 99[39m
+[32m[39m
+2026-02-03 16:04:59 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa1k1000gt1f4kgzoi5ns/messages?limit=50 200 16.371 ms - 99[39m
+[32m[39m
+2026-02-03 16:05:01 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa292000wt1f4cxixu8no/messages?limit=50 200 17.974 ms - 99[39m
+[32m[39m
+2026-02-03 16:05:03 [32minfo[39m [32mPOST /api/v1/chat/conversations 201 19.629 ms - 1038[39m
+[32m[39m
+2026-02-03 16:05:03 [32minfo[39m [32mPOST /api/v1/chat/conversations 200 7.048 ms - 306[39m
+[32m[39m
+2026-02-03 16:05:03 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-03 16:05:05 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qcss60018t1f4dbkybvf1/messages?limit=50 200 18.918 ms - 99[39m
+[32m[39m
+2026-02-03 16:05:06 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qcss60018t1f4dbkybvf1/messages?limit=50 200 16.500 ms - 99[39m
+[32m[39m
+2026-02-03 16:06:31 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 17.370 ms - 13045[39m
+[32m[39m
+2026-02-03 16:06:32 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 34.774 ms - 13045[39m
+[32m[39m
+2026-02-03 16:06:32 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 29.602 ms - 7403[39m
+[32m[39m
+2026-02-03 16:06:32 [32minfo[39m [32mGET /api/v1/livestock/counts 200 6.588 ms - 103[39m
+[32m[39m
+2026-02-03 16:06:33 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 11.414 ms - 7403[39m
+[32m[39m
+2026-02-03 16:06:33 [32minfo[39m [32mGET /api/v1/livestock/counts 200 6.861 ms - 103[39m
+[32m[39m
+2026-02-03 16:06:33 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 17.308 ms - 13045[39m
+[32m[39m
+2026-02-03 16:06:33 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 10.516 ms - 7403[39m
+[32m[39m
+2026-02-03 16:06:34 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 15.692 ms - 13045[39m
+[32m[39m
+2026-02-03 16:06:34 [32minfo[39m [32mGET /api/v1/livestock/counts 200 15.712 ms - 103[39m
+[32m[39m
+2026-02-03 16:06:34 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 25.218 ms - 7403[39m
+[32m[39m
+2026-02-03 16:06:34 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 0tmIc9DwRvRFlvtYAAAc[39m
+2026-02-03 16:06:46 [32minfo[39m [32mPOST /api/v1/auth/login 200 147.941 ms - 711[39m
+[32m[39m
+2026-02-03 16:06:51 [32minfo[39m [32mGET /api/v1/livestock/counts 200 12.653 ms - 103[39m
+[32m[39m
+2026-02-03 16:06:51 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 16.172 ms - 7403[39m
+[32m[39m
+2026-02-03 16:06:52 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 15.708 ms - 13045[39m
+[32m[39m
+2026-02-03 16:06:52 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 17.015 ms - 7403[39m
+[32m[39m
+2026-02-03 16:06:53 [32minfo[39m [32mGET /api/v1/livestock/counts 200 6.718 ms - 103[39m
+[32m[39m
+2026-02-03 16:06:53 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 15.961 ms - 13045[39m
+[32m[39m
+2026-02-03 16:07:13 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: Jm6XtsL1RaTJVMznAAAe[39m
+2026-02-03 16:07:14 [32minfo[39m [32mGET /api/v1/chat/available-users 200 27.858 ms - 930[39m
+[32m[39m
+2026-02-03 16:07:14 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 33.647 ms - 14455[39m
+[32m[39m
+2026-02-03 16:07:15 [32minfo[39m [32mGET /api/v1/chat/available-users 200 9.961 ms - 930[39m
+[32m[39m
+2026-02-03 16:07:16 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 22.189 ms - 14455[39m
+[32m[39m
+2026-02-03 16:07:17 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 31.199 ms - 14455[39m
+[32m[39m
+2026-02-03 16:07:17 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93 200 112.009 ms - 16512[39m
+[32m[39m
+2026-02-03 16:07:18 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 17.193 ms - 14455[39m
+[32m[39m
+2026-02-03 16:07:18 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93 200 90.621 ms - 16512[39m
+[32m[39m
+2026-02-03 16:11:03 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: Jm6XtsL1RaTJVMznAAAe[39m
+2026-02-03 16:11:11 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: pgMeinCQakiYdQqpAAAg[39m
+2026-02-03 16:12:32 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: pgMeinCQakiYdQqpAAAg[39m
+2026-02-03 16:12:37 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: nltGDyCMt7bJYMYBAAAi[39m
+2026-02-03 16:12:40 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 27.193 ms - 14455[39m
+[32m[39m
+2026-02-03 16:12:43 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 16.949 ms - 14455[39m
+[32m[39m
+2026-02-03 16:12:44 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 20.250 ms - 14455[39m
+[32m[39m
+2026-02-03 16:12:47 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 14.298 ms - 14455[39m
+[32m[39m
+2026-02-03 16:13:14 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: nltGDyCMt7bJYMYBAAAi[39m
+2026-02-03 16:13:17 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: f909CfaOsPAjk4gMAAAk[39m
+2026-02-03 16:13:20 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: f909CfaOsPAjk4gMAAAk[39m
+2026-02-03 16:25:16 [32minfo[39m [32mPOST /api/v1/auth/login 200 157.268 ms - 711[39m
+[32m[39m
+2026-02-03 16:25:21 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 24.862 ms - 13045[39m
+[32m[39m
+2026-02-03 16:25:23 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 102.337 ms - 7403[39m
+[32m[39m
+2026-02-03 16:25:23 [32minfo[39m [32mGET /api/v1/livestock/counts 200 11.532 ms - 103[39m
+[32m[39m
+2026-02-03 16:25:24 [32minfo[39m [32mGET /api/v1/livestock/counts 200 11.686 ms - 103[39m
+[32m[39m
+2026-02-03 16:25:24 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 19.242 ms - 13045[39m
+[32m[39m
+2026-02-03 16:25:26 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 15.504 ms - 7403[39m
+[32m[39m
+2026-02-03 16:25:37 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: MphSo8kVb25suA71AAAm[39m
+2026-02-03 16:25:38 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 181.137 ms - 14455[39m
+[32m[39m
+2026-02-03 16:25:38 [32minfo[39m [32mGET /api/v1/chat/available-users 200 16.675 ms - 930[39m
+[32m[39m
+2026-02-03 16:25:38 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 53.787 ms - 14455[39m
+[32m[39m
+2026-02-03 16:25:39 [32minfo[39m [32mGET /api/v1/chat/available-users 200 13.853 ms - 930[39m
+[32m[39m
+2026-02-03 16:25:39 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 25.470 ms - 14455[39m
+[32m[39m
+2026-02-03 16:25:40 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93 200 112.433 ms - 16512[39m
+[32m[39m
+2026-02-03 16:25:40 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 33.415 ms - 14455[39m
+[32m[39m
+2026-02-03 16:25:41 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93 200 85.081 ms - 16512[39m
+[32m[39m
+2026-02-03 16:28:04 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: MphSo8kVb25suA71AAAm[39m
+2026-02-03 16:28:12 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: i70JEDE6F315tmakAAAo[39m
+2026-02-03 16:28:26 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: i70JEDE6F315tmakAAAo[39m
+2026-02-03 16:28:33 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: ScEDCm47vPk4g43kAAAq[39m
+2026-02-03 16:30:46 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: ScEDCm47vPk4g43kAAAq[39m
+2026-02-03 16:30:57 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: c6mWB2UvTkB5dGjFAAAs[39m
+2026-02-03 16:30:59 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 25.466 ms - 14455[39m
+[32m[39m
+2026-02-03 16:31:02 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 21.771 ms - 14455[39m
+[32m[39m
+2026-02-03 16:31:04 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 20.249 ms - 14455[39m
+[32m[39m
+2026-02-03 16:31:07 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 18.786 ms - 14455[39m
+[32m[39m
+2026-02-03 16:31:18 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: c6mWB2UvTkB5dGjFAAAs[39m
+2026-02-03 16:31:27 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: STh_JSHwuA5v-rPVAAAu[39m
+2026-02-03 16:31:34 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: STh_JSHwuA5v-rPVAAAu[39m
+2026-02-03 16:31:46 [32minfo[39m [32mPOST /api/v1/auth/login 200 153.174 ms - 711[39m
+[32m[39m
+2026-02-03 16:31:52 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 204.710 ms - 7403[39m
+[32m[39m
+2026-02-03 16:31:52 [32minfo[39m [32mGET /api/v1/livestock/counts 200 12.645 ms - 103[39m
+[32m[39m
+2026-02-03 16:31:52 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 21.456 ms - 13045[39m
+[32m[39m
+2026-02-03 16:31:59 [32minfo[39m [32mGET /api/v1/chat/available-users 200 15.925 ms - 930[39m
+[32m[39m
+2026-02-03 16:31:59 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 34.836 ms - 14455[39m
+[32m[39m
+2026-02-03 16:32:01 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 16.854 ms - 14455[39m
+[32m[39m
+2026-02-03 16:32:01 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 5qQF61grygu122QQAAAw[39m
+2026-02-03 16:32:03 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93 200 93.987 ms - 16512[39m
+[32m[39m
+2026-02-03 16:32:09 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 5qQF61grygu122QQAAAw[39m
+2026-02-03 16:32:11 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: MfLVmxuDVanFypQEAAAy[39m
+2026-02-03 16:34:33 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: MfLVmxuDVanFypQEAAAy[39m
+2026-02-03 16:38:13 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: wweOzVc2XhylGW7kAAA0[39m
+2026-02-03 16:39:13 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: wweOzVc2XhylGW7kAAA0[39m
+2026-02-03 16:39:26 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: _3tTYkN7oWqX4ExhAAA2[39m
+2026-02-03 16:39:27 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 22.118 ms - 14455[39m
+[32m[39m
+2026-02-03 16:39:30 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 20.688 ms - 14455[39m
+[32m[39m
+2026-02-03 16:39:33 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 16.154 ms - 14455[39m
+[32m[39m
+2026-02-03 16:39:34 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 15.108 ms - 14455[39m
+[32m[39m
+2026-02-03 16:40:29 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: _3tTYkN7oWqX4ExhAAA2[39m
+2026-02-03 16:40:51 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: HHAYaqLkCemWB617AAA4[39m
+2026-02-03 16:40:52 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: HHAYaqLkCemWB617AAA4[39m
+2026-02-03 16:40:56 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: wZPKK0ew7AG-u2OGAAA6[39m
+2026-02-03 16:40:56 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: wZPKK0ew7AG-u2OGAAA6[39m
+2026-02-03 16:41:10 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: okELs1LRGd-DJ-y5AAA8[39m
+2026-02-03 16:41:26 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: okELs1LRGd-DJ-y5AAA8[39m
+2026-02-03 16:41:31 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: jirV4z2W1GIE3DDCAAA-[39m
+2026-02-03 16:41:55 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: jirV4z2W1GIE3DDCAAA-[39m
+2026-02-03 16:42:01 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: H304iZbUj-woLyMgAABA[39m
+2026-02-03 16:42:06 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: H304iZbUj-woLyMgAABA[39m
+2026-02-03 16:42:10 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: MOV89a6X8MZ3hy_6AABC[39m
+2026-02-03 16:46:00 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: MOV89a6X8MZ3hy_6AABC[39m
+2026-02-03 16:46:12 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: fv4rHYR886Zwt_K2AABE[39m
+2026-02-03 16:46:12 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 25.901 ms - 14455[39m
+[32m[39m
+2026-02-03 16:46:12 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: fv4rHYR886Zwt_K2AABE[39m
+2026-02-03 16:46:13 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 17.122 ms - 14455[39m
+[32m[39m
+2026-02-03 16:46:14 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 18.005 ms - 14455[39m
+[32m[39m
+2026-02-03 16:46:14 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: frWD860MZTa3ZDeKAABG[39m
+2026-02-03 16:46:15 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 18.872 ms - 14455[39m
+[32m[39m
+2026-02-03 16:46:15 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: frWD860MZTa3ZDeKAABG[39m
+2026-02-03 16:46:17 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: MRI5bkFkQLlIGok_AABI[39m
+2026-02-03 16:46:54 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: MRI5bkFkQLlIGok_AABI[39m
+2026-02-03 16:46:58 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 8aTO2Rt8hvDu86KBAABK[39m
+2026-02-03 16:46:58 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 8aTO2Rt8hvDu86KBAABK[39m
+2026-02-03 16:47:02 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 7gfkpDif9X2I7hvyAABM[39m
+2026-02-03 16:47:34 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 7gfkpDif9X2I7hvyAABM[39m
+2026-02-03 16:47:37 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: GtAPxFodPwgMmNFLAABO[39m
+2026-02-03 17:19:54 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: GtAPxFodPwgMmNFLAABO[39m
+2026-02-03 17:20:11 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: SMBpMCZ6039_ay_ZAABQ[39m
+2026-02-03 17:20:15 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 31.184 ms - 14455[39m
+[32m[39m
+2026-02-03 17:20:20 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 15.537 ms - 14455[39m
+[32m[39m
+2026-02-03 17:20:24 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 16.778 ms - 14455[39m
+[32m[39m
+2026-02-03 17:20:26 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 19.309 ms - 14455[39m
+[32m[39m
+2026-02-03 17:20:56 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: SMBpMCZ6039_ay_ZAABQ[39m
+2026-02-03 17:21:01 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: Dml9Dzjvd3fqBdC2AABS[39m
+2026-02-03 17:21:50 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: Dml9Dzjvd3fqBdC2AABS[39m
+2026-02-03 17:21:57 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 4Q4gVgB1WCrpKIeJAABU[39m
+2026-02-03 17:25:24 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 4Q4gVgB1WCrpKIeJAABU[39m
+2026-02-03 17:25:30 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: YVbbXcrRrhjQrOZkAABW[39m
+2026-02-03 17:27:06 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: YVbbXcrRrhjQrOZkAABW[39m
+2026-02-03 17:27:24 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: PS9fRZWkDP9B_oohAABY[39m
+2026-02-03 17:27:26 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 24.361 ms - 14455[39m
+[32m[39m
+2026-02-03 17:27:29 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 18.629 ms - 14455[39m
+[32m[39m
+2026-02-03 17:27:32 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 21.118 ms - 14455[39m
+[32m[39m
+2026-02-03 17:27:35 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 16.546 ms - 14455[39m
+[32m[39m
+2026-02-03 17:27:57 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: PS9fRZWkDP9B_oohAABY[39m
+2026-02-03 17:27:59 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: fDXjGzwJ_P0T7vRJAABa[39m
+2026-02-03 17:28:00 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: fDXjGzwJ_P0T7vRJAABa[39m
+2026-02-03 17:28:04 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: Hs0xOFsShZQmvsHHAABc[39m
+2026-02-03 17:28:28 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: Hs0xOFsShZQmvsHHAABc[39m
+2026-02-03 17:28:33 [32minfo[39m [32mGET /api/v1/chat/available-users 200 20.735 ms - 930[39m
+[32m[39m
+2026-02-03 17:28:34 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 7vhU6l22N6W0rM-7AABf[39m
+2026-02-03 17:28:36 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.427 ms - 930[39m
+[32m[39m
+2026-02-03 17:28:37 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 7vhU6l22N6W0rM-7AABf[39m
+2026-02-03 17:28:41 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: mYikOjQsCTYfva8UAABh[39m
+2026-02-03 17:28:42 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.304 ms - 930[39m
+[32m[39m
+2026-02-03 17:28:43 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.906 ms - 930[39m
+[32m[39m
+2026-02-03 17:29:03 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: mYikOjQsCTYfva8UAABh[39m
+2026-02-03 17:29:06 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.476 ms - 930[39m
+[32m[39m
+2026-02-03 17:29:06 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 3rAZsS1_5urMJeZ7AABj[39m
+2026-02-03 17:29:06 [32minfo[39m [32mGET /api/v1/chat/available-users 200 12.662 ms - 930[39m
+[32m[39m
+2026-02-03 17:29:07 [32minfo[39m [32mGET /api/v1/chat/available-users 200 15.575 ms - 930[39m
+[32m[39m
+2026-02-03 17:29:10 [32minfo[39m [32mGET /api/v1/chat/available-users 200 12.695 ms - 930[39m
+[32m[39m
+2026-02-03 17:29:11 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 3rAZsS1_5urMJeZ7AABj[39m
+2026-02-03 17:29:14 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.179 ms - 930[39m
+[32m[39m
+2026-02-03 17:29:16 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: pbFK9lZcSboLmt65AABl[39m
+2026-02-03 17:29:17 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.047 ms - 930[39m
+[32m[39m
+2026-02-03 17:29:18 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.189 ms - 930[39m
+[32m[39m
+2026-02-03 17:29:19 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: pbFK9lZcSboLmt65AABl[39m
+2026-02-03 17:29:21 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.169 ms - 930[39m
+[32m[39m
+2026-02-03 17:29:21 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: d3tohZGojaMFtLOFAABn[39m
+2026-02-03 17:29:22 [32minfo[39m [32mGET /api/v1/chat/available-users 200 9.519 ms - 930[39m
+[32m[39m
+2026-02-03 17:29:23 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.136 ms - 930[39m
+[32m[39m
+2026-02-03 17:29:24 [32minfo[39m [32mGET /api/v1/chat/available-users 200 9.986 ms - 930[39m
+[32m[39m
+2026-02-03 17:29:26 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: d3tohZGojaMFtLOFAABn[39m
+2026-02-03 17:29:27 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.566 ms - 930[39m
+[32m[39m
+2026-02-03 17:29:28 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: ajNnAFq-gKHrtTnSAABp[39m
+2026-02-03 17:29:28 [32minfo[39m [32mGET /api/v1/chat/available-users 200 16.660 ms - 930[39m
+[32m[39m
+2026-02-03 17:29:31 [32minfo[39m [32mGET /api/v1/chat/available-users 200 12.830 ms - 930[39m
+[32m[39m
+2026-02-03 17:29:32 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.564 ms - 930[39m
+[32m[39m
+2026-02-03 17:30:29 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: ajNnAFq-gKHrtTnSAABp[39m
+2026-02-03 17:30:32 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: eaMg6ePwlgqZBmnXAABr[39m
+2026-02-03 17:30:32 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.032 ms - 930[39m
+[32m[39m
+2026-02-03 17:30:35 [32minfo[39m [32mGET /api/v1/chat/available-users 200 9.811 ms - 930[39m
+[32m[39m
+2026-02-03 17:30:35 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: eaMg6ePwlgqZBmnXAABr[39m
+2026-02-03 17:30:53 [32minfo[39m [32mPOST /api/v1/auth/login 200 151.741 ms - 711[39m
+[32m[39m
+2026-02-03 17:30:57 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 25.561 ms - 13045[39m
+[32m[39m
+2026-02-03 17:30:57 [32minfo[39m [32mGET /api/v1/livestock/counts 200 109.040 ms - 103[39m
+[32m[39m
+2026-02-03 17:30:58 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 27.389 ms - 7403[39m
+[32m[39m
+2026-02-03 17:30:58 [32minfo[39m [32mGET /api/v1/livestock/counts 200 109.242 ms - 103[39m
+[32m[39m
+2026-02-03 17:31:00 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 26.979 ms - 13045[39m
+[32m[39m
+2026-02-03 17:31:01 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 14.420 ms - 7403[39m
+[32m[39m
+2026-02-03 17:31:02 [32minfo[39m [32mGET /api/v1/chat/available-users 200 13.192 ms - 930[39m
+[32m[39m
+2026-02-03 17:31:02 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 21.551 ms - 14455[39m
+[32m[39m
+2026-02-03 17:31:03 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: IK0DcHCuwhY055y8AABt[39m
+2026-02-03 17:31:03 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.741 ms - 930[39m
+[32m[39m
+2026-02-03 17:31:03 [32minfo[39m [32mGET /api/v1/chat/available-users 200 13.725 ms - 930[39m
+[32m[39m
+2026-02-03 17:31:03 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 18.063 ms - 14455[39m
+[32m[39m
+2026-02-03 17:31:04 [32minfo[39m [32mGET /api/v1/chat/available-users 200 14.761 ms - 930[39m
+[32m[39m
+2026-02-03 17:31:12 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: IK0DcHCuwhY055y8AABt[39m
+2026-02-03 17:31:56 [32minfo[39m [32mPOST /api/v1/auth/login 200 144.471 ms - 711[39m
+[32m[39m
+2026-02-03 17:32:00 [32minfo[39m [32mGET /api/v1/livestock/counts 200 10.097 ms - 103[39m
+[32m[39m
+2026-02-03 17:32:00 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 18.176 ms - 13045[39m
+[32m[39m
+2026-02-03 17:32:00 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 15.097 ms - 7403[39m
+[32m[39m
+2026-02-03 17:32:01 [32minfo[39m [32mGET /api/v1/livestock/counts 200 8.064 ms - 103[39m
+[32m[39m
+2026-02-03 17:32:01 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 16.686 ms - 13045[39m
+[32m[39m
+2026-02-03 17:32:01 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 12.471 ms - 7403[39m
+[32m[39m
+2026-02-03 17:32:19 [32minfo[39m [32mGET /api/v1/chat/available-users 200 13.923 ms - 930[39m
+[32m[39m
+2026-02-03 17:32:19 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 21.564 ms - 14455[39m
+[32m[39m
+2026-02-03 17:32:20 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: sOnXf5eUb_zgMh89AABv[39m
+2026-02-03 17:32:20 [32minfo[39m [32mGET /api/v1/chat/available-users 200 14.157 ms - 930[39m
+[32m[39m
+2026-02-03 17:32:20 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 27.742 ms - 14455[39m
+[32m[39m
+2026-02-03 17:32:21 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.252 ms - 930[39m
+[32m[39m
+2026-02-03 17:32:22 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.164 ms - 930[39m
+[32m[39m
+2026-02-03 17:35:51 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: sOnXf5eUb_zgMh89AABv[39m
+2026-02-03 17:36:11 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: JiKmeuCvHIlcdwzCAABx[39m
+2026-02-03 17:36:14 [32minfo[39m [32mGET /api/v1/chat/available-users 200 15.852 ms - 930[39m
+[32m[39m
+2026-02-03 17:36:17 [32minfo[39m [32mGET /api/v1/chat/available-users 200 14.336 ms - 930[39m
+[32m[39m
+2026-02-03 17:36:19 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.720 ms - 930[39m
+[32m[39m
+2026-02-03 17:36:20 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.200 ms - 930[39m
+[32m[39m
+2026-02-03 17:36:43 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: JiKmeuCvHIlcdwzCAABx[39m
+2026-02-03 17:36:48 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: OfWpJYe4vU1rpg8-AABz[39m
+2026-02-03 17:36:48 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.745 ms - 930[39m
+[32m[39m
+2026-02-03 17:36:50 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.812 ms - 930[39m
+[32m[39m
+2026-02-03 17:36:51 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.172 ms - 930[39m
+[32m[39m
+2026-02-03 17:36:52 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.680 ms - 930[39m
+[32m[39m
+2026-02-03 17:37:36 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: OfWpJYe4vU1rpg8-AABz[39m
+2026-02-03 17:37:39 [32minfo[39m [32mGET /api/v1/chat/available-users 200 14.893 ms - 930[39m
+[32m[39m
+2026-02-03 17:37:41 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.579 ms - 930[39m
+[32m[39m
+2026-02-03 17:37:41 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 25.077 ms - 14455[39m
+[32m[39m
+2026-02-03 17:37:42 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.058 ms - 930[39m
+[32m[39m
+2026-02-03 17:37:42 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 17.399 ms - 14455[39m
+[32m[39m
+2026-02-03 17:37:43 [32minfo[39m [32mGET /api/v1/chat/available-users 200 14.121 ms - 930[39m
+[32m[39m
+2026-02-03 17:37:49 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.499 ms - 930[39m
+[32m[39m
+2026-02-03 17:37:50 [32minfo[39m [32mGET /api/v1/chat/available-users 200 9.932 ms - 930[39m
+[32m[39m
+2026-02-03 17:37:52 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.692 ms - 930[39m
+[32m[39m
+2026-02-03 17:37:54 [32minfo[39m [32mGET /api/v1/chat/available-users 200 13.928 ms - 930[39m
+[32m[39m
+2026-02-03 17:37:55 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.355 ms - 930[39m
+[32m[39m
+2026-02-03 17:37:56 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.286 ms - 930[39m
+[32m[39m
+2026-02-03 17:37:57 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.402 ms - 930[39m
+[32m[39m
+2026-02-03 17:38:16 [32minfo[39m [32mGET /api/v1/chat/available-users 200 12.784 ms - 930[39m
+[32m[39m
+2026-02-03 17:38:17 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.179 ms - 930[39m
+[32m[39m
+2026-02-03 17:38:18 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.952 ms - 930[39m
+[32m[39m
+2026-02-03 17:38:20 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.125 ms - 930[39m
+[32m[39m
+2026-02-03 17:38:21 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.460 ms - 930[39m
+[32m[39m
+2026-02-03 17:38:22 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.225 ms - 930[39m
+[32m[39m
+2026-02-03 17:38:25 [32minfo[39m [32mGET /api/v1/chat/available-users 200 12.686 ms - 930[39m
+[32m[39m
+2026-02-03 17:39:49 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 5NBrlFZTs1_lGLLaAAB1[39m
+2026-02-03 17:39:49 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.797 ms - 930[39m
+[32m[39m
+2026-02-03 17:39:51 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.052 ms - 930[39m
+[32m[39m
+2026-02-03 17:39:51 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.485 ms - 930[39m
+[32m[39m
+2026-02-03 17:40:14 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 5NBrlFZTs1_lGLLaAAB1[39m
+2026-02-03 17:40:36 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: Bjt6YWn-tuswu9XAAAB3[39m
+2026-02-03 17:40:37 [32minfo[39m [32mGET /api/v1/chat/available-users 200 9.979 ms - 930[39m
+[32m[39m
+2026-02-03 17:40:38 [32minfo[39m [32mGET /api/v1/chat/available-users 200 10.542 ms - 930[39m
+[32m[39m
+2026-02-03 17:40:39 [32minfo[39m [32mGET /api/v1/chat/available-users 200 11.724 ms - 930[39m
+[32m[39m
+2026-02-03 17:42:05 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: Bjt6YWn-tuswu9XAAAB3[39m
+2026-02-03 17:42:18 [32minfo[39m [32mPOST /api/v1/auth/login 200 150.359 ms - 711[39m
+[32m[39m
+2026-02-03 17:42:24 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 25.551 ms - 13045[39m
+[32m[39m
+2026-02-03 17:42:24 [32minfo[39m [32mGET /api/v1/livestock/counts 200 89.950 ms - 103[39m
+[32m[39m
+2026-02-03 17:42:24 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 20.882 ms - 13045[39m
+[32m[39m
+2026-02-03 17:42:25 [32minfo[39m [32mGET /api/v1/livestock/counts 200 7.840 ms - 103[39m
+[32m[39m
+2026-02-03 17:42:25 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 16.318 ms - 7403[39m
+[32m[39m
+2026-02-03 17:42:26 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 12.733 ms - 7403[39m
+[32m[39m
+2026-02-03 17:42:40 [32minfo[39m [32mGET /api/v1/tasks/assigned/all 200 13.873 ms - 7403[39m
+[32m[39m
+2026-02-03 17:42:40 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: XtPIjzlTt_KA4EwIAAB5[39m
+2026-02-03 17:42:40 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 22.360 ms - 14455[39m
+[32m[39m
+2026-02-03 17:42:41 [32minfo[39m [32mGET /api/v1/chat/available-users 200 13.076 ms - 930[39m
+[32m[39m
+2026-02-03 17:42:41 [32minfo[39m [32mGET /api/v1/tasks/assigned/all 200 14.268 ms - 7403[39m
+[32m[39m
+2026-02-03 17:42:42 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 20.822 ms - 14455[39m
+[32m[39m
+2026-02-03 17:42:42 [32minfo[39m [32mGET /api/v1/chat/available-users 200 14.299 ms - 930[39m
+[32m[39m
+2026-02-03 17:42:42 [32minfo[39m [32mGET /api/v1/chat/available-users 200 13.142 ms - 930[39m
+[32m[39m
+2026-02-03 17:42:48 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa26b000st1f4f4s0h2pu/messages?limit=50 200 20.407 ms - 99[39m
+[32m[39m
+2026-02-03 17:42:48 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa292000wt1f4cxixu8no/messages?limit=50 200 15.437 ms - 99[39m
+[32m[39m
+2026-02-03 17:42:50 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qct0n001ct1f4la17c173/messages?limit=50 200 25.607 ms - 99[39m
+[32m[39m
+2026-02-03 17:43:54 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: XtPIjzlTt_KA4EwIAAB5[39m
+2026-02-03 17:44:07 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: e_PvLMltyzq-uurAAAB7[39m
+2026-02-03 17:44:09 [32minfo[39m [32mGET /api/v1/chat/available-users 200 16.188 ms - 930[39m
+[32m[39m
+2026-02-03 17:44:10 [32minfo[39m [32mGET /api/v1/chat/available-users 200 13.999 ms - 930[39m
+[32m[39m
+2026-02-03 17:44:11 [32minfo[39m [32mGET /api/v1/chat/available-users 200 13.499 ms - 930[39m
+[32m[39m
+2026-02-03 17:44:12 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: e_PvLMltyzq-uurAAAB7[39m
+2026-02-03 17:44:20 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93 200 84.708 ms - 16512[39m
+[32m[39m
+2026-02-03 17:44:21 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: -kIoxIrEMFnyzQvBAAB9[39m
+2026-02-03 17:44:23 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: -kIoxIrEMFnyzQvBAAB9[39m
+2026-02-03 17:48:45 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: yKWBPqd6VnOvW44qAAB_[39m
+2026-02-03 17:48:46 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 24.736 ms - 14455[39m
+[32m[39m
+2026-02-03 17:48:48 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 18.087 ms - 14455[39m
+[32m[39m
+2026-02-03 17:48:51 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 14.348 ms - 14455[39m
+[32m[39m
+2026-02-03 17:48:54 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 16.465 ms - 14455[39m
+[32m[39m
+2026-02-03 17:48:55 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: yKWBPqd6VnOvW44qAAB_[39m
+2026-02-03 17:49:14 [32minfo[39m [32mPOST /api/v1/auth/login 200 150.558 ms - 711[39m
+[32m[39m
+2026-02-03 17:49:18 [32minfo[39m [32mGET /api/v1/livestock/counts 200 200.964 ms - 103[39m
+[32m[39m
+2026-02-03 17:49:18 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 275.177 ms - 7403[39m
+[32m[39m
+2026-02-03 17:49:18 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 24.142 ms - 13045[39m
+[32m[39m
+2026-02-03 17:49:19 [32minfo[39m [32mGET /api/v1/livestock/counts 200 9.023 ms - 103[39m
+[32m[39m
+2026-02-03 17:49:20 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 20.335 ms - 7403[39m
+[32m[39m
+2026-02-03 17:49:20 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 37.466 ms - 13045[39m
+[32m[39m
+2026-02-03 17:49:29 [32minfo[39m [32mGET /api/v1/chat/available-users 200 14.344 ms - 930[39m
+[32m[39m
+2026-02-03 17:49:30 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 17.053 ms - 14455[39m
+[32m[39m
+2026-02-03 17:49:30 [32minfo[39m [32mGET /api/v1/chat/available-users 200 14.372 ms - 930[39m
+[32m[39m
+2026-02-03 17:49:30 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: Ye-5umsLZ6FZJVteAACB[39m
+2026-02-03 17:49:31 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 14.944 ms - 14455[39m
+[32m[39m
+2026-02-03 17:49:31 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 24.169 ms - 14455[39m
+[32m[39m
+2026-02-03 17:49:31 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93 200 107.195 ms - 16512[39m
+[32m[39m
+2026-02-03 17:49:32 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 15.130 ms - 14455[39m
+[32m[39m
+2026-02-03 17:49:33 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93 200 77.406 ms - 16512[39m
+[32m[39m
+2026-02-03 17:52:26 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: Ye-5umsLZ6FZJVteAACB[39m
+2026-02-03 17:55:09 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: DSOW00UVrQImjqmrAACD[39m
+2026-02-03 17:55:28 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: DSOW00UVrQImjqmrAACD[39m
+2026-02-03 17:57:12 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: JwD6zDbWiTI1wSsKAACF[39m
+2026-02-03 17:59:51 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa1gq000ct1f42i6xozgj/messages?limit=50 200 97.260 ms - 99[39m
+[32m[39m
+2026-02-03 17:59:54 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa1gq000ct1f42i6xozgj/messages?limit=50 200 21.017 ms - 99[39m
+[32m[39m
+2026-02-03 17:59:57 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa1gq000ct1f42i6xozgj/messages?limit=50 200 14.752 ms - 99[39m
+[32m[39m
+2026-02-03 18:00:39 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: JwD6zDbWiTI1wSsKAACF[39m
+2026-02-03 18:00:47 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: y_BOBHiLSQfBv9oDAACH[39m
+2026-02-03 18:00:48 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 23.538 ms - 14455[39m
+[32m[39m
+2026-02-03 18:00:49 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 18.590 ms - 14455[39m
+[32m[39m
+2026-02-03 18:00:52 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 15.272 ms - 14455[39m
+[32m[39m
+2026-02-03 18:00:54 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 25.052 ms - 14455[39m
+[32m[39m
+2026-02-03 18:00:56 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: y_BOBHiLSQfBv9oDAACH[39m
+2026-02-03 18:00:59 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: OiKFiglGMQl8IifRAACJ[39m
+2026-02-03 18:01:03 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: OiKFiglGMQl8IifRAACJ[39m
+2026-02-03 18:01:08 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 9J5t-nGmCTGL2P4kAACL[39m
+2026-02-03 18:01:37 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 9J5t-nGmCTGL2P4kAACL[39m
+2026-02-03 18:01:40 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: eAT-7MXJcXmCsP9rAACN[39m
+2026-02-03 18:01:42 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: eAT-7MXJcXmCsP9rAACN[39m
+2026-02-03 18:01:45 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: IA4cAJWDo2z3bjMhAACP[39m
+2026-02-03 18:01:46 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: IA4cAJWDo2z3bjMhAACP[39m
+2026-02-03 18:01:51 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: jo7i3b4Sx9L0feqsAACR[39m
+2026-02-03 18:01:57 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qct0n001ct1f4la17c173/messages?limit=50 200 14.866 ms - 99[39m
+[32m[39m
+2026-02-03 18:01:58 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa292000wt1f4cxixu8no/messages?limit=50 200 17.788 ms - 99[39m
+[32m[39m
+2026-02-03 18:01:59 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa1gq000ct1f42i6xozgj/messages?limit=50 200 16.591 ms - 99[39m
+[32m[39m
+2026-02-03 18:10:58 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: jo7i3b4Sx9L0feqsAACR[39m
+2026-02-03 18:12:43 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: l9qpYQiStRvlIoAaAACT[39m
+2026-02-03 18:13:28 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa292000wt1f4cxixu8no/messages?limit=50 200 30.066 ms - 99[39m
+[32m[39m
+2026-02-03 18:13:29 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa1gq000ct1f42i6xozgj/messages?limit=50 200 15.721 ms - 99[39m
+[32m[39m
+2026-02-03 18:13:32 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa1gq000ct1f42i6xozgj/messages?limit=50 200 14.912 ms - 99[39m
+[32m[39m
+2026-02-03 18:13:33 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa1gq000ct1f42i6xozgj/messages?limit=50 200 17.735 ms - 99[39m
+[32m[39m
+2026-02-03 18:13:34 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa1gq000ct1f42i6xozgj/messages?limit=50 200 18.656 ms - 99[39m
+[32m[39m
+2026-02-03 18:13:36 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa1gq000ct1f42i6xozgj/messages?limit=50 200 14.904 ms - 99[39m
+[32m[39m
+2026-02-03 18:13:36 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qcss60018t1f4dbkybvf1/messages?limit=50 200 13.773 ms - 99[39m
+[32m[39m
+2026-02-03 18:13:36 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa2et0010t1f4lfv0ai7n/messages?limit=50 200 27.207 ms - 687[39m
+[32m[39m
+2026-02-03 18:13:37 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa1gq000ct1f42i6xozgj/messages?limit=50 200 16.605 ms - 99[39m
+[32m[39m
+2026-02-03 18:13:41 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa2et0010t1f4lfv0ai7n/messages?limit=50 200 42.067 ms - 687[39m
+[32m[39m
+2026-02-03 18:13:48 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa26b000st1f4f4s0h2pu/messages?limit=50 200 15.543 ms - 99[39m
+[32m[39m
+2026-02-03 18:13:51 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa1gq000ct1f42i6xozgj/messages?limit=50 200 14.653 ms - 99[39m
+[32m[39m
+2026-02-03 18:13:53 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa1k1000gt1f4kgzoi5ns/messages?limit=50 200 14.296 ms - 99[39m
+[32m[39m
+2026-02-03 18:13:54 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa1sx000kt1f4s481hun0/messages?limit=50 200 14.519 ms - 99[39m
+[32m[39m
+2026-02-03 18:14:20 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa1gq000ct1f42i6xozgj/messages?limit=50 200 17.548 ms - 99[39m
+[32m[39m
+2026-02-03 18:14:21 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa1gq000ct1f42i6xozgj/messages?limit=50 200 17.548 ms - 99[39m
+[32m[39m
+2026-02-03 18:14:22 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qct0n001ct1f4la17c173/messages?limit=50 200 16.662 ms - 99[39m
+[32m[39m
+2026-02-03 18:14:23 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa1gq000ct1f42i6xozgj/messages?limit=50 200 17.924 ms - 99[39m
+[32m[39m
+2026-02-03 18:15:50 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: l9qpYQiStRvlIoAaAACT[39m
+2026-02-03 18:15:58 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 26.333 ms - 14455[39m
+[32m[39m
+2026-02-03 18:15:59 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: zcgmVgmKkxhM0dKWAACW[39m
+2026-02-03 18:16:00 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: zcgmVgmKkxhM0dKWAACW[39m
+2026-02-03 18:16:05 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: sC7cgPrldVB8kHPUAACZ[39m
+2026-02-03 18:16:26 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: sC7cgPrldVB8kHPUAACZ[39m
+2026-02-03 18:16:31 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: _x6Zjahoy8CMTKnOAACb[39m
+2026-02-03 18:16:32 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: _x6Zjahoy8CMTKnOAACb[39m
+2026-02-03 18:16:35 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 4A5HzD4LqzOrKKOfAACd[39m
+2026-02-03 18:16:36 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 4A5HzD4LqzOrKKOfAACd[39m
+2026-02-03 18:16:41 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 52ZPgPuDECguvRawAACf[39m
+2026-02-03 18:16:50 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 52ZPgPuDECguvRawAACf[39m
+2026-02-03 18:17:07 [32minfo[39m [32mPOST /api/v1/auth/login 200 128.825 ms - 711[39m
+[32m[39m
+2026-02-03 18:17:11 [32minfo[39m [32mGET /api/v1/livestock/counts 200 86.938 ms - 103[39m
+[32m[39m
+2026-02-03 18:17:12 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 102.041 ms - 7403[39m
+[32m[39m
+2026-02-03 18:17:12 [32minfo[39m [32mGET /api/v1/livestock/counts 200 6.891 ms - 103[39m
+[32m[39m
+2026-02-03 18:17:13 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 10.706 ms - 7403[39m
+[32m[39m
+2026-02-03 18:17:13 [32minfo[39m [32mGET /api/v1/chat/available-users 200 30.426 ms - 930[39m
+[32m[39m
+2026-02-03 18:17:13 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 35.701 ms - 14455[39m
+[32m[39m
+2026-02-03 18:17:13 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 37NBeMAV3U-HykslAACh[39m
+2026-02-03 18:17:14 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 19.607 ms - 13045[39m
+[32m[39m
+2026-02-03 18:17:14 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 14.536 ms - 14455[39m
+[32m[39m
+2026-02-03 18:17:15 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 14.540 ms - 13045[39m
+[32m[39m
+2026-02-03 18:17:15 [32minfo[39m [32mGET /api/v1/chat/available-users 200 15.416 ms - 930[39m
+[32m[39m
+2026-02-03 18:17:15 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93 200 79.366 ms - 16512[39m
+[32m[39m
+2026-02-03 18:17:15 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 15.758 ms - 14455[39m
+[32m[39m
+2026-02-03 18:17:16 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 27.728 ms - 14455[39m
+[32m[39m
+2026-02-03 18:17:16 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93 200 97.128 ms - 16512[39m
+[32m[39m
+2026-02-03 18:24:13 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 37NBeMAV3U-HykslAACh[39m
+2026-02-03 18:26:10 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 23.933 ms - 14455[39m
+[32m[39m
+2026-02-03 18:26:12 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: sTFiV6YChS4z2BlhAACj[39m
+2026-02-03 18:26:15 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 15.978 ms - 14455[39m
+[32m[39m
+2026-02-03 18:26:16 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 19.756 ms - 14455[39m
+[32m[39m
+2026-02-03 18:26:19 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 17.292 ms - 14455[39m
+[32m[39m
+2026-02-03 18:26:34 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qct0n001ct1f4la17c173/messages?limit=50 200 16.537 ms - 99[39m
+[32m[39m
+2026-02-03 18:26:37 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa2et0010t1f4lfv0ai7n/messages?limit=50 200 21.183 ms - 687[39m
+[32m[39m
+2026-02-03 18:26:39 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa292000wt1f4cxixu8no/messages?limit=50 200 24.113 ms - 99[39m
+[32m[39m
+2026-02-03 18:26:45 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa292000wt1f4cxixu8no/messages?limit=50 200 18.149 ms - 99[39m
+[32m[39m
+2026-02-03 18:26:48 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa2et0010t1f4lfv0ai7n/messages?limit=50 200 25.990 ms - 687[39m
+[32m[39m
+2026-02-03 18:26:55 [32minfo[39m [32mGET /api/v1/chat/conversations/cml3kr4zc0004t1i44smi05zd/messages?limit=50 200 21.088 ms - 2462[39m
+[32m[39m
+2026-02-03 18:27:00 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa292000wt1f4cxixu8no/messages?limit=50 200 98.921 ms - 99[39m
+[32m[39m
+2026-02-03 18:27:04 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qa2et0010t1f4lfv0ai7n/messages?limit=50 200 20.851 ms - 687[39m
+[32m[39m
+2026-02-03 18:27:16 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: sTFiV6YChS4z2BlhAACj[39m
+2026-02-03 18:31:25 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 5fSunlWPLvIIja2oAACl[39m
+2026-02-03 18:43:14 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 5fSunlWPLvIIja2oAACl[39m
+2026-02-03 18:55:59 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: IB3cJQM1GPBcFBEdAACn[39m
+2026-02-03 19:00:27 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: IB3cJQM1GPBcFBEdAACn[39m
+2026-02-03 19:00:32 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: EtDh0GfsM54t3Cx9AACp[39m
+2026-02-03 19:00:33 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 25.387 ms - 14455[39m
+[32m[39m
+2026-02-03 19:00:34 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 15.809 ms - 14455[39m
+[32m[39m
+2026-02-03 19:00:36 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 20.744 ms - 14455[39m
+[32m[39m
+2026-02-03 19:00:37 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 17.029 ms - 14455[39m
+[32m[39m
+2026-02-03 19:01:01 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: EtDh0GfsM54t3Cx9AACp[39m
+2026-02-03 19:01:09 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: khMUqpqJSVAngfUPAACr[39m
+2026-02-03 19:02:25 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: khMUqpqJSVAngfUPAACr[39m
+2026-02-03 19:02:30 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 7B1kYkTy1G4mMjyjAACt[39m
+2026-02-03 19:02:47 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 7B1kYkTy1G4mMjyjAACt[39m
+2026-02-03 19:02:54 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: bSgrLxaNKJqhJ1koAACv[39m
+2026-02-03 19:02:58 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: bSgrLxaNKJqhJ1koAACv[39m
+2026-02-03 19:03:03 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: UrjPOPWQ2cJanVWNAACx[39m
+2026-02-03 19:03:14 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: UrjPOPWQ2cJanVWNAACx[39m
+2026-02-03 19:03:18 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: aRfWiedy-JWw-FanAACz[39m
+2026-02-03 19:03:21 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: aRfWiedy-JWw-FanAACz[39m
+2026-02-03 19:03:25 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: VEFtfzO3eSZCWaGdAAC1[39m
+2026-02-03 19:03:27 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: VEFtfzO3eSZCWaGdAAC1[39m
+2026-02-03 19:03:31 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: CMwZ-wpXtFvUuHdqAAC3[39m
+2026-02-03 19:03:33 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: CMwZ-wpXtFvUuHdqAAC3[39m
+2026-02-03 19:03:42 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: Qg7GWYl-7Mt3VGquAAC6[39m
+2026-02-03 19:04:10 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: Qg7GWYl-7Mt3VGquAAC6[39m
+2026-02-03 19:04:18 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: pp44jfdCGoYG7A2oAAC8[39m
+2026-02-03 19:04:21 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: pp44jfdCGoYG7A2oAAC8[39m
+2026-02-03 19:04:29 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: IaU4gm6Yop8iqm5DAAC_[39m
+2026-02-03 19:04:31 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: IaU4gm6Yop8iqm5DAAC_[39m
+2026-02-03 19:04:38 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: sLAS-5Ck5fj3gKovAADB[39m
+2026-02-03 19:04:45 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: sLAS-5Ck5fj3gKovAADB[39m
+2026-02-03 19:04:50 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: OcJyCnbXKqbRKrecAADD[39m
+2026-02-03 19:04:50 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: OcJyCnbXKqbRKrecAADD[39m
+2026-02-03 19:04:57 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: WurqlbtMqG5_i-gsAADF[39m
+2026-02-03 19:10:52 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: WurqlbtMqG5_i-gsAADF[39m
+2026-02-03 19:11:01 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 24.468 ms - 14455[39m
+[32m[39m
+2026-02-03 19:11:01 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 2C-U-b9BNoMM5Ke9AADH[39m
+2026-02-03 19:11:03 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 16.387 ms - 14455[39m
+[32m[39m
+2026-02-03 19:11:04 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 14.854 ms - 14455[39m
+[32m[39m
+2026-02-03 19:11:05 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 16.747 ms - 14455[39m
+[32m[39m
+2026-02-03 19:11:10 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 2C-U-b9BNoMM5Ke9AADH[39m
+2026-02-03 19:11:13 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: IeddljoO9nivqz5QAADJ[39m
+2026-02-03 19:11:21 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: IeddljoO9nivqz5QAADJ[39m
+2026-02-03 19:11:31 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: f9KC8qt3lu275hgtAADM[39m
+2026-02-03 19:11:32 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: f9KC8qt3lu275hgtAADM[39m
+2026-02-03 19:11:35 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: X_3tHYFFtunf3q_BAADO[39m
+2026-02-03 19:11:46 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: X_3tHYFFtunf3q_BAADO[39m
+2026-02-03 19:11:51 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: KfdEL3BjTekyLnElAADQ[39m
+2026-02-03 19:11:52 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: KfdEL3BjTekyLnElAADQ[39m
+2026-02-03 19:11:54 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: xjWSIPFw4wDdAKEPAADS[39m
+2026-02-03 19:11:55 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: xjWSIPFw4wDdAKEPAADS[39m
+2026-02-03 19:11:59 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 52vQa0KVeeZ9M26BAADU[39m
+2026-02-03 19:12:00 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 52vQa0KVeeZ9M26BAADU[39m
+2026-02-03 19:12:03 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 0e3pw1MuHMeX-x6KAADW[39m
+2026-02-03 19:12:03 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 0e3pw1MuHMeX-x6KAADW[39m
+2026-02-03 19:12:08 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: yDlZ0mtSDpVlQ8VaAADY[39m
+2026-02-03 19:12:11 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: yDlZ0mtSDpVlQ8VaAADY[39m
+2026-02-03 19:12:33 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: mWEkbzOqVUI9PZOgAADa[39m
+2026-02-03 19:12:35 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: mWEkbzOqVUI9PZOgAADa[39m
+2026-02-03 19:12:40 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: mkMM8F0Covb40eS4AADc[39m
+2026-02-03 19:12:45 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: mkMM8F0Covb40eS4AADc[39m
+2026-02-03 19:12:50 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: UrNBUszHTFBuX6uJAADe[39m
+2026-02-03 19:13:23 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: UrNBUszHTFBuX6uJAADe[39m
+2026-02-03 19:13:36 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: YmLVwktiQVZU7BSkAADh[39m
+2026-02-03 19:14:06 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: YmLVwktiQVZU7BSkAADh[39m
+2026-02-05 11:39:13 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 401 28.101 ms - 66[39m
+[32m[39m
+2026-02-05 11:39:13 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 401 7.205 ms - 66[39m
+[32m[39m
+2026-02-05 11:39:13 [32minfo[39m [32mGET /api/v1/livestock/counts 401 4.719 ms - 66[39m
+[32m[39m
+2026-02-05 11:39:16 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 401 0.683 ms - 66[39m
+[32m[39m
+2026-02-05 11:39:16 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 401 0.528 ms - 66[39m
+[32m[39m
+2026-02-05 11:39:16 [32minfo[39m [32mGET /api/v1/livestock/counts 401 0.346 ms - 66[39m
+[32m[39m
+2026-02-05 11:39:35 [32minfo[39m [32mPOST /api/v1/auth/login 200 444.146 ms - 711[39m
+[32m[39m
+2026-02-05 11:39:40 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 66.054 ms - 13045[39m
+[32m[39m
+2026-02-05 11:39:40 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 178.163 ms - 7403[39m
+[32m[39m
+2026-02-05 11:39:41 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 72.535 ms - 13045[39m
+[32m[39m
+2026-02-05 11:39:41 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 197.560 ms - 7403[39m
+[32m[39m
+2026-02-05 11:39:42 [32minfo[39m [32mGET /api/v1/livestock/counts 200 18.160 ms - 103[39m
+[32m[39m
+2026-02-05 11:39:42 [32minfo[39m [32mGET /api/v1/livestock/counts 200 15.965 ms - 103[39m
+[32m[39m
+2026-02-05 11:40:16 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 58.520 ms - 14455[39m
+[32m[39m
+2026-02-05 11:40:16 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: eQtV1LP8clt5pQmyAADj[39m
+2026-02-05 11:40:16 [32minfo[39m [32mGET /api/v1/chat/available-users 200 44.648 ms - 930[39m
+[32m[39m
+2026-02-05 11:40:17 [32minfo[39m [32mGET /api/v1/chat/available-users 200 31.277 ms - 930[39m
+[32m[39m
+2026-02-05 11:40:18 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 37.054 ms - 14455[39m
+[32m[39m
+2026-02-05 11:40:19 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 43.078 ms - 14455[39m
+[32m[39m
+2026-02-05 11:40:20 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93 200 148.946 ms - 15461[39m
+[32m[39m
+2026-02-05 11:40:21 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 40.450 ms - 14455[39m
+[32m[39m
+2026-02-05 11:40:22 [32minfo[39m [32mGET /api/v1/users/vet/farms/cmj8izq2l0000t1l8yjb6du93 200 200.405 ms - 15461[39m
+[32m[39m
+2026-02-05 11:41:55 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: eQtV1LP8clt5pQmyAADj[39m
+2026-02-05 11:42:00 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: RaQ8lydb6Ak9MCbEAADl[39m
+2026-02-05 11:44:02 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qct0n001ct1f4la17c173/messages?limit=50 200 296.746 ms - 99[39m
+[32m[39m
+2026-02-05 11:45:39 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: RaQ8lydb6Ak9MCbEAADl[39m
+2026-02-05 11:45:48 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 137.806 ms - 14455[39m
+[32m[39m
+2026-02-05 11:45:50 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: UU-pEtkYmUE0a1tKAADn[39m
+2026-02-05 11:45:51 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 69.659 ms - 14455[39m
+[32m[39m
+2026-02-05 11:45:54 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 55.437 ms - 14455[39m
+[32m[39m
+2026-02-05 11:45:57 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 87.768 ms - 14455[39m
+[32m[39m
+2026-02-05 11:47:45 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: UU-pEtkYmUE0a1tKAADn[39m
+2026-02-05 11:47:50 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: U15Y0Qgi4A5YlA7YAADp[39m
+2026-02-05 11:48:03 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: U15Y0Qgi4A5YlA7YAADp[39m
+2026-02-05 11:48:09 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: surfutHGRWZpO2srAADr[39m
+2026-02-05 11:49:14 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: surfutHGRWZpO2srAADr[39m
+2026-02-05 11:49:23 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: UvamX8N_JPvq8WvpAADt[39m
+2026-02-05 12:57:36 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: D070lvEoyMiJW5BlAADv[39m
+2026-02-05 12:57:36 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: D070lvEoyMiJW5BlAADv[39m
+2026-02-05 12:57:36 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: UvamX8N_JPvq8WvpAADt[39m
+2026-02-05 14:40:42 [32minfo[39m [32mGET /api/v1/inventory/items?page=1 401 9.913 ms - 64[39m
+[32m[39m
+2026-02-05 14:40:45 [32minfo[39m [32mGET /api/v1/inventory/items?page=1 401 2.679 ms - 64[39m
+[32m[39m
+2026-02-05 14:43:46 [32minfo[39m [32mPOST /api/v1/auth/login 200 409.968 ms - 711[39m
+[32m[39m
+2026-02-05 14:43:55 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 62.189 ms - 13045[39m
+[32m[39m
+2026-02-05 14:43:55 [32minfo[39m [32mGET /api/v1/livestock/counts 200 176.217 ms - 103[39m
+[32m[39m
+2026-02-05 14:43:56 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 220.669 ms - 7403[39m
+[32m[39m
+2026-02-05 14:43:57 [32minfo[39m [32mGET /api/v1/tasks/assigned/all?page=1&limit=10 200 26.511 ms - 7403[39m
+[32m[39m
+2026-02-05 14:43:57 [32minfo[39m [32mGET /api/v1/livestock/counts 200 55.608 ms - 103[39m
+[32m[39m
+2026-02-05 14:43:59 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 17.764 ms - 13045[39m
+[32m[39m
+2026-02-05 14:45:26 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 30.731 ms - 13045[39m
+[32m[39m
+2026-02-05 14:45:27 [32minfo[39m [32mGET /api/v1/livestock?page=1&limit=10 200 37.792 ms - 13045[39m
+[32m[39m
+2026-02-05 14:45:31 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: a_h0LDxKsIDC5DOjAAAB[39m
+2026-02-05 14:45:31 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 68.650 ms - 14455[39m
+[32m[39m
+2026-02-05 14:45:34 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 29.429 ms - 14455[39m
+[32m[39m
+2026-02-05 14:45:35 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 38.693 ms - 14455[39m
+[32m[39m
+2026-02-05 14:45:35 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 200 54.629 ms - 14455[39m
+[32m[39m
+2026-02-05 14:46:03 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: a_h0LDxKsIDC5DOjAAAB[39m
+2026-02-05 14:46:20 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: zcLnMVkPbiCODNs6AAAD[39m
+2026-02-05 14:47:37 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: QteLnRQCgBnfDZ9cAAAF[39m
+2026-02-05 14:47:41 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: zcLnMVkPbiCODNs6AAAD[39m
+2026-02-05 14:48:02 [32minfo[39m [32mGET /api/v1/chat/conversations/cml6qct0n001ct1f4la17c173/messages?limit=50 200 44.606 ms - 99[39m
+[32m[39m
+2026-02-05 14:49:55 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: XXlX5j4XkQjCu7xyAAAH[39m
+2026-02-05 14:50:18 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: QteLnRQCgBnfDZ9cAAAF[39m
+2026-02-05 14:52:08 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: XXlX5j4XkQjCu7xyAAAH[39m
+2026-02-05 14:52:23 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 5MBFTXmDrCXW1Y4jAAAJ[39m
+2026-02-05 14:54:02 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 5q4QqVS4spETTbfwAAAL[39m
+2026-02-05 14:54:11 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 5MBFTXmDrCXW1Y4jAAAJ[39m
+2026-02-05 14:56:12 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: zX4tHHTE90ztuvYaAAAN[39m
+2026-02-05 14:56:15 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: 5q4QqVS4spETTbfwAAAL[39m
+2026-02-05 14:58:26 [32minfo[39m [32mSocket connected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: O-7w8FmxQRTyX4OWAAAP[39m
+2026-02-05 14:58:47 [32minfo[39m [32mSocket disconnected - User: cmj8izq6g0002t1l8xf1l3yo6, Socket: zX4tHHTE90ztuvYaAAAN[39m

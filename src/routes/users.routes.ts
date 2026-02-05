@@ -3,7 +3,6 @@ import {
 	deleteUser,
 	getAllUsers,
 	getProfile,
-	// updateProfile,
 	getUserById,
 	updateUserProfile,
 	adminUpdateUser,
@@ -14,7 +13,7 @@ import {
 } from '../contollers/users.controllers';
 import { authenticateJWT } from '../middlewares/errorHandler';
 import { validateRequest } from '../middlewares/validateRequest';
-import { adminUpdateUserSchema, changePasswordSchema, updateUserSchema } from '../schemas/users.schemas';
+import { adminUpdateUserSchema, updateUserSchema } from '../schemas/users.schemas';
 import { requireRoles } from '../middlewares/roleCheck';
 import { upload } from '../config/upload';
 

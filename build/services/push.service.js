@@ -27,17 +27,13 @@ class PushService {
                     fullName: true,
                 },
             });
-            // 🚫 No push token → skip
             if (!user?.fcmToken)
                 continue;
-            // Respect notification settings
             const shouldSend = await notification_services_1.NotificationService.shouldSendNotification(recipientId, 'MESSAGE');
             if (!shouldSend)
                 continue;
-            // 🔔 Send push via OneSignal
             await axios_1.default.post('https://onesignal.com/api/v1/notifications', {
                 app_id: process.env.ONESIGNAL_APP_ID,
-                // 👇 Store OneSignal player ID in fcmToken
                 include_player_ids: [user.fcmToken],
                 headings: { en: `New message from ${message.sender.fullName}` },
                 contents: { en: message.content },
@@ -53,7 +49,6 @@ class PushService {
                     'Content-Type': 'application/json',
                 },
             });
-            // 📥 Save in-app notification
             await notification_services_1.NotificationService.createNotification({
                 recipientId,
                 title: 'New Message',
