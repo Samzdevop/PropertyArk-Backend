@@ -5435,3 +5435,623 @@
 2026-02-03 16:02:55 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
 2026-02-03 16:02:55 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
 2026-02-03 16:05:03 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-09 13:03:37 [31merror[39m [31mUser is not associated with a company User is not associated with a company[39m
+2026-02-09 13:04:17 [31merror[39m [31mUser is not associated with a company User is not associated with a company[39m
+2026-02-09 13:04:22 [31merror[39m [31mUser is not associated with a company User is not associated with a company[39m
+2026-02-09 13:12:04 [31merror[39m [31mUser is not associated with a company User is not associated with a company[39m
+2026-02-09 13:12:41 [31merror[39m [31mUser is not associated with a company User is not associated with a company[39m
+2026-02-09 13:16:33 [31merror[39m [31mUser is not associated with a company User is not associated with a company[39m
+2026-02-09 13:16:38 [31merror[39m [31mUser is not associated with a company User is not associated with a company[39m
+2026-02-09 14:25:48 [31merror[39m [31mUser is not associated with a company User is not associated with a company[39m
+2026-02-09 14:36:44 [31merror[39m [31mUser is not associated with a company User is not associated with a company[39m
+2026-02-09 15:21:46 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-09 15:22:13 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-09 15:22:25 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-09 15:29:04 [31merror[39m [31mUser is not associated with a company User is not associated with a company[39m
+2026-02-09 15:29:25 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-09 15:32:29 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-09 15:40:34 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-09 15:44:57 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-09 15:45:26 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-09 15:51:16 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-09 15:51:24 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-09 15:51:30 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-17 08:50:00 [31merror[39m [31mConversation not found Conversation not found[39m
+2026-02-18 05:06:23 [31merror[39m [31mConversation not found Conversation not found[39m
+2026-02-18 05:06:49 [31merror[39m [31mConversation not found Conversation not found[39m
+2026-02-18 05:06:56 [31merror[39m [31mConversation not found Conversation not found[39m
+2026-02-18 05:13:36 [31merror[39m [31mConversation not found Conversation not found[39m
+2026-02-18 13:22:33 [31merror[39m [31mPrisma error: [39m
+[31mInvalid `prisma.livestock.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:159:24[39m
+
+[31m  156 prisma.livestock.count({[39m
+[31m  157   where: companyFilter[39m
+[31m  158 }),[39m
+[31m→ 159 prisma.livestock.count([39m
+[31mCan't reach database server at `localhost:5432`[39m
+
+[31mPlease make sure your database server is running at `localhost:5432`. [39m
+[31mInvalid `prisma.livestock.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:159:24[39m
+
+[31m  156 prisma.livestock.count({[39m
+[31m  157   where: companyFilter[39m
+[31m  158 }),[39m
+[31m→ 159 prisma.livestock.count([39m
+[31mCan't reach database server at `localhost:5432`[39m
+
+[31mPlease make sure your database server is running at `localhost:5432`.[39m
+2026-02-18 13:22:35 [31merror[39m [31mPrisma error: [39m
+[31mInvalid `prisma.task.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\task.controller.ts:290:19[39m
+
+[31m  287     livestock: true[39m
+[31m  288   }[39m
+[31m  289 }),[39m
+[31m→ 290 prisma.task.count([39m
+[31mCan't reach database server at `localhost:5432`[39m
+
+[31mPlease make sure your database server is running at `localhost:5432`. [39m
+[31mInvalid `prisma.task.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\task.controller.ts:290:19[39m
+
+[31m  287     livestock: true[39m
+[31m  288   }[39m
+[31m  289 }),[39m
+[31m→ 290 prisma.task.count([39m
+[31mCan't reach database server at `localhost:5432`[39m
+
+[31mPlease make sure your database server is running at `localhost:5432`.[39m
+2026-02-18 13:22:46 [31merror[39m [31mPrisma error: [39m
+[31mInvalid `prisma.livestock.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:159:24[39m
+
+[31m  156 prisma.livestock.count({[39m
+[31m  157   where: companyFilter[39m
+[31m  158 }),[39m
+[31m→ 159 prisma.livestock.count([39m
+[31mCan't reach database server at `localhost:5432`[39m
+
+[31mPlease make sure your database server is running at `localhost:5432`. [39m
+[31mInvalid `prisma.livestock.count()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:159:24[39m
+
+[31m  156 prisma.livestock.count({[39m
+[31m  157   where: companyFilter[39m
+[31m  158 }),[39m
+[31m→ 159 prisma.livestock.count([39m
+[31mCan't reach database server at `localhost:5432`[39m
+
+[31mPlease make sure your database server is running at `localhost:5432`.[39m
+2026-02-19 02:51:23 [31merror[39m [31mConversation not found Conversation not found[39m
+2026-02-19 02:51:37 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-19 02:51:42 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-19 02:53:04 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-19 02:55:36 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-19 03:13:08 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-19 03:13:29 [31merror[39m [31mInternal Server Error Cannot set headers after they are sent to the client[39m
+2026-02-19 04:25:03 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2026-02-24 11:45:14 [31merror[39m [31mInvalid credentials Invalid credentials[39m
+2026-02-24 12:06:37 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.treatment.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:595:24[39m
+
+[31m  592 }),[39m
+[31m  593 [39m
+[31m  594 // Treatment records (including those not linked to sickness)[39m
+[31m→ 595 prisma.treatment.findMany({[39m
+[31m        where: {[39m
+[31m          livestockId: "cmklbif420007t1ckukqhv4nn"[39m
+[31m        },[39m
+[31m        include: {[39m
+[31m          recordedBy: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              role: true[39m
+[31m            }[39m
+[31m          },[39m
+[31m          sickness: {[39m
+[31m            select: {[39m
+[31m            ~~~~~~[39m
+[31m              id: true,[39m
+[31m              dateOfObservation: true,[39m
+[31m              observedSymptoms: true[39m
+[31m            },[39m
+[31m            include: {[39m
+[31m            ~~~~~~~[39m
+[31m              recordedBy: {[39m
+[31m                select: {[39m
+[31m                  id: true,[39m
+[31m                  fullName: true,[39m
+[31m                  role: true[39m
+[31m                }[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        orderBy: {[39m
+[31m          dateOfTreatment: "desc"[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mPlease either use `include` or `select`, but not both at the same time. [39m
+[31mInvalid `prisma.treatment.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:595:24[39m
+
+[31m  592 }),[39m
+[31m  593 [39m
+[31m  594 // Treatment records (including those not linked to sickness)[39m
+[31m→ 595 prisma.treatment.findMany({[39m
+[31m        where: {[39m
+[31m          livestockId: "cmklbif420007t1ckukqhv4nn"[39m
+[31m        },[39m
+[31m        include: {[39m
+[31m          recordedBy: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              role: true[39m
+[31m            }[39m
+[31m          },[39m
+[31m          sickness: {[39m
+[31m            select: {[39m
+[31m            ~~~~~~[39m
+[31m              id: true,[39m
+[31m              dateOfObservation: true,[39m
+[31m              observedSymptoms: true[39m
+[31m            },[39m
+[31m            include: {[39m
+[31m            ~~~~~~~[39m
+[31m              recordedBy: {[39m
+[31m                select: {[39m
+[31m                  id: true,[39m
+[31m                  fullName: true,[39m
+[31m                  role: true[39m
+[31m                }[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        orderBy: {[39m
+[31m          dateOfTreatment: "desc"[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mPlease either use `include` or `select`, but not both at the same time.[39m
+2026-02-24 12:06:53 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.treatment.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:595:24[39m
+
+[31m  592 }),[39m
+[31m  593 [39m
+[31m  594 // Treatment records (including those not linked to sickness)[39m
+[31m→ 595 prisma.treatment.findMany({[39m
+[31m        where: {[39m
+[31m          livestockId: "cmklbif420007t1ckukqhv4nn"[39m
+[31m        },[39m
+[31m        include: {[39m
+[31m          recordedBy: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              role: true[39m
+[31m            }[39m
+[31m          },[39m
+[31m          sickness: {[39m
+[31m            select: {[39m
+[31m            ~~~~~~[39m
+[31m              id: true,[39m
+[31m              dateOfObservation: true,[39m
+[31m              observedSymptoms: true[39m
+[31m            },[39m
+[31m            include: {[39m
+[31m            ~~~~~~~[39m
+[31m              recordedBy: {[39m
+[31m                select: {[39m
+[31m                  id: true,[39m
+[31m                  fullName: true,[39m
+[31m                  role: true[39m
+[31m                }[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        orderBy: {[39m
+[31m          dateOfTreatment: "desc"[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mPlease either use `include` or `select`, but not both at the same time. [39m
+[31mInvalid `prisma.treatment.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:595:24[39m
+
+[31m  592 }),[39m
+[31m  593 [39m
+[31m  594 // Treatment records (including those not linked to sickness)[39m
+[31m→ 595 prisma.treatment.findMany({[39m
+[31m        where: {[39m
+[31m          livestockId: "cmklbif420007t1ckukqhv4nn"[39m
+[31m        },[39m
+[31m        include: {[39m
+[31m          recordedBy: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              role: true[39m
+[31m            }[39m
+[31m          },[39m
+[31m          sickness: {[39m
+[31m            select: {[39m
+[31m            ~~~~~~[39m
+[31m              id: true,[39m
+[31m              dateOfObservation: true,[39m
+[31m              observedSymptoms: true[39m
+[31m            },[39m
+[31m            include: {[39m
+[31m            ~~~~~~~[39m
+[31m              recordedBy: {[39m
+[31m                select: {[39m
+[31m                  id: true,[39m
+[31m                  fullName: true,[39m
+[31m                  role: true[39m
+[31m                }[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        orderBy: {[39m
+[31m          dateOfTreatment: "desc"[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mPlease either use `include` or `select`, but not both at the same time.[39m
+2026-02-24 13:43:52 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.treatment.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:595:24[39m
+
+[31m  592 }),[39m
+[31m  593 [39m
+[31m  594 // Treatment records (including those not linked to sickness)[39m
+[31m→ 595 prisma.treatment.findMany({[39m
+[31m        where: {[39m
+[31m          livestockId: "cmklbif420007t1ckukqhv4nn"[39m
+[31m        },[39m
+[31m        include: {[39m
+[31m          recordedBy: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              role: true[39m
+[31m            }[39m
+[31m          },[39m
+[31m          sickness: {[39m
+[31m            select: {[39m
+[31m            ~~~~~~[39m
+[31m              id: true,[39m
+[31m              dateOfObservation: true,[39m
+[31m              observedSymptoms: true[39m
+[31m            },[39m
+[31m            include: {[39m
+[31m            ~~~~~~~[39m
+[31m              recordedBy: {[39m
+[31m                select: {[39m
+[31m                  id: true,[39m
+[31m                  fullName: true,[39m
+[31m                  role: true[39m
+[31m                }[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        orderBy: {[39m
+[31m          dateOfTreatment: "desc"[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mPlease either use `include` or `select`, but not both at the same time. [39m
+[31mInvalid `prisma.treatment.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:595:24[39m
+
+[31m  592 }),[39m
+[31m  593 [39m
+[31m  594 // Treatment records (including those not linked to sickness)[39m
+[31m→ 595 prisma.treatment.findMany({[39m
+[31m        where: {[39m
+[31m          livestockId: "cmklbif420007t1ckukqhv4nn"[39m
+[31m        },[39m
+[31m        include: {[39m
+[31m          recordedBy: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              role: true[39m
+[31m            }[39m
+[31m          },[39m
+[31m          sickness: {[39m
+[31m            select: {[39m
+[31m            ~~~~~~[39m
+[31m              id: true,[39m
+[31m              dateOfObservation: true,[39m
+[31m              observedSymptoms: true[39m
+[31m            },[39m
+[31m            include: {[39m
+[31m            ~~~~~~~[39m
+[31m              recordedBy: {[39m
+[31m                select: {[39m
+[31m                  id: true,[39m
+[31m                  fullName: true,[39m
+[31m                  role: true[39m
+[31m                }[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        orderBy: {[39m
+[31m          dateOfTreatment: "desc"[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mPlease either use `include` or `select`, but not both at the same time.[39m
+2026-02-24 13:48:12 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.treatment.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:595:24[39m
+
+[31m  592 }),[39m
+[31m  593 [39m
+[31m  594 // Treatment records (including those not linked to sickness)[39m
+[31m→ 595 prisma.treatment.findMany({[39m
+[31m        where: {[39m
+[31m          livestockId: "cmklbif420007t1ckukqhv4nn"[39m
+[31m        },[39m
+[31m        include: {[39m
+[31m          recordedBy: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              role: true[39m
+[31m            }[39m
+[31m          },[39m
+[31m          sickness: {[39m
+[31m            select: {[39m
+[31m            ~~~~~~[39m
+[31m              id: true,[39m
+[31m              dateOfObservation: true,[39m
+[31m              observedSymptoms: true[39m
+[31m            },[39m
+[31m            include: {[39m
+[31m            ~~~~~~~[39m
+[31m              recordedBy: {[39m
+[31m                select: {[39m
+[31m                  id: true,[39m
+[31m                  fullName: true,[39m
+[31m                  role: true[39m
+[31m                }[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        orderBy: {[39m
+[31m          dateOfTreatment: "desc"[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mPlease either use `include` or `select`, but not both at the same time. [39m
+[31mInvalid `prisma.treatment.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:595:24[39m
+
+[31m  592 }),[39m
+[31m  593 [39m
+[31m  594 // Treatment records (including those not linked to sickness)[39m
+[31m→ 595 prisma.treatment.findMany({[39m
+[31m        where: {[39m
+[31m          livestockId: "cmklbif420007t1ckukqhv4nn"[39m
+[31m        },[39m
+[31m        include: {[39m
+[31m          recordedBy: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              role: true[39m
+[31m            }[39m
+[31m          },[39m
+[31m          sickness: {[39m
+[31m            select: {[39m
+[31m            ~~~~~~[39m
+[31m              id: true,[39m
+[31m              dateOfObservation: true,[39m
+[31m              observedSymptoms: true[39m
+[31m            },[39m
+[31m            include: {[39m
+[31m            ~~~~~~~[39m
+[31m              recordedBy: {[39m
+[31m                select: {[39m
+[31m                  id: true,[39m
+[31m                  fullName: true,[39m
+[31m                  role: true[39m
+[31m                }[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        orderBy: {[39m
+[31m          dateOfTreatment: "desc"[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mPlease either use `include` or `select`, but not both at the same time.[39m
+2026-02-24 13:50:12 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.treatment.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:595:24[39m
+
+[31m  592 }),[39m
+[31m  593 [39m
+[31m  594 // Treatment records (including those not linked to sickness)[39m
+[31m→ 595 prisma.treatment.findMany({[39m
+[31m        where: {[39m
+[31m          livestockId: "cmklbif420007t1ckukqhv4nn"[39m
+[31m        },[39m
+[31m        include: {[39m
+[31m          recordedBy: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              role: true[39m
+[31m            }[39m
+[31m          },[39m
+[31m          sickness: {[39m
+[31m            select: {[39m
+[31m            ~~~~~~[39m
+[31m              id: true,[39m
+[31m              dateOfObservation: true,[39m
+[31m              observedSymptoms: true[39m
+[31m            },[39m
+[31m            include: {[39m
+[31m            ~~~~~~~[39m
+[31m              recordedBy: {[39m
+[31m                select: {[39m
+[31m                  id: true,[39m
+[31m                  fullName: true,[39m
+[31m                  role: true[39m
+[31m                }[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        orderBy: {[39m
+[31m          dateOfTreatment: "desc"[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mPlease either use `include` or `select`, but not both at the same time. [39m
+[31mInvalid `prisma.treatment.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:595:24[39m
+
+[31m  592 }),[39m
+[31m  593 [39m
+[31m  594 // Treatment records (including those not linked to sickness)[39m
+[31m→ 595 prisma.treatment.findMany({[39m
+[31m        where: {[39m
+[31m          livestockId: "cmklbif420007t1ckukqhv4nn"[39m
+[31m        },[39m
+[31m        include: {[39m
+[31m          recordedBy: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              role: true[39m
+[31m            }[39m
+[31m          },[39m
+[31m          sickness: {[39m
+[31m            select: {[39m
+[31m            ~~~~~~[39m
+[31m              id: true,[39m
+[31m              dateOfObservation: true,[39m
+[31m              observedSymptoms: true[39m
+[31m            },[39m
+[31m            include: {[39m
+[31m            ~~~~~~~[39m
+[31m              recordedBy: {[39m
+[31m                select: {[39m
+[31m                  id: true,[39m
+[31m                  fullName: true,[39m
+[31m                  role: true[39m
+[31m                }[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        orderBy: {[39m
+[31m          dateOfTreatment: "desc"[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mPlease either use `include` or `select`, but not both at the same time.[39m
+2026-02-24 13:52:45 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.treatment.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:595:24[39m
+
+[31m  592 }),[39m
+[31m  593 [39m
+[31m  594 // Treatment records (including those not linked to sickness)[39m
+[31m→ 595 prisma.treatment.findMany({[39m
+[31m        where: {[39m
+[31m          livestockId: "cmj8izqvw000ot1l8unli074h"[39m
+[31m        },[39m
+[31m        include: {[39m
+[31m          recordedBy: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              role: true[39m
+[31m            }[39m
+[31m          },[39m
+[31m          sickness: {[39m
+[31m            select: {[39m
+[31m            ~~~~~~[39m
+[31m              id: true,[39m
+[31m              dateOfObservation: true,[39m
+[31m              observedSymptoms: true[39m
+[31m            },[39m
+[31m            include: {[39m
+[31m            ~~~~~~~[39m
+[31m              recordedBy: {[39m
+[31m                select: {[39m
+[31m                  id: true,[39m
+[31m                  fullName: true,[39m
+[31m                  role: true[39m
+[31m                }[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        orderBy: {[39m
+[31m          dateOfTreatment: "desc"[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mPlease either use `include` or `select`, but not both at the same time. [39m
+[31mInvalid `prisma.treatment.findMany()` invocation in[39m
+[31mC:\Users\DoBUY\Agritech-Backend\src\contollers\livestock.controller.ts:595:24[39m
+
+[31m  592 }),[39m
+[31m  593 [39m
+[31m  594 // Treatment records (including those not linked to sickness)[39m
+[31m→ 595 prisma.treatment.findMany({[39m
+[31m        where: {[39m
+[31m          livestockId: "cmj8izqvw000ot1l8unli074h"[39m
+[31m        },[39m
+[31m        include: {[39m
+[31m          recordedBy: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              role: true[39m
+[31m            }[39m
+[31m          },[39m
+[31m          sickness: {[39m
+[31m            select: {[39m
+[31m            ~~~~~~[39m
+[31m              id: true,[39m
+[31m              dateOfObservation: true,[39m
+[31m              observedSymptoms: true[39m
+[31m            },[39m
+[31m            include: {[39m
+[31m            ~~~~~~~[39m
+[31m              recordedBy: {[39m
+[31m                select: {[39m
+[31m                  id: true,[39m
+[31m                  fullName: true,[39m
+[31m                  role: true[39m
+[31m                }[39m
+[31m              }[39m
+[31m            }[39m
+[31m          }[39m
+[31m        },[39m
+[31m        orderBy: {[39m
+[31m          dateOfTreatment: "desc"[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mPlease either use `include` or `select`, but not both at the same time.[39m

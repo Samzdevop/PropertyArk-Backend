@@ -11,6 +11,8 @@ exports.livestockRouter = (0, express_1.Router)();
 exports.livestockRouter.post('/:companyId', errorHandler_1.authenticateJWT, (0, validateRequest_1.validateRequest)(livestock_schemas_1.addLivestockSchema), livestock_controller_1.addLivestock);
 exports.livestockRouter.get('/counts', errorHandler_1.authenticateJWT, livestock_controller_1.getLivestockCounts);
 exports.livestockRouter.get('/', errorHandler_1.authenticateJWT, livestock_controller_1.getAllLivestock);
+// used by vet to get livestock of a farm
+exports.livestockRouter.get('/:companyId', errorHandler_1.authenticateJWT, livestock_controller_1.getLivestockByCompany);
 exports.livestockRouter.get('/:livestockId', errorHandler_1.authenticateJWT, livestock_controller_1.getLivestockById);
 exports.livestockRouter.patch('/:livestockId', errorHandler_1.authenticateJWT, (0, validateRequest_1.validateRequest)(livestock_schemas_1.updateLivestockSchema), livestock_controller_1.updateLivestock);
 exports.livestockRouter.delete('/:livestockId', errorHandler_1.authenticateJWT, (0, roleCheck_1.requireRoles)(['ADMIN', 'FARM_KEEPER']), livestock_controller_1.deleteLivestock);

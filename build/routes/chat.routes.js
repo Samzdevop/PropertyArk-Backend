@@ -2,11 +2,34 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.chatRouter = void 0;
 const express_1 = require("express");
-const chat_controller_1 = require("../contollers/chat.controller");
+// import {
+//   sendVetRequest,
+//   acceptVetRequest,
+//   rejectVetRequest,
+//   getVetRequests,
+//   getConversations,
+//   getMessages,
+//   getConversation,
+//   updateConversation,
+//   deleteConversation,
+//   addParticipants,
+//   removeParticipant,
+//   createConversation,
+//   getAvailableChatUsers,
+//   createMessage,
+//   markMessagesAsRead,
+//   addReaction,
+//   editMessage,
+//   deleteMessage,
+//   startCall,
+//   endCall,
+//   answerCall
+// } from '../contollers/chat.controller';
 const errorHandler_1 = require("../middlewares/errorHandler");
 const roleCheck_1 = require("../middlewares/roleCheck");
 const validateRequest_1 = require("../middlewares/validateRequest");
 const chat_schemas_1 = require("../schemas/chat.schemas");
+const chat_controller_1 = require("../contollers/chat.controller");
 exports.chatRouter = (0, express_1.Router)();
 exports.chatRouter.post('/vet-requests/:vetId/:companyId', errorHandler_1.authenticateJWT, (0, roleCheck_1.requireRoles)(['ADMIN']), (0, validateRequest_1.validateRequest)(chat_schemas_1.sendVetRequestSchema), chat_controller_1.sendVetRequest);
 exports.chatRouter.patch('/vet-requests/:requestId/accept', errorHandler_1.authenticateJWT, (0, roleCheck_1.requireRoles)(['VET']), chat_controller_1.acceptVetRequest);
@@ -21,6 +44,7 @@ exports.chatRouter.post('/conversations/:conversationId/participants', errorHand
 exports.chatRouter.delete('/conversations/:conversationId/participants/:participantId', errorHandler_1.authenticateJWT, chat_controller_1.removeParticipant);
 exports.chatRouter.get('/conversations/:conversationId/messages', errorHandler_1.authenticateJWT, chat_controller_1.getMessages);
 exports.chatRouter.get('/available-users', errorHandler_1.authenticateJWT, chat_controller_1.getAvailableChatUsers);
+exports.chatRouter.get('/available-company-users', errorHandler_1.authenticateJWT, chat_controller_1.getCompanyUsersForVet);
 exports.chatRouter.post('/messages', errorHandler_1.authenticateJWT, (0, validateRequest_1.validateRequest)(chat_schemas_1.createMessageSchema), chat_controller_1.createMessage);
 exports.chatRouter.patch('/messages/read', errorHandler_1.authenticateJWT, (0, validateRequest_1.validateRequest)(chat_schemas_1.markMessagesAsReadSchema), chat_controller_1.markMessagesAsRead);
 exports.chatRouter.post('/messages/:messageId/reactions', errorHandler_1.authenticateJWT, (0, validateRequest_1.validateRequest)(chat_schemas_1.addReactionSchema), chat_controller_1.addReaction);

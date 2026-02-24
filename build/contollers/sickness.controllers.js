@@ -57,9 +57,14 @@ exports.reportSickness = reportSickness;
 // Get all sickness records
 const getAllSickness = async (req, res, next) => {
     try {
+        const currentUser = req.user;
         const { page = 1, limit = 10, livestockId } = req.query;
         const where = {
-            ...(livestockId && { livestockId: String(livestockId) })
+            ...(livestockId && { livestockId: String(livestockId) }),
+            livestock: {
+                companyId: currentUser.companyId,
+                isDeleted: false
+            }
         };
         const sicknessRecords = await prisma_1.default.sickness.findMany({
             where,

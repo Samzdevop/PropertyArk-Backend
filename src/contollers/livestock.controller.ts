@@ -140,6 +140,73 @@ export const getAllLivestock = async (
   }
 };
 
+
+export const getLivestockByCompany = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const { page = 1, limit = 10, type } = req.query;
+    const { companyId } = req.params; 
+    const currentUser = (req.user as any);
+
+    const where = { 
+      companyId: companyId, 
+      isDeleted: false,
+      ...(type && { type: String(type) }) 
+    };
+
+    const livestock = await prisma.livestock.findMany({
+      where,
+      skip: (Number(page) - 1) * Number(limit),
+      take: Number(limit),
+      include: { 
+        addedBy: { select: userSelect },
+        vaccinationRecords: {
+          orderBy: {dateofVaccination: 'desc'},
+          select: {
+            id: true,
+            dateofVaccination: true,
+            vaccineType: true,
+            dosage: true,
+            administeredBy: true,
+            nextDueDate: true
+          }
+        },
+        treatments: {
+          orderBy: {dateOfTreatment: 'desc'},
+          select: {
+            id: true,
+            dateOfTreatment: true,
+            nextDueDate: true,
+            treatmentType: true,
+            dosage: true
+          }
+        }
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    const total = await prisma.livestock.count({ where });
+    
+    sendSuccessResponse(res, 'Livestock retrieved successfully for company', { 
+      livestock,
+      companyId,
+      pagination: {
+        page: Number(page),
+        limit: Number(limit),
+        total,
+        pages: Math.ceil(total / Number(limit))
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+
 export const getLivestockCounts = async (
   req: Request,
   res: Response,
@@ -147,16 +214,18 @@ export const getLivestockCounts = async (
 ): Promise<void> => {
    try {
     const currentUser = (req.user as any);
+    const companyFilter = {
+      companyId: currentUser.companyId,
+      isDeleted: false
+    };
+
     const [totalLivestock, sickLivestock] = await Promise.all([
       prisma.livestock.count({
-        where: { 
-          companyId: currentUser.companyId,
-          isDeleted: false
-        }
+        where: companyFilter
       }),
       prisma.livestock.count({
         where: {
-          isDeleted: false,
+          ...companyFilter,
           healthStatus: {
             in: ['SICK', 'IN_TREATMENT', 'CRITICAL'] 
           },
@@ -536,13 +605,11 @@ export const getLivestockHealthHistory = async (
             }
           },
           sickness: {
-            select: {
+            select: { 
               id: true,
               dateOfObservation: true,
-              observedSymptoms: true
-            },
-             include: {
-              recordedBy: {
+              observedSymptoms: true,
+              recordedBy: { 
                 select: {
                   id: true,
                   fullName: true,

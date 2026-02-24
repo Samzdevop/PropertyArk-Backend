@@ -40,7 +40,7 @@ import {
   endCallSchema,
   answerCallSchema
 } from '../schemas/chat.schemas';
-import { acceptVetRequest, addParticipants, addReaction, answerCall, createConversation, createMessage, deleteConversation, deleteMessage, editMessage, endCall, getAvailableChatUsers, getConversation, getConversations, getMessages, getVetRequests, markMessagesAsRead, rejectVetRequest, removeParticipant, sendVetRequest, startCall, updateConversation } from '../contollers/chat.controller';
+import { acceptVetRequest, addParticipants, addReaction, answerCall, createConversation, createMessage, deleteConversation, deleteMessage, editMessage, endCall, getAvailableChatUsers, getCompanyUsersForVet, getConversation, getConversations, getMessages, getVetRequests, markMessagesAsRead, rejectVetRequest, removeParticipant, sendVetRequest, startCall, updateConversation } from '../contollers/chat.controller';
 
 export const chatRouter = Router();
 
@@ -133,6 +133,12 @@ chatRouter.get(
   '/available-users',
   authenticateJWT,
   getAvailableChatUsers
+);
+
+chatRouter.get(
+  '/available-company-users',
+  authenticateJWT,
+  getCompanyUsersForVet
 );
 
 chatRouter.post(

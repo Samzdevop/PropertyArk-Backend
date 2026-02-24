@@ -12,6 +12,7 @@ import {
   getFarmLivestock,
   getLivestockHealthHistory,
   getLivestockActivityTimeline,
+  getLivestockByCompany,
 } from '../contollers/livestock.controller';
 import { authenticateJWT } from '../middlewares/errorHandler';
 import { validateRequest } from '../middlewares/validateRequest';
@@ -42,6 +43,13 @@ livestockRouter.get(
   '/',
   authenticateJWT, 
   getAllLivestock
+);
+
+// used by vet to get livestock of a farm
+livestockRouter.get(
+  '/:companyId',
+  authenticateJWT,
+  getLivestockByCompany
 );
 
 livestockRouter.get(

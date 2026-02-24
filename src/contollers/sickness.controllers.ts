@@ -67,10 +67,15 @@ export const getAllSickness = async (
   next: NextFunction
 ): Promise<void> => {
   try {
+    const currentUser = req.user as any;
     const { page = 1, limit = 10, livestockId } = req.query;
     
     const where = {
-      ...(livestockId && { livestockId: String(livestockId) })
+      ...(livestockId && { livestockId: String(livestockId) }),
+      livestock: {
+        companyId: currentUser.companyId,
+        isDeleted: false
+      }
     };
 
     const sicknessRecords = await prisma.sickness.findMany({

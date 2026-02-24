@@ -7,7 +7,6 @@ const baseInventorySchema = zod_1.z.object({
     notes: zod_1.z.string().optional(),
 });
 exports.inventoryRecordSchema = zod_1.z.discriminatedUnion('recordType', [
-    // NEW Record
     baseInventorySchema.extend({
         recordType: zod_1.z.literal('NEW'),
         type: zod_1.z.enum(['FEED', 'MEDICINE', 'EQUIPMENT']),

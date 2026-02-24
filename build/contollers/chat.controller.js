@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.answerCall = exports.endCall = exports.startCall = exports.addReaction = exports.editMessage = exports.deleteMessage = exports.markMessagesAsRead = exports.createMessage = exports.getAvailableChatUsers = exports.removeParticipant = exports.addParticipants = exports.deleteConversation = exports.updateConversation = exports.getConversation = exports.createConversation = exports.getMessages = exports.getConversations = exports.getVetRequests = exports.rejectVetRequest = exports.acceptVetRequest = exports.sendVetRequest = void 0;
+exports.answerCall = exports.endCall = exports.startCall = exports.addReaction = exports.editMessage = exports.deleteMessage = exports.markMessagesAsRead = exports.createMessage = exports.getAvailableChatUsers = exports.getCompanyUsersForVet = exports.removeParticipant = exports.addParticipants = exports.deleteConversation = exports.updateConversation = exports.getConversation = exports.createConversation = exports.getMessages = exports.getConversations = exports.getVetRequests = exports.rejectVetRequest = exports.acceptVetRequest = exports.sendVetRequest = void 0;
 const prisma_1 = __importDefault(require("../prisma"));
 const sendSuccessResponse_1 = require("../utils/sendSuccessResponse");
 const NotFoundError_1 = require("../errors/NotFoundError");
@@ -836,6 +836,60 @@ const removeParticipant = async (req, res, next) => {
     }
 };
 exports.removeParticipant = removeParticipant;
+const getCompanyUsersForVet = async (req, res, next) => {
+    try {
+        const vetId = req.user.id;
+        const vetRole = req.user.role;
+        if (vetRole !== 'VET') {
+            throw new ForbiddenError_1.ForbiddenError('Only veterinarians can access this resource');
+        }
+        const acceptedVetRequests = await prisma_1.default.vetRequest.findMany({
+            where: {
+                vetId,
+                status: 'ACCEPTED'
+            },
+            select: {
+                companyId: true
+            }
+        });
+        const companyIds = [...new Set(acceptedVetRequests.map(r => r.companyId))];
+        if (companyIds.length === 0) {
+            (0, sendSuccessResponse_1.sendSuccessResponse)(res, 'No accepted company requests found', {
+                allUsers: []
+            });
+        }
+        const companyUsers = await prisma_1.default.user.findMany({
+            where: {
+                companyId: { in: companyIds },
+                isSuspended: false,
+                isVerified: true,
+                role: {
+                    in: ['ADMIN', 'COWORKER', 'FARM_KEEPER']
+                }
+            },
+            select: {
+                id: true,
+                fullName: true,
+                email: true,
+                phone: true,
+                avatar: true,
+                role: true,
+                companyId: true,
+                companyName: true,
+                location: true,
+                lastLogin: true
+            }
+        });
+        (0, sendSuccessResponse_1.sendSuccessResponse)(res, 'Available company users retrieved successfully', {
+            allUsers: companyUsers,
+            companyCount: companyIds.length
+        });
+    }
+    catch (error) {
+        next(error);
+    }
+};
+exports.getCompanyUsersForVet = getCompanyUsersForVet;
 const getAvailableChatUsers = async (req, res, next) => {
     try {
         const userId = req.user.id;
@@ -864,7 +918,6 @@ const getAvailableChatUsers = async (req, res, next) => {
                 lastLogin: true
             }
         });
-        // Get vets that have accepted requests from this company
         const acceptedVetRequests = await prisma_1.default.vetRequest.findMany({
             where: {
                 companyId,

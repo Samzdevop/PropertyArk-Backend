@@ -943,7 +943,65 @@ export const removeParticipant = async (
 };
 
 
+export const getCompanyUsersForVet = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+):Promise <void> => {
+  try {
+    const vetId = (req.user as any).id;
+    const vetRole = (req.user as any).role;
+    if (vetRole !== 'VET') {
+      throw new ForbiddenError('Only veterinarians can access this resource');
+    }
+    const acceptedVetRequests = await prisma.vetRequest.findMany({
+      where: {
+        vetId,
+        status: 'ACCEPTED'
+      },
+      select: {
+        companyId: true
+      }
+    });
 
+    const companyIds = [...new Set(acceptedVetRequests.map(r => r.companyId))];
+
+    if (companyIds.length === 0) {
+      sendSuccessResponse(res, 'No accepted company requests found', {
+        allUsers: []
+      });
+    }
+    const companyUsers = await prisma.user.findMany({
+      where: {
+        companyId: { in: companyIds },
+        isSuspended: false,
+        isVerified: true,
+        role: {
+          in: ['ADMIN', 'COWORKER', 'FARM_KEEPER']
+        }
+      },
+      select: {
+        id: true,
+        fullName: true,
+        email: true,
+        phone: true,
+        avatar: true,
+        role: true,
+        companyId: true,
+        companyName: true,
+        location: true,
+        lastLogin: true
+      }
+    });
+
+    sendSuccessResponse(res, 'Available company users retrieved successfully', {
+      allUsers: companyUsers,
+      companyCount: companyIds.length
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const getAvailableChatUsers = async (
   req: Request,
@@ -980,7 +1038,6 @@ export const getAvailableChatUsers = async (
       }
     });
 
-    // Get vets that have accepted requests from this company
     const acceptedVetRequests = await prisma.vetRequest.findMany({
       where: {
         companyId,

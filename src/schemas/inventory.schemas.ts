@@ -6,7 +6,6 @@ const baseInventorySchema = z.object({
 });
 
 export const inventoryRecordSchema = z.discriminatedUnion('recordType', [
-  // NEW Record
   baseInventorySchema.extend({
     recordType: z.literal('NEW'),
     type: z.enum(['FEED', 'MEDICINE', 'EQUIPMENT']),

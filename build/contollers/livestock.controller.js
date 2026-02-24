@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getLivestockActivityTimeline = exports.getLivestockHealthHistory = exports.getFarmLivestock = exports.restoreLivestock = exports.getDeletedLivestock = exports.softDeleteLivestock = exports.deleteLivestock = exports.updateLivestock = exports.getLivestockCounts = exports.getAllLivestock = exports.getLivestockById = exports.addLivestock = void 0;
+exports.getLivestockActivityTimeline = exports.getLivestockHealthHistory = exports.getFarmLivestock = exports.restoreLivestock = exports.getDeletedLivestock = exports.softDeleteLivestock = exports.deleteLivestock = exports.updateLivestock = exports.getLivestockCounts = exports.getLivestockByCompany = exports.getAllLivestock = exports.getLivestockById = exports.addLivestock = void 0;
 const prisma_1 = __importDefault(require("../prisma"));
 const sendSuccessResponse_1 = require("../utils/sendSuccessResponse");
 const NotFoundError_1 = require("../errors/NotFoundError");
@@ -115,19 +115,77 @@ const getAllLivestock = async (req, res, next) => {
     }
 };
 exports.getAllLivestock = getAllLivestock;
+const getLivestockByCompany = async (req, res, next) => {
+    try {
+        const { page = 1, limit = 10, type } = req.query;
+        const { companyId } = req.params;
+        const currentUser = req.user;
+        const where = {
+            companyId: companyId,
+            isDeleted: false,
+            ...(type && { type: String(type) })
+        };
+        const livestock = await prisma_1.default.livestock.findMany({
+            where,
+            skip: (Number(page) - 1) * Number(limit),
+            take: Number(limit),
+            include: {
+                addedBy: { select: selects_1.userSelect },
+                vaccinationRecords: {
+                    orderBy: { dateofVaccination: 'desc' },
+                    select: {
+                        id: true,
+                        dateofVaccination: true,
+                        vaccineType: true,
+                        dosage: true,
+                        administeredBy: true,
+                        nextDueDate: true
+                    }
+                },
+                treatments: {
+                    orderBy: { dateOfTreatment: 'desc' },
+                    select: {
+                        id: true,
+                        dateOfTreatment: true,
+                        nextDueDate: true,
+                        treatmentType: true,
+                        dosage: true
+                    }
+                }
+            },
+            orderBy: { createdAt: 'desc' },
+        });
+        const total = await prisma_1.default.livestock.count({ where });
+        (0, sendSuccessResponse_1.sendSuccessResponse)(res, 'Livestock retrieved successfully for company', {
+            livestock,
+            companyId,
+            pagination: {
+                page: Number(page),
+                limit: Number(limit),
+                total,
+                pages: Math.ceil(total / Number(limit))
+            }
+        });
+    }
+    catch (error) {
+        next(error);
+    }
+};
+exports.getLivestockByCompany = getLivestockByCompany;
 const getLivestockCounts = async (req, res, next) => {
     try {
         const currentUser = req.user;
+        const companyFilter = {
+            companyId: currentUser.companyId,
+            isDeleted: false
+        };
         const [totalLivestock, sickLivestock] = await Promise.all([
             prisma_1.default.livestock.count({
-                where: {
-                    companyId: currentUser.companyId,
-                    isDeleted: false
-                }
+                where: companyFilter
             }),
             prisma_1.default.livestock.count({
                 where: {
-                    isDeleted: false,
+                    ...companyFilter,
                     healthStatus: {
                         in: ['SICK', 'IN_TREATMENT', 'CRITICAL']
                     },
@@ -460,9 +518,7 @@ const getLivestockHealthHistory = async (req, res, next) => {
                         select: {
                             id: true,
                             dateOfObservation: true,
-                            observedSymptoms: true
-                        },
-                        include: {
+                            observedSymptoms: true,
                             recordedBy: {
                                 select: {
                                     id: true,
