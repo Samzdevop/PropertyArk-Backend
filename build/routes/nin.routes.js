@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ninRouter = void 0;
+const express_1 = require("express");
+const upload_1 = require("../config/upload");
+const roleCheck_middleware_1 = require("../middlewares/roleCheck.middleware");
+const errorHandler_middleware_1 = require("../middlewares/errorHandler.middleware");
+const nin_controller_1 = require("../contollers/nin.controller");
+const nin_schemas_1 = require("../schemas/nin.schemas");
+const validateRequest_middleware_1 = require("../middlewares/validateRequest.middleware");
+exports.ninRouter = (0, express_1.Router)();
+exports.ninRouter.post('/upload', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['VENDOR']), upload_1.uploadNIN.single('ninPhoto'), nin_controller_1.uploadNIN);
+exports.ninRouter.get('/pending', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['ADMIN']), nin_controller_1.getPendingNINVerifications);
+exports.ninRouter.patch('/:vendorId/verify', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['ADMIN']), (0, validateRequest_middleware_1.validateRequest)(nin_schemas_1.verifyNINSchema), nin_controller_1.verifyVendorNIN);
