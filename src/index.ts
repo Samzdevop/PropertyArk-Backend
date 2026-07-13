@@ -1,13 +1,11 @@
+import { app } from './app';
 import { config } from './config';
-import {  httpServer, io, } from './app';
-import { ReminderJob } from './jobs/reminder.job';
 
-
+let server: any = null;
 
 const PORT = config.PORT;
 
 
-httpServer.listen(PORT, () => {
-  console.log(`🚀 Server + Socket.IO running on port ${PORT}`);
-  ReminderJob.start();
+server = app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

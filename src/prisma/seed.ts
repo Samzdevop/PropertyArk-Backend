@@ -1,649 +1,655 @@
-import { PrismaClient, Role, HealthStatus, Priority, TaskStatus, InventoryType, FinancialTransactionType, DiagnosisSeverity, DiagnosisPrognosis, Frequency, AdministrationRoutine, NotificationType, NotificationStatus, VisitType, Offtake } from '@prisma/client';
+import { PrismaClient, Role, ListingType, PropertyStatus, PropertyListingStatus, PropertyType, VerificationStatus, MediaType, DocumentType, NotificationType } from '@prisma/client';
 import { hash } from 'argon2';
+import { faker } from '@faker-js/faker';
 
 const prisma = new PrismaClient();
 
-interface CompanyData {
-  name: string;
-  location: string;
-  phone: string;
-}
+const SEED_CONFIG = {
+  ADMIN_COUNT: 1,
+  STAFF_COUNT: 2,
+  VENDOR_COUNT: 4,
+  USER_COUNT: 6,
+  PROPERTIES_PER_VENDOR: 15,
+  PASSWORD: 'Password123!',
+};
 
-interface UserData {
-  email: string;
-  fullName: string;
-  password: string;
-  location: string;
-  phone: string;
-  role: Role;
-  isVerified: boolean;
-  lastLogin: Date;
-}
-
-async function main() {
-  console.log('🌱 Starting seed...');
-
-  // Clear existing data in correct order to handle foreign key constraints
-  // console.log('🗑️ Clearing existing data...');
-  await prisma.note.deleteMany();
-  await prisma.followUpReminder.deleteMany();
-  await prisma.treatmentReminder.deleteMany();
-  await prisma.followUp.deleteMany();
-  await prisma.prescribedTreatment.deleteMany();
-  await prisma.diagnosis.deleteMany();
-  await prisma.appointmentReminder.deleteMany();
-  await prisma.appointment.deleteMany();
-  await prisma.farmVisit.deleteMany();
-  await prisma.notification.deleteMany();
-  await prisma.taskObservation.deleteMany();
-  await prisma.task.deleteMany();
-  await prisma.treatment.deleteMany();
-  await prisma.sickness.deleteMany();
-  await prisma.vaccination.deleteMany();
-  await prisma.offtakeRecord.deleteMany();
-  await prisma.livestock.deleteMany();
-  await prisma.inventoryRecord.deleteMany();
-  await prisma.inventory.deleteMany();
-  await prisma.financialTransaction.deleteMany();
-  await prisma.user.deleteMany();
-  await prisma.company.deleteMany();
-
-  console.log('🏢 Creating companies and users...');
-
-  const companiesData: CompanyData[] = [
-    {
-      name: 'Green Valley Farm',
-      location: 'Lagos, Nigeria',
-      phone: '+2348012345001'
-    },
-    {
-      name: 'Sunrise Ranch', 
-      location: 'Abuja, Nigeria',
-      phone: '+2348012345002'
-    },
-    {
-      name: 'Mountain View Farm',
-      location: 'Port Harcourt, Nigeria',
-      phone: '+2348012345003'
-    }
-  ];
-
-  const createdCompanies: any[] = [];
-  const createdUsers: any[] = [];
-
-  // Create companies and admin users
-  for (const companyData of companiesData) {
-    // Create company
-    const company = await prisma.company.create({
-      data: {
-        name: companyData.name,
-        location: companyData.location,
-        phone: companyData.phone,
-        isActive: true
-      }
-    });
-    createdCompanies.push(company);
-
-    // Create company admin
-    const adminPassword: string = await hash('password123');
-    const adminData = {
-      email: `admin@${company.name.toLowerCase().replace(/\s+/g, '')}.com`,
-      fullName: `${company.name} Owner`,
-      password: adminPassword,
-      companyName: company.name,
-      companyId: company.id,
-      location: company.location,
-      phone: company.phone,
-      role: 'ADMIN' as Role,
-      isVerified: true,
-      lastLogin: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000)
-    };
-
-    const admin = await prisma.user.create({
-      data: adminData
-    });
-    createdUsers.push(admin);
-
-    // Create farm keeper for this company
-    const farmKeeperPassword: string = await hash('password123');
-    const farmKeeperData = {
-      email: `farmkeeper@${company.name.toLowerCase().replace(/\s+/g, '')}.com`,
-      fullName: `${company.name} Farm Keeper`,
-      password: farmKeeperPassword,
-      companyName: company.name,
-      companyId: company.id,
-      location: company.location,
-      phone: `+2348012345${String(createdUsers.length + 100).padStart(3, '0')}`,
-      role: 'FARM_KEEPER' as Role,
-      isVerified: true,
-      lastLogin: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000)
-    };
-
-    const farmKeeper = await prisma.user.create({
-      data: farmKeeperData
-    });
-    createdUsers.push(farmKeeper);
-
-    // Create coworker for this company
-    const coworkerPassword: string = await hash('password123');
-    const coworkerData = {
-      email: `coworker@${company.name.toLowerCase().replace(/\s+/g, '')}.com`,
-      fullName: `${company.name} Coworker`,
-      password: coworkerPassword,
-      companyName: company.name,
-      companyId: company.id,
-      location: company.location,
-      phone: `+2348012345${String(createdUsers.length + 200).padStart(3, '0')}`,
-      role: 'COWORKER' as Role,
-      isVerified: true,
-      lastLogin: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000)
-    };
-
-    const coworker = await prisma.user.create({
-      data: coworkerData
-    });
-    createdUsers.push(coworker);
-  }
-
-  // Create vets (they don't belong to specific companies)
-  const vetPassword: string = await hash('password123');
-  const vet1 = await prisma.user.create({
-    data: {
-      email: 'vet.drbrown@animalclinic.com',
-      fullName: 'Dr. Sarah Brown',
-      password: vetPassword,
-      companyName: 'Animal Clinic Ltd',
-      location: 'Lagos, Nigeria',
-      phone: '+2348012345004',
-      role: 'VET' as Role,
-      isVerified: true,
-      lastLogin: new Date()
-    }
-  });
-  createdUsers.push(vet1);
-
-  const vet2 = await prisma.user.create({
-    data: {
-      email: 'vet.drjohnson@vetcare.com',
-      fullName: 'Dr. Michael Johnson',
-      password: vetPassword,
-      companyName: 'Vet Care Services',
-      location: 'Abuja, Nigeria',
-      phone: '+2348012345005',
-      role: 'VET' as Role,
-      isVerified: true,
-      lastLogin: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
-    }
-  });
-  createdUsers.push(vet2);
-
-  console.log('🐄 Creating livestock...');
-
-  const livestockTypes: string[] = ['Cattle', 'Goat', 'Sheep', 'Pig', 'Chicken'];
-  const breeds: { [key: string]: string[] } = {
-    Cattle: ['Angus', 'Hereford', 'Holstein', 'Jersey'],
-    Goat: ['Boer', 'Nubian', 'Saanen', 'Alpine'],
-    Sheep: ['Dorper', 'Merino', 'Suffolk', 'Dorset'],
-    Pig: ['Duroc', 'Hampshire', 'Yorkshire', 'Berkshire'],
-    Chicken: ['Rhode Island Red', 'Leghorn', 'Plymouth Rock', 'Sussex']
+const generateImageUrl = (category: string, index: number): string => {
+  const images = {
+    property: [
+      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800',
+      'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800',
+      'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800',
+      'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800',
+      'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=800',
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800',
+      'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800',
+      'https://images.unsplash.com/photo-1505693314120-0d443867891c?w=800',
+      'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800',
+      'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800',
+    ],
+    avatar: [
+      'https://randomuser.me/api/portraits/men/1.jpg',
+      'https://randomuser.me/api/portraits/women/2.jpg',
+      'https://randomuser.me/api/portraits/men/3.jpg',
+      'https://randomuser.me/api/portraits/women/4.jpg',
+      'https://randomuser.me/api/portraits/men/5.jpg',
+      'https://randomuser.me/api/portraits/women/6.jpg',
+      'https://randomuser.me/api/portraits/men/7.jpg',
+      'https://randomuser.me/api/portraits/women/8.jpg',
+      'https://randomuser.me/api/portraits/men/9.jpg',
+      'https://randomuser.me/api/portraits/women/10.jpg',
+      'https://randomuser.me/api/portraits/men/11.jpg',
+      'https://randomuser.me/api/portraits/women/12.jpg',
+    ]
   };
 
-  const healthStatuses: HealthStatus[] = ['HEALTHY', 'SICK', 'IN_TREATMENT', 'RECOVERING', 'CRITICAL'];
-  const createdLivestock: any[] = [];
+  const selectedImages = images[category as keyof typeof images] || images.property;
+  return selectedImages[index % selectedImages.length];
+};
 
-  for (const company of createdCompanies) {
-    const companyAdmin = createdUsers.find(u => u.companyId === company.id && u.role === 'ADMIN');
-    if (!companyAdmin) continue;
-    
-    for (let i = 1; i <= 20; i++) {
-      const type: string = livestockTypes[Math.floor(Math.random() * livestockTypes.length)];
-      const breed: string = breeds[type][Math.floor(Math.random() * breeds[type].length)];
-      const healthStatus: HealthStatus = healthStatuses[Math.floor(Math.random() * healthStatuses.length)];
-      
-      const livestockData = {
-        tagId: `${company.name.substring(0, 3).toUpperCase()}-${String(i).padStart(3, '0')}`,
-        type,
-        breed,
-        birthDate: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000 * 3),
-        healthStatus,
-        weight: 50 + Math.random() * 200,
-        gender: Math.random() > 0.5 ? 'Male' : 'Female',
-        livestockSource: ['Purchase', 'Birth', 'Transfer'][Math.floor(Math.random() * 3)],
-        livestockPurpose: ['Meat', 'Milk', 'Breeding', 'Eggs'][Math.floor(Math.random() * 4)],
-        companyId: company.id,
-        addedById: companyAdmin.id
-      };
-      
-      const livestock = await prisma.livestock.create({
-        data: livestockData
-      });
-      createdLivestock.push(livestock);
-    }
+const generateVideoUrl = (): string => {
+  const videos = [
+    'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+    'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+    'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+  ];
+  return videos[Math.floor(Math.random() * videos.length)];
+};
+
+const generateNinPhotoUrl = (index: number): string => {
+  return `https://randomuser.me/api/portraits/med/${index % 2 === 0 ? 'men' : 'women'}/${index + 10}.jpg`;
+};
+
+const getRandomPropertyType = (): PropertyType => {
+  const types = [
+    PropertyType.RESIDENTIAL,
+    PropertyType.COMMERCIAL,
+    PropertyType.INDUSTRIAL,
+    PropertyType.LAND,
+    PropertyType.MIXED_USE
+  ];
+  return types[Math.floor(Math.random() * types.length)];
+};
+
+const getRandomListingType = (): ListingType => {
+  const types = [
+    ListingType.FOR_RENT,
+    ListingType.FOR_SALE,
+    ListingType.FOR_LAND,
+    ListingType.FOR_SHORTLET
+  ];
+  return types[Math.floor(Math.random() * types.length)];
+};
+
+const getRandomPropertyStatus = (): PropertyStatus => {
+  const statuses = [
+    PropertyStatus.AVAILABLE,
+    PropertyStatus.OCCUPIED,
+    PropertyStatus.UNDER_MAINTENANCE,
+    PropertyStatus.UNDER_CONSTRUCTION,
+    PropertyStatus.SOLD,
+    PropertyStatus.RENTED
+  ];
+  return statuses[Math.floor(Math.random() * statuses.length)];
+};
+
+const getRandomListingStatus = (index: number): PropertyListingStatus => {
+  if (index % 5 === 0) return PropertyListingStatus.PENDING;
+  if (index % 7 === 0) return PropertyListingStatus.REJECTED;
+  return PropertyListingStatus.ACTIVE;
+};
+
+const getRandomAmenities = (): string[] => {
+  const allAmenities = [
+    'Pool', 'Gym', 'Parking', 'Elevator', 'Security', 'Pet Friendly',
+    'Balcony', 'Garden', 'Terrace', 'Jacuzzi', 'Sauna', 'Tennis Court',
+    'Clubhouse', 'Playground', 'BBQ Area', 'Fireplace', 'Central AC',
+    'Washer/Dryer', 'Dishwasher', 'Smart Home', 'Solar Panels'
+  ];
+  const count = Math.floor(Math.random() * 6) + 2;
+  return faker.helpers.arrayElements(allAmenities, count);
+};
+
+const getPricingByListingType = (listingType: ListingType): { rentAmount?: number; salePrice?: number; landFee?: number; shortletAmount?: number } => {
+  switch (listingType) {
+    case ListingType.FOR_RENT:
+      return { rentAmount: faker.number.int({ min: 800, max: 5000 }) };
+    case ListingType.FOR_SALE:
+      return { salePrice: faker.number.int({ min: 100000, max: 2000000 }) };
+    case ListingType.FOR_LAND:
+      return { landFee: faker.number.int({ min: 20000, max: 500000 }) };
+    case ListingType.FOR_SHORTLET:
+      return { shortletAmount: faker.number.int({ min: 100, max: 500 }) };
+    default:
+      return {};
   }
+};
 
-  console.log('💉 Creating vaccinations...');
+const generatePropertyName = (index: number): string => {
+  const prefixes = ['Luxury', 'Modern', 'Cozy', 'Spacious', 'Elegant', 'Charming', 'Grand', 'Serene', 'Vibrant', 'Tranquil'];
+  const suffixes = ['Apartments', 'Villa', 'Mansion', 'Estate', 'Tower', 'Plaza', 'Gardens', 'Heights', 'Manor', 'Courtyard'];
+  return `${prefixes[index % prefixes.length]} ${suffixes[(index + 3) % suffixes.length]} ${faker.location.city()}`;
+};
 
-  const vaccineTypes: string[] = ['Rabies', 'Parvovirus', 'Distemper', 'Leptospirosis', 'Brucellosis', 'Anthrax'];
-  
-  for (const livestock of createdLivestock.slice(0, 30)) {
-    const company = createdCompanies.find(c => c.id === livestock.companyId);
-    const recordedBy = createdUsers.find(u => 
-      u.companyId === livestock.companyId && 
-      u.role === 'FARM_KEEPER'
-    );
-    if (!recordedBy) continue;
-    
-    const vaccinationData = {
-      livestockId: livestock.id,
-      dateofVaccination: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
-      vaccineType: vaccineTypes[Math.floor(Math.random() * vaccineTypes.length)],
-      dosage: 1 + Math.random() * 4,
-      administeredBy: 'Farm Staff',
-      nextDueDate: new Date(Date.now() + Math.random() * 90 * 24 * 60 * 60 * 1000),
-      recordedById: recordedBy.id
-    };
+async function main() {
+  console.log(' Starting database seeding...');
+  console.log('=' .repeat(60));
 
-    await prisma.vaccination.create({
-      data: vaccinationData
-    });
-  }
+  console.log('\n Cleaning existing data...');
 
-  console.log('🤒 Creating sickness records...');
+  await prisma.$transaction([
+    prisma.activityLog.deleteMany(),
+    prisma.notification.deleteMany(),
+    prisma.media.deleteMany(),
+    prisma.document.deleteMany(),
+    prisma.property.deleteMany(),
+    prisma.user.deleteMany(),
+    prisma.systemConfig.deleteMany(),
+    prisma.platformSettings.deleteMany(),
+  ]);
 
-  const symptoms: string[] = ['Fever', 'Coughing', 'Diarrhea', 'Loss of appetite', 'Lethargy', 'Lameness', 'Respiratory distress'];
-  const causes: string[] = ['Bacterial infection', 'Viral infection', 'Parasites', 'Nutritional deficiency', 'Injury', 'Unknown'];
+  console.log('Existing data cleared');
 
-  const sickLivestock = createdLivestock.filter(l => 
-    l.healthStatus === 'SICK' || l.healthStatus === 'CRITICAL' || l.healthStatus === 'IN_TREATMENT'
-  ).slice(0, 15);
+  const hashedPassword = await hash(SEED_CONFIG.PASSWORD);
 
-  const createdSickness: any[] = [];
+  console.log('\n👤 Creating Admin...');
 
-  for (const livestock of sickLivestock) {
-    const recordedBy = createdUsers.find(u => 
-      u.companyId === livestock.companyId && 
-      u.role === 'FARM_KEEPER'
-    );
-    if (!recordedBy) continue;
-    
-    const sicknessData = {
-      livestockId: livestock.id,
-      dateOfObservation: new Date(Date.now() - Math.random() * 14 * 24 * 60 * 60 * 1000),
-      observedSymptoms: symptoms.slice(0, 2 + Math.floor(Math.random() * 3)).join(', '),
-      suspectedCause: causes[Math.floor(Math.random() * causes.length)],
-      notes: 'Animal showing signs of illness, requires monitoring',
-      recordedById: recordedBy.id
-    };
+  const admin = await prisma.user.create({
+    data: {
+      email: 'admin@property.com',
+      password: hashedPassword,
+      fullName: 'System Administrator',
+      phone: '+1 (555) 000-0001',
+      avatar: generateImageUrl('avatar', 0),
+      location: 'New York, NY',
+      role: Role.ADMIN,
+      ninVerificationStatus: VerificationStatus.VERIFIED,
+      isVerified: true,
+    },
+  });
 
-    const sickness = await prisma.sickness.create({
-      data: sicknessData
-    });
-    createdSickness.push(sickness);
+  console.log(`Admin created: ${admin.email}`);
 
-    // Create treatment for some sickness records
-    if (Math.random() > 0.3) {
-      const treatmentData = {
-        sicknessId: sickness.id,
-        livestockId: livestock.id,
-        dateOfTreatment: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000),
-        treatmentType: ['Antibiotics', 'Anti-inflammatory', 'Vitamins', 'Pain relief'][Math.floor(Math.random() * 4)],
-        dosage: 0.5 + Math.random() * 3,
-        cause: 'Prescribed treatment for observed symptoms',
-        administeredBy: 'Veterinarian',
-        nextDueDate: new Date(Date.now() + Math.random() * 7 * 24 * 60 * 60 * 1000),
-        recordedById: recordedBy.id
-      };
+  console.log('\nCreating Staff members...');
 
-      await prisma.treatment.create({
-        data: treatmentData
-      });
-    }
-  }
-
-  console.log('🩺 Creating diagnoses...');
-
-  const diagnoses: string[] = ['Bacterial Pneumonia', 'Parasitic Infection', 'Nutritional Deficiency', 'Viral Infection', 'Metabolic Disorder'];
-  
-  for (const livestock of sickLivestock.slice(0, 10)) {
-    const diagnosisData = {
-      livestockId: livestock.id,
-      diagnosis: diagnoses[Math.floor(Math.random() * diagnoses.length)],
-      labTests: ['Blood Test', 'Fecal Exam', 'Culture'][Math.floor(Math.random() * 3)],
-      severity: ['MILD', 'MODERATE', 'SEVERE', 'CRITICAL'][Math.floor(Math.random() * 4)] as DiagnosisSeverity,
-      prognosis: ['GOOD', 'FAIR', 'GUARDED', 'POOR'][Math.floor(Math.random() * 4)] as DiagnosisPrognosis,
-      observations: 'Diagnosis based on clinical signs and lab results',
-      date: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000),
-      recordedById: vet1.id
-    };
-
-    await prisma.diagnosis.create({
-      data: diagnosisData
-    });
-  }
-
-  console.log('💊 Creating prescribed treatments...');
-
-  for (const livestock of sickLivestock.slice(0, 8)) {
-    const prescribedTreatmentData = {
-      livestockId: livestock.id,
-      treatmentType: 'Medication',
-      medicationName: ['Amoxicillin', 'Ivermectin', 'Vitamin Complex', 'Anti-inflammatory'][Math.floor(Math.random() * 4)],
-      dosage: '2ml per kg',
-      frequency: ['DAILY', 'TWICE_DAILY', 'WEEKLY'][Math.floor(Math.random() * 3)] as Frequency,
-      routine: ['ORAL', 'INTRAMUSCULAR', 'TOPICAL'][Math.floor(Math.random() * 3)] as AdministrationRoutine,
-      additionalNotes: 'Administer with food',
-      startDate: new Date(Date.now() - Math.random() * 3 * 24 * 60 * 60 * 1000),
-      endDate: new Date(Date.now() + Math.random() * 7 * 24 * 60 * 60 * 1000),
-      isActive: true,
-      recordedById: vet1.id
-    };
-
-    await prisma.prescribedTreatment.create({
-      data: prescribedTreatmentData
-    });
-  }
-
-  console.log('📋 Creating tasks...');
-
-  const taskNames: string[] = [
-    'Routine Health Check',
-    'Vaccination Schedule', 
-    'Feed Distribution',
-    'Barn Cleaning',
-    'Livestock Monitoring',
-    'Medical Treatment',
-    'Breeding Program',
-    'Weight Measurement',
-    'Hoof Trimming',
-    'Milking Schedule'
+  const staffMembers = [];
+  const staffNames = [
+    { fullName: 'Sarah Johnson', email: 'sarah.johnson@property.com', department: 'Property Management' },
+    { fullName: 'Michael Chen', email: 'michael.chen@property.com', department: 'Sales' },
   ];
 
-  const priorities: Priority[] = ['LOW', 'MEDIUM', 'HIGH'];
-  const statuses: TaskStatus[] = ['PENDING', 'IN_PROGRESS', 'COMPLETED'];
+  for (let i = 0; i < staffNames.length; i++) {
+    const staff = await prisma.user.create({
+      data: {
+        email: staffNames[i].email,
+        password: hashedPassword,
+        fullName: staffNames[i].fullName,
+        phone: faker.phone.number({ style: 'international' }),
+        avatar: generateImageUrl('avatar', i + 1),
+        location: faker.location.city() + ', ' + faker.location.state({ abbreviated: true }),
+        role: Role.STAFF,
+        employeeId: `EMP${String(i + 1).padStart(4, '0')}`,
+        department: staffNames[i].department,
+        isVerified: true,
+      },
+    });
+    staffMembers.push(staff);
+    console.log(`Staff created: ${staff.fullName} (${staff.employeeId})`);
+  }
 
-  const createdTasks: any[] = [];
+  console.log('\n Creating Vendors...');
 
-  for (const company of createdCompanies) {
-    const companyUsers = createdUsers.filter(u => u.companyId === company.id);
-    const companyAdmin = companyUsers.find(u => u.role === 'ADMIN');
-    const farmKeeper = companyUsers.find(u => u.role === 'FARM_KEEPER');
-    const companyLivestock = createdLivestock.filter(l => l.companyId === company.id);
-    
-    if (!companyAdmin || !farmKeeper) continue;
-    
-    for (let i = 0; i < 8; i++) {
-      const hasLivestock: boolean = Math.random() > 0.3;
-      const livestock = hasLivestock && companyLivestock.length > 0 
-        ? companyLivestock[Math.floor(Math.random() * companyLivestock.length)] 
-        : null;
-      const assignToVet: boolean = Math.random() > 0.5;
-      const assignedTo = assignToVet ? (Math.random() > 0.5 ? vet1 : vet2) : farmKeeper;
-      
-      const taskData = {
-        name: taskNames[Math.floor(Math.random() * taskNames.length)],
-        description: `Task description for ${livestock ? livestock.tagId : 'general farm maintenance'}`,
-        priority: priorities[Math.floor(Math.random() * priorities.length)],
-        companyId: company.id,
-        dueDate: new Date(Date.now() + Math.random() * 14 * 24 * 60 * 60 * 1000),
-        status: statuses[Math.floor(Math.random() * statuses.length)],
-        assignedToId: assignedTo.id,
-        assignedById: companyAdmin.id,
-        livestockId: livestock?.id || null
-      };
+  const vendors = [];
+  const vendorNames = [
+    'Smith Properties',
+    'Johnson Real Estate',
+    'Williams Holdings',
+    'Brown Investments'
+  ];
 
-      const task = await prisma.task.create({
-        data: taskData
+  for (let i = 0; i < SEED_CONFIG.VENDOR_COUNT; i++) {
+    const fullName = vendorNames[i] || faker.company.name();
+    const email = `${fullName.toLowerCase().replace(/\s/g, '.')}@vendors.com`;
+
+    const vendor = await prisma.user.create({
+      data: {
+        email,
+        password: hashedPassword,
+        fullName: fullName,
+        phone: faker.phone.number({ style: 'international' }),
+        avatar: generateImageUrl('avatar', i + 3),
+        location: faker.location.city() + ', ' + faker.location.state({ abbreviated: true }),
+        role: Role.VENDOR,
+        isVerified: true,
+        ninPhotoUrl: generateNinPhotoUrl(i),
+        ninVerificationStatus: VerificationStatus.VERIFIED,
+        ninVerifiedAt: new Date(),
+        ninVerifiedBy: admin.id,
+      },
+    });
+
+    vendors.push(vendor);
+    console.log(`Vendor created: ${vendor.fullName} (${vendor.email})`);
+  }
+
+  console.log('\n Creating Users...');
+
+  const users = [];
+  const userNames = [
+    'John Doe', 'Jane Smith', 'Robert Wilson', 'Emily Davis',
+    'Michael Brown', 'Lisa Anderson'
+  ];
+
+  for (let i = 0; i < SEED_CONFIG.USER_COUNT; i++) {
+    const fullName = userNames[i] || faker.person.fullName();
+    const email = `${fullName.toLowerCase().replace(/\s/g, '.')}@users.com`;
+
+    const user = await prisma.user.create({
+      data: {
+        email,
+        password: hashedPassword,
+        fullName: fullName,
+        phone: faker.phone.number({ style: 'international' }),
+        avatar: generateImageUrl('avatar', i + 5),
+        location: faker.location.city() + ', ' + faker.location.state({ abbreviated: true }),
+        role: Role.USER,
+        isVerified: true,
+      },
+    });
+
+    users.push(user);
+    console.log(` User created: ${user.fullName} (${user.email})`);
+  }
+  console.log('\n Creating properties...');
+
+  let totalProperties = 0;
+  const allProperties = [];
+
+  for (const vendor of vendors) {
+    console.log(`Creating properties for ${vendor.fullName}...`);
+
+    for (let i = 0; i < SEED_CONFIG.PROPERTIES_PER_VENDOR; i++) {
+      const listingType = getRandomListingType();
+      const status = getRandomPropertyStatus();
+      const listingStatus = getRandomListingStatus(i);
+      const pricing = getPricingByListingType(listingType);
+
+      const property = await prisma.property.create({
+        data: {
+          name: generatePropertyName(i),
+          description: faker.lorem.paragraphs(2),
+          type: getRandomPropertyType(),
+          listingType: listingType,
+          status: status,
+          listingStatus: listingStatus,
+          address: faker.location.streetAddress(),
+          city: faker.location.city(),
+          state: faker.location.state({ abbreviated: true }),
+          country: 'USA',
+          zipCode: faker.location.zipCode(),
+          size: faker.number.float({ min: 500, max: 5000, fractionDigits: 0 }),
+          sizeUnit: 'sqft',
+          bedrooms: faker.number.int({ min: 1, max: 5 }),
+          bathrooms: faker.number.int({ min: 1, max: 5}),
+          yearBuilt: faker.number.int({ min: 1980, max: 2024 }),
+          amenities: getRandomAmenities(),
+          vendorId: vendor.id,
+          staffId: Math.random() > 0.6 ? staffMembers[Math.floor(Math.random() * staffMembers.length)].id : null,
+
+          ...pricing,
+          ...(listingStatus === PropertyListingStatus.REJECTED && {
+            rejectionReason: faker.helpers.arrayElement([
+              'Property photos are not clear enough',
+              'Missing required documentation',
+              'Price is above market rate',
+              'Incomplete property details',
+              'Address verification failed'
+            ]),
+            reviewedBy: admin.id,
+            reviewedAt: faker.date.recent({ days: 30 }),
+          }),
+          ...(listingStatus === PropertyListingStatus.ACTIVE && {
+            reviewedBy: admin.id,
+            reviewedAt: faker.date.recent({ days: 60 }),
+          }),
+        },
       });
-      createdTasks.push(task);
 
-      // Add observations for some tasks
-      if (Math.random() > 0.6) {
-        await prisma.taskObservation.create({
+      allProperties.push(property);
+      totalProperties++;
+      const imageCount = faker.number.int({ min: 3, max: 8 });
+      const mediaData: any[] = [];
+
+      for (let j = 0; j < imageCount; j++) {
+        mediaData.push({
+          name: `Property Image ${j + 1}`,
+          type: MediaType.IMAGE,
+          url: generateImageUrl('property', j + (i * 2)),
+          key: `property-${property.id}-image-${j}.jpg`,
+          size: faker.number.int({ min: 200000, max: 5000000 }),
+          mimeType: 'image/jpeg',
+          container: 'property-photos',
+          propertyId: property.id,
+          isPrimary: j === 0,
+        });
+      }
+      if (Math.random() > 0.5) {
+        mediaData.push({
+          name: 'Property Tour Video',
+          type: MediaType.VIDEO,
+          url: generateVideoUrl(),
+          key: `property-${property.id}-video.mp4`,
+          size: faker.number.int({ min: 10000000, max: 50000000 }),
+          mimeType: 'video/mp4',
+          container: 'property-videos',
+          propertyId: property.id,
+          isPrimary: false,
+        });
+      }
+      if (Math.random() > 0.7) {
+        mediaData.push({
+          name: 'Property Document',
+          type: MediaType.DOCUMENT,
+          url: `https://example.com/documents/property-${property.id}.pdf`,
+          key: `property-${property.id}-doc.pdf`,
+          size: faker.number.int({ min: 100000, max: 2000000 }),
+          mimeType: 'application/pdf',
+          container: 'property-documents',
+          propertyId: property.id,
+          isPrimary: false,
+        });
+      }
+
+      if (mediaData.length > 0) {
+        await prisma.media.createMany({ data: mediaData });
+      }
+      const notificationTypes = [
+        NotificationType.PROPERTY_APPROVED,
+        NotificationType.PROPERTY_REJECTED,
+        NotificationType.GENERAL,
+      ];
+
+      const notificationCount = faker.number.int({ min: 1, max: 3 });
+      for (let k = 0; k < notificationCount; k++) {
+        const type = notificationTypes[Math.floor(Math.random() * notificationTypes.length)];
+        let title, message;
+
+        switch (type) {
+          case NotificationType.PROPERTY_APPROVED:
+            title = 'Property Approved';
+            message = `Your property "${property.name}" has been approved and is now live.`;
+            break;
+          case NotificationType.PROPERTY_REJECTED:
+            title = 'Property Rejected';
+            message = `Your property "${property.name}" was rejected. ${property.rejectionReason || 'Please update and resubmit.'}`;
+            break;
+          default:
+            title = 'Property Update';
+            message = `Your property "${property.name}" has been ${property.listingStatus.toLowerCase()}.`;
+        }
+
+        await prisma.notification.create({
           data: {
-            note: `Observation note for task ${task.name}. Work is in progress.`,
-            mediaUrls: [],
-            taskId: task.id,
-            reportedById: assignedTo.id,
-            reportedAt: new Date()
-          }
+            userId: vendor.id,
+            type: type,
+            title: title,
+            message: message,
+            data: { propertyId: property.id },
+            read: Math.random() > 0.4,
+            readAt: Math.random() > 0.4 ? faker.date.recent({ days: 10 }) : null,
+            createdAt: faker.date.recent({ days: 60 }),
+          },
         });
       }
     }
+
+    console.log(`Created ${SEED_CONFIG.PROPERTIES_PER_VENDOR} properties for ${vendor.fullName}`);
   }
 
-  console.log('📦 Creating inventory...');
+  console.log('\n Creating activity logs...');
 
-  const feedItems: string[] = ['Corn Feed', 'Hay', 'Soybean Meal', 'Mineral Supplements'];
-  const medicineItems: string[] = ['Antibiotics', 'Vaccines', 'Vitamins', 'Dewormer'];
+  const allUsers = [admin, ...staffMembers, ...vendors, ...users];
+  const actions = [
+    'CREATE_PROPERTY', 'UPDATE_PROPERTY', 'REVIEW_PROPERTY',
+    'LOGIN', 'LOGOUT', 'VIEW_PROPERTY',
+    'VERIFY_VENDOR_NIN', 'REJECT_VENDOR_NIN', 'UPLOAD_NIN',
+    'CREATE_STAFF', 'UPDATE_STAFF',
+    'CREATE_PROPERTY', 'UPDATE_PROPERTY', 'DELETE_PROPERTY'
+  ];
 
-  for (const company of createdCompanies) {
-    // Create feed inventory
-    for (const item of feedItems) {
-      const inventoryData = {
-        type: 'FEED' as InventoryType,
-        name: item,
-        currentQuantity: 100 + Math.random() * 400,
-        unit: 'kg',
-        purchasePrice: 10 + Math.random() * 40,
-        reorderPoint: 50,
-        supplier: 'Farm Supplies Ltd',
-        notes: `${item} for livestock feeding`,
-        mediaUrls: []
-      };
+  const entityTypes = ['PROPERTY', 'USER', 'NIN', 'STAFF', 'PROPERTY_REVIEW'];
 
-      await prisma.inventory.create({
-        data: inventoryData
-      });
-    }
-
-    // Create medicine inventory
-    for (const item of medicineItems) {
-      const inventoryData = {
-        type: 'MEDICINE' as InventoryType,
-        name: item,
-        currentQuantity: 20 + Math.random() * 80,
-        unit: 'units',
-        purchasePrice: 5 + Math.random() * 25,
-        reorderPoint: 10,
-        supplier: 'Medical Supplies Co',
-        notes: `${item} for veterinary use`,
-        mediaUrls: [],
-        companyId: company.id,
-      };
-
-      await prisma.inventory.create({
-        data: inventoryData
-      });
-    }
-  }
-
-  console.log('💰 Creating financial transactions...');
-
-  const incomeSources: string[] = ['Livestock Sales', 'Milk Production', 'Egg Sales', 'Breeding Services'];
-  const expenseCategories: string[] = ['Feed Purchase', 'Medical Supplies', 'Equipment Maintenance', 'Staff Salaries'];
-  const paymentMethods: string[] = ['Cash', 'Bank Transfer', 'Mobile Money'];
-
-  for (const company of createdCompanies) {
-    const companyAdmin = createdUsers.find(u => u.companyId === company.id && u.role === 'ADMIN');
-    if (!companyAdmin) continue;
+  for (let i = 0; i < 200; i++) {
+    const user = allUsers[Math.floor(Math.random() * allUsers.length)];
+    const action = actions[Math.floor(Math.random() * actions.length)];
+    const entityType = entityTypes[Math.floor(Math.random() * entityTypes.length)];
     
-    for (let i = 0; i < 10; i++) {
-      const isIncome: boolean = Math.random() > 0.4;
-      const transactionData = {
-        type: isIncome ? 'INCOME' as FinancialTransactionType : 'EXPENSE' as FinancialTransactionType,
-        referenceNumber: `REF-${company.name.substring(0, 3).toUpperCase()}-${String(i).padStart(4, '0')}`,
-        title: isIncome 
-          ? incomeSources[Math.floor(Math.random() * incomeSources.length)]
-          : expenseCategories[Math.floor(Math.random() * expenseCategories.length)],
-        amount: isIncome ? 500 + Math.random() * 2000 : 50 + Math.random() * 500,
-        paymentMethod: paymentMethods[Math.floor(Math.random() * paymentMethods.length)],
-        date: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
-        description: `${isIncome ? 'Revenue from' : 'Payment for'} ${isIncome ? 'farm products' : 'farm operations'}`,
-        partyName: isIncome ? 'Farm Products Buyer' : 'Farm Supplies Vendor',
-        mediaUrls: [],
-        recordedById: companyAdmin.id
-      };
-
-      await prisma.financialTransaction.create({
-        data: transactionData
-      });
-    }
-  }
-
-  console.log('📤 Creating offtake records...');
-
-  for (const livestock of createdLivestock.slice(0, 10)) {
-    const recordedBy = createdUsers.find(u => 
-      u.companyId === livestock.companyId && 
-      u.role === 'FARM_KEEPER'
-    );
-    if (!recordedBy) continue;
-
-    const offtakeType = ['SALE', 'DEATH', 'MISSING'][Math.floor(Math.random() * 3)] as Offtake;
-    
-    const offtakeData: any = {
-      livestockId: livestock.id,
-      type: offtakeType,
-      dateOfEvent: new Date(Date.now() - Math.random() * 60 * 24 * 60 * 60 * 1000),
-      recordedById: recordedBy.id
-    };
-
-    if (offtakeType === 'SALE') {
-      offtakeData.destination = 'Local Market';
-      offtakeData.price = 200 + Math.random() * 800;
-    } else if (offtakeType === 'DEATH') {
-      offtakeData.causeOfDeath = ['Disease', 'Injury', 'Old Age'][Math.floor(Math.random() * 3)];
+    let entityId: string;
+    if (entityType === 'PROPERTY' && allProperties.length > 0) {
+      const randomProperty = allProperties[Math.floor(Math.random() * allProperties.length)];
+      entityId = randomProperty.id;
+    } else {
+      entityId = user.id;
     }
 
-    await prisma.offtakeRecord.create({
-      data: offtakeData
+    await prisma.activityLog.create({
+      data: {
+        userId: user.id,
+        action,
+        entityType,
+        entityId: entityId,
+        description: `${action} on ${entityType}`,
+        details: {
+          timestamp: new Date().toISOString(),
+          userRole: user.role,
+        },
+        ipAddress: faker.internet.ip(),
+        userAgent: faker.internet.userAgent(),
+        createdAt: faker.date.recent({ days: 90 }),
+      },
     });
   }
 
-  console.log('📅 Creating appointments...');
+  console.log('Created 200+ activity logs');
 
-  for (const company of createdCompanies.slice(0, 2)) {
-    const vet = createdUsers.find(u => u.role === 'VET');
-    const companyLivestock = createdLivestock.filter(l => l.companyId === company.id);
-    
-    if (!vet || companyLivestock.length === 0) continue;
+  console.log('\n Creating documents...');
 
-    const appointmentData = {
-      visitType: 'FARM_VISIT' as VisitType,
-      title: 'Routine Health Inspection',
-      date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-      time: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-      companyId: company.id,
-      relatedFarm: company.name,
-      relatedAnimal: companyLivestock[0].tagId,
-      purpose: 'Regular health check and vaccination',
-      setReminder: true,
-      notifyFarmStaff: true,
-      status: 'SCHEDULED',
-      recordedById: vet.id
-    };
-
-    await prisma.appointment.create({
-      data: appointmentData
+  for (const vendor of vendors) {
+    await prisma.document.create({
+      data: {
+        name: `NIN_${vendor.fullName.replace(/\s/g, '_')}`,
+        type: DocumentType.NIN,
+        url: vendor.ninPhotoUrl || generateNinPhotoUrl(vendors.indexOf(vendor)),
+        key: `nin-${vendor.id}-${Date.now()}.jpg`,
+        size: faker.number.int({ min: 100000, max: 2000000 }),
+        mimeType: 'image/jpeg',
+        container: 'nin-documents',
+        vendorId: vendor.id,
+        uploadedById: vendor.id,
+      },
     });
-  }
 
-  console.log('🏥 Creating farm visits...');
-
-  for (const company of createdCompanies.slice(0, 2)) {
-    const vet = createdUsers.find(u => u.role === 'VET');
-    
-    if (!vet) continue;
-
-    const farmVisitData = {
-      companyId: company.id,
-      relatedFarm: company.name,
-      date: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
-      time: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
-      reason: 'Routine farm inspection and consultation',
-      keyPersonnelMet: 'Farm Manager, Staff',
-      animalExamined: 'Multiple livestock checked',
-      farmObservation: 'Farm is in good condition, animals appear healthy',
-      farmRecommendation: 'Continue current feeding and healthcare regimen',
-      mediaUrls: [],
-      recordedById: vet.id
-    };
-
-    await prisma.farmVisit.create({
-      data: farmVisitData
-    });
-  }
-
-  console.log('📝 Creating notes...');
-
-  const noteFolders: string[] = ['Farm Observations', 'Medical Records', 'Breeding Notes', 'Financial Notes', 'General'];
-  
-  for (const user of createdUsers.slice(0, 5)) {
-    for (let i = 0; i < 3; i++) {
-      const noteData = {
-        folderName: noteFolders[Math.floor(Math.random() * noteFolders.length)],
-        date: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
-        title: `Note ${i + 1} - ${new Date().toLocaleDateString()}`,
-        body: `This is a sample note content for ${user.fullName}. This note contains important information about farm operations and observations.`,
-        recordedById: user.id
-      };
-
-      await prisma.note.create({
-        data: noteData
+    if (Math.random() > 0.6) {
+      await prisma.document.create({
+        data: {
+          name: `Identification_${vendor.fullName.replace(/\s/g, '_')}`,
+          type: DocumentType.IDENTIFICATION,
+          url: `https://example.com/documents/id-${vendor.id}.pdf`,
+          key: `id-${vendor.id}-${Date.now()}.pdf`,
+          size: faker.number.int({ min: 100000, max: 1000000 }),
+          mimeType: 'application/pdf',
+          container: 'vendor-documents',
+          vendorId: vendor.id,
+          uploadedById: vendor.id,
+        },
       });
     }
   }
 
-  console.log('🔔 Creating notifications...');
+  for (const property of allProperties.slice(0, 20)) {
+    if (Math.random() > 0.7) {
+      await prisma.document.create({
+        data: {
+          name: `Deed_${property.name.replace(/\s/g, '_')}`,
+          type: DocumentType.OTHER,
+          url: `https://example.com/documents/deed-${property.id}.pdf`,
+          key: `deed-${property.id}-${Date.now()}.pdf`,
+          size: faker.number.int({ min: 50000, max: 500000 }),
+          mimeType: 'application/pdf',
+          container: 'property-documents',
+          propertyId: property.id,
+          uploadedById: property.vendorId,
+        },
+      });
+    }
+  }
 
-  for (const user of createdUsers.slice(0, 8)) {
-    const notificationData = {
-      title: 'Welcome to Agritech System',
-      message: 'Your account has been successfully set up and is ready to use.',
-      type: 'SYSTEM_ALERT' as NotificationType,
-      status: 'UNREAD' as NotificationStatus,
-      recipientId: user.id,
-      sentAt: new Date()
-    };
+  console.log('Created documents');
 
-    await prisma.notification.create({
-      data: notificationData
+  console.log('\n Creating platform settings...');
+
+  const settingsData = [
+    {
+      key: 'max_properties_per_vendor',
+      value: 50,
+      description: 'Maximum number of properties a vendor can list',
+    },
+    {
+      key: 'nin_verification_required',
+      value: true,
+      description: 'Whether NIN verification is required for vendors',
+    },
+    {
+      key: 'commission_rate',
+      value: 0.05,
+      description: 'Platform commission rate (5%)',
+    },
+    {
+      key: 'max_media_per_property',
+      value: 20,
+      description: 'Maximum number of media files per property',
+    },
+    {
+      key: 'property_approval_required',
+      value: true,
+      description: 'Whether admin approval is required for new properties',
+    },
+    {
+      key: 'currency',
+      value: 'USD',
+      description: 'Default currency for the platform',
+    },
+    {
+      key: 'timezone',
+      value: 'America/New_York',
+      description: 'Default timezone for the platform',
+    },
+  ];
+
+  for (const setting of settingsData) {
+    await prisma.platformSettings.create({
+      data: {
+        key: setting.key,
+        value: setting.value,
+        description: setting.description,
+        updatedBy: admin.id,
+      },
     });
   }
 
-  console.log('✅ Seed completed successfully!');
-  
-//   console.log(`\n📊 Seed Summary:`);
-//   console.log(`   Companies: ${createdCompanies.length}`);
-//   console.log(`   Users: ${createdUsers.length}`);
-//   console.log(`   Livestock: ${createdLivestock.length}`);
-//   console.log(`   Vaccinations: 30`);
-//   console.log(`   Sickness Records: ${createdSickness.length}`);
-//   console.log(`   Diagnoses: 10`);
-//   console.log(`   Prescribed Treatments: 8`);
-//   console.log(`   Tasks: ${createdTasks.length}`);
-//   console.log(`   Inventory Items: ~24 (8 per company)`);
-//   console.log(`   Financial Transactions: 30 (10 per company)`);
-//   console.log(`   Offtake Records: 10`);
-//   console.log(`   Appointments: 2`);
-//   console.log(`   Farm Visits: 2`);
-//   console.log(`   Notes: 15`);
-//   console.log(`   Notifications: 8`);
+  console.log('Platform settings created');
 
-//   console.log('\n🔑 Test Credentials:');
-//   console.log('   All passwords: "password123"');
-//   console.log('\n   Company Admins:');
-//   console.log('     - admin@greenvalleyfarm.com (Green Valley Farm)');
-//   console.log('     - admin@sunriseranch.com (Sunrise Ranch)');
-//   console.log('     - admin@mountainviewfarm.com (Mountain View Farm)');
-//   console.log('\n   Vets:');
-//   console.log('     - vet.drbrown@animalclinic.com');
-//   console.log('     - vet.drjohnson@vetcare.com');
+  console.log('\n Creating system config...');
+
+  const systemConfigs = [
+    {
+      configKey: 'email_provider',
+      configValue: 'graph',
+      description: 'Email provider: graph, sendgrid, smtp',
+    },
+    {
+      configKey: 'storage_provider',
+      configValue: 'local',
+      description: 'Storage provider: local, s3, azure',
+    },
+    {
+      configKey: 'feature_flags',
+      configValue: {
+        enable_ai_search: true,
+        enable_chat: false,
+        enable_reviews: true,
+        enable_analytics: true,
+      },
+      description: 'Feature flags for the platform',
+    },
+    {
+      configKey: 'rate_limits',
+      configValue: {
+        api: 100,
+        auth: 20,
+        upload: 10,
+      },
+      description: 'Rate limits for different endpoints',
+    },
+    {
+      configKey: 'cache_ttl',
+      configValue: 3600,
+      description: 'Cache TTL in seconds',
+    },
+  ];
+
+  for (const config of systemConfigs) {
+    await prisma.systemConfig.create({
+      data: {
+        configKey: config.configKey,
+        configValue: config.configValue,
+        description: config.description,
+        isActive: true,
+        updatedBy: admin.id,
+      },
+    });
+  }
+
+  console.log('System config created');
+  console.log('\n' + '=' .repeat(60));
+  console.log(' DATABASE SEEDING COMPLETED SUCCESSFULLY!');
+  console.log('=' .repeat(60));
+
+  console.log('\n FINAL SUMMARY:');
+  console.log(`\n USERS:`);
+  console.log(`Admin: 1`);
+  console.log(`Staff: ${staffMembers.length}`);
+  console.log(`Vendors: ${vendors.length}`);
+  console.log(`Users: ${users.length}`);
+  console.log(`Total: ${allUsers.length} users`);
+
+  console.log(`\n PROPERTIES:`);
+  console.log(`Total Properties: ${totalProperties}`);
+  console.log(`Per Vendor: ${SEED_CONFIG.PROPERTIES_PER_VENDOR}`);
+
+  console.log(`\n DOCUMENTS:`);
+  console.log(`NIN Documents: ${vendors.length}`);
+  console.log(`Property Documents: ${Math.min(allProperties.length, 20)}`);
+
+  console.log(`\n ACTIVITY LOGS: 200+`);
+  console.log(`\n PLATFORM SETTINGS: ${settingsData.length}`);
+  console.log(`\n SYSTEM CONFIG: ${systemConfigs.length}`);
+
+  console.log('\n LOGIN CREDENTIALS:');
+  console.log(`   Admin:     admin@property.com / ${SEED_CONFIG.PASSWORD}`);
+  console.log(`   Staff 1:   ${staffMembers[0]?.email} / ${SEED_CONFIG.PASSWORD}`);
+  console.log(`   Staff 2:   ${staffMembers[1]?.email} / ${SEED_CONFIG.PASSWORD}`);
+  console.log(`   Vendor 1:  ${vendors[0]?.email} / ${SEED_CONFIG.PASSWORD}`);
+  console.log(`   User 1:    ${users[0]?.email} / ${SEED_CONFIG.PASSWORD}`);
+
+  console.log('\n' + '=' .repeat(60));
 }
+
+
 
 main()
   .catch((e) => {
-    console.error('❌ Seed failed:', e);
+    console.error('\n Seeding failed:', e);
     process.exit(1);
   })
   .finally(async () => {

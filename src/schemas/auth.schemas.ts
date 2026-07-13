@@ -1,83 +1,56 @@
-import { z } from "zod";
+import { z } from 'zod';
 import { validatePhoneNumber } from "../utils/phoneFormat";
 
 export const adminRegisterSchema = z.object({
   body: z.object({
-    fullName: z.string().min(1, "First Name is required"),
+    fullName: z.string().min(1, "Full Name is required"),
     email: z.string().email("Invalid email format"),
     password: z.string().min(8, "Password must be at least 8 characters long"),
     location: z.string().min(1, "Location is required"),
-    phone: z.string().min(1, "Phone number is required"),
-    companyName: z.string().min(1, "Company Name is required"),
+    phone: z.string().min(10, "Phone number is required")
+      .refine((val) => validatePhoneNumber(val), {
+        message: "Phone number must be in valid international format (+xxx....)"
+      })
+      .optional(),
   }),
 });
 
 export const registerSchema = z.object({
   body: z.object({
-    fullName: z.string().min(1, "First Name is required"),
-    email: z.string().email("Invalid email format").optional(),
-    phone: z.string()
-      .min(10, "Phone must be at least 10 digits")
-      .refine((val) => validatePhoneNumber(val), {
-        message: "Phone must be in valid international format (+XXX...) or local Nigerian format (0XXX...)"
-      })
-    .optional(),
+    fullName: z.string().min(1, "Full Name is required"),
+    email: z.string().email("Invalid email format"),
     password: z.string().min(8, "Password must be at least 8 characters long"),
-    role: z.enum(['FARM_KEEPER', 'COWORKER']).default('COWORKER'), // Default to COWORKER
-  }).refine(data => data.email || data.phone, {
-    message: "Either email or phone number is required",
-    path: ["email"],
+    role: z.enum(['USER', 'VENDOR'], {
+      errorMap: () => ({ message: "Role must be either 'USER' or 'VENDOR'" })
+    }),
+    location: z.string().optional(),
+    phone: z.string().optional()
+      .refine((val) => !val || validatePhoneNumber(val), {
+        message: "Phone number must be in valid international format (+xxx....)"
+      }),
   }),
 });
 
-export const vetRegisterSchema = z.object({
+
+export const staffRegisterSchema = z.object({
   body: z.object({
-    fullName: z.string().min(1, "First Name is required"),
-    email: z.string().email("Invalid email format").optional(),
-    phone: z.string()
-      .min(10, "Phone must be at least 10 digits")
-      .refine((val) => validatePhoneNumber(val), {
-        message: "Phone must be in valid international format (+XXX...) or local Nigerian format (0XXX...)"
-      })
-    .optional(),
+    fullName: z.string().min(1, "Full Name is required"),
+    email: z.string().email("Invalid email format"),
     password: z.string().min(8, "Password must be at least 8 characters long"),
+    employeeId: z.string().min(1, "Employee ID is required"),
+    department: z.string().min(1, "Department is required"),
     location: z.string().optional(),
-      bio: z.string().max(500, "Bio cannot exceed 500 characters").optional(),
-    specializations: z.string().optional().transform(val => {
-      try {
-        return val ? JSON.parse(val) : [];
-      } catch {
-        return [];
-      }
-    }),
-    licenseNumber: z.string().min(1, "License number is required"),
-    consultationFee: z.string().optional().transform(val => {
-        return val ? parseFloat(val) : null;
+    phone: z.string().optional()
+      .refine((val) => !val || validatePhoneNumber(val), {
+        message: "Phone number must be in valid international format (+xxx....)"
       }),
-    yearsOfExperience: z.string().optional().transform(val => {
-        return val ? parseInt(val) : null;
-    }),
-    certifications: z.string().optional().transform(val => {
-        try {
-          return val ? JSON.parse(val) : [];
-        } catch {
-          return [];
-        }
-      })
-  }).refine(data => data.email || data.phone, {
-    message: "Either email or phone number is required",
-    path: ["email"],
   }),
 });
 
 export const loginSchema = z.object({
   body: z.object({
-    email: z.string().email("Invalid email format").optional(),
-    phone: z.string().min(11, "Invalid phone number format").optional(),
+    email: z.string().email("Invalid email format"),
     password: z.string().min(8, "Password must be at least 8 characters long"),
-  }).refine(data => data.email || data.phone, {
-    message: "Either email or phone number is required",
-    path: ["email",]
   }),
 });
 
@@ -90,27 +63,20 @@ export const requestVerificationSchema = z.object({
 export const verifyAccountSchema = z.object({
   body: z.object({
     email: z.string().email("Invalid email format"),
-    verificationCode: z
-      .string()
-      .min(4, "Verification code must be at least 4 digits long"),
+    verificationCode: z.string().min(4, "Verification code must be at least 4 digits long"),
   }),
 });
-export const resetPasswordSchema = z.object({
-  body: z.object({
-    email: z.string().email("Invalid email format"),
-    password: z.string().min(8, "Password must be at least 8 characters long"),
-    confirmPassword: z
-      .string()
-      .min(8, "Confirm Password must be at least 8 characters long"),
-    verificationCode: z
-      .string()
-      .min(4, "Verification code must be at least 4 digits long"),
-  }),
-});
-
 
 export const forgotPasswordSchema = z.object({
   body: z.object({
+    email: z.string().email("Invalid email format")
+  })
+});
+
+export const resetPasswordSchema = z.object({
+  body: z.object({
     email: z.string().email("Invalid email format"),
-  }),
+    token: z.string().min(32, "Invalid token format"),
+    password: z.string().min(8, "Password must be at least 8 characters long")
+  })
 });

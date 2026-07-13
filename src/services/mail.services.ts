@@ -1,26 +1,53 @@
-import { createTransport } from 'nodemailer';
+import { sendNodemailerMail, sendNodemailerTemplateMail } from './brevoMail.service';
 import Logger from '../config/logger';
 import { MailInterface } from '../interfaces/mail.interfaces';
-import nodemailer from 'nodemailer';
+
+export const sendGraphMail = async (mail: MailInterface): Promise<void> => {
+  try {
+    if (process.env.SMTP_ENABLED === 'false') {
+      Logger.info('Email sending is disabled by configuration');
+      return;
+    }
+
+    await sendNodemailerMail(mail);
+    
+    Logger.info(`Email sent successfully to ${mail.to}`);
+  } catch (error) {
+    Logger.error('Failed to send email:', error);
+    throw new Error('Failed to send email');
+  }
+};
 
 
-export const transporter = nodemailer.createTransport({
-	host: process.env.SMTP_HOST,
-	port: Number(process.env.SMTP_PORT || 587),
-	secure:false,
-	auth: {
-		user: process.env.SMTP_USERNAME,
-		pass: process.env.SMTP_PASSWORD,
-	},
-});
+export const sendTemplateMail = async (
+  to: string | string[],
+  templateName: string,
+  templateData: Record<string, any>,
+  subject: string,
+  from?: string
+): Promise<void> => {
+  try {
+    await sendNodemailerTemplateMail(to, templateName, templateData, subject, from);
+  } catch (error) {
+    Logger.error(`Failed to send template email: ${error}`);
+    throw new Error(`Failed to send template email: ${error}`);
+  }
+};
 
-export const sendCustomMail = async (mailOptions: MailInterface) => {
-	try {
-		const info = await transporter.sendMail(mailOptions);
-		Logger.info(`Mail successfully sent to ${mailOptions.to}`);
-		Logger.info('Message sent: %s', info);
-	} catch (error) {
-		Logger.info(`Error sending message to ${mailOptions.to}`);
-		Logger.error('Error sending email:', error);
-	}
+
+export const testSMTPConnection = async (): Promise<boolean> => {
+  try {
+    
+    const { initializeTransporter } = await import('./brevoMail.service');
+    
+    const transporter = initializeTransporter();
+  
+    await transporter.verify();
+    
+    Logger.info('SMTP connection test successful');
+    return true;
+  } catch (error) {
+    Logger.error('SMTP connection test failed:', error);
+    return false;
+  }
 };

@@ -1,21 +1,9 @@
 import { Router } from 'express';
-import {
-	deleteUser,
-	getAllUsers,
-	getProfile,
-	getUserById,
-	updateUserProfile,
-	adminUpdateUser,
-	getFarmDetails,
-	getVetAssignedFarms,
-	getAllVets,
-	updateUserAvatar,
-} from '../contollers/users.controllers';
-import { authenticateJWT } from '../middlewares/errorHandler';
-import { validateRequest } from '../middlewares/validateRequest';
-import { adminUpdateUserSchema, updateUserSchema } from '../schemas/users.schemas';
-import { requireRoles } from '../middlewares/roleCheck';
-import { upload } from '../config/upload';
+import { authenticateJWT } from '../middlewares/errorHandler.middleware';
+import { validateRequest } from '../middlewares/validateRequest.middleware';
+import { changePasswordSchema, updateUserSchema } from '../schemas/users.schemas';
+import { requireRoles } from '../middlewares/roleCheck.middleware';
+import { changePassword, deleteUser, getAllUsers, getProfile } from '../contollers/users.controller';
 
 export const usersRouter = Router();
 
@@ -26,75 +14,29 @@ usersRouter.get(
 );
 
 usersRouter.patch(
-  '/update',
-  authenticateJWT,
-  validateRequest(updateUserSchema),
-  updateUserProfile
+	'/change-password',
+	authenticateJWT,
+	validateRequest(changePasswordSchema),
+	changePassword
 );
-
-// usersRouter.patch(
-// 	'/update',
-// 	authenticateJWT,
-// 	validateRequest(updateUserSchema),
-// 	updateProfile
-// );
  
 usersRouter.get(
 	'/', 
 	authenticateJWT,
-	requireRoles(['ADMIN', 'FARM_KEEPER']),
+	requireRoles(['ADMIN']),
 	getAllUsers
 );
 
-usersRouter.get(
-	'/:userId',
-	authenticateJWT,
-	requireRoles(['ADMIN', 'FARM_KEEPER']),
-	getUserById
-);
+// usersRouter.get(
+// 	'/:userId',
+// 	authenticateJWT,
+// 	requireRoles(['ADMIN']),
+// 	getUserById
+// );
 
 usersRouter.delete(
 	'/:userId', 
 	authenticateJWT,
-	requireRoles(['ADMIN', 'FARM_KEEPER']),
+	requireRoles(['ADMIN']),
 	deleteUser
-);
-
-
-usersRouter.patch(
-  '/:userId',
-  authenticateJWT,
-  requireRoles(['ADMIN']),
-  validateRequest(adminUpdateUserSchema),
-  adminUpdateUser
-);
-
-usersRouter.patch(
-  '/:userId/avatar',
-  authenticateJWT,
-  requireRoles(['ADMIN']),
-  upload.single('avatar'), 
-  updateUserAvatar 
-);
-
-
-usersRouter.get(
-	'/vet/assigned-farms', 
-	authenticateJWT,
-	requireRoles(['VET']),
-	getVetAssignedFarms
-);
-
-usersRouter.get(
-	'/vet/farms/:companyId',
-	authenticateJWT,
-	requireRoles(['VET', 'ADMIN']),
-	getFarmDetails
-);
-
-usersRouter.get(
-  '/vets/profile',
-  authenticateJWT,
-  requireRoles(['ADMIN']), 
-  getAllVets
 );

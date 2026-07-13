@@ -1,116 +1,91 @@
 import { Router } from 'express';
 import {
-	login,
-	adminRegister,
-	requestVerificationCode,
-	resetPassword,
-	verifyAccount,
-	register,
-	vetRegister,
-	vetLogin,
-	forgotPassword,
-	changePassword,
+  adminRegister,
+  forgotPassword,
+  login,
+  requestVerificationCode,
+  resetPassword,
+  verifyAccount,
+  staffRegister,
+  logout,
+  register,
 } from '../contollers/auth.controller';
-import { validateRequest } from '../middlewares/validateRequest';
+import { validateRequest } from '../middlewares/validateRequest.middleware';
 import {
-	loginSchema,
-	adminRegisterSchema,
-	requestVerificationSchema,
-	resetPasswordSchema,
-	verifyAccountSchema,
-	registerSchema,
-	vetRegisterSchema,
-	forgotPasswordSchema,
+  adminRegisterSchema,
+  forgotPasswordSchema,
+  loginSchema,
+  registerSchema,
+  requestVerificationSchema,
+  resetPasswordSchema,
+  verifyAccountSchema,
+  staffRegisterSchema,
 } from '../schemas/auth.schemas';
-import passport from 'passport';
-import { sendSuccessResponse } from '../utils/sendSuccessResponse';
-import { authenticateJWT } from '../middlewares/errorHandler';
-import { requireRoles } from '../middlewares/roleCheck';
-import { changePasswordSchema } from '../schemas/users.schemas';
+import { authenticateJWT } from '../middlewares/errorHandler.middleware';
+import { requireRoles } from '../middlewares/roleCheck.middleware';
+import { uploadNIN } from '../config/upload';
 
 export const authRouter = Router();
 
-authRouter.post('/admin-reg',
-	validateRequest(adminRegisterSchema),
-	adminRegister
+
+authRouter.post(
+  '/admin/reg',
+  validateRequest(adminRegisterSchema),
+  adminRegister
 );
 
 authRouter.post(
-	'/register/:companyId',
-	authenticateJWT,
-	requireRoles(['ADMIN', 'FARM_KEEPER']),
-	validateRequest(registerSchema),
-	register
+  '/reg',
+  uploadNIN.single('ninPhoto'), 
+  validateRequest(registerSchema),
+  register
 );
 
 authRouter.post(
-	'/login',
-	validateRequest(loginSchema), 
-	login
-);
-
-authRouter.post(
-  '/vet-reg',
-  validateRequest(vetRegisterSchema),
-  vetRegister
-);
-
-authRouter.post(
-	'/vet-login', 
-	validateRequest(loginSchema),
-	vetLogin
-);
-
-authRouter.post(
-	'/resend',
-	validateRequest(requestVerificationSchema),
-	requestVerificationCode
-);
-
-authRouter.put('/verify', 
-	validateRequest(verifyAccountSchema),
-	verifyAccount
-);
-
-authRouter.put('/reset', 
-	validateRequest(resetPasswordSchema), 
-	resetPassword
-);
-
-// Google Strategy
-authRouter.get(
-	'/google',
-	passport.authenticate('google', { scope: ['profile', 'email'] })
-);
-
-authRouter.get(
-	'/google/callback',
-	passport.authenticate('google', { session: false }),
-	(req, res) => {
-		const { user, token } = req.user as any;
-		res.json({
-			message: 'Login successful',
-			user,
-			token,
-		});
-		sendSuccessResponse(res, 'Login successful', { user, token });
-	}
-);
-
-authRouter.get('/failure', (_req, res) => {
-	res.status(401).json({ error: 'Failed to authenticate' });
-});
-
-authRouter.post(
-	'/forgot-password',
-	validateRequest(forgotPasswordSchema),
-	forgotPassword
-);
-
-
-authRouter.patch(
-  '/change-password',
+  '/reg/staff',
   authenticateJWT,
-  validateRequest(changePasswordSchema),
-  changePassword
+  requireRoles(['ADMIN']),
+  validateRequest(staffRegisterSchema),
+  staffRegister
+);
+
+authRouter.post(
+  '/login',
+  validateRequest(loginSchema),
+  login
+);
+
+
+authRouter.post(
+  '/resend',
+  validateRequest(requestVerificationSchema),
+  requestVerificationCode
+);
+
+
+authRouter.put(
+  '/verify',
+  validateRequest(verifyAccountSchema),
+  verifyAccount
+);
+
+
+authRouter.post(
+  '/forgot-password',
+  validateRequest(forgotPasswordSchema),
+  forgotPassword
+);
+
+         
+authRouter.put(
+  '/reset-password',
+  validateRequest(resetPasswordSchema),
+  resetPassword
+);
+
+ 
+authRouter.post(
+  '/logout',
+  authenticateJWT,
+  logout
 );

@@ -6055,3 +6055,35 @@
 [31m      })[39m
 
 [31mPlease either use `include` or `select`, but not both at the same time.[39m
+2026-07-12 22:11:05 [31merror[39m [31mInternal Server Error [39m
+[31mInvalid `prisma.user.findFirst()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\contollers\auth.controller.ts:275:40[39m
+
+[31m  272 const { email, password } = req.body;[39m
+[31m  273 [39m
+[31m  274   try {[39m
+[31m→ 275       const user = await prisma.user.findFirst([39m
+[31mDatabase `PropertyArkdb&connection_limit=5&pool_timeout=10` does not exist[39m
+2026-07-12 22:11:45 [31merror[39m [31mInternal Server Error [39m
+[31mInvalid `prisma.user.findFirst()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\contollers\auth.controller.ts:275:40[39m
+
+[31m  272 const { email, password } = req.body;[39m
+[31m  273 [39m
+[31m  274   try {[39m
+[31m→ 275       const user = await prisma.user.findFirst([39m
+[31mDatabase `PropertyArkdb&connection_limit=5&pool_timeout=10` does not exist[39m
+2026-07-12 22:14:51 [31merror[39m [31mInternal Server Error [39m
+[31mInvalid `prisma.user.findFirst()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\contollers\auth.controller.ts:275:40[39m
+
+[31m  272 const { email, password } = req.body;[39m
+[31m  273 [39m
+[31m  274   try {[39m
+[31m→ 275       const user = await prisma.user.findFirst([39m
+[31mDatabase `PropertyArkdb&connection_limit=5&pool_timeout=10` does not exist[39m
+2026-07-13 02:23:22 [31merror[39m [31mInternal Server Error Failed to send email[39m
+2026-07-13 13:29:35 [31merror[39m [31mSMTP transporter verification failed: Invalid login: 525 5.7.1 Unauthorized IP address[39m
+2026-07-13 13:29:35 [31merror[39m [31mSMTP connection test failed: Invalid login: 525 5.7.1 Unauthorized IP address[39m
+2026-07-13 13:39:41 [31merror[39m [31mSMTP connection test failed: Invalid login: 525 5.7.1 Unauthorized IP address[39m
+2026-07-13 13:39:57 [31merror[39m [31mSMTP transporter verification failed: Invalid login: 525 5.7.1 Unauthorized IP address[39m

@@ -1,9 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
+// prisma/schema.prisma
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,803 +8,283 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Company {
-  id          String       @id @default(cuid())
-  name        String       @unique
-  location    String?
-  phone       String?
-  isActive    Boolean      @default(true)
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  notes       Note[]
-  vetRequests VetRequest[]
-
-  // Relations
-  users                 User[]
-  appointments          Appointment[]
-  farmVisits            FarmVisit[]
-  livestock             Livestock[]
-  tasks                 Task[]
-  inventories           Inventory[]
-  inventoryRecords      InventoryRecord[]
-  financialTransactions FinancialTransaction[]
-
-  @@map("companies")
-}
-
-model User {
-  id                  String    @id @default(cuid())
-  email               String?   @unique
-  phone               String?   @unique
-  googleId            String?   @unique
-  companyName         String?
-  company             Company?  @relation(fields: [companyId], references: [id])
-  companyId           String?
-  password            String?
-  fullName            String
-  avatar              String?
-  location            String?
-  role                Role      @default(ADMIN)
-  lastLogin           DateTime?
-  verificationCode    String?
-  verificationExpires DateTime?
-  isVerified          Boolean   @default(false)
-  isSuspended         Boolean   @default(false)
-  createdAt           DateTime  @default(now())
-  updatedAt           DateTime  @updatedAt
-
-  bio                 String?
-  specializations     String[]
-  fcmToken            String?
-  licenseNumber       String?           @unique
-  averageRating       Float             @default(0.0)
-  totalRatings        Int               @default(0)
-  availability        String[]
-  consultationFee     Float?
-  yearsOfExperience   Int?
-  certifications      String[]
-  deletedMessages     Message[]         @relation("MessageDeletions")
-  reactions           Reaction[]
-  messageDeliveries   MessageDelivery[]
-  initiatedCalls      Call[]
-  callParticipants    CallParticipant[]
-  vetRequestsSent     VetRequest[]      @relation("VetRequestsSent")
-  vetRequestsReceived VetRequest[]      @relation("VetRequestsReceived")
-
-  assignedTasks        Task[]                    @relation("TaskAssignedTo")
-  createdTasks         Task[]                    @relation("CreatedTasks")
-  livestockAdded       Livestock[]               @relation("LivestockAddedBy")
-  livestockUpdated     Livestock[]               @relation("LivestockUpdatedBy")
-  deletedLivestock     Livestock[]               @relation("LivestockDeletedBy")
-  vaccination          Vaccination[]
-  Sickness             Sickness[]
-  Treatment            Treatment[]
-  OfftakeRecord        OfftakeRecord[]
-  TaskObservation      TaskObservation[]         @relation("UserTaskObservations")
-  InventoryRecord      InventoryRecord[]
-  FinancialTransaction FinancialTransaction[]
-  Diagnosis            Diagnosis[]
-  prescribedTreatments PrescribedTreatment[]
-  followUps            FollowUp[]
-  notifications        Notification[]
-  appointments         Appointment[]
-  farmVisits           FarmVisit[]
-  notes                Note[]
-  notificationSettings NotificationSettings?
-  conversations        ConversationParticipant[]
-  sentMessages         Message[]
-
-  // Creator relationship
-  createdBy    User?   @relation("UserCreator", fields: [createdById], references: [id])
-  createdById  String?
-  createdUsers User[]  @relation("UserCreator")
-
-  @@index([companyId])
-}
-
-model VetRequest {
-  id         String    @id @default(cuid())
-  vetId      String
-  vet        User      @relation("VetRequestsReceived", fields: [vetId], references: [id])
-  companyId  String
-  company    Company   @relation(fields: [companyId], references: [id])
-  adminId    String
-  admin      User      @relation("VetRequestsSent", fields: [adminId], references: [id])
-  message    String?
-  status     String    @default("PENDING")
-  acceptedAt DateTime?
-  rejectedAt DateTime?
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-
-  @@index([vetId])
-  @@index([companyId])
-  @@index([adminId])
-  @@index([status])
-}
-
-model Livestock {
-  id               String       @id @default(cuid())
-  tagId            String       @unique
-  type             String
-  breed            String?
-  birthDate        DateTime?
-  company          Company?     @relation(fields: [companyId], references: [id])
-  companyId        String?
-  healthStatus     HealthStatus
-  weight           Float?
-  gender           String
-  livestockSource  String?
-  livestockPurpose String?
-  isSick           Boolean      @default(false)
-  isTreatment      Boolean      @default(false)
-
-  isDeleted      Boolean   @default(false)
-  deletionReason String?
-  deletedAt      DateTime?
-  deletedBy      User?     @relation("LivestockDeletedBy", fields: [deletedById], references: [id]) // New relation
-  deletedById    String?
-
-  sickness             Sickness[]
-  treatments           Treatment[]
-  addedBy              User                  @relation("LivestockAddedBy", fields: [addedById], references: [id])
-  addedById            String
-  updatedBy            User?                 @relation("LivestockUpdatedBy", fields: [updatedById], references: [id])
-  updatedById          String?
-  createdAt            DateTime              @default(now())
-  updatedAt            DateTime              @updatedAt
-  vaccinationRecords   Vaccination[]
-  OfftakeRecord        OfftakeRecord[]
-  tasks                Task[]
-  diagnoses            Diagnosis[]
-  prescribedTreatments PrescribedTreatment[]
-  followUps            FollowUp[]
-
-  @@index([companyId])
-}
-
-model Vaccination {
-  id                String    @id @default(cuid())
-  livestock         Livestock @relation(fields: [livestockId], references: [id])
-  livestockId       String
-  dateofVaccination DateTime
-  vaccineType       String
-  dosage            Float
-  administeredBy    String
-  nextDueDate       DateTime?
-  recordedBy        User      @relation(fields: [recordedById], references: [id])
-  recordedById      String
-  createdAt         DateTime  @default(now())
-}
-
-model Sickness {
-  id                String      @id @default(cuid())
-  livestock         Livestock   @relation(fields: [livestockId], references: [id])
-  livestockId       String
-  dateOfObservation DateTime
-  observedSymptoms  String
-  suspectedCause    String?
-  notes             String?
-  recordedBy        User        @relation(fields: [recordedById], references: [id])
-  recordedById      String
-  createdAt         DateTime    @default(now())
-  treatments        Treatment[]
-}
-
-model Treatment {
-  id              String    @id @default(cuid())
-  sickness        Sickness? @relation(fields: [sicknessId], references: [id])
-  sicknessId      String?
-  livestock       Livestock @relation(fields: [livestockId], references: [id])
-  livestockId     String
-  dateOfTreatment DateTime
-  treatmentType   String
-  dosage          Float
-  cause           String
-  administeredBy  String
-  nextDueDate     DateTime?
-  recordedBy      User      @relation(fields: [recordedById], references: [id])
-  recordedById    String
-  createdAt       DateTime  @default(now())
-}
-
-model OfftakeRecord {
-  id           String    @id @default(cuid())
-  livestock    Livestock @relation(fields: [livestockId], references: [id])
-  livestockId  String
-  type         Offtake
-  dateOfEvent  DateTime
-  destination  String?
-  price        Float?
-  causeOfDeath String?
-  notes        String?
-  recordedBy   User      @relation(fields: [recordedById], references: [id])
-  recordedById String
-  createdAt    DateTime  @default(now())
-
-  @@index([livestockId])
-  @@index([type])
-}
-
-model Task {
-  id           String            @id @default(cuid())
-  name         String
-  description  String
-  priority     Priority
-  company      Company?          @relation(fields: [companyId], references: [id])
-  companyId    String?
-  dueDate      DateTime
-  status       TaskStatus        @default(PENDING)
-  observations TaskObservation[]
-  assignedTo   User              @relation("TaskAssignedTo", fields: [assignedToId], references: [id])
-  assignedToId String
-  assignedBy   User              @relation("CreatedTasks", fields: [assignedById], references: [id])
-  assignedById String
-
-  livestock   Livestock? @relation(fields: [livestockId], references: [id])
-  livestockId String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([companyId])
-  @@index([assignedToId])
-  @@index([livestockId])
-}
-
-model TaskObservation {
-  id           String   @id @default(cuid())
-  note         String
-  mediaUrls    String[]
-  reportedAt   DateTime @default(now())
-  task         Task     @relation(fields: [taskId], references: [id])
-  taskId       String
-  reportedBy   User     @relation("UserTaskObservations", fields: [reportedById], references: [id])
-  reportedById String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
-  @@index([taskId])
-  @@index([reportedById])
-}
-
-model Inventory {
-  id              String            @id @default(cuid())
-  type            InventoryType
-  name            String
-  company         Company?          @relation(fields: [companyId], references: [id])
-  companyId       String?
-  currentQuantity Float
-  unit            String            @default("units")
-  purchasePrice   Float?
-  reorderPoint    Float
-  supplier        String?
-  notes           String?
-  mediaUrls       String[]
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  records         InventoryRecord[]
-}
-
-model InventoryRecord {
-  id             String              @id @default(cuid())
-  recordType     InventoryRecordType
-  quantity       Float
-  pricePerUnit   Float?
-  totalCost      Float?
-  date           DateTime
-  company        Company?            @relation(fields: [companyId], references: [id])
-  companyId      String?
-  movementType   String?
-  relatedAnimals String?
-  notes          String?
-  mediaUrls      String[]
-  inventory      Inventory?          @relation(fields: [inventoryId], references: [id])
-  inventoryId    String?
-  recordedBy     User                @relation(fields: [recordedById], references: [id])
-  recordedById   String
-  createdAt      DateTime            @default(now())
-}
-
-model FinancialTransaction {
-  id              String                   @id @default(cuid())
-  type            FinancialTransactionType
-  referenceNumber String
-  title           String
-  amount          Float
-  company         Company?                 @relation(fields: [companyId], references: [id])
-  companyId       String?
-  paymentMethod   String
-  date            DateTime
-  description     String?
-  partyName       String // Buyer or vendor name
-  mediaUrls       String[]
-  recordedBy      User                     @relation(fields: [recordedById], references: [id])
-  recordedById    String
-  createdAt       DateTime                 @default(now())
-
-  @@index([type])
-  @@index([date])
-}
-
-model Diagnosis {
-  id           String             @id @default(cuid())
-  livestock    Livestock          @relation(fields: [livestockId], references: [id])
-  livestockId  String
-  diagnosis    String
-  labTests     String?
-  severity     DiagnosisSeverity  @default(MILD)
-  prognosis    DiagnosisPrognosis @default(GOOD)
-  observations String?
-  date         DateTime
-  recordedBy   User               @relation(fields: [recordedById], references: [id])
-  recordedById String
-  createdAt    DateTime           @default(now())
-  updatedAt    DateTime           @updatedAt
-
-  @@index([livestockId])
-  @@index([date])
-  @@index([severity])
-  @@index([prognosis])
-}
-
-model PrescribedTreatment {
-  id              String                @id @default(cuid())
-  livestock       Livestock             @relation(fields: [livestockId], references: [id])
-  livestockId     String
-  treatmentType   String
-  medicationName  String
-  dosage          String
-  frequency       Frequency
-  routine         AdministrationRoutine
-  additionalNotes String?
-  startDate       DateTime
-  endDate         DateTime?
-  isActive        Boolean               @default(true)
-  recordedBy      User                  @relation(fields: [recordedById], references: [id])
-  recordedById    String
-  createdAt       DateTime              @default(now())
-  updatedAt       DateTime              @updatedAt
-  followUps       FollowUp[]
-  reminders       TreatmentReminder[]
-
-  @@index([livestockId])
-  @@index([isActive])
-  @@index([startDate])
-}
-
-model FollowUp {
-  id                    String               @id @default(cuid())
-  prescribedTreatment   PrescribedTreatment? @relation(fields: [prescribedTreatmentId], references: [id])
-  prescribedTreatmentId String?
-  reason                String
-  date                  DateTime
-  time                  DateTime
-  relatedAnimal         Livestock            @relation(fields: [relatedAnimalId], references: [id])
-  relatedAnimalId       String
-  relatedFarm           String
-  location              String
-  additionalNotes       String?
-  setReminder           Boolean              @default(false)
-  notifyFarmStaff       Boolean              @default(false)
-  status                String               @default("SCHEDULED")
-  recordedBy            User                 @relation(fields: [recordedById], references: [id])
-  recordedById          String
-  createdAt             DateTime             @default(now())
-  updatedAt             DateTime             @updatedAt
-  reminders             FollowUpReminder[]
-
-  @@index([date])
-  @@index([relatedAnimalId])
-  @@index([status])
-}
-
-model TreatmentReminder {
-  id                    String              @id @default(cuid())
-  prescribedTreatment   PrescribedTreatment @relation(fields: [prescribedTreatmentId], references: [id])
-  prescribedTreatmentId String
-  reminderType          String // "DAILY", "WEEKLY", etc.
-  dueDate               DateTime
-  isSent                Boolean             @default(false)
-  sentAt                DateTime?
-  createdAt             DateTime            @default(now())
-}
-
-model FollowUpReminder {
-  id           String    @id @default(cuid())
-  followUp     FollowUp  @relation(fields: [followUpId], references: [id])
-  followUpId   String
-  reminderType String // "1_DAY_BEFORE", "1_HOUR_BEFORE"
-  dueDate      DateTime
-  isSent       Boolean   @default(false)
-  sentAt       DateTime?
-  createdAt    DateTime  @default(now())
-}
-
-model Notification {
-  id                String             @id @default(cuid())
-  title             String
-  message           String
-  type              NotificationType
-  status            NotificationStatus @default(UNREAD)
-  recipient         User               @relation(fields: [recipientId], references: [id])
-  recipientId       String
-  relatedEntityType String? // e.g., "TASK", "FOLLOW_UP", "TREATMENT"
-  relatedEntityId   String?
-  metadata          Json?
-  sentAt            DateTime           @default(now())
-  readAt            DateTime?
-  createdAt         DateTime           @default(now())
-
-  @@index([recipientId])
-  @@index([status])
-  @@index([type])
-  @@index([sentAt])
-}
-
-model Appointment {
-  id              String                @id @default(cuid())
-  visitType       VisitType
-  title           String
-  date            DateTime
-  time            DateTime
-  company         Company?              @relation(fields: [companyId], references: [id])
-  companyId       String?
-  relatedFarm     String
-  relatedAnimal   String?
-  purpose         String
-  setReminder     Boolean               @default(false)
-  notifyFarmStaff Boolean               @default(false)
-  status          String                @default("SCHEDULED") // SCHEDULED, COMPLETED, CANCELLED
-  recordedBy      User                  @relation(fields: [recordedById], references: [id])
-  recordedById    String
-  createdAt       DateTime              @default(now())
-  updatedAt       DateTime              @updatedAt
-  reminders       AppointmentReminder[]
-
-  @@index([companyId])
-  @@index([date])
-  @@index([status])
-  @@index([recordedById])
-}
-
-model AppointmentReminder {
-  id            String      @id @default(cuid())
-  appointment   Appointment @relation(fields: [appointmentId], references: [id])
-  appointmentId String
-  reminderType  String
-  dueDate       DateTime
-  isSent        Boolean     @default(false)
-  sentAt        DateTime?
-  createdAt     DateTime    @default(now())
-}
-
-model FarmVisit {
-  id                 String   @id @default(cuid())
-  company            Company? @relation(fields: [companyId], references: [id])
-  companyId          String?
-  relatedFarm        String
-  date               DateTime
-  time               DateTime
-  reason             String
-  keyPersonnelMet    String
-  animalExamined     String
-  farmObservation    String
-  farmRecommendation String
-  mediaUrls          String[] // Store image URLs instead of files
-  recordedBy         User     @relation(fields: [recordedById], references: [id])
-  recordedById       String
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-
-  @@index([companyId])
-  @@index([date])
-  @@index([recordedById])
-}
-
-model Note {
-  id           String   @id @default(cuid())
-  folderName   String
-  date         DateTime
-  title        String
-  body         String
-  company      Company? @relation(fields: [companyId], references: [id])
-  companyId    String?
-  recordedBy   User     @relation(fields: [recordedById], references: [id])
-  recordedById String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
-  @@index([companyId])
-  @@index([folderName])
-  @@index([date])
-  @@map("notes")
-}
-
-model NotificationSettings {
-  id     String @id @default(cuid())
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  // Notification toggles
-  followUpReminders    Boolean @default(true)
-  upcomingAppointments Boolean @default(true)
-  messageNotifications Boolean @default(true)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("notification_settings")
-}
-
-model Conversation {
-  id            String                    @id @default(cuid())
-  participants  ConversationParticipant[]
-  messages      Message[]
-  lastMessageId String?                   @unique
-  lastMessage   Message?                  @relation("LastMessage", fields: [lastMessageId], references: [id])
-  lastMessageAt DateTime?
-  createdAt     DateTime                  @default(now())
-  updatedAt     DateTime                  @updatedAt
-  isGroup       Boolean                   @default(false)
-  groupName     String?
-  groupAdminId  String?
-  groupImage    String?
-  calls         Call[]
-
-  @@index([lastMessageAt])
-}
-
-model ConversationParticipant {
-  id             String       @id @default(cuid())
-  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  conversationId String
-  user           User         @relation(fields: [userId], references: [id])
-  userId         String
-  joinedAt       DateTime     @default(now())
-
-  @@unique([conversationId, userId])
-  @@map("conversation_participants")
-}
-
-model Message {
-  id              String            @id @default(cuid())
-  conversation    Conversation      @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  conversationId  String
-  sender          User              @relation(fields: [senderId], references: [id])
-  senderId        String
-  content         String
-  messageType     MessageType       @default(TEXT)
-  mediaUrl        String?
-  fileSize        Float?
-  fileName        String?
-  isRead          Boolean           @default(false)
-  readAt          DateTime?
-  deliveredAt     DateTime?
-  status          MessageStatus     @default(SENT)
-  parentMessageId String?
-  parentMessage   Message?          @relation("MessageReplies", fields: [parentMessageId], references: [id])
-  replies         Message[]         @relation("MessageReplies")
-  reactions       Reaction[]
-  deletedForUsers User[]            @relation("MessageDeletions")
-  encryptedKey    String?
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  lastMessageOf   Conversation?     @relation("LastMessage")
-  deliveries      MessageDelivery[]
-
-  @@index([conversationId])
-  @@index([senderId])
-  @@index([createdAt])
-  @@index([status])
-}
-
-model Reaction {
-  id        String   @id @default(cuid())
-  message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
-  messageId String
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
-  emoji     String
-  createdAt DateTime @default(now())
-
-  @@unique([messageId, userId])
-}
-
-model MessageDelivery {
-  id          String        @id @default(cuid())
-  message     Message       @relation(fields: [messageId], references: [id], onDelete: Cascade)
-  messageId   String
-  recipient   User          @relation(fields: [recipientId], references: [id])
-  recipientId String
-  status      MessageStatus @default(SENT)
-  deliveredAt DateTime?
-  readAt      DateTime?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-
-  @@unique([messageId, recipientId])
-}
-
-model Call {
-  id             String            @id @default(cuid())
-  callId         String            @unique
-  conversationId String
-  conversation   Conversation      @relation(fields: [conversationId], references: [id])
-  initiatorId    String
-  initiator      User              @relation(fields: [initiatorId], references: [id])
-  callType       String
-  status         CallStatus        @default(RINGING)
-  startedAt      DateTime          @default(now())
-  endedAt        DateTime?
-  endReason      String?
-  duration       Int?
-  participants   CallParticipant[]
-  createdAt      DateTime          @default(now())
-  updatedAt      DateTime          @updatedAt
-
-  @@index([conversationId])
-  @@index([initiatorId])
-  @@index([status])
-  @@index([startedAt])
-}
-
-model CallParticipant {
-  id        String                @id @default(cuid())
-  callId    String
-  call      Call                  @relation(fields: [callId], references: [callId], onDelete: Cascade)
-  userId    String
-  user      User                  @relation(fields: [userId], references: [id])
-  status    CallParticipantStatus @default(RINGING)
-  joinedAt  DateTime?
-  leftAt    DateTime?
-  createdAt DateTime              @default(now())
-
-  @@unique([callId, userId])
-}
-
-enum MessageStatus {
-  SENT
-  DELIVERED
-  READ
-  FAILED
-}
-
-enum CallStatus {
-  RINGING
-  ACTIVE
-  ENDED
-  FAILED
-}
-
-enum CallParticipantStatus {
-  RINGING
-  JOINED
-  DECLINED
-  ENDED
-  LEFT
-  MISSED
-}
-
-enum HealthStatus {
-  HEALTHY
-  SICK
-  IN_TREATMENT
-  RECOVERING
-  CRITICAL
-}
-
-enum Offtake {
-  SALE
-  DEATH
-  MISSING
-}
-
-enum Priority {
-  LOW
-  MEDIUM
-  HIGH
-}
-
-enum TaskStatus {
-  PENDING
-  IN_PROGRESS
-  COMPLETED
-  OVERDUE
-}
+// ============ ENUMS ============
 
 enum Role {
   ADMIN
-  FARM_KEEPER
-  COWORKER
-  VET
+  VENDOR
+  USER
+  STAFF
 }
 
-enum FinancialTransactionType {
-  INCOME
-  EXPENSE
+enum ListingType {
+  FOR_RENT
+  FOR_SALE
+  FOR_LAND
+  FOR_SHORTLET
 }
 
-enum InventoryType {
-  FEED
-  MEDICINE
-  EQUIPMENT
+enum PropertyStatus {
+  AVAILABLE
+  OCCUPIED
+  UNDER_MAINTENANCE
+  UNDER_CONSTRUCTION
+  SOLD
+  RENTED
 }
 
-enum InventoryRecordType {
-  NEW
-  ITEM
-  USE
+enum PropertyListingStatus {
+  PENDING
+  ACTIVE
+  REJECTED
 }
 
-enum DiagnosisSeverity {
-  MILD
-  MODERATE
-  SEVERE
-  CRITICAL
-  CHRONIC
+enum PropertyType {
+  RESIDENTIAL
+  COMMERCIAL
+  INDUSTRIAL
+  LAND
+  MIXED_USE
 }
 
-enum DiagnosisPrognosis {
-  GOOD
-  FAIR
-  GUARDED
-  POOR
+enum MediaType {
+  IMAGE
+  VIDEO
+  DOCUMENT
 }
 
-enum Frequency {
-  DAILY
-  TWICE_DAILY
-  EVERY_OTHER_DAY
-  WEEKLY
-  BI_WEEKLY
-  MONTHLY
-  AS_NEEDED
+enum DocumentType {
+  NIN
+  IDENTIFICATION
+  PROOF_OF_INCOME
+  OTHER
 }
 
-enum AdministrationRoutine {
-  ORAL
-  INTRAMUSCULAR
-  SUBCUTANEOUS
-  INTRAVENOUS
-  TOPICAL
-  INTRAMAMMARY
+enum VerificationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
 }
 
 enum NotificationType {
-  TASK_ASSIGNED
-  FOLLOW_UP_REMINDER
-  TREATMENT_REMINDER
-  ANNOUNCEMENT
-  SYSTEM_ALERT
-  APPOINTMENT_REMINDER
-  MESSAGE
-  VET_REQUEST
+  PROPERTY_APPROVED
+  PROPERTY_REJECTED
+  NIN_VERIFIED
+  NIN_REJECTED
+  PAYMENT_CONFIRMATION
+  GENERAL
 }
 
-enum NotificationStatus {
-  UNREAD
-  READ
-  DISMISSED
+// ============ MODELS ============
+
+model User {
+  id                  String    @id @default(cuid())
+  email               String    @unique
+  password            String?
+  fullName            String
+  phone               String?
+  avatar              String?
+  location            String?
+  role                Role      @default(USER)
+  isVerified          Boolean   @default(false)
+  isSuspended         Boolean   @default(false)
+  isDeleted           Boolean   @default(false)
+  lastLogin           DateTime?
+  verificationCode    String?
+  verificationExpires DateTime?
+
+  // NIN Verification
+  ninPhotoUrl           String?
+  ninVerificationStatus VerificationStatus @default(PENDING)
+  ninVerifiedAt         DateTime?
+  ninVerifiedBy         String?
+  ninRejectionReason    String?
+
+  // Staff specific fields
+  employeeId String? @unique
+  department String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  properties      Property[]     @relation("PropertyVendor")
+  staffProperties Property[]     @relation("PropertyStaff")
+  notifications   Notification[]
+  activityLogs    ActivityLog[]
+  documents       Document[]     @relation("UploadedBy")
+  vendorNIN       Document[]     @relation("VendorNIN")
+
+  // Password reset
+  passwordResetToken     String?
+  passwordResetExpiresAt DateTime?
+
+  @@index([email])
+  @@index([role])
+  @@index([isVerified])
+  @@index([isSuspended])
+  @@index([ninVerificationStatus])
+  @@index([employeeId])
 }
 
-enum VisitType {
-  FARM_VISIT
-  MEETING
+model Property {
+  id            String                @id @default(cuid())
+  name          String
+  description   String?
+  type          PropertyType
+  listingType   ListingType
+  status        PropertyStatus        @default(AVAILABLE)
+  listingStatus PropertyListingStatus @default(PENDING)
+
+  // Pricing based on listing type
+  rentAmount     Float? // FOR_RENT
+  salePrice      Float? // FOR_SALE
+  landFee        Float? // FOR_LAND
+  shortletAmount Float? // FOR_SHORTLET
+
+  address String
+  city    String
+  state   String
+  country String
+  zipCode String
+
+  size      Float?
+  sizeUnit  String? @default("sqft")
+  bedrooms  Int?
+  bathrooms Float?
+  yearBuilt Int?
+  amenities Json?
+
+  // Relations
+  vendorId String
+  vendor   User   @relation("PropertyVendor", fields: [vendorId], references: [id])
+
+  staffId String?
+  staff   User?   @relation("PropertyStaff", fields: [staffId], references: [id])
+
+  documents Document[]
+  media     Media[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Admin who approved/rejected
+  reviewedBy      String?
+  reviewedAt      DateTime?
+  rejectionReason String?
+
+  @@index([vendorId])
+  @@index([staffId])
+  @@index([status])
+  @@index([listingType])
+  @@index([listingStatus])
+  @@index([city, state])
 }
 
-enum ConversationType {
-  DIRECT
-  GROUP
+model Media {
+  id        String    @id @default(cuid())
+  name      String
+  type      MediaType
+  url       String
+  key       String
+  size      Int
+  mimeType  String
+  container String?
+  isPrimary Boolean   @default(false)
+
+  propertyId String?
+  property   Property? @relation(fields: [propertyId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([propertyId])
 }
 
-enum MessageType {
-  TEXT
-  IMAGE
-  FILE
-  AUDIO
-  VIDEO
-  LOCATION
-  CONTACT
-  SYSTEM
+model Document {
+  id        String       @id @default(cuid())
+  name      String
+  type      DocumentType
+  url       String
+  key       String
+  size      Int
+  mimeType  String
+  container String?
+
+  propertyId String?
+  property   Property? @relation(fields: [propertyId], references: [id])
+
+  uploadedById String
+  uploadedBy   User   @relation("UploadedBy", fields: [uploadedById], references: [id])
+
+  // For NIN documents
+  vendorId String?
+  vendor   User?   @relation("VendorNIN", fields: [vendorId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([propertyId])
+  @@index([uploadedById])
+  @@index([vendorId])
+}
+
+model Notification {
+  id      String           @id @default(cuid())
+  userId  String
+  user    User             @relation(fields: [userId], references: [id])
+  type    NotificationType
+  title   String
+  message String
+  data    Json?
+  read    Boolean          @default(false)
+  readAt  DateTime?
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([read])
+  @@index([createdAt])
+}
+
+model ActivityLog {
+  id          String  @id @default(cuid())
+  userId      String
+  user        User    @relation(fields: [userId], references: [id])
+  action      String
+  entityType  String
+  entityId    String
+  description String?
+  details     Json?
+  ipAddress   String?
+  userAgent   String?
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([entityType])
+  @@index([entityId])
+  @@index([createdAt])
+  @@index([action])
+}
+
+model PlatformSettings {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       Json
+  description String?
+  updatedBy   String
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+}
+
+model SystemConfig {
+  id          String   @id @default(cuid())
+  configKey   String   @unique
+  configValue Json
+  description String?
+  isActive    Boolean  @default(true)
+  updatedBy   String
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
 }

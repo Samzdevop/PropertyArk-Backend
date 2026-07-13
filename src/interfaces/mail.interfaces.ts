@@ -6,4 +6,9 @@ export interface MailInterface {
 	bcc?: string | string[];
 	text: string;
 	html?: string;
+	attachments?: Array<{
+		content?: string;
+		name?: string;
+		url?: string;
+	}>;
 }

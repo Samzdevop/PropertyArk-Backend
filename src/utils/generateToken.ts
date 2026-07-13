@@ -16,7 +16,7 @@ const generateToken = (user: TokenPayload): string => {
         },
         process.env.JWT_SECRET as string,
         {
-            expiresIn: process.env.JWT_EXPIRY || '1h',
+            expiresIn: process.env.JWT_EXPIRY as jwt.SignOptions['expiresIn'] || '1h' ,
         }
     );
 };

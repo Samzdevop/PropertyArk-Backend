@@ -38481,3 +38481,85 @@
 2026-02-24 14:32:38 [32minfo[39m [32mGET /api/v1/chat/conversations?page=1&limit=50 304 52.499 ms - -[39m
 [32m[39m
 2026-02-24 14:32:38 [32minfo[39m [32mSocket disconnected - User: cmj8izqvt000mt1l8fjfhubck, Socket: pA4cMBuf4KgrBdpBAAAB[39m
+2026-07-12 22:09:52 [32minfo[39m [32mGET /api/v1/auth/login 404 3.356 ms - 122[39m
+[32m[39m
+2026-07-12 22:11:05 [31merror[39m [31mInternal Server Error [39m
+[31mInvalid `prisma.user.findFirst()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\contollers\auth.controller.ts:275:40[39m
+
+[31m  272 const { email, password } = req.body;[39m
+[31m  273 [39m
+[31m  274   try {[39m
+[31m→ 275       const user = await prisma.user.findFirst([39m
+[31mDatabase `PropertyArkdb&connection_limit=5&pool_timeout=10` does not exist[39m
+2026-07-12 22:11:05 [32minfo[39m [32mPOST /api/v1/auth/login 500 523.571 ms - 49[39m
+[32m[39m
+2026-07-12 22:11:45 [31merror[39m [31mInternal Server Error [39m
+[31mInvalid `prisma.user.findFirst()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\contollers\auth.controller.ts:275:40[39m
+
+[31m  272 const { email, password } = req.body;[39m
+[31m  273 [39m
+[31m  274   try {[39m
+[31m→ 275       const user = await prisma.user.findFirst([39m
+[31mDatabase `PropertyArkdb&connection_limit=5&pool_timeout=10` does not exist[39m
+2026-07-12 22:11:45 [32minfo[39m [32mPOST /api/v1/auth/login 500 152.323 ms - 49[39m
+[32m[39m
+2026-07-12 22:14:51 [31merror[39m [31mInternal Server Error [39m
+[31mInvalid `prisma.user.findFirst()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\contollers\auth.controller.ts:275:40[39m
+
+[31m  272 const { email, password } = req.body;[39m
+[31m  273 [39m
+[31m  274   try {[39m
+[31m→ 275       const user = await prisma.user.findFirst([39m
+[31mDatabase `PropertyArkdb&connection_limit=5&pool_timeout=10` does not exist[39m
+2026-07-12 22:14:51 [32minfo[39m [32mPOST /api/v1/auth/login 500 446.553 ms - 49[39m
+[32m[39m
+2026-07-12 22:18:58 [32minfo[39m [32mPOST /api/v1/auth/login 200 516.813 ms - 615[39m
+[32m[39m
+2026-07-12 22:19:06 [32minfo[39m [32mPOST /api/v1/auth/login 200 138.969 ms - 615[39m
+[32m[39m
+2026-07-13 02:23:22 [31merror[39m [31mInternal Server Error Failed to send email[39m
+2026-07-13 02:23:22 [32minfo[39m [32mPOST /api/v1/auth/admin/register 500 370.554 ms - 49[39m
+[32m[39m
+2026-07-13 02:59:49 [32minfo[39m [32mPOST /api/v1/auth/login 200 458.387 ms - 616[39m
+[32m[39m
+2026-07-13 13:24:47 [32minfo[39m [32mPOST /api/v1/auth/login 200 639.521 ms - 616[39m
+[32m[39m
+2026-07-13 13:29:32 [32minfo[39m [32mNodemailer transporter initialized with Brevo SMTP[39m
+2026-07-13 13:29:35 [31merror[39m [31mSMTP transporter verification failed: Invalid login: 525 5.7.1 Unauthorized IP address[39m
+2026-07-13 13:29:35 [31merror[39m [31mSMTP connection test failed: Invalid login: 525 5.7.1 Unauthorized IP address[39m
+2026-07-13 13:29:35 [32minfo[39m [32mGET /api/v1/email/status 200 2826.447 ms - 280[39m
+[32m[39m
+2026-07-13 13:38:54 [32minfo[39m [32mPOST /api/v1/auth/login 200 850.359 ms - 616[39m
+[32m[39m
+2026-07-13 13:39:35 [32minfo[39m [32mNodemailer transporter initialized with Brevo SMTP[39m
+2026-07-13 13:39:41 [31merror[39m [31mSMTP connection test failed: Invalid login: 525 5.7.1 Unauthorized IP address[39m
+2026-07-13 13:39:41 [32minfo[39m [32mGET /api/v1/email/status 200 6241.890 ms - 280[39m
+[32m[39m
+2026-07-13 13:39:57 [31merror[39m [31mSMTP transporter verification failed: Invalid login: 525 5.7.1 Unauthorized IP address[39m
+2026-07-13 13:51:19 [32minfo[39m [32mNodemailer transporter initialized with Brevo SMTP[39m
+2026-07-13 13:51:24 [32minfo[39m [32mSMTP transporter verified successfully[39m
+2026-07-13 13:51:24 [32minfo[39m [32mSMTP connection test successful[39m
+2026-07-13 13:51:24 [32minfo[39m [32mGET /api/v1/email/status 200 6236.588 ms - 279[39m
+[32m[39m
+2026-07-13 13:56:56 [32minfo[39m [32mGET /api/v1/auth/cmrj0lov1000094xc4d2m7wuf 404 72.679 ms - 142[39m
+[32m[39m
+2026-07-13 13:57:40 [32minfo[39m [32mGET /api/v1/users/cmrj0lov1000094xc4d2m7wuf 404 11.845 ms - 143[39m
+[32m[39m
+2026-07-13 13:57:52 [32minfo[39m [32mDELETE /api/v1/users/cmrj0lov1000094xc4d2m7wuf 401 23.859 ms - 66[39m
+[32m[39m
+2026-07-13 13:58:50 [32minfo[39m [32mDELETE /api/v1/users/cmrj0lov1000094xc4d2m7wuf 204 447.970 ms - -[39m
+[32m[39m
+2026-07-13 14:09:08 [32minfo[39m [32mPOST /api/v1/auth/login 200 466.842 ms - 616[39m
+[32m[39m
+2026-07-13 14:10:09 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to samzdevop@gmail.com. MessageId: <ebe96a10-58d3-e9d7-8258-d13428ff35b4@gmail.com>[39m
+2026-07-13 14:10:09 [32minfo[39m [32mEmail sent successfully to samzdevop@gmail.com[39m
+2026-07-13 14:10:09 [32minfo[39m [32mVerification email sent to samzdevop@gmail.com[39m
+2026-07-13 14:10:09 [32minfo[39m [32mPOST /api/v1/auth/reg 201 10863.315 ms - 120[39m
+[32m[39m
+2026-07-13 14:12:11 [32minfo[39m [32mPOST /api/v1/auth/verify 404 3.933 ms - 123[39m
+[32m[39m
+2026-07-13 14:13:42 [32minfo[39m [32mPUT /api/v1/auth/verify 200 284.245 ms - 70[39m
+[32m[39m
