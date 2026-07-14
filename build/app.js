@@ -24,10 +24,23 @@ const email_routes_1 = require("./routes/email.routes");
 exports.app = (0, express_1.default)();
 exports.app.use(passport_1.default.initialize());
 exports.app.use((0, helmet_1.default)());
+const allowedOrigins = [
+    'http://localhost:3000',
+    'http://localhost:5173',
+];
 exports.app.use((0, cors_1.default)({
-    origin: process.env.CORS_ORIGIN || '*',
+    origin: function (origin, callback) {
+        if (!origin)
+            return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    },
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
 }));
 exports.app.use(express_1.default.json());
 (0, morgan_1.default)('tiny');
