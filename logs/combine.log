@@ -38563,3 +38563,19 @@
 [32m[39m
 2026-07-13 14:13:42 [32minfo[39m [32mPUT /api/v1/auth/verify 200 284.245 ms - 70[39m
 [32m[39m
+2026-07-14 08:32:33 [32minfo[39m [32mNodemailer transporter initialized with Brevo SMTP[39m
+2026-07-14 08:32:40 [32minfo[39m [32mSMTP transporter verified successfully[39m
+2026-07-14 08:32:41 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to ebu7569@gmail.com. MessageId: <6687ad72-6898-6430-7d53-08e287f26c0b@gmail.com>[39m
+2026-07-14 08:32:41 [32minfo[39m [32mEmail sent successfully to ebu7569@gmail.com[39m
+2026-07-14 08:32:41 [32minfo[39m [32mVerification email sent to ebu7569@gmail.com[39m
+2026-07-14 08:32:42 [32minfo[39m [32mPOST /api/v1/auth/reg 201 9024.255 ms - 120[39m
+[32m[39m
+2026-07-14 08:33:20 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to ebus7569@gmail.com. MessageId: <7bc6f688-a2af-ab17-a84f-04584a2562b0@gmail.com>[39m
+2026-07-14 08:33:20 [32minfo[39m [32mEmail sent successfully to ebus7569@gmail.com[39m
+2026-07-14 08:33:20 [32minfo[39m [32mVerification email sent to ebus7569@gmail.com[39m
+2026-07-14 08:33:20 [32minfo[39m [32mPOST /api/v1/auth/reg 201 1072.841 ms - 120[39m
+[32m[39m
+2026-07-14 08:34:50 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to ebus7569@gmail.com. MessageId: <77fa32cf-24a2-3d79-c94a-311bc1311fd3@gmail.com>[39m
+2026-07-14 08:34:50 [32minfo[39m [32mEmail sent successfully to ebus7569@gmail.com[39m
+2026-07-14 08:34:50 [32minfo[39m [32mPOST /api/v1/auth/resend 200 928.528 ms - 74[39m
+[32m[39m

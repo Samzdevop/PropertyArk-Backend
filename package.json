@@ -71,7 +71,7 @@
     "render-build": "yarn prisma generate && yarn prisma migrate deploy",
     "lint": "eslint --ext .ts .",
     "test:process": "yarn migration:test && yarn lint && yarn test",
-    "build": "tsc",
+    "build": "tsc && copyfiles -u 1 \"src/views/**/*\" build",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:reset": "prisma migrate reset",
