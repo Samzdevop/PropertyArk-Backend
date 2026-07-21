@@ -75,39 +75,46 @@ enum NotificationType {
   GENERAL
 }
 
-// ============ MODELS ============
+enum InquiryStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+}
+
+enum MeetingType {
+  VIDEO_CALL
+  IN_PERSON
+}
 
 model User {
-  id                  String    @id @default(cuid())
-  email               String    @unique
-  password            String?
-  fullName            String
-  phone               String?
-  avatar              String?
-  location            String?
-  role                Role      @default(USER)
-  isVerified          Boolean   @default(false)
-  isSuspended         Boolean   @default(false)
-  isDeleted           Boolean   @default(false)
-  lastLogin           DateTime?
-  verificationCode    String?
-  verificationExpires DateTime?
-
-  // NIN Verification
+  id                    String             @id @default(cuid())
+  email                 String             @unique
+  password              String?
+  fullName              String
+  phone                 String?
+  avatar                String?
+  location              String?
+  role                  Role               @default(USER)
+  isVerified            Boolean            @default(false)
+  isSuspended           Boolean            @default(false)
+  isDeleted             Boolean            @default(false)
+  lastLogin             DateTime?
+  verificationCode      String?
+  verificationExpires   DateTime?
   ninPhotoUrl           String?
   ninVerificationStatus VerificationStatus @default(PENDING)
   ninVerifiedAt         DateTime?
   ninVerifiedBy         String?
   ninRejectionReason    String?
+  propertyViews         PropertyView[]
+  favorites             Favorite[]
+  inquiries             Inquiry[]          @relation("UserInquiries")
+  vendorInquiries       Inquiry[]          @relation("VendorInquiries")
+  employeeId            String?            @unique
+  department            String?
 
-  // Staff specific fields
-  employeeId String? @unique
-  department String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relations
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
   properties      Property[]     @relation("PropertyVendor")
   staffProperties Property[]     @relation("PropertyStaff")
   notifications   Notification[]
@@ -128,39 +135,39 @@ model User {
 }
 
 model Property {
-  id            String                @id @default(cuid())
-  name          String
-  description   String?
-  type          PropertyType
-  listingType   ListingType
-  status        PropertyStatus        @default(AVAILABLE)
-  listingStatus PropertyListingStatus @default(PENDING)
+  id             String                @id @default(cuid())
+  name           String
+  description    String?
+  type           PropertyType
+  listingType    ListingType
+  status         PropertyStatus        @default(AVAILABLE)
+  listingStatus  PropertyListingStatus @default(PENDING)
+  rentAmount     Float? 
+  salePrice      Float? 
+  landFee        Float? 
+  shortletAmount Float?
 
-  // Pricing based on listing type
-  rentAmount     Float? // FOR_RENT
-  salePrice      Float? // FOR_SALE
-  landFee        Float? // FOR_LAND
-  shortletAmount Float? // FOR_SHORTLET
-
-  address String
-  city    String
-  state   String
-  country String
-  zipCode String
-
+  address   String
+  city      String
+  state     String
+  country   String
+  zipCode   String
   size      Float?
   sizeUnit  String? @default("sqft")
   bedrooms  Int?
   bathrooms Float?
   yearBuilt Int?
   amenities Json?
+  vendorId  String
+  vendor    User    @relation("PropertyVendor", fields: [vendorId], references: [id], onDelete: Cascade)
 
-  // Relations
-  vendorId String
-  vendor   User   @relation("PropertyVendor", fields: [vendorId], references: [id])
-
-  staffId String?
-  staff   User?   @relation("PropertyStaff", fields: [staffId], references: [id])
+  staffId      String?
+  staff        User?          @relation("PropertyStaff", fields: [staffId], references: [id])
+  views        PropertyView[]
+  viewCount    Int            @default(0)
+  inquiryCount Int            @default(0)
+  favorites    Favorite[]
+  inquiries    Inquiry[]
 
   documents Document[]
   media     Media[]
@@ -179,6 +186,24 @@ model Property {
   @@index([listingType])
   @@index([listingStatus])
   @@index([city, state])
+}
+
+model PropertyView {
+  id         String   @id @default(cuid())
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  viewerId   String?
+  viewer     User?    @relation(fields: [viewerId], references: [id])
+  ipAddress  String?
+  userAgent  String?
+  referrer   String?
+  sessionId  String?
+  viewedAt   DateTime @default(now())
+
+  @@index([propertyId])
+  @@index([viewedAt])
+  @@index([viewerId])
+  @@index([sessionId])
 }
 
 model Media {
@@ -215,7 +240,7 @@ model Document {
   property   Property? @relation(fields: [propertyId], references: [id])
 
   uploadedById String
-  uploadedBy   User   @relation("UploadedBy", fields: [uploadedById], references: [id])
+  uploadedBy   User   @relation("UploadedBy", fields: [uploadedById], references: [id],  onDelete: Cascade)
 
   // For NIN documents
   vendorId String?
@@ -287,4 +312,48 @@ model SystemConfig {
   updatedBy   String
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
+}
+
+model Favorite {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@unique([userId, propertyId])
+  @@index([userId])
+  @@index([propertyId])
+}
+
+model Inquiry {
+  id            String   @id @default(cuid())
+  inquiryNumber String   @unique
+  userId        String
+  user          User     @relation("UserInquiries", fields: [userId], references: [id], onDelete: Cascade)
+  propertyId    String
+  property      Property @relation(fields: [propertyId], references: [id])
+  vendorId      String
+  vendor        User     @relation("VendorInquiries", fields: [vendorId], references: [id], onDelete: Cascade)
+
+  name        String
+  location    String
+  message     String
+  meetingType MeetingType
+
+  status       InquiryStatus @default(PENDING)
+  responseNote String? // Used for decline reason
+
+  viewedAt    DateTime?
+  respondedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([propertyId])
+  @@index([vendorId])
+  @@index([status])
+  @@index([createdAt])
 }

@@ -22,6 +22,7 @@ import { authenticateJWT } from "../middlewares/errorHandler.middleware";
 import { requireRoles } from "../middlewares/roleCheck.middleware";
 import { validateRequest } from "../middlewares/validateRequest.middleware";
 import { bulkDeleteMediaSchema, createPropertySchema, reviewPropertySchema, updateMediaSchema, updatePropertySchema } from "../schemas/property.schemas";
+import { trackPropertyView } from "../middlewares/trackView.middleware";
 
 export const propertyRouter = Router();
 
@@ -33,6 +34,7 @@ propertyRouter.get(
 
 propertyRouter.get(
   '/public/:id', 
+  trackPropertyView,
   getPublicPropertyById
 );
 
@@ -46,6 +48,7 @@ propertyRouter.get(
 propertyRouter.get(
   '/:id',
   authenticateJWT,
+  trackPropertyView,
   getPropertyById
 );
 

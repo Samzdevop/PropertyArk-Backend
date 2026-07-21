@@ -15,6 +15,10 @@ import { propertyRouter } from './routes/property.routes';
 import { ninRouter } from './routes/nin.routes';
 import { activityRouter } from './routes/activity.routes';
 import { emailRouter } from './routes/email.routes';
+import { favoriteRouter } from './routes/favorite.routes';
+import { inquiryRouter } from './routes/inquiry.routes';
+import { vendorRouter } from './routes/vendor.routes';
+import { viewStatsRouter } from './routes/viewStats.routes';
 
 export const app = express();
 
@@ -68,6 +72,10 @@ app.use('/api/v1/properties', propertyRouter);
 app.use('/api/v1/nin', ninRouter);
 app.use('/api/v1/activity', activityRouter);
 app.use('/api/v1/email', emailRouter);
+app.use('/api/v1/favorites',  favoriteRouter);
+app.use('/api/v1/inquiries',  inquiryRouter);
+app.use('/api/v1/vendor',  vendorRouter);
+app.use('/api/v1/view-stats', viewStatsRouter);
 
 
 

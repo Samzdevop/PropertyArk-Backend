@@ -10,6 +10,7 @@ import { NotFoundError } from "../errors/NotFoundError";
 import { BadRequestError } from "../errors/BadRequestError";
 import { serializeDates } from "../utils/serialize.utils";
 import { logActivity } from "./activity.controller";
+import { ViewTrackingService } from "../services/viewTracking.service";
 
 
 export const createProperty = async (
@@ -98,6 +99,12 @@ export const getPropertyById = async (
       user.role,
       id as string
     );
+
+    setImmediate(() => {
+      ViewTrackingService.trackView(id as string, user.id).catch(error => {
+        console.error('View tracking error:', error);
+      });
+    });
 
     await logActivity(
       user.id,
@@ -348,6 +355,13 @@ export const getPublicPropertyById = async (
     const { id } = req.params;
 
     const property = await PropertyService.getPublicPropertyById(id as string);
+
+    const userId = (req.user as any)?.id;
+    setImmediate(() => {
+      ViewTrackingService.trackView(id as string, userId).catch(error => {
+        console.error('View tracking error:', error);
+      });
+    });
 
     const propertyWithBaseUrls = attachBaseUrlUploads(serializeDates(property), req);
 
