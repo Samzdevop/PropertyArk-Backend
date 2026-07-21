@@ -15,6 +15,7 @@ const NotFoundError_1 = require("../errors/NotFoundError");
 const BadRequestError_1 = require("../errors/BadRequestError");
 const serialize_utils_1 = require("../utils/serialize.utils");
 const activity_controller_1 = require("./activity.controller");
+const viewTracking_service_1 = require("../services/viewTracking.service");
 const createProperty = async (req, res, next) => {
     try {
         const user = req.user;
@@ -56,6 +57,11 @@ const getPropertyById = async (req, res, next) => {
         const { id } = req.params;
         const user = req.user;
         const property = await property_service_1.PropertyService.getPropertyById(user.id, user.role, id);
+        setImmediate(() => {
+            viewTracking_service_1.ViewTrackingService.trackView(id, user.id).catch(error => {
+                console.error('View tracking error:', error);
+            });
+        });
         await (0, activity_controller_1.logActivity)(user.id, 'VIEW_PROPERTY', 'PROPERTY', property.id, { propertyName: property.name }, req);
         const propertyWithBaseUrls = (0, attachBaseUrl_utils_1.attachBaseUrlUploads)((0, serialize_utils_1.serializeDates)(property), req);
         (0, sendSuccessResponse_1.sendSuccessResponse)(res, "Property retrieved successfully", propertyWithBaseUrls);
@@ -215,6 +221,12 @@ const getPublicPropertyById = async (req, res, next) => {
     try {
         const { id } = req.params;
         const property = await property_service_1.PropertyService.getPublicPropertyById(id);
+        const userId = req.user?.id;
+        setImmediate(() => {
+            viewTracking_service_1.ViewTrackingService.trackView(id, userId).catch(error => {
+                console.error('View tracking error:', error);
+            });
+        });
         const propertyWithBaseUrls = (0, attachBaseUrl_utils_1.attachBaseUrlUploads)((0, serialize_utils_1.serializeDates)(property), req);
         (0, sendSuccessResponse_1.sendSuccessResponse)(res, "Property retrieved successfully", propertyWithBaseUrls);
     }

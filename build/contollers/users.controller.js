@@ -107,6 +107,34 @@ const getAllUsers = async (req, res, next) => {
     }
 };
 exports.getAllUsers = getAllUsers;
+// export const deleteUser = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   try {
+//     const userId = req.params.userId;
+//     const user = await prisma.user.findUnique({
+//       where: { id: userId as string },
+//     });
+//     if (!user) throw new NotFoundError("User not found");
+//     await prisma.$transaction(async (tx) => {
+//       await tx.document.deleteMany({
+//         where: {
+//           uploadedById: userId as string,
+//         },
+//       });
+//       await tx.user.delete({
+//         where: {
+//           id: userId as string,
+//         },
+//       });
+//     });
+//     res.status(204).end();
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 const deleteUser = async (req, res, next) => {
     try {
         const user = await prisma_1.default.user.findUnique({

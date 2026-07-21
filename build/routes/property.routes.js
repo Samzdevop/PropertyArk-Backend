@@ -8,11 +8,12 @@ const errorHandler_middleware_1 = require("../middlewares/errorHandler.middlewar
 const roleCheck_middleware_1 = require("../middlewares/roleCheck.middleware");
 const validateRequest_middleware_1 = require("../middlewares/validateRequest.middleware");
 const property_schemas_1 = require("../schemas/property.schemas");
+const trackView_middleware_1 = require("../middlewares/trackView.middleware");
 exports.propertyRouter = (0, express_1.Router)();
 exports.propertyRouter.get('/available', property_controller_1.getAvailableProperties);
-exports.propertyRouter.get('/public/:id', property_controller_1.getPublicPropertyById);
+exports.propertyRouter.get('/public/:id', trackView_middleware_1.trackPropertyView, property_controller_1.getPublicPropertyById);
 exports.propertyRouter.get('/', errorHandler_middleware_1.authenticateJWT, property_controller_1.getAllProperties);
-exports.propertyRouter.get('/:id', errorHandler_middleware_1.authenticateJWT, property_controller_1.getPropertyById);
+exports.propertyRouter.get('/:id', errorHandler_middleware_1.authenticateJWT, trackView_middleware_1.trackPropertyView, property_controller_1.getPropertyById);
 exports.propertyRouter.post('/', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['ADMIN', 'VENDOR', 'STAFF']), upload_1.upload.fields([
     { name: 'photos', maxCount: 10 },
     { name: 'videos', maxCount: 5 },

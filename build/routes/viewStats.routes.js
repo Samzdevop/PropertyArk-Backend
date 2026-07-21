@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.viewStatsRouter = void 0;
+const express_1 = require("express");
+const errorHandler_middleware_1 = require("../middlewares/errorHandler.middleware");
+const roleCheck_middleware_1 = require("../middlewares/roleCheck.middleware");
+const viewStats_controller_1 = require("../contollers/viewStats.controller");
+exports.viewStatsRouter = (0, express_1.Router)();
+exports.viewStatsRouter.get('/vendor', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['VENDOR', 'ADMIN']), viewStats_controller_1.getVendorViewStats);
+exports.viewStatsRouter.get('/vendor/dashboard', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['VENDOR', 'ADMIN']), viewStats_controller_1.getDashboardViewSummary);
+exports.viewStatsRouter.get('/property/:propertyId', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['VENDOR', 'ADMIN']), viewStats_controller_1.getPropertyViewStats);
