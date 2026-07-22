@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.logout = exports.resetPassword = exports.forgotPassword = exports.requestVerificationCode = exports.verifyAccount = exports.login = exports.staffRegister = exports.register = exports.adminRegister = void 0;
+exports.logout = exports.resetPassword = exports.forgotPassword = exports.requestVerificationCode = exports.verifyAccount = exports.login = exports.googleAuthCallback = exports.staffRegister = exports.register = exports.adminRegister = void 0;
 const prisma_1 = __importDefault(require("../prisma"));
 const generateToken_1 = __importDefault(require("../utils/generateToken"));
 const argon2_1 = require("argon2");
@@ -219,6 +219,53 @@ const staffRegister = async (req, res, next) => {
     }
 };
 exports.staffRegister = staffRegister;
+const googleAuthCallback = async (req, res, next) => {
+    try {
+        const { user, token } = req.user;
+        await prisma_1.default.activityLog.create({
+            data: {
+                userId: user.id,
+                action: 'GOOGLE_LOGIN',
+                entityType: 'USER',
+                entityId: user.id,
+                ipAddress: req.ip,
+                userAgent: req.get('user-agent')
+            }
+        });
+        (0, sendSuccessResponse_1.sendSuccessResponse)(res, "Google login successful", {
+            user,
+            token,
+            isNewUser: false
+        });
+    }
+    catch (error) {
+        next(error);
+    }
+};
+exports.googleAuthCallback = googleAuthCallback;
+/**
+ * Handle Google auth redirect from frontend
+ * This endpoint receives the token and user data from the callback
+ */
+// export const googleAuthRedirect = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ): Promise<void> => {
+//   try {
+//     const { token, user } = req.query;
+//     if (!token || !user) {
+//       throw new BadRequestError("Missing token or user data");
+//     }
+//     const userData = JSON.parse(user as string);
+//     sendSuccessResponse(res, "Google authentication successful", {
+//       token,
+//       user: userData
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 const login = async (req, res, next) => {
     const { email, password } = req.body;
     try {
