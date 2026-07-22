@@ -16,6 +16,7 @@ import { PasswordResetService } from "../services/passwordReset.service";
 import { uploadToAzure, STORAGE_CONTAINERS } from "../config/upload";
 import { Role, VerificationStatus } from "@prisma/client";
 import { userSelect } from "../prisma/selects";
+import { BadRequestError } from "../errors/BadRequestError";
 
 
 export const adminRegister = async (
@@ -263,6 +264,62 @@ export const staffRegister = async (
   }
 };
 
+
+export const googleAuthCallback = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const { user, token } = req.user as any;
+    
+    await prisma.activityLog.create({
+      data: {
+        userId: user.id,
+        action: 'GOOGLE_LOGIN',
+        entityType: 'USER',
+        entityId: user.id,
+        ipAddress: req.ip,
+        userAgent: req.get('user-agent')
+      }
+    });
+
+    sendSuccessResponse(res, "Google login successful", { 
+      user, 
+      token,
+      isNewUser: false 
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * Handle Google auth redirect from frontend
+ * This endpoint receives the token and user data from the callback
+ */
+// export const googleAuthRedirect = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ): Promise<void> => {
+//   try {
+//     const { token, user } = req.query;
+
+//     if (!token || !user) {
+//       throw new BadRequestError("Missing token or user data");
+//     }
+
+//     const userData = JSON.parse(user as string);
+
+//     sendSuccessResponse(res, "Google authentication successful", {
+//       token,
+//       user: userData
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 
 export const login = async (
   req: Request,

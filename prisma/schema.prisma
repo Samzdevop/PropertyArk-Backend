@@ -91,6 +91,7 @@ model User {
   email                 String             @unique
   password              String?
   fullName              String
+  googleId              String?            @unique
   phone                 String?
   avatar                String?
   location              String?
@@ -142,9 +143,9 @@ model Property {
   listingType    ListingType
   status         PropertyStatus        @default(AVAILABLE)
   listingStatus  PropertyListingStatus @default(PENDING)
-  rentAmount     Float? 
-  salePrice      Float? 
-  landFee        Float? 
+  rentAmount     Float?
+  salePrice      Float?
+  landFee        Float?
   shortletAmount Float?
 
   address   String
@@ -240,7 +241,7 @@ model Document {
   property   Property? @relation(fields: [propertyId], references: [id])
 
   uploadedById String
-  uploadedBy   User   @relation("UploadedBy", fields: [uploadedById], references: [id],  onDelete: Cascade)
+  uploadedBy   User   @relation("UploadedBy", fields: [uploadedById], references: [id], onDelete: Cascade)
 
   // For NIN documents
   vendorId String?

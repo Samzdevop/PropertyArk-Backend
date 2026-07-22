@@ -38584,3 +38584,21 @@
 2026-07-20 18:48:24 [37mdebug[39m [37mActivity logged: VIEW_VENDOR_DASHBOARD on DASHBOARD by cmrirxig1000394i4ixlreltr[39m
 2026-07-20 18:48:24 [32minfo[39m [32mGET /api/v1/vendor/stats 200 388.843 ms - 3944[39m
 [32m[39m
+2026-07-22 03:39:19 [32minfo[39m [32mGET /api/v1/auth/google?role=USER 302 41.756 ms - 0[39m
+[32m[39m
+2026-07-22 03:40:00 [32minfo[39m [32mGET /favicon.ico 404 16.148 ms - 116[39m
+[32m[39m
+2026-07-22 03:40:03 [32minfo[39m [32mGET /api/v1/auth/google?role=USER 302 2.559 ms - 0[39m
+[32m[39m
+2026-07-22 03:40:06 [32minfo[39m [32mGET /api/v1/auth/google?role=USER 302 0.365 ms - 0[39m
+[32m[39m
+2026-07-22 03:40:20 [32minfo[39m [32mGET /api/v1/auth/google?role=USER 302 0.829 ms - 0[39m
+[32m[39m
+2026-07-22 03:43:04 [32minfo[39m [32mGET /api/v1/auth/google?role=USER 302 2.419 ms - 0[39m
+[32m[39m
+2026-07-22 03:44:04 [32minfo[39m [32mGET /api/v1/auth/google?role=USER 302 0.881 ms - 0[39m
+[32m[39m
+2026-07-22 03:45:34 [32minfo[39m [32mGET /favicon.ico 404 31.306 ms - 116[39m
+[32m[39m
+2026-07-22 03:45:39 [32minfo[39m [32mGET /api/v1/auth/google?role=USER 302 7.004 ms - 0[39m
+[32m[39m
