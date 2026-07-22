@@ -11,6 +11,8 @@ export const userSelect = {
     createdAt: true,
     updatedAt: true,
     lastLogin: true,
+    googleId: true,
+    
 }
 
 

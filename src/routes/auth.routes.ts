@@ -62,23 +62,26 @@ authRouter.get(
     const role = req.query.role as string || 'USER';
     passport.authenticate('google', {
       scope: ['profile', 'email'],
-      state: role,
+      state: role, // Pass role as state
     })(req, res, next);
   }
 );
 
-// Step 2: Google callback with role from state
 authRouter.get(
   '/google/callback',
   (req, res, next) => {
     passport.authenticate('google', {
-      session: false,
+      session: false, // We don't want to use session, we use JWT
       failureRedirect: '/auth/failure',
     }, (err: any, data: any) => {
       if (err || !data) {
+        console.error('❌ Google Auth Error:', err?.message || 'No data');
         return res.redirect(`${process.env.FRONTEND_URL}/login?error=google_auth_failed`);
       }
+
       const { user, token } = data;
+      
+      // Redirect to frontend with token
       const redirectUrl = `${process.env.FRONTEND_URL}/auth/callback?token=${token}&user=${encodeURIComponent(JSON.stringify(user))}`;
       return res.redirect(redirectUrl);
     })(req, res, next);

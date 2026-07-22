@@ -2,6 +2,7 @@ import express, { Response, Request } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import session from 'express-session'; 
 import Logger from './config/logger';
 import { authRouter } from './routes/auth.routes';
 import { notFoundHandler } from './middlewares/notFoundRoute.middleware';
@@ -22,9 +23,39 @@ import { viewStatsRouter } from './routes/viewStats.routes';
 
 export const app = express();
 
+// const isProduction = process.env.NODE_ENV === 'production';
+
+// app.use(
+//   session({
+//     secret: process.env.SESSION_SECRET!,
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//       secure: isProduction, // HTTPS only in production
+//       httpOnly: true,
+//       maxAge: 24 * 60 * 60 * 1000,
+//       sameSite: isProduction ? 'strict' : 'lax',
+//       domain: isProduction ? '.yourdomain.com' : undefined,
+//     },
+//     name: isProduction ? '__Host-propertyark.sid' : 'propertyark.sid',
+//   })
+// );
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || 'your-session-secret-key',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 1 * 60 * 60 * 1000, //  1hours
+	  sameSite: 'lax',
+    },
+  })
+);
 
 app.use(passport.initialize());
-
+app.use(passport.session());
 
 app.use(helmet());
 

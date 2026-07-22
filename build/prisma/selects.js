@@ -14,4 +14,5 @@ exports.userSelect = {
     createdAt: true,
     updatedAt: true,
     lastLogin: true,
+    googleId: true,
 };

@@ -38602,3 +38602,27 @@
 [32m[39m
 2026-07-22 03:45:39 [32minfo[39m [32mGET /api/v1/auth/google?role=USER 302 7.004 ms - 0[39m
 [32m[39m
+2026-07-22 04:10:38 [32minfo[39m [32mGET /api/v1/auth/google/callback?state=USER&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AXEQxICKR6f8CIrMfRubmMt9K3EjJUZcIl-F_LU6PkCq9BgsWZLwJPhdmhW5KPjO1kJEtw&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=1&prompt=consent 302 11.606 ms - 81[39m
+[32m[39m
+2026-07-22 04:11:09 [32minfo[39m [32mGET /api/v1/auth/google/callback?state=USER&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AXEQxICHCqL3nlmwGqn5iy1N8mjURfPFlXvRdCBroI93fS8nyyNNjDSPG8NFJTw_6GxPgA&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=1&prompt=consent 302 63.334 ms - 81[39m
+[32m[39m
+2026-07-22 04:21:37 [32minfo[39m [32mGET /api/v1/auth/google/callback?state=USER&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AXEQxIA7IsiUdTsmJ2JflgvbR7gXAvFmTh9Aj7-HmOUSnYvh29giDyt71oEE2zHE4yCtaw&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 302 39.803 ms - 81[39m
+[32m[39m
+2026-07-22 04:27:24 [32minfo[39m [32mGET /api/v1/auth/google?role=USER 302 67.996 ms - 0[39m
+[32m[39m
+2026-07-22 04:27:40 [32minfo[39m [32mGET /api/v1/auth/google/callback?state=USER&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AXEQxICAAxee1rr2w5diilme9DuA2U6vvIsc9jNO3umqoyPCmYno6urLr7kIRVGGbl_Qtg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 302 13.386 ms - 81[39m
+[32m[39m
+2026-07-22 04:30:54 [32minfo[39m [32mGET /api/v1/auth/google?role=USER 302 8.962 ms - 0[39m
+[32m[39m
+2026-07-22 04:31:05 [32minfo[39m [32mGET /api/v1/auth/google/callback?state=USER&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AXEQxIDPw_OyAnR7FRNz6No9qouU9NMEswCA7kzLO9vFILNWmNUWntJ0yZep2b2ANhKAeg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 401 82.779 ms - 491[39m
+[32m[39m
+2026-07-22 04:31:07 [32minfo[39m [32mGET /favicon.ico 404 2.862 ms - 116[39m
+[32m[39m
+2026-07-22 04:59:08 [32minfo[39m [32mGET /api/v1/auth/google/callback?state=USER&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AXEQxIDPw_OyAnR7FRNz6No9qouU9NMEswCA7kzLO9vFILNWmNUWntJ0yZep2b2ANhKAeg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 302 718.110 ms - 81[39m
+[32m[39m
+2026-07-22 04:59:40 [32minfo[39m [32mGET /api/v1/auth/google?role=USER 302 6.954 ms - 0[39m
+[32m[39m
+2026-07-22 05:00:00 [32minfo[39m [32mGoogle auth attempt for email: samuellchuks@gmail.com[39m
+2026-07-22 05:00:00 [32minfo[39m [32mNew user created via Google: samuellchuks@gmail.com with role: USER[39m
+2026-07-22 05:00:01 [32minfo[39m [32mGET /api/v1/auth/google/callback?state=USER&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AXEQxIAcFqUQ3qoG6oC9-eUnT6QbRXkoNNIrBKxlktxB7g0Sv8K_eoOj9QfiZAtqeJKTAQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 302 2295.306 ms - 721[39m
+[32m[39m

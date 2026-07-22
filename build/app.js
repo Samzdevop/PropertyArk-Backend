@@ -8,6 +8,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 const morgan_1 = __importDefault(require("morgan"));
+const express_session_1 = __importDefault(require("express-session"));
 const logger_1 = __importDefault(require("./config/logger"));
 const auth_routes_1 = require("./routes/auth.routes");
 const notFoundRoute_middleware_1 = require("./middlewares/notFoundRoute.middleware");
@@ -26,7 +27,34 @@ const inquiry_routes_1 = require("./routes/inquiry.routes");
 const vendor_routes_1 = require("./routes/vendor.routes");
 const viewStats_routes_1 = require("./routes/viewStats.routes");
 exports.app = (0, express_1.default)();
+// const isProduction = process.env.NODE_ENV === 'production';
+// app.use(
+//   session({
+//     secret: process.env.SESSION_SECRET!,
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//       secure: isProduction, // HTTPS only in production
+//       httpOnly: true,
+//       maxAge: 24 * 60 * 60 * 1000,
+//       sameSite: isProduction ? 'strict' : 'lax',
+//       domain: isProduction ? '.yourdomain.com' : undefined,
+//     },
+//     name: isProduction ? '__Host-propertyark.sid' : 'propertyark.sid',
+//   })
+// );
+exports.app.use((0, express_session_1.default)({
+    secret: process.env.SESSION_SECRET || 'your-session-secret-key',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 1 * 60 * 60 * 1000, //  1hours
+        sameSite: 'lax',
+    },
+}));
 exports.app.use(passport_1.default.initialize());
+exports.app.use(passport_1.default.session());
 exports.app.use((0, helmet_1.default)());
 const allowedOrigins = [
     'http://localhost:3000',

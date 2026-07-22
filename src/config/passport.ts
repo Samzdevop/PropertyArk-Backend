@@ -6,6 +6,7 @@ import generateToken from '../utils/generateToken';
 import Logger from './logger';
 import { Role } from '@prisma/client';
 import dotenv from 'dotenv';
+import { userSelect } from '../prisma/selects';
 
 dotenv.config();
 
@@ -29,6 +30,20 @@ passport.use(
 	)
 );
 
+passport.serializeUser((user: any, done) => {
+  done(null, user.id);
+});
+passport.deserializeUser(async (id: string, done) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id },
+      select: userSelect
+    });
+    done(null, user);
+  } catch (error) {
+    done(error, null);
+  }
+});
 
 passport.use(
   new GoogleStrategy(
@@ -37,7 +52,6 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       callbackURL: process.env.GOOGLE_CALLBACK!,
       passReqToCallback: true,
-      state: true,
     },
     async (req, _accessToken, _refreshToken, profile, done) => {
       try {
@@ -97,8 +111,8 @@ passport.use(
               fullName: fullName,
               avatar: avatar,
               role: role as Role,
-              isVerified: true, // Google users are automatically verified
-              password: null, // No password for Google users
+              isVerified: true,
+              password: null, 
               location: null,
               phone: null,
             },

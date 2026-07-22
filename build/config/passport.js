@@ -10,6 +10,7 @@ const prisma_1 = __importDefault(require("../prisma"));
 const generateToken_1 = __importDefault(require("../utils/generateToken"));
 const logger_1 = __importDefault(require("./logger"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const selects_1 = require("../prisma/selects");
 dotenv_1.default.config();
 passport_1.default.use(new passport_jwt_1.Strategy({
     jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -27,12 +28,26 @@ passport_1.default.use(new passport_jwt_1.Strategy({
         return done(err, false);
     }
 }));
+passport_1.default.serializeUser((user, done) => {
+    done(null, user.id);
+});
+passport_1.default.deserializeUser(async (id, done) => {
+    try {
+        const user = await prisma_1.default.user.findUnique({
+            where: { id },
+            select: selects_1.userSelect
+        });
+        done(null, user);
+    }
+    catch (error) {
+        done(error, null);
+    }
+});
 passport_1.default.use(new passport_google_oauth20_1.Strategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: process.env.GOOGLE_CALLBACK,
     passReqToCallback: true,
-    state: true,
 }, async (req, _accessToken, _refreshToken, profile, done) => {
     try {
         logger_1.default.info(`Google auth attempt for email: ${profile.emails?.[0]?.value}`);
@@ -83,8 +98,8 @@ passport_1.default.use(new passport_google_oauth20_1.Strategy({
                     fullName: fullName,
                     avatar: avatar,
                     role: role,
-                    isVerified: true, // Google users are automatically verified
-                    password: null, // No password for Google users
+                    isVerified: true,
+                    password: null,
                     location: null,
                     phone: null,
                 },
