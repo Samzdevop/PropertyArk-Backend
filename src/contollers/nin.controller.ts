@@ -43,7 +43,6 @@ export const verifyVendorNIN = async (
         }
       });
 
-      // Create notification for vendor
       await prisma.notification.create({
         data: {
           userId: vendorId as string, 

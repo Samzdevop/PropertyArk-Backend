@@ -6087,3 +6087,5 @@
 2026-07-13 13:29:35 [31merror[39m [31mSMTP connection test failed: Invalid login: 525 5.7.1 Unauthorized IP address[39m
 2026-07-13 13:39:41 [31merror[39m [31mSMTP connection test failed: Invalid login: 525 5.7.1 Unauthorized IP address[39m
 2026-07-13 13:39:57 [31merror[39m [31mSMTP transporter verification failed: Invalid login: 525 5.7.1 Unauthorized IP address[39m
+2026-08-04 03:39:49 [31merror[39m [31mInternal Server Error Multipart: Boundary not found[39m
+2026-08-04 03:40:38 [31merror[39m [31mInternal Server Error Multipart: Boundary not found[39m

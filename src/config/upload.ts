@@ -19,6 +19,10 @@ export const UPLOADS_PATH = path.join(process.cwd(), "uploads");
 type StorageDriver = 'local' | 's3' | 'azure';
 
 const storageDriver = (process.env.STORAGE_DRIVER as StorageDriver) || 'local';
+const storageConfig = {
+  driver: storageDriver as 'local' | 's3',
+  uploadsFolder: path.resolve(__dirname, '..', '..', 'uploads')
+};
 
 let storage: StorageEngine;
 
@@ -53,7 +57,7 @@ const generateSafeFileName = (originalName: string): string => {
 };
 
 // Configure storage based on driver
-if (storageDriver === 's3') {
+if (storageConfig.driver === 's3') {
   const s3 = getS3Client();
   storage = multerS3({
     s3,

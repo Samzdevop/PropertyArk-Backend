@@ -171,42 +171,104 @@ export class PropertyService {
     return property;
   }
 
-  private static async uploadPropertyMediaInBackground(propertyId: string, files: any) {
-    try {
-      const mediaData: any[] = [];
-      const uploadConfig = [
-        { field: "photos", type: "IMAGE", container: STORAGE_CONTAINERS.PROPERTY_PHOTOS },
-        { field: "videos", type: "VIDEO", container: STORAGE_CONTAINERS.PROPERTY_VIDEOS },
-        { field: "documents", type: "DOCUMENT", container: STORAGE_CONTAINERS.PROPERTY_DOCUMENTS }
-      ];
+  // private static async uploadPropertyMediaInBackground(propertyId: string, files: any) {
+  //   try {
+  //     const mediaData: any[] = [];
+  //     const uploadConfig = [
+  //       { field: "photos", type: "IMAGE", container: STORAGE_CONTAINERS.PROPERTY_PHOTOS },
+  //       { field: "videos", type: "VIDEO", container: STORAGE_CONTAINERS.PROPERTY_VIDEOS },
+  //       { field: "documents", type: "DOCUMENT", container: STORAGE_CONTAINERS.PROPERTY_DOCUMENTS }
+  //     ];
 
-      for (const config of uploadConfig) {
-        const fileGroup = files[config.field];
-        if (!fileGroup || fileGroup.length === 0) continue;
+  //     for (const config of uploadConfig) {
+  //       const fileGroup = files[config.field];
+  //       if (!fileGroup || fileGroup.length === 0) continue;
 
-        const urls = await uploadMultipleToAzure(fileGroup, config.container);
-        urls.forEach((url: string, index: number) => {
-          mediaData.push({
-            name: fileGroup[index].originalname,
-            type: config.type as MediaType,
-            url,
-            key: url.split("/").pop() || "",
-            size: fileGroup[index].size,
-            mimeType: fileGroup[index].mimetype,
-            container: config.container,
-            propertyId: propertyId,
-            isPrimary: index === 0 && config.field === "photos"
-          });
+  //       const urls = await uploadMultipleToAzure(fileGroup, config.container);
+  //       urls.forEach((url: string, index: number) => {
+  //         mediaData.push({
+  //           name: fileGroup[index].originalname,
+  //           type: config.type as MediaType,
+  //           url,
+  //           key: url.split("/").pop() || "",
+  //           size: fileGroup[index].size,
+  //           mimeType: fileGroup[index].mimetype,
+  //           container: config.container,
+  //           propertyId: propertyId,
+  //           isPrimary: index === 0 && config.field === "photos"
+  //         });
+  //       });
+  //     }
+
+  //     if (mediaData.length > 0) {
+  //       await prisma.media.createMany({ data: mediaData });
+  //     }
+  //   } catch (error) {
+  //     console.error("Background upload failed:", error);
+  //   }
+  // }
+
+  // services/property.service.ts
+
+/**
+ * Upload property media in background - supports all storage drivers
+ */
+private static async uploadPropertyMediaInBackground(propertyId: string, files: any) {
+  try {
+    const mediaData: any[] = [];
+    const uploadConfig = [
+      { field: "photos", type: "IMAGE", container: STORAGE_CONTAINERS.PROPERTY_PHOTOS },
+      { field: "videos", type: "VIDEO", container: STORAGE_CONTAINERS.PROPERTY_VIDEOS },
+      { field: "documents", type: "DOCUMENT", container: STORAGE_CONTAINERS.PROPERTY_DOCUMENTS }
+    ];
+
+    const storageDriver = process.env.STORAGE_DRIVER || 'local';
+
+    for (const config of uploadConfig) {
+      const fileGroup = files[config.field];
+      if (!fileGroup || fileGroup.length === 0) continue;
+
+      let urls: string[] = [];
+
+      if (storageDriver === 'azure') {
+        // Azure: Upload to Azure blob storage
+        urls = await uploadMultipleToAzure(fileGroup, config.container);
+      } else if (storageDriver === 's3') {
+        // S3: Files already uploaded by multer-s3, get location from file
+        urls = fileGroup.map((file: any) => file.location || `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${file.key}`);
+      } else {
+        // LOCAL: Files saved to disk, generate URL
+        urls = fileGroup.map((file: any) => {
+          // For local storage, multer saves files and provides filename
+          const filename = file.filename || file.key || file.originalname;
+          return `/uploads/${filename}`;
         });
       }
 
-      if (mediaData.length > 0) {
-        await prisma.media.createMany({ data: mediaData });
-      }
-    } catch (error) {
-      console.error("Background upload failed:", error);
+      urls.forEach((url: string, index: number) => {
+        const file = fileGroup[index];
+        mediaData.push({
+          name: file.originalname,
+          type: config.type as MediaType,
+          url: url,
+          key: url.split('/').pop() || file.filename || file.originalname,
+          size: file.size,
+          mimeType: file.mimetype,
+          container: config.container,
+          propertyId: propertyId,
+          isPrimary: index === 0 && config.field === "photos"
+        });
+      });
     }
+
+    if (mediaData.length > 0) {
+      await prisma.media.createMany({ data: mediaData });
+      console.log(`${mediaData.length} media files saved to database for property ${propertyId}`);
+    }
+  } catch (error) {
+    console.error("Background upload failed:", error);
   }
+}
 
   static async getAllProperties(
     userId: string,

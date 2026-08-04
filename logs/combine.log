@@ -38626,3 +38626,47 @@
 2026-07-22 05:00:00 [32minfo[39m [32mNew user created via Google: samuellchuks@gmail.com with role: USER[39m
 2026-07-22 05:00:01 [32minfo[39m [32mGET /api/v1/auth/google/callback?state=USER&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AXEQxIAcFqUQ3qoG6oC9-eUnT6QbRXkoNNIrBKxlktxB7g0Sv8K_eoOj9QfiZAtqeJKTAQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent 302 2295.306 ms - 721[39m
 [32m[39m
+2026-08-04 03:35:49 [32minfo[39m [32mPOST /api/v1/auth/login 200 972.843 ms - 632[39m
+[32m[39m
+2026-08-04 03:39:04 [32minfo[39m [32mPOST /api/v1/properties 401 35.301 ms - 66[39m
+[32m[39m
+2026-08-04 03:39:49 [31merror[39m [31mInternal Server Error Multipart: Boundary not found[39m
+2026-08-04 03:39:49 [32minfo[39m [32mPOST /api/v1/properties 500 172.790 ms - 49[39m
+[32m[39m
+2026-08-04 03:40:38 [31merror[39m [31mInternal Server Error Multipart: Boundary not found[39m
+2026-08-04 03:40:38 [32minfo[39m [32mPOST /api/v1/properties 500 35.119 ms - 49[39m
+[32m[39m
+2026-08-04 03:43:08 [32minfo[39m [32mPOST /api/v1/properties 422 2390.970 ms - 544[39m
+[32m[39m
+2026-08-04 03:43:48 [32minfo[39m [32mPOST /api/v1/properties 422 3733.578 ms - 177[39m
+[32m[39m
+2026-08-04 03:44:12 [32minfo[39m [32mPOST /api/v1/properties 422 3583.369 ms - 177[39m
+[32m[39m
+2026-08-04 03:44:23 [37mdebug[39m [37mActivity logged: CREATE_PROPERTY on PROPERTY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-04 03:44:23 [32minfo[39m [32mPOST /api/v1/properties 201 3469.867 ms - 799[39m
+[32m[39m
+2026-08-04 03:45:08 [33mwarn[39m [33mAttempted to track view for non-existent property: cmsej6m4g000194awx4pnlhnr[39m
+2026-08-04 03:45:08 [33mwarn[39m [33mAttempted to track view for non-existent property: cmsej6m4g000194awx4pnlhnr[39m
+2026-08-04 03:45:08 [37mdebug[39m [37mActivity logged: VIEW_PROPERTY on PROPERTY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-04 03:45:08 [32minfo[39m [32mGET /api/v1/properties/cmsej6m4g000194awx4pnlhnr 200 529.730 ms - 1031[39m
+[32m[39m
+2026-08-04 03:46:52 [32minfo[39m [32mGET /api/v1/properties 401 2.577 ms - 66[39m
+[32m[39m
+2026-08-04 03:47:16 [32minfo[39m [32mGET /api/v1/properties 200 185.230 ms - 45846[39m
+[32m[39m
+2026-08-04 08:07:37 [32minfo[39m [32mPOST /api/v1/auth/login 200 746.445 ms - 632[39m
+[32m[39m
+2026-08-04 08:08:37 [32minfo[39m [32mGET /api/v1/properties 200 396.151 ms - 45846[39m
+[32m[39m
+2026-08-04 08:26:57 [37mdebug[39m [37mActivity logged: DELETE_PROPERTY on PROPERTY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-04 08:26:57 [32minfo[39m [32mDELETE /api/v1/properties/cmsej6m4g000194awx4pnlhnr 200 495.117 ms - 68[39m
+[32m[39m
+2026-08-04 08:29:31 [32minfo[39m [32mPOST /api/v1/properties 422 916.219 ms - 177[39m
+[32m[39m
+2026-08-04 08:29:50 [37mdebug[39m [37mActivity logged: CREATE_PROPERTY on PROPERTY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-04 08:29:50 [32minfo[39m [32mPOST /api/v1/properties 201 852.460 ms - 791[39m
+[32m[39m
+2026-08-04 08:30:11 [32minfo[39m [32mGET /api/v1/properties 200 256.909 ms - 46856[39m
+[32m[39m
+2026-08-04 08:30:32 [32minfo[39m [32mGET /api/v1/properties 200 52.728 ms - 46856[39m
+[32m[39m
