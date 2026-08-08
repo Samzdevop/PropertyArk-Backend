@@ -4,6 +4,7 @@ import { BadRequestError } from "../errors/BadRequestError";
 import { ForbiddenError } from "../errors/ForbiddenError";
 import { NotFoundError } from "../errors/NotFoundError";
 import { uploadMultipleToAzure, deleteFile, STORAGE_CONTAINERS } from "../config/upload";
+// import { VendorService } from "./vendor.service";
 
 export class PropertyService {
 
@@ -171,48 +172,8 @@ export class PropertyService {
     return property;
   }
 
-  // private static async uploadPropertyMediaInBackground(propertyId: string, files: any) {
-  //   try {
-  //     const mediaData: any[] = [];
-  //     const uploadConfig = [
-  //       { field: "photos", type: "IMAGE", container: STORAGE_CONTAINERS.PROPERTY_PHOTOS },
-  //       { field: "videos", type: "VIDEO", container: STORAGE_CONTAINERS.PROPERTY_VIDEOS },
-  //       { field: "documents", type: "DOCUMENT", container: STORAGE_CONTAINERS.PROPERTY_DOCUMENTS }
-  //     ];
 
-  //     for (const config of uploadConfig) {
-  //       const fileGroup = files[config.field];
-  //       if (!fileGroup || fileGroup.length === 0) continue;
 
-  //       const urls = await uploadMultipleToAzure(fileGroup, config.container);
-  //       urls.forEach((url: string, index: number) => {
-  //         mediaData.push({
-  //           name: fileGroup[index].originalname,
-  //           type: config.type as MediaType,
-  //           url,
-  //           key: url.split("/").pop() || "",
-  //           size: fileGroup[index].size,
-  //           mimeType: fileGroup[index].mimetype,
-  //           container: config.container,
-  //           propertyId: propertyId,
-  //           isPrimary: index === 0 && config.field === "photos"
-  //         });
-  //       });
-  //     }
-
-  //     if (mediaData.length > 0) {
-  //       await prisma.media.createMany({ data: mediaData });
-  //     }
-  //   } catch (error) {
-  //     console.error("Background upload failed:", error);
-  //   }
-  // }
-
-  // services/property.service.ts
-
-/**
- * Upload property media in background - supports all storage drivers
- */
 private static async uploadPropertyMediaInBackground(propertyId: string, files: any) {
   try {
     const mediaData: any[] = [];
@@ -338,10 +299,51 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
       prisma.property.count({ where })
     ]);
 
-    const enrichedProperties = properties.map((property:any) => ({
-      ...property,
-      priceDisplay: this.getPriceDisplay(property)
-    }));
+    // const enrichedProperties = properties.map((property:any) => ({
+    //   ...property,
+    //   priceDisplay: this.getPriceDisplay(property)
+    // }));
+
+    const enrichedProperties = await Promise.all(
+      properties.map(async (property) => {
+        let availability:any = [];
+        const vendorId = property.vendorId;
+        if (vendorId) {
+          const allSlots = await prisma.vendorAvailability.findMany({
+            where: {
+              vendorId: vendorId,
+              isActive: true
+            },
+            orderBy: { date: 'asc' }
+          });
+
+          // Group by date
+          const groupedSlots: any = {};
+          allSlots.forEach(slot => {
+            const dateKey = slot.date.toISOString().split('T')[0];
+            if (!groupedSlots[dateKey]) {
+              groupedSlots[dateKey] = [];
+            }
+            groupedSlots[dateKey].push({
+              startTime: slot.startTime,
+              endTime: slot.endTime,
+              isActive: slot.isActive
+            });
+          });
+
+          availability = Object.entries(groupedSlots).map(([date, slots]) => ({
+            date,
+            slots
+          }));
+        }
+
+         return {
+          ...property,
+          priceDisplay: this.getPriceDisplay(property),
+          availability: availability // Return ALL availability slots
+        };
+      })
+    );
 
     return {
       properties: enrichedProperties,
@@ -354,16 +356,237 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
     };
   }
 
+  static async getMyProperties(
+    userId: string,
+    role: Role,
+    queryParams: {
+      page?: number;
+      limit?: number;
+      status?: string;
+      listingStatus?: string;
+      listingType?: string;
+      search?: string;
+    }
+  ): Promise<any> {
+    // Verify user is a vendor
+    if (role !== Role.VENDOR && role !== Role.ADMIN) {
+      throw new Error("Only vendors and admins can access this endpoint");
+    }
+
+    const {
+      page = 1,
+      limit = 10,
+      status,
+      listingStatus,
+      listingType,
+      search
+    } = queryParams;
+
+    const skip = (Number(page) - 1) * Number(limit);
+    const take = Number(limit);
+
+    // Build where clause
+    const where: any = { vendorId: userId };
+
+    if (status) where.status = status;
+    if (listingStatus) where.listingStatus = listingStatus;
+    if (listingType) where.listingType = listingType;
+    
+    if (search) {
+      where.OR = [
+        { name: { contains: search, mode: 'insensitive' } },
+        { description: { contains: search, mode: 'insensitive' } },
+        { address: { contains: search, mode: 'insensitive' } },
+        { city: { contains: search, mode: 'insensitive' } },
+        { state: { contains: search, mode: 'insensitive' } }
+      ];
+    }
+
+    // Get all properties (for statistics) and paginated properties
+    const [allProperties, properties, total] = await Promise.all([
+      prisma.property.findMany({
+        where: { vendorId: userId },
+        select: {
+          id: true,
+          status: true,
+          listingStatus: true,
+          listingType: true,
+          rentAmount: true,
+          salePrice: true,
+          landFee: true,
+          shortletAmount: true,
+          viewCount: true,
+          inquiryCount: true,
+          createdAt: true
+        }
+      }),
+      prisma.property.findMany({
+        where,
+        skip,
+        take,
+        orderBy: { createdAt: 'desc' },
+        include: {
+          media: {
+            orderBy: { isPrimary: 'desc' },
+            take: 10
+          },
+          vendor: {
+            select: {
+              id: true,
+              fullName: true,
+              email: true,
+              phone: true,
+              avatar: true
+            }
+          },
+          // staff: {
+          //   select: {
+          //     id: true,
+          //     fullName: true,
+          //     email: true,
+          //     employeeId: true,
+          //     department: true
+          //   }
+          // },
+          _count: {
+            select: {
+              media: true,
+              inquiries: true,
+              favorites: true
+            }
+          }
+        }
+      }),
+      prisma.property.count({ where })
+    ]);
+
+    // Calculate statistics
+    const totalProperties = allProperties.length;
+    const activeListings = allProperties.filter(p => p.listingStatus === PropertyListingStatus.ACTIVE).length;
+    const pendingApproval = allProperties.filter(p => p.listingStatus === PropertyListingStatus.PENDING).length;
+    const rejectedListings = allProperties.filter(p => p.listingStatus === PropertyListingStatus.REJECTED).length;
+    
+    // Calculate occupancy rate (properties with OCCUPIED or RENTED status)
+    const occupiedProperties = allProperties.filter(p => 
+      p.status === PropertyStatus.OCCUPIED || 
+      p.status === PropertyStatus.RENTED
+    ).length;
+    const occupancyRate = totalProperties > 0 
+      ? Math.round((occupiedProperties / totalProperties) * 100) 
+      : 0;
+
+    // Calculate sold rate
+    const soldProperties = allProperties.filter(p => p.status === PropertyStatus.SOLD).length;
+    const soldRate = totalProperties > 0 
+      ? Math.round((soldProperties / totalProperties) * 100) 
+      : 0;
+
+    // Total properties summary
+    const totalPropertiesSummary = [
+      { TotalListing: totalProperties },
+      { "Active Listing": activeListings },
+      { "Pending Approval": pendingApproval },
+      { "Occupancy rate": `${occupancyRate}%` },
+      { "Sold rate": `${soldRate}%` }
+    ];
+
+    // Format properties for response
+    const formattedProperties = properties.map(property => ({
+      id: property.id,
+      name: property.name,
+      description: property.description,
+      type: property.type,
+      listingType: property.listingType,
+      status: property.status,
+      listingStatus: property.listingStatus,
+      address: property.address,
+      city: property.city,
+      state: property.state,
+      country: property.country,
+      zipCode: property.zipCode,
+      price: this.getPriceDisplay(property),
+      amenities: property.amenities,
+      size: property.size,
+      sizeUnit: property.sizeUnit,
+      bedrooms: property.bedrooms,
+      bathrooms: property.bathrooms,
+      yearBuilt: property.yearBuilt,
+      viewCount: property.viewCount,
+      inquiryCount: property.inquiryCount,
+      createdAt: property.createdAt,
+      updatedAt: property.updatedAt,
+      media: property.media.map(m => ({
+        id: m.id,
+        name: m.name,
+        type: m.type,
+        url: m.url,
+        isPrimary: m.isPrimary
+      })),
+      vendor: property.vendor,
+      // staff: property.staff,
+      _count: {
+        media: property._count.media,
+        inquiries: property._count.inquiries,
+        favorites: property._count.favorites
+      }
+    }));
+
+    return {
+      totalProperties: totalPropertiesSummary,
+      properties: formattedProperties,
+      pagination: {
+        page: Number(page),
+        limit: Number(limit),
+        total,
+        pages: Math.ceil(total / Number(limit))
+      }
+    };
+  }
+
+  static async getPropertyCounts(vendorId: string): Promise<any> {
+    const [total, active, pending, rejected] = await Promise.all([
+      prisma.property.count({ where: { vendorId } }),
+      prisma.property.count({ 
+        where: { 
+          vendorId, 
+          listingStatus: PropertyListingStatus.ACTIVE 
+        } 
+      }),
+      prisma.property.count({ 
+        where: { 
+          vendorId, 
+          listingStatus: PropertyListingStatus.PENDING 
+        } 
+      }),
+      prisma.property.count({ 
+        where: { 
+          vendorId, 
+          listingStatus: PropertyListingStatus.REJECTED 
+        } 
+      })
+    ]);
+
+    return { total, active, pending, rejected };
+  }
+
+  static async getPropertiesByListingType(vendorId: string): Promise<any> {
+    return prisma.property.groupBy({
+      by: ['listingType'],
+      where: { vendorId },
+      _count: true
+    });
+  }
+
   static getPriceDisplay(property: any): string {
     switch (property.listingType) {
       case ListingType.FOR_RENT:
-        return property.rentAmount ? `$${property.rentAmount.toLocaleString()}/month` : 'Contact for price';
+        return property.rentAmount ? `${property.rentAmount.toLocaleString()}/month` : 'Contact for price';
       case ListingType.FOR_SALE:
-        return property.salePrice ? `$${property.salePrice.toLocaleString()}` : 'Contact for price';
+        return property.salePrice ? `${property.salePrice.toLocaleString()}` : 'Contact for price';
       case ListingType.FOR_LAND:
-        return property.landFee ? `$${property.landFee.toLocaleString()}` : 'Contact for price';
+        return property.landFee ? `${property.landFee.toLocaleString()}` : 'Contact for price';
       case ListingType.FOR_SHORTLET:
-        return property.shortletAmount ? `$${property.shortletAmount.toLocaleString()}/night` : 'Contact for price';
+        return property.shortletAmount ? `${property.shortletAmount.toLocaleString()}/night` : 'Contact for price';
       default:
         return 'Contact for price';
     }
@@ -411,9 +634,60 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
       throw new ForbiddenError("You don't have access to this property");
     }
 
+    // let availability = null;
+    // if (property.vendor && property.listingStatus === PropertyListingStatus.ACTIVE) {
+    //   // Get upcoming availability (next 7 days)
+    //   const today = new Date();
+    //   today.setHours(0, 0, 0, 0);
+      
+    //   const nextWeek = new Date(today);
+    //   nextWeek.setDate(nextWeek.getDate() + 7);
+
+    //   availability = await VendorService.getVendorAvailabilitySlots(
+    //     property.vendorId,
+    //     {
+    //       startDate: today,
+    //       endDate: nextWeek
+    //     }
+    //   );
+    // }
+
+    let availability:any = [];
+    if (property.vendor && property.listingStatus === PropertyListingStatus.ACTIVE) {
+      // Get ALL availability slots for this vendor
+      const allSlots = await prisma.vendorAvailability.findMany({
+        where: {
+          vendorId: property.vendorId,
+          isActive: true
+        },
+        orderBy: { date: 'asc' }
+      });
+
+      // Group by date
+      const groupedSlots: any = {};
+      allSlots.forEach(slot => {
+        const dateKey = slot.date.toISOString().split('T')[0];
+        if (!groupedSlots[dateKey]) {
+          groupedSlots[dateKey] = [];
+        }
+        groupedSlots[dateKey].push({
+          startTime: slot.startTime,
+          endTime: slot.endTime,
+          isActive: slot.isActive
+        });
+      });
+
+      // Convert to array format
+      availability = Object.entries(groupedSlots).map(([date, slots]) => ({
+        date,
+        slots
+      }));
+    }
+
     return {
       ...property,
-      priceDisplay: this.getPriceDisplay(property)
+      priceDisplay: this.getPriceDisplay(property),
+      availability: availability 
     };
   }
 
@@ -451,9 +725,57 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
       throw new NotFoundError("Property not found or not available");
     }
 
+    // let availability = null;
+    // if (property.vendor) {
+    //   // Get upcoming availability (next 7 days)
+    //   const today = new Date();
+    //   today.setHours(0, 0, 0, 0);
+      
+    //   const nextWeek = new Date(today);
+    //   nextWeek.setDate(nextWeek.getDate() + 7);
+
+    //   availability = await VendorService.getVendorAvailabilitySlots(
+    //     property.vendorId,
+    //     {
+    //       startDate: today,
+    //       endDate: nextWeek
+    //     }
+    //   );
+    // }
+
+     let availability:any = [];
+    if (property.vendor) {
+      const allSlots = await prisma.vendorAvailability.findMany({
+        where: {
+          vendorId: property.vendorId,
+          isActive: true
+        },
+        orderBy: { date: 'asc' }
+      });
+
+      // Group by date
+      const groupedSlots: any = {};
+      allSlots.forEach(slot => {
+        const dateKey = slot.date.toISOString().split('T')[0];
+        if (!groupedSlots[dateKey]) {
+          groupedSlots[dateKey] = [];
+        }
+        groupedSlots[dateKey].push({
+          startTime: slot.startTime,
+          endTime: slot.endTime,
+          isActive: slot.isActive
+        });
+      });
+
+      availability = Object.entries(groupedSlots).map(([date, slots]) => ({
+        date,
+        slots
+      }));
+    }
     return {
       ...property,
-      priceDisplay: this.getPriceDisplay(property)
+      priceDisplay: this.getPriceDisplay(property),
+      availability: availability 
     };
   }
 
@@ -703,10 +1025,50 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
       prisma.property.count({ where })
     ]);
 
-    const enrichedProperties = properties.map((property: any) => ({
-      ...property,
-      priceDisplay: this.getPriceDisplay(property)
-    }));
+    // const enrichedProperties = properties.map((property: any) => ({
+    //   ...property,
+    //   priceDisplay: this.getPriceDisplay(property)
+    // }));
+
+      const enrichedProperties = await Promise.all(
+        properties.map(async (property) => {
+          let availability:any = [];
+          if (property.vendor) {
+            const allSlots = await prisma.vendorAvailability.findMany({
+              where: {
+                vendorId: property.vendorId,
+                isActive: true
+              },
+              orderBy: { date: 'asc' }
+            });
+
+            // Group by date
+            const groupedSlots: any = {};
+            allSlots.forEach(slot => {
+              const dateKey = slot.date.toISOString().split('T')[0];
+              if (!groupedSlots[dateKey]) {
+                groupedSlots[dateKey] = [];
+              }
+              groupedSlots[dateKey].push({
+                startTime: slot.startTime,
+                endTime: slot.endTime,
+                isActive: slot.isActive
+              });
+            });
+
+            availability = Object.entries(groupedSlots).map(([date, slots]) => ({
+              date,
+              slots
+            }));
+          }
+
+        return {
+          ...property,
+          priceDisplay: this.getPriceDisplay(property),
+          availability: availability 
+        };
+      })
+    );
 
     return {
       properties: enrichedProperties,
@@ -718,4 +1080,5 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
       }
     };
   }
+
 }

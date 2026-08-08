@@ -10,13 +10,14 @@ const client_1 = require("@prisma/client");
 const createInquiry = async (req, res, next) => {
     try {
         const user = req.user;
-        const { propertyId, name, location, message, meetingType } = req.body;
+        const { propertyId, name, location, message, meetingType, proposedDate } = req.body;
         const inquiry = await inquiry_service_1.InquiryService.createInquiry(user.id, {
             propertyId,
             name,
             location,
             message,
-            meetingType
+            meetingType,
+            proposedDate
         });
         await (0, activity_controller_1.logActivity)(user.id, 'CREATE_INQUIRY', 'INQUIRY', inquiry.id, {
             propertyId,

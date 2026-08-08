@@ -38670,3 +38670,445 @@
 [32m[39m
 2026-08-04 08:30:32 [32minfo[39m [32mGET /api/v1/properties 200 52.728 ms - 46856[39m
 [32m[39m
+2026-08-04 11:17:39 [32minfo[39m [32mPOST /api/v1/auth/login 200 284.688 ms - 632[39m
+[32m[39m
+2026-08-04 11:18:27 [31merror[39m [31mInternal Server Error Vendor not found[39m
+2026-08-04 11:18:27 [32minfo[39m [32mGET /api/v1/vendor/stats 500 44.754 ms - 49[39m
+[32m[39m
+2026-08-04 11:35:37 [32minfo[39m [32mPOST /api/v1/auth/login 200 580.653 ms - 637[39m
+[32m[39m
+2026-08-04 11:36:01 [37mdebug[39m [37mActivity logged: VIEW_VENDOR_DASHBOARD on DASHBOARD by cmrirxig1000394i4ixlreltr[39m
+2026-08-04 11:36:01 [32minfo[39m [32mGET /api/v1/vendor/stats 200 572.070 ms - 3944[39m
+[32m[39m
+2026-08-04 12:42:00 [32minfo[39m [32mPOST /api/v1/auth/login 200 532.580 ms - 632[39m
+[32m[39m
+2026-08-04 12:43:02 [37mdebug[39m [37mActivity logged: VIEW_VENDOR_INQUIRIES on INQUIRY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-04 12:43:02 [32minfo[39m [32mGET /api/v1/inquiries/vendor 200 189.243 ms - 206[39m
+[32m[39m
+2026-08-04 12:44:49 [32minfo[39m [32mPOST /api/v1/auth/login 200 167.963 ms - 619[39m
+[32m[39m
+2026-08-04 12:46:22 [32minfo[39m [32mGET /api/v1/properties 200 380.185 ms - 46856[39m
+[32m[39m
+2026-08-04 12:46:59 [31merror[39m [31mProperty not found or not available Property not found or not available[39m
+2026-08-04 12:46:59 [32minfo[39m [32mPOST /api/v1/inquiries 404 213.105 ms - 63[39m
+[32m[39m
+2026-08-04 12:51:22 [31merror[39m [31mProperty not found or not available Property not found or not available[39m
+2026-08-04 12:51:22 [32minfo[39m [32mPOST /api/v1/inquiries 404 471.302 ms - 63[39m
+[32m[39m
+2026-08-04 12:52:27 [31merror[39m [31mProperty not found or not available Property not found or not available[39m
+2026-08-04 12:52:27 [32minfo[39m [32mPOST /api/v1/inquiries 404 71.749 ms - 63[39m
+[32m[39m
+2026-08-04 12:52:54 [32minfo[39m [32mGET /api/v1/properties 200 183.566 ms - 46856[39m
+[32m[39m
+2026-08-04 12:53:23 [31merror[39m [31mUnexpected end of JSON input Unexpected end of JSON input[39m
+2026-08-04 12:53:36 [32minfo[39m [32mGET /api/v1/properties 200 43.138 ms - 46856[39m
+[32m[39m
+2026-08-04 12:54:06 [31merror[39m [31mProperty not found or not available Property not found or not available[39m
+2026-08-04 12:54:06 [32minfo[39m [32mPOST /api/v1/inquiries 404 10.994 ms - 63[39m
+[32m[39m
+2026-08-04 12:56:07 [32minfo[39m [32mPOST /api/v1/auth/login 200 163.143 ms - 637[39m
+[32m[39m
+2026-08-04 12:56:36 [32minfo[39m [32mPOST /api/v1/inquiries 403 177.936 ms - 72[39m
+[32m[39m
+2026-08-04 12:57:07 [32minfo[39m [32mPOST /api/v1/auth/login 200 182.616 ms - 619[39m
+[32m[39m
+2026-08-04 12:57:25 [31merror[39m [31mProperty not found or not available Property not found or not available[39m
+2026-08-04 12:57:25 [32minfo[39m [32mPOST /api/v1/inquiries 404 19.616 ms - 63[39m
+[32m[39m
+2026-08-04 12:58:02 [32minfo[39m [32mNodemailer transporter initialized with Brevo SMTP[39m
+2026-08-04 12:58:24 [31merror[39m [31mSMTP transporter verification failed: connect ETIMEDOUT 172.246.243.66:587[39m
+2026-08-04 12:58:24 [31merror[39m [31mNodemailer email sending failed: connect ETIMEDOUT 172.246.243.66:587 connect ETIMEDOUT 172.246.243.66:587[39m
+2026-08-04 12:58:24 [31merror[39m [31mFailed to send email: Failed to send email: connect ETIMEDOUT 172.246.243.66:587[39m
+2026-08-04 12:58:24 [31merror[39m [31mFailed to send inquiry notifications: Failed to send email[39m
+2026-08-04 12:58:24 [32minfo[39m [32mInquiry INQ-2026-1827 created by user cmrirxige000794i4gamejrwk for property cmrirxiu900km94i43azkrwhq[39m
+2026-08-04 12:58:24 [37mdebug[39m [37mActivity logged: CREATE_INQUIRY on INQUIRY by cmrirxige000794i4gamejrwk[39m
+2026-08-04 12:58:24 [32minfo[39m [32mPOST /api/v1/inquiries 201 22558.090 ms - 886[39m
+[32m[39m
+2026-08-04 13:00:54 [37mdebug[39m [37mActivity logged: VIEW_VENDOR_INQUIRIES on INQUIRY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-04 13:00:54 [32minfo[39m [32mGET /api/v1/inquiries/vendor 200 425.930 ms - 206[39m
+[32m[39m
+2026-08-04 13:02:37 [32minfo[39m [32mPOST /api/v1/auth/login 200 566.255 ms - 637[39m
+[32m[39m
+2026-08-04 13:03:10 [32minfo[39m [32mPOST /api/v1/inquiries 403 21.370 ms - 72[39m
+[32m[39m
+2026-08-04 13:03:29 [37mdebug[39m [37mActivity logged: VIEW_VENDOR_INQUIRIES on INQUIRY by cmrirxig1000394i4ixlreltr[39m
+2026-08-04 13:03:29 [32minfo[39m [32mGET /api/v1/inquiries/vendor 200 121.271 ms - 206[39m
+[32m[39m
+2026-08-04 13:05:34 [32minfo[39m [32mPOST /api/v1/auth/login 200 259.725 ms - 643[39m
+[32m[39m
+2026-08-04 13:06:22 [37mdebug[39m [37mActivity logged: VIEW_VENDOR_INQUIRIES on INQUIRY by cmrirxiga000694i41cjrz7s6[39m
+2026-08-04 13:06:22 [32minfo[39m [32mGET /api/v1/inquiries/vendor 200 583.414 ms - 1117[39m
+[32m[39m
+2026-08-04 21:45:45 [32minfo[39m [32mPOST /api/v1/auth/login 200 540.166 ms - 643[39m
+[32m[39m
+2026-08-04 22:03:30 [37mdebug[39m [37mActivity logged: VIEW_MY_PROPERTIES on PROPERTY by cmrirxiga000694i41cjrz7s6[39m
+2026-08-04 22:03:30 [32minfo[39m [32mGET /api/v1/properties/my-properties 200 826.041 ms - 23449[39m
+[32m[39m
+2026-08-04 22:06:23 [37mdebug[39m [37mActivity logged: VIEW_MY_PROPERTIES on PROPERTY by cmrirxiga000694i41cjrz7s6[39m
+2026-08-04 22:06:23 [32minfo[39m [32mGET /api/v1/properties/my-properties 200 478.543 ms - 22591[39m
+[32m[39m
+2026-08-04 22:08:58 [37mdebug[39m [37mActivity logged: VIEW_MY_PROPERTIES on PROPERTY by cmrirxiga000694i41cjrz7s6[39m
+2026-08-04 22:08:58 [32minfo[39m [32mGET /api/v1/properties/my-properties 200 402.600 ms - 22912[39m
+[32m[39m
+2026-08-04 22:09:28 [37mdebug[39m [37mActivity logged: VIEW_MY_PROPERTIES on PROPERTY by cmrirxiga000694i41cjrz7s6[39m
+2026-08-04 22:09:28 [32minfo[39m [32mGET /api/v1/properties/my-properties 200 311.897 ms - 22581[39m
+[32m[39m
+2026-08-04 22:27:59 [37mdebug[39m [37mActivity logged: VIEW_INQUIRY_STATS on INQUIRY by cmrirxiga000694i41cjrz7s6[39m
+2026-08-04 22:27:59 [32minfo[39m [32mGET /api/v1/inquiries/vendor/stats 200 289.709 ms - 245[39m
+[32m[39m
+2026-08-05 16:49:02 [32minfo[39m [32mPOST /api/v1/auth/login 200 499.806 ms - 619[39m
+[32m[39m
+2026-08-05 16:50:10 [32minfo[39m [32mPOST /api/v1/auth/login 200 130.885 ms - 637[39m
+[32m[39m
+2026-08-05 16:50:54 [32minfo[39m [32mGET /api/v1/properties 200 226.324 ms - 47955[39m
+[32m[39m
+2026-08-05 16:51:49 [31merror[39m [31mProperty not found or not available Property not found or not available[39m
+2026-08-05 16:51:49 [32minfo[39m [32mPOST /api/v1/inquiries 404 45.240 ms - 63[39m
+[32m[39m
+2026-08-05 16:52:21 [31merror[39m [31mPrisma error: [39m
+[31mInvalid `prisma.vendorAvailability.findFirst()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\services\vendor.service.ts:488:50[39m
+
+[31m  485 targetDate.setHours(0, 0, 0, 0);[39m
+[31m  486 const timeStr = this.formatTime(dateTime);[39m
+[31m  487 [39m
+[31m→ 488 const slot = await prisma.vendorAvailability.findFirst([39m
+[31mThe table `public.VendorAvailability` does not exist in the current database. [39m
+[31mInvalid `prisma.vendorAvailability.findFirst()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\services\vendor.service.ts:488:50[39m
+
+[31m  485 targetDate.setHours(0, 0, 0, 0);[39m
+[31m  486 const timeStr = this.formatTime(dateTime);[39m
+[31m  487 [39m
+[31m→ 488 const slot = await prisma.vendorAvailability.findFirst([39m
+[31mThe table `public.VendorAvailability` does not exist in the current database.[39m
+2026-08-05 16:52:21 [32minfo[39m [32mPOST /api/v1/inquiries 400 187.229 ms - 439[39m
+[32m[39m
+2026-08-05 16:53:37 [31merror[39m [31mPrisma error: [39m
+[31mInvalid `prisma.vendorAvailability.findFirst()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\services\vendor.service.ts:488:50[39m
+
+[31m  485 targetDate.setHours(0, 0, 0, 0);[39m
+[31m  486 const timeStr = this.formatTime(dateTime);[39m
+[31m  487 [39m
+[31m→ 488 const slot = await prisma.vendorAvailability.findFirst([39m
+[31mThe table `public.VendorAvailability` does not exist in the current database. [39m
+[31mInvalid `prisma.vendorAvailability.findFirst()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\services\vendor.service.ts:488:50[39m
+
+[31m  485 targetDate.setHours(0, 0, 0, 0);[39m
+[31m  486 const timeStr = this.formatTime(dateTime);[39m
+[31m  487 [39m
+[31m→ 488 const slot = await prisma.vendorAvailability.findFirst([39m
+[31mThe table `public.VendorAvailability` does not exist in the current database.[39m
+2026-08-05 16:53:37 [32minfo[39m [32mPOST /api/v1/inquiries 400 16.206 ms - 439[39m
+[32m[39m
+2026-08-05 17:00:30 [31merror[39m [31mVendor is not available at the proposed date and time Vendor is not available at the proposed date and time[39m
+2026-08-05 17:00:30 [32minfo[39m [32mPOST /api/v1/inquiries 400 251.542 ms - 81[39m
+[32m[39m
+2026-08-05 17:30:21 [32minfo[39m [32mGET /api/v1/properties 200 547.865 ms - 48171[39m
+[32m[39m
+2026-08-05 17:43:50 [32minfo[39m [32mGET /api/v1/properties 200 516.176 ms - 48171[39m
+[32m[39m
+2026-08-06 00:01:44 [32minfo[39m [32mPOST /api/v1/auth/login 200 667.978 ms - 619[39m
+[32m[39m
+2026-08-06 00:02:43 [32minfo[39m [32mNodemailer transporter initialized with Brevo SMTP[39m
+2026-08-06 00:02:50 [32minfo[39m [32mSMTP transporter verified successfully[39m
+2026-08-06 00:02:51 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to smith.properties@vendors.com. MessageId: <a557513b-ef89-184e-ad49-122c26fadb06@gmail.com>[39m
+2026-08-06 00:02:51 [32minfo[39m [32mEmail sent successfully to smith.properties@vendors.com[39m
+2026-08-06 00:02:51 [32minfo[39m [32mInquiry notification email sent to vendor smith.properties@vendors.com[39m
+2026-08-06 00:02:52 [31merror[39m [31mFailed to send inquiry notifications: ENOENT: no such file or directory, open 'C:\Users\HomePC\Desktop\PropertyArk-Backend\src\views\inquiry-confirmation.hbs'[39m
+2026-08-06 00:02:52 [32minfo[39m [32mInquiry INQ-2026-3779 created by user cmrirxige000794i4gamejrwk for property cmrirxikk004v94i4yb3rxac0[39m
+2026-08-06 00:02:52 [37mdebug[39m [37mActivity logged: CREATE_INQUIRY on INQUIRY by cmrirxige000794i4gamejrwk[39m
+2026-08-06 00:02:52 [32minfo[39m [32mPOST /api/v1/inquiries 201 8766.076 ms - 946[39m
+[32m[39m
+2026-08-06 00:04:38 [32minfo[39m [32mPOST /api/v1/auth/login 200 211.342 ms - 637[39m
+[32m[39m
+2026-08-06 00:05:11 [32minfo[39m [32mGET /api/v1/vendor/availability?startDate=2026-08-10T00:00:00.000Z&endDate=2026-08-20T00:00:00.000 401 3.454 ms - 66[39m
+[32m[39m
+2026-08-06 00:05:52 [32minfo[39m [32mGET /api/v1/vendor/availability?startDate=2026-08-10T00:00:00.000Z&endDate=2026-08-20T00:00:00.000 422 14.510 ms - 205[39m
+[32m[39m
+2026-08-06 00:06:59 [32minfo[39m [32mGET /api/v1/vendor/availability?startDate=2026-08-10&endDate=2026-08-20 422 139.176 ms - 298[39m
+[32m[39m
+2026-08-06 00:08:46 [37mdebug[39m [37mActivity logged: VIEW_AVAILABILITY on AVAILABILITY by cmrirxig1000394i4ixlreltr[39m
+2026-08-06 00:08:46 [32minfo[39m [32mGET /api/v1/vendor/availability?startDate=2026-08-10T00:00:00.000Z&endDate=2026-08-20T00:00:00.000Z 200 39.822 ms - 144[39m
+[32m[39m
+2026-08-06 00:13:25 [37mdebug[39m [37mActivity logged: VIEW_AVAILABILITY on AVAILABILITY by cmrirxig1000394i4ixlreltr[39m
+2026-08-06 00:13:25 [32minfo[39m [32mGET /api/v1/vendor/availability 200 400.255 ms - 144[39m
+[32m[39m
+2026-08-06 00:14:45 [37mdebug[39m [37mActivity logged: VIEW_AVAILABILITY on AVAILABILITY by cmrirxig1000394i4ixlreltr[39m
+2026-08-06 00:14:45 [32minfo[39m [32mGET /api/v1/vendor/availability?startDate=2026-08-10&endDate=2026-08-20 200 51.219 ms - 144[39m
+[32m[39m
+2026-08-07 04:23:10 [32minfo[39m [32mGET /api/v1/properties 200 965.233 ms - 47060[39m
+[32m[39m
+2026-08-07 04:23:18 [32minfo[39m [32mGET /api/v1/properties/available 200 114.887 ms - 19085[39m
+[32m[39m
+2026-08-07 04:24:33 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 422 35.384 ms - 248[39m
+[32m[39m
+2026-08-07 04:27:22 [31merror[39m [31mProperty not found or not available for shortlet Property not found or not available for shortlet[39m
+2026-08-07 04:27:22 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 404 457.695 ms - 76[39m
+[32m[39m
+2026-08-07 04:27:47 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.shortletBooking.create()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\services\shortletBooking.service.ts:149:50[39m
+
+[31m  146 }[39m
+[31m  147 [39m
+[31m  148 // Create booking[39m
+[31m→ 149 const booking = await prisma.shortletBooking.create({[39m
+[31m        data: {[39m
+[31m          bookingNumber: "BKG-2026-2034",[39m
+[31m          propertyId: "cmrirxisj00hn94i43tsgq86y",[39m
+[31m          vendorId: "cmrirxiga000694i41cjrz7s6",[39m
+[31m          guestLastName: "Doe",[39m
+[31m          guestEmail: "john.doe@example.com",[39m
+[31m          guestPhone: "+1234567890",[39m
+[31m          adultCount: 2,[39m
+[31m          childCount: 1,[39m
+[31m          checkInDate: new Date("2026-08-20T14:00:00.000Z"),[39m
+[31m          checkOutDate: new Date("2026-08-25T11:00:00.000Z"),[39m
+[31m          totalNights: 5,[39m
+[31m          totalAmount: 1785,[39m
+[31m          paymentMethod: "TRANSFER",[39m
+[31m          status: "PENDING",[39m
+[31m          userId: null,[39m
+[31m      +   guestFirstName: String[39m
+[31m        },[39m
+[31m        include: {[39m
+[31m          property: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              name: true,[39m
+[31m              address: true,[39m
+[31m              city: true,[39m
+[31m              state: true,[39m
+[31m              shortletAmount: true,[39m
+[31m              media: {[39m
+[31m                take: 1,[39m
+[31m                where: {[39m
+[31m                  isPrimary: true[39m
+[31m                },[39m
+[31m                select: {[39m
+[31m                  url: true[39m
+[31m                }[39m
+[31m              }[39m
+[31m            }[39m
+[31m          },[39m
+[31m          vendor: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              email: true,[39m
+[31m              phone: true[39m
+[31m            }[39m
+[31m          },[39m
+[31m          user: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              email: true,[39m
+[31m              phone: true[39m
+[31m            }[39m
+[31m          }[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mArgument `guestFirstName` is missing. [39m
+[31mInvalid `prisma.shortletBooking.create()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\services\shortletBooking.service.ts:149:50[39m
+
+[31m  146 }[39m
+[31m  147 [39m
+[31m  148 // Create booking[39m
+[31m→ 149 const booking = await prisma.shortletBooking.create({[39m
+[31m        data: {[39m
+[31m          bookingNumber: "BKG-2026-2034",[39m
+[31m          propertyId: "cmrirxisj00hn94i43tsgq86y",[39m
+[31m          vendorId: "cmrirxiga000694i41cjrz7s6",[39m
+[31m          guestLastName: "Doe",[39m
+[31m          guestEmail: "john.doe@example.com",[39m
+[31m          guestPhone: "+1234567890",[39m
+[31m          adultCount: 2,[39m
+[31m          childCount: 1,[39m
+[31m          checkInDate: new Date("2026-08-20T14:00:00.000Z"),[39m
+[31m          checkOutDate: new Date("2026-08-25T11:00:00.000Z"),[39m
+[31m          totalNights: 5,[39m
+[31m          totalAmount: 1785,[39m
+[31m          paymentMethod: "TRANSFER",[39m
+[31m          status: "PENDING",[39m
+[31m          userId: null,[39m
+[31m      +   guestFirstName: String[39m
+[31m        },[39m
+[31m        include: {[39m
+[31m          property: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              name: true,[39m
+[31m              address: true,[39m
+[31m              city: true,[39m
+[31m              state: true,[39m
+[31m              shortletAmount: true,[39m
+[31m              media: {[39m
+[31m                take: 1,[39m
+[31m                where: {[39m
+[31m                  isPrimary: true[39m
+[31m                },[39m
+[31m                select: {[39m
+[31m                  url: true[39m
+[31m                }[39m
+[31m              }[39m
+[31m            }[39m
+[31m          },[39m
+[31m          vendor: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              email: true,[39m
+[31m              phone: true[39m
+[31m            }[39m
+[31m          },[39m
+[31m          user: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              email: true,[39m
+[31m              phone: true[39m
+[31m            }[39m
+[31m          }[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mArgument `guestFirstName` is missing.[39m
+2026-08-07 04:27:47 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 422 494.684 ms - 1910[39m
+[32m[39m
+2026-08-07 04:31:50 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 422 62.656 ms - 181[39m
+[32m[39m
+2026-08-07 04:32:09 [32minfo[39m [32mNodemailer transporter initialized with Brevo SMTP[39m
+2026-08-07 04:32:12 [32minfo[39m [32mSMTP transporter verified successfully[39m
+2026-08-07 04:32:13 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to brown.investments@vendors.com. MessageId: <70ac75b6-1fe8-4905-cdb8-1176724b5263@gmail.com>[39m
+2026-08-07 04:32:13 [32minfo[39m [32mEmail sent successfully to brown.investments@vendors.com[39m
+2026-08-07 04:32:13 [32minfo[39m [32mBooking notification sent to vendor brown.investments@vendors.com[39m
+2026-08-07 04:32:14 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to john.doe@example.com. MessageId: <6beaf5f4-55c3-c2c2-e45b-94d1ddbc35a6@gmail.com>[39m
+2026-08-07 04:32:14 [32minfo[39m [32mEmail sent successfully to john.doe@example.com[39m
+2026-08-07 04:32:14 [32minfo[39m [32mBooking confirmation sent to guest john.doe@example.com[39m
+2026-08-07 04:32:14 [32minfo[39m [32mBooking BKG-2026-1310 created for property cmrirxisj00hn94i43tsgq86y[39m
+2026-08-07 04:32:14 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 201 5565.202 ms - 1145[39m
+[32m[39m
+2026-08-07 04:33:29 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 422 15.033 ms - 338[39m
+[32m[39m
+2026-08-07 04:43:27 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 422 41.580 ms - 338[39m
+[32m[39m
+2026-08-07 04:43:43 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 422 3.288 ms - 338[39m
+[32m[39m
+2026-08-07 04:44:29 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 422 18.302 ms - 338[39m
+[32m[39m
+2026-08-07 04:45:20 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 422 19.061 ms - 338[39m
+[32m[39m
+2026-08-07 04:48:16 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 422 9.622 ms - 338[39m
+[32m[39m
+2026-08-07 04:49:47 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 422 14.837 ms - 338[39m
+[32m[39m
+2026-08-07 04:53:01 [31merror[39m [31mProperty is already booked for the selected dates Property is already booked for the selected dates[39m
+2026-08-07 04:53:02 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 400 4854.050 ms - 77[39m
+[32m[39m
+2026-08-07 04:53:43 [31merror[39m [31mProperty is already booked for the selected dates Property is already booked for the selected dates[39m
+2026-08-07 04:53:43 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 400 33.723 ms - 77[39m
+[32m[39m
+2026-08-07 04:53:54 [31merror[39m [31mProperty is already booked for the selected dates Property is already booked for the selected dates[39m
+2026-08-07 04:53:54 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 400 17.676 ms - 77[39m
+[32m[39m
+2026-08-07 04:55:55 [32minfo[39m [32mNodemailer transporter initialized with Brevo SMTP[39m
+2026-08-07 04:55:56 [32minfo[39m [32mSMTP transporter verified successfully[39m
+2026-08-07 04:55:57 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to brown.investments@vendors.com. MessageId: <00eebdad-c41d-8e3c-f8ce-fb32c24b0c07@gmail.com>[39m
+2026-08-07 04:55:57 [32minfo[39m [32mEmail sent successfully to brown.investments@vendors.com[39m
+2026-08-07 04:55:57 [32minfo[39m [32mBooking notification sent to vendor brown.investments@vendors.com[39m
+2026-08-07 04:55:58 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to john.doe@example.com. MessageId: <5b33f023-fb81-010f-6700-963431364d2f@gmail.com>[39m
+2026-08-07 04:55:58 [32minfo[39m [32mEmail sent successfully to john.doe@example.com[39m
+2026-08-07 04:55:58 [32minfo[39m [32mBooking confirmation sent to guest john.doe@example.com[39m
+2026-08-07 04:55:58 [32minfo[39m [32mBooking BKG-2026-2205 created for property cmrirxisj00hn94i43tsgq86y[39m
+2026-08-07 04:55:58 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 201 4524.410 ms - 1145[39m
+[32m[39m
+2026-08-07 04:56:38 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to brown.investments@vendors.com. MessageId: <1037049f-6eac-14aa-dbc8-e8601ff2a642@gmail.com>[39m
+2026-08-07 04:56:38 [32minfo[39m [32mEmail sent successfully to brown.investments@vendors.com[39m
+2026-08-07 04:56:38 [32minfo[39m [32mBooking notification sent to vendor brown.investments@vendors.com[39m
+2026-08-07 04:56:39 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to john.doe@example.com. MessageId: <b0a43f03-20b3-f165-26e5-a1d3c7f7dd21@gmail.com>[39m
+2026-08-07 04:56:39 [32minfo[39m [32mEmail sent successfully to john.doe@example.com[39m
+2026-08-07 04:56:39 [32minfo[39m [32mBooking confirmation sent to guest john.doe@example.com[39m
+2026-08-07 04:56:39 [32minfo[39m [32mBooking BKG-2026-7050 created for property cmrirxisj00hn94i43tsgq86y[39m
+2026-08-07 04:56:39 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 201 1831.117 ms - 1145[39m
+[32m[39m
+2026-08-07 04:57:02 [31merror[39m [31mProperty is already booked for the selected dates Property is already booked for the selected dates[39m
+2026-08-07 04:57:02 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 400 39.563 ms - 77[39m
+[32m[39m
+2026-08-07 04:57:15 [31merror[39m [31mProperty is already booked for the selected dates Property is already booked for the selected dates[39m
+2026-08-07 04:57:15 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 400 13.253 ms - 77[39m
+[32m[39m
+2026-08-07 04:57:30 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to brown.investments@vendors.com. MessageId: <f757b32f-0652-eaaf-6cee-c79d498c066a@gmail.com>[39m
+2026-08-07 04:57:30 [32minfo[39m [32mEmail sent successfully to brown.investments@vendors.com[39m
+2026-08-07 04:57:30 [32minfo[39m [32mBooking notification sent to vendor brown.investments@vendors.com[39m
+2026-08-07 04:57:31 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to john.doe@example.com. MessageId: <0ab7c096-bb9c-db0f-3d91-b0f1df89a9fd@gmail.com>[39m
+2026-08-07 04:57:31 [32minfo[39m [32mEmail sent successfully to john.doe@example.com[39m
+2026-08-07 04:57:31 [32minfo[39m [32mBooking confirmation sent to guest john.doe@example.com[39m
+2026-08-07 04:57:31 [32minfo[39m [32mBooking BKG-2026-5344 created for property cmrirxisj00hn94i43tsgq86y[39m
+2026-08-07 04:57:31 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 201 2138.766 ms - 1146[39m
+[32m[39m
+2026-08-07 05:14:01 [32minfo[39m [32mPOST /api/v1/auth/login 200 778.883 ms - 643[39m
+[32m[39m
+2026-08-07 05:15:57 [37mdebug[39m [37mActivity logged: VIEW_BOOKING_STATS on BOOKING by cmrirxiga000694i41cjrz7s6[39m
+2026-08-07 05:15:57 [32minfo[39m [32mGET /api/v1/shortlet-bookings/vendor-stats 200 143.281 ms - 2664[39m
+[32m[39m
+2026-08-08 00:17:27 [32minfo[39m [32mPOST /api/v1/auth/login 200 1098.678 ms - 632[39m
+[32m[39m
+2026-08-08 00:19:12 [32minfo[39m [32mGET /api/v1/nin/pending?page=1&limit=20 200 380.574 ms - 141[39m
+[32m[39m
+2026-08-08 00:21:20 [32minfo[39m [32mGET /api/v1/nin/pending?page=1&limit=20 200 303.514 ms - 141[39m
+[32m[39m
+2026-08-08 00:21:26 [32minfo[39m [32mGET /api/v1/nin/pending?page=1&limit=20 200 30.108 ms - 141[39m
+[32m[39m
+2026-08-08 00:21:42 [32minfo[39m [32mGET /api/v1/nin 404 37.100 ms - 115[39m
+[32m[39m
+2026-08-08 00:21:50 [32minfo[39m [32mGET /api/v1/nin/pending?page=1&limit=20 200 16.257 ms - 141[39m
+[32m[39m
+2026-08-08 09:36:30 [32minfo[39m [32mPOST /api/v1/auth/login 200 467.541 ms - 632[39m
+[32m[39m
+2026-08-08 09:37:05 [37mdebug[39m [37mActivity logged: VIEW_NIN_STATS on NIN by cmrirxif2000094i4f8lbor4s[39m
+2026-08-08 09:37:05 [32minfo[39m [32mGET /api/v1/admin/nin-stats 200 331.257 ms - 153[39m
+[32m[39m
+2026-08-08 09:38:09 [37mdebug[39m [37mActivity logged: VIEW_PROPERTY_MANAGEMENT_STATS on PROPERTY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-08 09:38:09 [32minfo[39m [32mGET /api/v1/admin/property-stats?page=1&limit=10&status=PENDING 200 269.960 ms - 15737[39m
+[32m[39m
+2026-08-08 09:38:20 [37mdebug[39m [37mActivity logged: VIEW_PROPERTY_MANAGEMENT_STATS on PROPERTY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-08 09:38:20 [32minfo[39m [32mGET /api/v1/admin/property-stats?page=1&limit=10 200 25.555 ms - 15921[39m
+[32m[39m
+2026-08-08 09:38:37 [37mdebug[39m [37mActivity logged: VIEW_PROPERTY_MANAGEMENT_STATS on PROPERTY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-08 09:38:37 [32minfo[39m [32mGET /api/v1/admin/property-stats?page=1&limit=10&status=PENDING 200 54.982 ms - 15737[39m
+[32m[39m
+2026-08-08 09:38:52 [37mdebug[39m [37mActivity logged: VIEW_PROPERTY_MANAGEMENT_STATS on PROPERTY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-08 09:38:52 [32minfo[39m [32mGET /api/v1/admin/property-stats?page=1&limit=10&status=ACTIVE 200 33.742 ms - 15977[39m
+[32m[39m
+2026-08-08 09:39:49 [37mdebug[39m [37mActivity logged: VIEW_PROPERTY_MANAGEMENT_STATS on PROPERTY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-08 09:39:49 [32minfo[39m [32mGET /api/v1/admin/property-stats?page=1&limit=10 200 28.267 ms - 15921[39m
+[32m[39m
+2026-08-08 09:41:47 [37mdebug[39m [37mActivity logged: VIEW_ADMIN_DASHBOARD on DASHBOARD by cmrirxif2000094i4f8lbor4s[39m
+2026-08-08 09:41:47 [32minfo[39m [32mGET /api/v1/admin/dashboard 200 345.662 ms - 15859[39m
+[32m[39m
+2026-08-08 09:44:57 [37mdebug[39m [37mActivity logged: VIEW_PLATFORM_OVERVIEW on PLATFORM by cmrirxif2000094i4f8lbor4s[39m
+2026-08-08 09:44:57 [32minfo[39m [32mGET /api/v1/admin/platform-overview 200 305.741 ms - 247[39m
+[32m[39m
+2026-08-08 09:51:00 [32minfo[39m [32mGET /api/v1/users/?page=1&limit=10 200 619.878 ms - 3815[39m
+[32m[39m
+2026-08-08 09:51:25 [32minfo[39m [32mGET /api/v1/users/?page=1&limit=10&Role=USER 200 35.685 ms - 3815[39m
+[32m[39m
+2026-08-08 09:51:44 [32minfo[39m [32mGET /api/v1/users/?page=1&limit=10&Role=VENDOR 200 59.082 ms - 3815[39m
+[32m[39m
+2026-08-08 09:54:27 [32minfo[39m [32mGET /api/v1/users/?page=1&limit=40 200 257.106 ms - 6185[39m
+[32m[39m
+2026-08-08 09:59:24 [32minfo[39m [32mGET /api/v1/users/?page=1&limit=40&role=VENDOR 200 376.602 ms - 1724[39m
+[32m[39m
+2026-08-08 09:59:53 [32minfo[39m [32mGET /api/v1/users/?page=1&limit=40&role=STAFF 200 16.347 ms - 908[39m
+[32m[39m
+2026-08-08 10:00:02 [31merror[39m [31mInvalid role. Allowed: VENDOR, USER, STAFF Invalid role. Allowed: VENDOR, USER, STAFF[39m
+2026-08-08 10:00:02 [32minfo[39m [32mGET /api/v1/users/?page=1&limit=40&role=STAFFS 400 55.152 ms - 70[39m
+[32m[39m
+2026-08-08 10:00:15 [32minfo[39m [32mGET /api/v1/users/?page=1&limit=40 200 13.449 ms - 6185[39m
+[32m[39m

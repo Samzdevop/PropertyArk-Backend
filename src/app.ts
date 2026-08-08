@@ -20,6 +20,9 @@ import { favoriteRouter } from './routes/favorite.routes';
 import { inquiryRouter } from './routes/inquiry.routes';
 import { vendorRouter } from './routes/vendor.routes';
 import { viewStatsRouter } from './routes/viewStats.routes';
+import { shortletBookingRouter } from './routes/shortletBooking.routes';
+import { notificationRouter } from './routes/notification.routes';
+import { adminDashboardRouter } from './routes/adminDashboard.routes';
 
 export const app = express();
 
@@ -107,7 +110,9 @@ app.use('/api/v1/favorites',  favoriteRouter);
 app.use('/api/v1/inquiries',  inquiryRouter);
 app.use('/api/v1/vendor',  vendorRouter);
 app.use('/api/v1/view-stats', viewStatsRouter);
-
+app.use('/api/v1/shortlet-bookings', shortletBookingRouter);
+app.use('/api/v1/notifications', notificationRouter);
+app.use('/api/v1/admin', adminDashboardRouter);
 
 
 

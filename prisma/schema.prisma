@@ -8,8 +8,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ============ ENUMS ============
-
 enum Role {
   ADMIN
   VENDOR
@@ -45,6 +43,19 @@ enum PropertyType {
   INDUSTRIAL
   LAND
   MIXED_USE
+}
+
+enum BookingStatus {
+  PENDING
+  APPROVED
+  CHECKED_IN
+  CHECKED_OUT
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CASH
+  TRANSFER
 }
 
 enum MediaType {
@@ -86,6 +97,19 @@ enum MeetingType {
   IN_PERSON
 }
 
+enum NotificationChannel {
+  IN_APP
+  EMAIL
+  BOTH
+}
+
+enum NotificationPriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
 model User {
   id                    String             @id @default(cuid())
   email                 String             @unique
@@ -114,18 +138,20 @@ model User {
   employeeId            String?            @unique
   department            String?
 
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @updatedAt
-  properties      Property[]     @relation("PropertyVendor")
-  staffProperties Property[]     @relation("PropertyStaff")
-  notifications   Notification[]
-  activityLogs    ActivityLog[]
-  documents       Document[]     @relation("UploadedBy")
-  vendorNIN       Document[]     @relation("VendorNIN")
+  createdAt              DateTime          @default(now())
+  updatedAt              DateTime          @updatedAt
+  properties             Property[]        @relation("PropertyVendor")
+  staffProperties        Property[]        @relation("PropertyStaff")
+  notifications          Notification[]
+  activityLogs           ActivityLog[]
+  documents              Document[]        @relation("UploadedBy")
+  vendorNIN              Document[]        @relation("VendorNIN")
+  vendorShortletBookings ShortletBooking[] @relation("VendorShortletBookings")
+  userShortletBookings   ShortletBooking[] @relation("UserShortletBookings")
 
-  // Password reset
   passwordResetToken     String?
   passwordResetExpiresAt DateTime?
+  vendorAvailabilities   VendorAvailability[]
 
   @@index([email])
   @@index([role])
@@ -170,8 +196,9 @@ model Property {
   favorites    Favorite[]
   inquiries    Inquiry[]
 
-  documents Document[]
-  media     Media[]
+  documents        Document[]
+  media            Media[]
+  shortletBookings ShortletBooking[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -266,11 +293,48 @@ model Notification {
   read    Boolean          @default(false)
   readAt  DateTime?
 
+  channel     NotificationChannel  @default(IN_APP)
+  priority    NotificationPriority @default(NORMAL)
+  sentAt      DateTime?
+  deliveredAt DateTime?
+  bulkId      String?
+  isBulk      Boolean              @default(false)
+
   createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@index([userId])
   @@index([read])
   @@index([createdAt])
+  @@index([bulkId])
+  @@index([channel])
+  @@index([priority])
+}
+
+model BulkNotification {
+  id             String               @id @default(cuid())
+  bulkId         String               @unique
+  title          String
+  message        String
+  channel        NotificationChannel
+  priority       NotificationPriority
+  targetAudience String
+  targetUserIds  String[]
+  targetRoles    String[]
+
+  sentCount      Int @default(0)
+  deliveredCount Int @default(0)
+  failedCount    Int @default(0)
+
+  sentBy String // Admin ID who sent it
+  sentAt DateTime @default(now())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([bulkId])
+  @@index([sentAt])
+  @@index([targetAudience])
 }
 
 model ActivityLog {
@@ -292,6 +356,64 @@ model ActivityLog {
   @@index([entityId])
   @@index([createdAt])
   @@index([action])
+}
+
+model VendorAvailability {
+  id          String   @id @default(cuid())
+  vendorId    String
+  vendor      User     @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  date        DateTime
+  startTime   String
+  endTime     String
+  isActive    Boolean  @default(true)
+  isRecurring Boolean  @default(false)
+  dayOfWeek   Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([vendorId, date, startTime, endTime])
+  @@index([vendorId])
+  @@index([date])
+  @@index([isActive])
+}
+
+model ShortletBooking {
+  id             String        @id @default(cuid())
+  bookingNumber  String        @unique
+  propertyId     String
+  property       Property      @relation(fields: [propertyId], references: [id])
+  vendorId       String
+  vendor         User          @relation("VendorShortletBookings", fields: [vendorId], references: [id])
+  guestFirstName String
+  guestLastName  String
+  guestEmail     String
+  guestPhone     String?
+  adultCount     Int           @default(1)
+  childCount     Int           @default(0)
+  checkInDate    DateTime
+  checkOutDate   DateTime
+  totalNights    Int
+  paymentMethod  PaymentMethod
+  totalAmount    Float
+  currency       String        @default("NGN")
+  status         BookingStatus @default(PENDING)
+  userId         String?
+  user           User?         @relation("UserShortletBookings", fields: [userId], references: [id])
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  checkedInAt    DateTime?
+  checkedOutAt   DateTime?
+  cancelledAt    DateTime?
+  approvedAt     DateTime?
+  approvedBy     String?
+
+  @@index([propertyId])
+  @@index([vendorId])
+  @@index([status])
+  @@index([checkInDate])
+  @@index([checkOutDate])
+  @@index([guestEmail])
 }
 
 model PlatformSettings {
@@ -343,8 +465,11 @@ model Inquiry {
   message     String
   meetingType MeetingType
 
+  proposedDate  DateTime?
+  scheduledDate DateTime?
+
   status       InquiryStatus @default(PENDING)
-  responseNote String? // Used for decline reason
+  responseNote String?
 
   viewedAt    DateTime?
   respondedAt DateTime?

@@ -1,15 +1,23 @@
-// services/vendor.service.ts
 import prisma from "../prisma";
 import { Prisma, Role, PropertyStatus, PropertyListingStatus } from "@prisma/client";
 import { formatDate } from "../utils/date.utils";
+import { BadRequestError } from "../errors/BadRequestError";
+import { NotFoundError } from "../errors/NotFoundError";
+import Logger from "../config/logger";
+
+
+
+export interface AvailabilitySlot {
+  date: Date;       
+  startTime: string; 
+  endTime: string;   
+  isRecurring?: boolean;
+  dayOfWeek?: number;
+}
 
 export class VendorService {
 
-  /**
-   * Get vendor dashboard statistics
-   */
   static async getDashboardStats(vendorId: string): Promise<any> {
-    // Verify vendor exists
     const vendor = await prisma.user.findUnique({
       where: { id: vendorId, role: Role.VENDOR }
     });
@@ -61,13 +69,11 @@ export class VendorService {
       ? Math.round((occupiedProperties / totalProperties) * 100) 
       : 0;
 
-    // Calculate sold rate
     const soldProperties = properties.filter(p => p.status === PropertyStatus.SOLD).length;
     const soldRate = totalProperties > 0 
       ? Math.round((soldProperties / totalProperties) * 100) 
       : 0;
 
-    // Total properties summary
     const totalPropertiesSummary = [
       { TotalListing: totalProperties },
       { "Active Listing": activeListings },
@@ -77,23 +83,19 @@ export class VendorService {
       { "Sold rate": `${soldRate}%` }
     ];
 
-    // Properties by listing type
     const propertiesByListingType = await prisma.property.groupBy({
       by: ['listingType'],
       where: { vendorId },
       _count: true
     });
 
-    // Format listing types for response
     const formattedListingTypes = propertiesByListingType.map(item => ({
       _count: item._count,
       listingType: item.listingType
     }));
 
-    // Get listing performance (weekly views and inquiries for the last 12 weeks)
     const listingPerformance = await this.getListingPerformance(vendorId);
 
-    // Get recent properties (last 5)
     const recentProperties = properties.slice(0, 5).map(p => ({
       id: p.id,
       name: p.name,
@@ -140,7 +142,6 @@ export class VendorService {
       }
     });
 
-    // Format recent inquiries
     const formattedRecentInquiries = recentInquiries.map(inquiry => ({
       id: inquiry.id,
       inquiryNumber: inquiry.inquiryNumber,
@@ -153,7 +154,6 @@ export class VendorService {
       createdAt: inquiry.createdAt
     }));
 
-    // Get payment statistics (aggregate from property earnings)
     const payments = await this.getPaymentStats(vendorId);
 
     return {
@@ -166,10 +166,7 @@ export class VendorService {
     };
   }
 
-  /**
-   * Get listing performance (weekly views and inquiries)
-   * Using your existing formatDate utility
-   */
+
   private static async getListingPerformance(vendorId: string): Promise<any[]> {
     const now = new Date();
     const weeks = 12;
@@ -224,7 +221,6 @@ export class VendorService {
       return date.toLocaleDateString('en-US', { month: 'short' });
     };
 
-    // Generate weekly performance data
     const weeksData = [];
     for (let i = 0; i < weeks; i++) {
       const weekStart = new Date(startDate);
@@ -232,7 +228,6 @@ export class VendorService {
       const weekEnd = new Date(weekStart);
       weekEnd.setDate(weekEnd.getDate() + 6);
 
-      // Find inquiry count for this week
       const inquiryCount = inquiryCounts.find(
         (item: any) => {
           const itemDate = new Date(item.week_start);
@@ -240,7 +235,6 @@ export class VendorService {
         }
       )?.count || 0;
 
-      // Find view count for this week
       const viewCount = viewCounts.find(
         (item: any) => {
           const itemDate = new Date(item.week_start);
@@ -260,14 +254,9 @@ export class VendorService {
     return weeksData;
   }
 
-  /**
-   * Get payment statistics
-   */
+ 
   private static async getPaymentStats(vendorId: string): Promise<any> {
-    // Since payments are not directly linked to vendors in this system,
-    // we'll provide a structure that can be filled later
-    // In a real implementation with payments, you'd query the Payment model
-    
+  
     return {
       summary: {
         totalCount: 0,
@@ -292,4 +281,417 @@ export class VendorService {
       }
     };
   }
+
+
+  static async setAvailability(
+    vendorId: string,
+    slots: AvailabilitySlot[]
+  ): Promise<any> {
+    const vendor = await prisma.user.findUnique({
+      where: { id: vendorId },
+      select: { id: true, role: true }
+    });
+
+    if (!vendor) {
+      throw new NotFoundError("Vendor not found");
+    }
+    for (const slot of slots) {
+      if (!slot.date || isNaN(slot.date.getTime())) {
+        throw new BadRequestError("Invalid date format");
+      }
+
+      if (!this.isValidTime(slot.startTime) || !this.isValidTime(slot.endTime)) {
+        throw new BadRequestError("Invalid time format. Use HH:mm (e.g., 09:00)");
+      }
+
+      if (slot.startTime >= slot.endTime) {
+        throw new BadRequestError("Start time must be before end time");
+      }
+
+      // Check if date is in the past
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (slot.date < today) {
+        throw new BadRequestError(`Date ${slot.date.toLocaleDateString()} is in the past`);
+      }
+    }
+
+    // Delete existing availability for these specific dates
+    const dates = slots.map(slot => slot.date);
+    await prisma.vendorAvailability.deleteMany({
+      where: {
+        vendorId,
+        date: { in: dates }
+      }
+    });
+
+    // Create new availability slots
+    const createdSlots = await prisma.vendorAvailability.createMany({
+      data: slots.map(slot => ({
+        vendorId,
+        date: new Date(slot.date.setHours(0, 0, 0, 0)),
+        startTime: slot.startTime,
+        endTime: slot.endTime,
+        isRecurring: slot.isRecurring || false,
+        dayOfWeek: slot.dayOfWeek || null,
+        isActive: true
+      }))
+    });
+
+    Logger.info(`Vendor ${vendorId} set ${slots.length} availability slots`);
+
+    return prisma.vendorAvailability.findMany({
+      where: { 
+        vendorId,
+        date: { in: dates }
+      },
+      orderBy: { date: 'asc' }
+    });
+  }
+
+
+
+  static async getVendorAvailabilitySlots(
+    vendorId: string
+  ): Promise<any[]> {
+    const slots = await prisma.vendorAvailability.findMany({
+      where: { 
+        vendorId,
+        isActive: true
+      },
+      orderBy: { date: 'asc' }
+    });
+
+    const groupedSlots: any = {};
+    slots.forEach(slot => {
+      const dateKey = slot.date.toISOString().split('T')[0];
+      if (!groupedSlots[dateKey]) {
+        groupedSlots[dateKey] = [];
+      }
+      groupedSlots[dateKey].push({
+        startTime: slot.startTime,
+        endTime: slot.endTime,
+        isActive: slot.isActive
+      });
+    });
+
+    return Object.entries(groupedSlots).map(([date, slots]) => ({
+      date,
+      slots
+    }));
+  }
+
+
+
+  static async getUpcomingAvailability(vendorId: string): Promise<any> {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    const nextWeek = new Date(today);
+    nextWeek.setDate(nextWeek.getDate() + 7);
+
+    const slots = await prisma.vendorAvailability.findMany({
+      where: {
+        vendorId,
+        date: {
+          gte: today,
+          lte: nextWeek
+        },
+        isActive: true
+      },
+      orderBy: { date: 'asc' }
+    });
+
+    // Group by date
+    const grouped = this.groupAvailabilityByDate(slots);
+    return grouped;
+  }
+
+
+
+   static async addAvailability(
+    vendorId: string,
+    slot: AvailabilitySlot
+  ): Promise<any> {
+    // Validate vendor exists
+    const vendor = await prisma.user.findUnique({
+      where: { id: vendorId },
+      select: { id: true, role: true }
+    });
+
+    if (!vendor) {
+      throw new NotFoundError("Vendor not found");
+    }
+
+    // Validate slot
+    if (!slot.date || isNaN(slot.date.getTime())) {
+      throw new BadRequestError("Invalid date format");
+    }
+
+    if (!this.isValidTime(slot.startTime) || !this.isValidTime(slot.endTime)) {
+      throw new BadRequestError("Invalid time format. Use HH:mm (e.g., 09:00)");
+    }
+
+    if (slot.startTime >= slot.endTime) {
+      throw new BadRequestError("Start time must be before end time");
+    }
+
+    // Check if date is in the past
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (slot.date < today) {
+      throw new BadRequestError(`Date ${slot.date.toLocaleDateString()} is in the past`);
+    }
+
+    // Check if slot already exists for this date
+    const existing = await prisma.vendorAvailability.findFirst({
+      where: {
+        vendorId,
+        date: new Date(slot.date.setHours(0, 0, 0, 0)),
+        startTime: slot.startTime,
+        endTime: slot.endTime
+      }
+    });
+
+    if (existing) {
+      throw new BadRequestError("This time slot already exists for this date");
+    }
+
+    // Create availability slot
+    const created = await prisma.vendorAvailability.create({
+      data: {
+        vendorId,
+        date: new Date(slot.date.setHours(0, 0, 0, 0)),
+        startTime: slot.startTime,
+        endTime: slot.endTime,
+        isRecurring: slot.isRecurring || false,
+        dayOfWeek: slot.dayOfWeek || null,
+        isActive: true
+      }
+    });
+
+    Logger.info(`Vendor ${vendorId} added availability for ${slot.date.toLocaleDateString()}`);
+    return created;
+  }
+
+  static async getAvailability(
+    vendorId: string,
+    startDate?: Date,
+    endDate?: Date
+  ): Promise<any> {
+    const where: any = { 
+      vendorId,
+      isActive: true
+    };
+
+    if (startDate) {
+      where.date = { gte: new Date(startDate.setHours(0, 0, 0, 0)) };
+    }
+
+    if (endDate) {
+      where.date = { ...where.date, lte: new Date(endDate.setHours(23, 59, 59, 999)) };
+    }
+
+    const availability = await prisma.vendorAvailability.findMany({
+      where,
+      orderBy: { date: 'asc' }
+    });
+
+    // Group by date
+    const grouped = this.groupAvailabilityByDate(availability);
+
+    return {
+      vendorId,
+      availability: grouped,
+      allSlots: availability
+    };
+  }
+   static async getAvailableSlotsForDate(
+    vendorId: string,
+    date: Date
+  ): Promise<any> {
+    const targetDate = new Date(date);
+    targetDate.setHours(0, 0, 0, 0);
+
+    const slots = await prisma.vendorAvailability.findMany({
+      where: {
+        vendorId,
+        date: targetDate,
+        isActive: true
+      },
+      orderBy: { startTime: 'asc' }
+    });
+
+    return {
+      date: targetDate,
+      available: slots.length > 0,
+      slots: slots.map((slot:any) => ({
+        id: slot.id,
+        startTime: slot.startTime,
+        endTime: slot.endTime,
+        isRecurring: slot.isRecurring
+      }))
+    };
+  }
+
+  static async isAvailable(
+    vendorId: string,
+    dateTime: Date
+  ): Promise<boolean> {
+    const targetDate = new Date(dateTime);
+    targetDate.setHours(0, 0, 0, 0);
+    const timeStr = this.formatTime(dateTime);
+
+    const slot = await prisma.vendorAvailability.findFirst({
+      where: {
+        vendorId,
+        date: targetDate,
+        startTime: { lte: timeStr },
+        endTime: { gte: timeStr },
+        isActive: true
+      }
+    });
+
+    return !!slot;
+  }
+
+  static async updateAvailabilitySlot(
+    vendorId: string,
+    slotId: string,
+    data: Partial<AvailabilitySlot>
+  ): Promise<any> {
+    const slot = await prisma.vendorAvailability.findFirst({
+      where: { 
+        id: slotId,
+        vendorId
+      }
+    });
+
+    if (!slot) {
+      throw new NotFoundError("Availability slot not found");
+    }
+
+    if (data.startTime && !this.isValidTime(data.startTime)) {
+      throw new BadRequestError("Invalid start time format");
+    }
+
+    if (data.endTime && !this.isValidTime(data.endTime)) {
+      throw new BadRequestError("Invalid end time format");
+    }
+
+    if (data.startTime && data.endTime && data.startTime >= data.endTime) {
+      throw new BadRequestError("Start time must be before end time");
+    }
+
+    const updated = await prisma.vendorAvailability.update({
+      where: { id: slotId },
+      data: {
+        ...(data.date && { date: new Date(data.date.setHours(0, 0, 0, 0)) }),
+        ...(data.startTime && { startTime: data.startTime }),
+        ...(data.endTime && { endTime: data.endTime }),
+        ...(data.isRecurring !== undefined && { isRecurring: data.isRecurring }),
+        ...(data.dayOfWeek !== undefined && { dayOfWeek: data.dayOfWeek })
+      }
+    });
+
+    Logger.info(`Vendor ${vendorId} updated availability slot ${slotId}`);
+    return updated;
+  }
+
+
+  static async deleteAvailabilitySlot(
+    vendorId: string,
+    slotId: string
+  ): Promise<void> {
+    const slot = await prisma.vendorAvailability.findFirst({
+      where: { 
+        id: slotId,
+        vendorId
+      }
+    });
+
+    if (!slot) {
+      throw new NotFoundError("Availability slot not found");
+    }
+
+    await prisma.vendorAvailability.delete({
+      where: { id: slotId }
+    });
+
+    Logger.info(`Vendor ${vendorId} deleted availability slot ${slotId}`);
+  }
+
+
+  static async toggleAvailability(
+    vendorId: string,
+    slotId: string
+  ): Promise<any> {
+    const slot = await prisma.vendorAvailability.findFirst({
+      where: { 
+        id: slotId,
+        vendorId
+      }
+    });
+
+    if (!slot) {
+      throw new NotFoundError("Availability slot not found");
+    }
+
+    const updated = await prisma.vendorAvailability.update({
+      where: { id: slotId },
+      data: { isActive: !slot.isActive }
+    });
+
+    Logger.info(`Vendor ${vendorId} ${updated.isActive ? 'activated' : 'deactivated'} slot ${slotId}`);
+    return updated;
+  }
+
+
+  static async bulkDeleteAvailability(
+    vendorId: string,
+    dates: Date[]
+  ): Promise<number> {
+    const result = await prisma.vendorAvailability.deleteMany({
+      where: {
+        vendorId,
+        date: { in: dates }
+      }
+    });
+
+    Logger.info(`Vendor ${vendorId} deleted ${result.count} availability slots`);
+    return result.count;
+  }
+
+  private static groupAvailabilityByDate(availability: any[]): any {
+    const grouped: any = {};
+
+    availability.forEach(slot => {
+      const dateKey = slot.date.toISOString().split('T')[0];
+      if (!grouped[dateKey]) {
+        grouped[dateKey] = [];
+      }
+      grouped[dateKey].push({
+        id: slot.id,
+        startTime: slot.startTime,
+        endTime: slot.endTime,
+        isRecurring: slot.isRecurring,
+        isActive: slot.isActive
+      });
+    });
+
+    return grouped;
+  }
+
+
+  private static isValidTime(time: string): boolean {
+    const regex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+    return regex.test(time);
+  }
+
+  private static formatTime(date: Date): string {
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${hours}:${minutes}`;
+  }
+
 }

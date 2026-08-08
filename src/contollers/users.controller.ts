@@ -80,15 +80,30 @@ export const getAllUsers = async (
 ) => {
   try {   
 	const requestingUser = (req as any).user;
-	const {page = 1, limit = 10 } = req.query;
+	const {page = 1, limit = 10, role } = req.query;
 
 	let allowedRoles: Role[] = [];
 
-	if(requestingUser.role === 'ADMIN'){
-		allowedRoles = ['VENDOR', 'USER', 'STAFF'];
-	}else {
-		throw new ForbiddenError('You don not have permission to view users');
-	}
+	// if(requestingUser.role === 'ADMIN'){
+	// 	allowedRoles = ['VENDOR', 'USER', 'STAFF'];
+	// }else {
+	// 	throw new ForbiddenError('You don not have permission to view users');
+	// }
+
+   if (requestingUser.role === 'ADMIN') {
+      if (role) {
+        const validRoles = ['VENDOR', 'USER', 'STAFF'];
+        if (!validRoles.includes(role as string)) {
+          throw new BadRequestError(`Invalid role. Allowed: ${validRoles.join(', ')}`);
+        }
+        allowedRoles = [role as Role];
+      } else {
+        allowedRoles = ['VENDOR', 'USER', 'STAFF'];
+      }
+    } else {
+      throw new ForbiddenError('You do not have permission to view users');
+    }
+
 
 	const where = {
 		role: {in: allowedRoles},

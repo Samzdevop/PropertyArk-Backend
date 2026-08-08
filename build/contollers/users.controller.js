@@ -67,13 +67,27 @@ exports.updateProfile = updateProfile;
 const getAllUsers = async (req, res, next) => {
     try {
         const requestingUser = req.user;
-        const { page = 1, limit = 10 } = req.query;
+        const { page = 1, limit = 10, role } = req.query;
         let allowedRoles = [];
+        // if(requestingUser.role === 'ADMIN'){
+        // 	allowedRoles = ['VENDOR', 'USER', 'STAFF'];
+        // }else {
+        // 	throw new ForbiddenError('You don not have permission to view users');
+        // }
         if (requestingUser.role === 'ADMIN') {
-            allowedRoles = ['VENDOR', 'USER', 'STAFF'];
+            if (role) {
+                const validRoles = ['VENDOR', 'USER', 'STAFF'];
+                if (!validRoles.includes(role)) {
+                    throw new BadRequestError_1.BadRequestError(`Invalid role. Allowed: ${validRoles.join(', ')}`);
+                }
+                allowedRoles = [role];
+            }
+            else {
+                allowedRoles = ['VENDOR', 'USER', 'STAFF'];
+            }
         }
         else {
-            throw new ForbiddenError_1.ForbiddenError('You don not have permission to view users');
+            throw new ForbiddenError_1.ForbiddenError('You do not have permission to view users');
         }
         const where = {
             role: { in: allowedRoles },

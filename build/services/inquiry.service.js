@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.InquiryService = void 0;
-// services/inquiry.service.ts
 const prisma_1 = __importDefault(require("../prisma"));
 const NotFoundError_1 = require("../errors/NotFoundError");
 const ForbiddenError_1 = require("../errors/ForbiddenError");
@@ -13,6 +12,7 @@ const client_1 = require("@prisma/client");
 const logger_1 = __importDefault(require("../config/logger"));
 const mail_services_1 = require("./mail.services");
 const mailTemplate_1 = require("../utils/mailTemplate");
+const vendor_service_1 = require("./vendor.service");
 class InquiryService {
     static generateInquiryNumber() {
         const year = new Date().getFullYear();
@@ -20,7 +20,7 @@ class InquiryService {
         return `INQ-${year}-${random}`;
     }
     static async createInquiry(userId, data) {
-        const { propertyId, name, location, message, meetingType } = data;
+        const { propertyId, name, location, message, meetingType, proposedDate } = data;
         const property = await prisma_1.default.property.findUnique({
             where: {
                 id: propertyId,
@@ -43,18 +43,38 @@ class InquiryService {
         if (!property.vendor) {
             throw new BadRequestError_1.BadRequestError("Property has no vendor associated");
         }
+        const inquiryData = {
+            inquiryNumber: this.generateInquiryNumber(),
+            userId,
+            propertyId,
+            vendorId: property.vendorId,
+            name,
+            location,
+            message,
+            meetingType,
+            status: client_1.InquiryStatus.PENDING
+        };
+        if (proposedDate) {
+            const proposedDateTime = new Date(proposedDate);
+            if (isNaN(proposedDateTime.getTime())) {
+                throw new BadRequestError_1.BadRequestError("Invalid proposed date format");
+            }
+            if (proposedDateTime < new Date()) {
+                throw new BadRequestError_1.BadRequestError("Proposed date must be in the future");
+            }
+            const isAvailable = await vendor_service_1.VendorService.isAvailable(property.vendorId, proposedDateTime);
+            // if (!isAvailable) {
+            //   throw new BadRequestError("Vendor is not available at the proposed date and time");
+            // }
+            if (!isAvailable) {
+                inquiryData.proposedDate = proposedDateTime;
+            }
+            else {
+                inquiryData.proposedDate = proposedDateTime;
+            }
+        }
         const inquiry = await prisma_1.default.inquiry.create({
-            data: {
-                inquiryNumber: this.generateInquiryNumber(),
-                userId,
-                propertyId,
-                vendorId: property.vendorId,
-                name,
-                location,
-                message,
-                meetingType,
-                status: client_1.InquiryStatus.PENDING
-            },
+            data: inquiryData,
             include: {
                 user: {
                     select: {
@@ -333,7 +353,7 @@ class InquiryService {
         return inquiry;
     }
     static async reviewInquiry(inquiryId, vendorId, data) {
-        const { status, reason } = data;
+        const { status, reason, scheduledDate } = data;
         const inquiry = await prisma_1.default.inquiry.findUnique({
             where: { id: inquiryId },
             include: {
@@ -379,6 +399,34 @@ class InquiryService {
         if (status === 'DECLINED') {
             updateData.responseNote = reason;
         }
+        if (status === 'ACCEPTED') {
+            if (!scheduledDate) {
+                throw new BadRequestError_1.BadRequestError("Scheduled date is required when accepting an inquiry");
+            }
+            const scheduledDateTime = new Date(scheduledDate);
+            if (isNaN(scheduledDateTime.getTime())) {
+                throw new BadRequestError_1.BadRequestError("Invalid scheduled date format");
+            }
+            // Validate scheduled date is in the future
+            if (scheduledDateTime < new Date()) {
+                throw new BadRequestError_1.BadRequestError("Scheduled date must be in the future");
+            }
+            // Check vendor availability
+            const isAvailable = await vendor_service_1.VendorService.isAvailable(vendorId, scheduledDateTime);
+            //  if (!isAvailable) {
+            //   throw new BadRequestError("You are not available at the scheduled date and time. Please set your availability first.");
+            // }
+            // updateData.scheduledDate = scheduledDateTime;
+            if (!isAvailable) {
+                updateData.scheduledDate = scheduledDateTime;
+                if (!updateData.responseNote) {
+                    updateData.responseNote = "Scheduled outside of regular availability hours";
+                }
+            }
+            else {
+                updateData.scheduledDate = scheduledDateTime;
+            }
+        }
         const updatedInquiry = await prisma_1.default.inquiry.update({
             where: { id: inquiryId },
             data: updateData,
@@ -400,14 +448,20 @@ class InquiryService {
                 }
             }
         });
-        // Send notification to user
         await this.sendReviewNotification(updatedInquiry, status, reason);
         logger_1.default.info(`Inquiry ${inquiry.inquiryNumber} ${status.toLowerCase()} by vendor ${vendorId}`);
         return updatedInquiry;
     }
-    static async sendReviewNotification(inquiry, status, reason) {
+    static async sendReviewNotification(inquiry, status, reason, scheduledDate) {
         try {
             const isAccepted = status === 'ACCEPTED';
+            let message = isAccepted
+                ? `Your inquiry about "${inquiry.property.name}" has been accepted`
+                : `Your inquiry about "${inquiry.property.name}" has been declined${reason ? `: ${reason}` : ''}`;
+            if (isAccepted && scheduledDate) {
+                const date = new Date(scheduledDate);
+                message += ` for ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`;
+            }
             await prisma_1.default.notification.create({
                 data: {
                     userId: inquiry.userId,
@@ -421,11 +475,11 @@ class InquiryService {
                         propertyId: inquiry.property.id,
                         inquiryNumber: inquiry.inquiryNumber,
                         status,
-                        ...(reason && { reason })
+                        ...(reason && { reason }),
+                        ...(scheduledDate && { scheduledDate })
                     }
                 }
             });
-            // Email notification
             if (inquiry.user.email) {
                 const templateName = isAccepted ? 'inquiry-accepted' : 'inquiry-declined';
                 const subject = isAccepted
@@ -437,6 +491,9 @@ class InquiryService {
                     propertyName: inquiry.property.name,
                     status: status,
                     ...(reason && { reason }),
+                    ...(scheduledDate && {
+                        scheduledDate: new Date(scheduledDate).toLocaleString()
+                    }),
                     currentYear: new Date().getFullYear(),
                     dashboardUrl: `${process.env.FRONTEND_URL}/dashboard`
                 });

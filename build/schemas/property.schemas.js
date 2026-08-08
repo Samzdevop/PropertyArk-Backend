@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.approveRejectPropertySchema = exports.getPropertyMediaSchema = exports.bulkDeleteMediaSchema = exports.updateMediaSchema = exports.reviewPropertySchema = exports.updatePropertySchema = exports.createPropertySchema = void 0;
+exports.approveRejectPropertySchema = exports.getPropertyMediaSchema = exports.bulkDeleteMediaSchema = exports.updateMediaSchema = exports.myPropertiesQuerySchema = exports.reviewPropertySchema = exports.updatePropertySchema = exports.createPropertySchema = void 0;
 const zod_1 = require("zod");
 const PropertyTypeEnum = zod_1.z.enum(['RESIDENTIAL', 'COMMERCIAL', 'INDUSTRIAL', 'LAND', 'MIXED_USE']);
 const ListingTypeEnum = zod_1.z.enum(['FOR_RENT', 'FOR_SALE', 'FOR_LAND', 'FOR_SHORTLET']);
@@ -92,6 +92,16 @@ exports.reviewPropertySchema = zod_1.z.object({
     }, {
         message: "Rejection reason is required when rejecting a property",
         path: ["rejectionReason"]
+    })
+});
+exports.myPropertiesQuerySchema = zod_1.z.object({
+    query: zod_1.z.object({
+        page: zod_1.z.string().optional().default('1').transform(val => parseInt(val)),
+        limit: zod_1.z.string().optional().default('10').transform(val => parseInt(val)),
+        status: zod_1.z.enum(['AVAILABLE', 'OCCUPIED', 'UNDER_MAINTENANCE', 'UNDER_CONSTRUCTION', 'SOLD', 'RENTED']).optional(),
+        listingStatus: zod_1.z.enum(['PENDING', 'ACTIVE', 'REJECTED']).optional(),
+        listingType: zod_1.z.enum(['FOR_RENT', 'FOR_SALE', 'FOR_LAND', 'FOR_SHORTLET']).optional(),
+        search: zod_1.z.string().optional()
     })
 });
 exports.updateMediaSchema = zod_1.z.object({

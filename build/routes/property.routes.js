@@ -13,6 +13,7 @@ exports.propertyRouter = (0, express_1.Router)();
 exports.propertyRouter.get('/available', property_controller_1.getAvailableProperties);
 exports.propertyRouter.get('/public/:id', trackView_middleware_1.trackPropertyView, property_controller_1.getPublicPropertyById);
 exports.propertyRouter.get('/', errorHandler_middleware_1.authenticateJWT, property_controller_1.getAllProperties);
+exports.propertyRouter.get('/my-properties', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['VENDOR', 'ADMIN']), (0, validateRequest_middleware_1.validateRequest)(property_schemas_1.myPropertiesQuerySchema), property_controller_1.getMyProperties);
 exports.propertyRouter.get('/:id', errorHandler_middleware_1.authenticateJWT, trackView_middleware_1.trackPropertyView, property_controller_1.getPropertyById);
 exports.propertyRouter.post('/', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['ADMIN', 'VENDOR', 'STAFF']), upload_1.upload.fields([
     { name: 'photos', maxCount: 10 },

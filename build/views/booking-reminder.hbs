@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Reminder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      background-color: #FF9800;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 5px 5px 0 0;
+    }
+    .header h2 {
+      margin: 0;
+    }
+    .content {
+      background-color: #f9f9f9;
+      padding: 30px;
+      border-radius: 0 0 5px 5px;
+      border: 1px solid #ddd;
+      border-top: none;
+    }
+    .info-box {
+      background-color: #fff3e0;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .info-row:last-child {
+      border-bottom: none;
+    }
+    .info-label {
+      font-weight: bold;
+      color: #555;
+    }
+    .info-value {
+      color: #333;
+    }
+    .badge-upcoming {
+      background-color: #FF9800;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      display: inline-block;
+    }
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>🔔 Booking Reminder</h2>
+    </div>
+    <div class="content">
+      <p>Hello {{recipientName}},</p>
+      <p>This is a friendly reminder about your upcoming booking.</p>
+
+      <div class="info-box">
+        <strong>📋 Booking Details</strong>
+        <div class="info-row">
+          <span class="info-label">Booking Number:</span>
+          <span class="info-value">{{bookingNumber}}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Status:</span>
+          <span class="info-value"><span class="badge-upcoming">Upcoming</span></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Property:</span>
+          <span class="info-value">{{propertyName}}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Address:</span>
+          <span class="info-value">{{propertyAddress}}, {{propertyCity}}, {{propertyState}}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Check-in:</span>
+          <span class="info-value">{{checkInDate}}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Check-out:</span>
+          <span class="info-value">{{checkOutDate}}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Days until check-in:</span>
+          <span class="info-value">{{daysUntil}} days</span>
+        </div>
+      </div>
+
+      <div style="margin: 20px 0;">
+        <h4>Reminders</h4>
+        <ul>
+          <li>Check-in time: <strong>2:00 PM</strong></li>
+          <li>Check-out time: <strong>11:00 AM</strong></li>
+          <li>Please bring a valid ID</li>
+        </ul>
+      </div>
+
+      <p style="font-size: 14px; color: #666;">
+        We look forward to hosting you!
+      </p>
+    </div>
+    <div class="footer">
+      <p>© {{currentYear}} Property Management. All rights reserved.</p>
+      <p>This is an automated message, please do not reply.</p>
+    </div>
+  </div>
+</body>
+</html>

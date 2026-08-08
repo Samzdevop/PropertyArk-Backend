@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPropertyMediaStats = exports.updateMedia = exports.getMediaById = exports.bulkDeleteMedia = exports.getPropertyMedia = exports.setPrimaryMedia = exports.deleteMedia = exports.uploadPropertyMedia = exports.getPublicPropertyById = exports.getAvailableProperties = exports.reviewProperty = exports.deleteProperty = exports.updateProperty = exports.getPropertyById = exports.getAllProperties = exports.createProperty = void 0;
+exports.getPropertyMediaStats = exports.updateMedia = exports.getMediaById = exports.bulkDeleteMedia = exports.getPropertyMedia = exports.setPrimaryMedia = exports.deleteMedia = exports.uploadPropertyMedia = exports.getPublicPropertyById = exports.getAvailableProperties = exports.getMyProperties = exports.reviewProperty = exports.deleteProperty = exports.updateProperty = exports.getPropertyById = exports.getAllProperties = exports.createProperty = void 0;
 const prisma_1 = __importDefault(require("../prisma"));
 const sendSuccessResponse_1 = require("../utils/sendSuccessResponse");
 const property_service_1 = require("../services/property.service");
@@ -193,9 +193,41 @@ const reviewProperty = async (req, res, next) => {
     }
 };
 exports.reviewProperty = reviewProperty;
+const getMyProperties = async (req, res, next) => {
+    try {
+        const user = req.user;
+        if (user.role !== client_1.Role.VENDOR && user.role !== client_1.Role.ADMIN) {
+            throw new ForbiddenError_1.ForbiddenError("Only vendors and admins can access this endpoint");
+        }
+        const { page = 1, limit = 10, status, listingStatus, listingType, search } = req.query;
+        const result = await property_service_1.PropertyService.getMyProperties(user.id, user.role, {
+            page: Number(page),
+            limit: Number(limit),
+            status: status,
+            listingStatus: listingStatus,
+            listingType: listingType,
+            search: search
+        });
+        // Attach base URLs to media
+        const propertiesWithUrls = (0, attachBaseUrl_utils_1.attachBaseUrlUploads)((0, serialize_utils_1.serializeDates)(result.properties), req);
+        await (0, activity_controller_1.logActivity)(user.id, 'VIEW_MY_PROPERTIES', 'PROPERTY', 'my-properties', {
+            totalProperties: result.totalProperties.find((p) => p.TotalListing !== undefined)?.TotalListing || 0,
+            page: result.pagination.page
+        }, req);
+        (0, sendSuccessResponse_1.sendSuccessResponse)(res, "My Properties retrieved successfully", {
+            totalProperties: result.totalProperties,
+            properties: propertiesWithUrls,
+            pagination: result.pagination
+        });
+    }
+    catch (error) {
+        next(error);
+    }
+};
+exports.getMyProperties = getMyProperties;
 const getAvailableProperties = async (req, res, next) => {
     try {
-        const { type, listingType, city, state, bedrooms, minPrice, maxPrice, page = 1, limit = 12 } = req.query;
+        const { type, listingType, city, state, bedrooms, minPrice, maxPrice, status, page = 1, limit = 12 } = req.query;
         const result = await property_service_1.PropertyService.getAvailableProperties({
             type: type,
             listingType: listingType,
@@ -204,6 +236,7 @@ const getAvailableProperties = async (req, res, next) => {
             bedrooms: bedrooms,
             minPrice: minPrice,
             maxPrice: maxPrice,
+            status: status,
             page: Number(page),
             limit: Number(limit)
         });

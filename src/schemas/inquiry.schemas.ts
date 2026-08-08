@@ -1,4 +1,3 @@
-// schemas/inquiry.schemas.ts
 import { z } from 'zod';
 
 export const createInquirySchema = z.object({
@@ -9,7 +8,8 @@ export const createInquirySchema = z.object({
     message: z.string().min(1, 'Message is required'),
     meetingType: z.enum(['VIDEO_CALL', 'IN_PERSON'], {
       errorMap: () => ({ message: "Meeting type must be 'VIDEO_CALL' or 'IN_PERSON'" })
-    })
+    }),
+    proposedDate: z.string().datetime().optional()
   })
 });
 
@@ -19,7 +19,8 @@ export const reviewInquirySchema = z.object({
   }),
   body: z.object({
     status: z.enum(['ACCEPTED', 'DECLINED']),
-    reason: z.string().optional()
+    reason: z.string().optional(),
+    scheduledDate: z.string().datetime().optional()
   }).refine(
     (data) => {
       if (data.status === 'DECLINED' && !data.reason) {
@@ -31,7 +32,18 @@ export const reviewInquirySchema = z.object({
       message: "Reason is required when declining an inquiry",
       path: ["reason"]
     }
-  )
+  ).refine(
+    (data) => {
+      if (data.status === 'ACCEPTED' && !data.scheduledDate) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: "Scheduled date is required when accepting an inquiry",
+      path: ["scheduledDate"]
+    }
+  )  
 });
 
 export const getInquiriesQuerySchema = z.object({

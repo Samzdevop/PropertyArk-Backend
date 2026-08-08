@@ -20,6 +20,10 @@ exports.STORAGE_CONTAINERS = {
 };
 exports.UPLOADS_PATH = path_1.default.join(process.cwd(), "uploads");
 const storageDriver = process.env.STORAGE_DRIVER || 'local';
+const storageConfig = {
+    driver: storageDriver,
+    uploadsFolder: path_1.default.resolve(__dirname, '..', '..', 'uploads')
+};
 let storage;
 // S3 Client
 const getS3Client = () => {
@@ -49,7 +53,7 @@ const generateSafeFileName = (originalName) => {
     return `${timestamp}-${uuid}-${sanitizedName}${extension}`;
 };
 // Configure storage based on driver
-if (storageDriver === 's3') {
+if (storageConfig.driver === 's3') {
     const s3 = getS3Client();
     storage = (0, multer_s3_1.default)({
         s3,

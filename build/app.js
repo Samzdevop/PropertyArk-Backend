@@ -26,6 +26,9 @@ const favorite_routes_1 = require("./routes/favorite.routes");
 const inquiry_routes_1 = require("./routes/inquiry.routes");
 const vendor_routes_1 = require("./routes/vendor.routes");
 const viewStats_routes_1 = require("./routes/viewStats.routes");
+const shortletBooking_routes_1 = require("./routes/shortletBooking.routes");
+const notification_routes_1 = require("./routes/notification.routes");
+const adminDashboard_routes_1 = require("./routes/adminDashboard.routes");
 exports.app = (0, express_1.default)();
 // const isProduction = process.env.NODE_ENV === 'production';
 // app.use(
@@ -98,5 +101,8 @@ exports.app.use('/api/v1/favorites', favorite_routes_1.favoriteRouter);
 exports.app.use('/api/v1/inquiries', inquiry_routes_1.inquiryRouter);
 exports.app.use('/api/v1/vendor', vendor_routes_1.vendorRouter);
 exports.app.use('/api/v1/view-stats', viewStats_routes_1.viewStatsRouter);
+exports.app.use('/api/v1/shortlet-bookings', shortletBooking_routes_1.shortletBookingRouter);
+exports.app.use('/api/v1/notifications', notification_routes_1.notificationRouter);
+exports.app.use('/api/v1/admin', adminDashboard_routes_1.adminDashboardRouter);
 exports.app.use(notFoundRoute_middleware_1.notFoundHandler);
 exports.app.use(errorHandler_middleware_1.errorHandler);

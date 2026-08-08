@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Cancelled</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      background-color: #f44336;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 5px 5px 0 0;
+    }
+    .header h2 {
+      margin: 0;
+    }
+    .content {
+      background-color: #f9f9f9;
+      padding: 30px;
+      border-radius: 0 0 5px 5px;
+      border: 1px solid #ddd;
+      border-top: none;
+    }
+    .info-box {
+      background-color: #ffebee;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .info-row:last-child {
+      border-bottom: none;
+    }
+    .info-label {
+      font-weight: bold;
+      color: #555;
+    }
+    .info-value {
+      color: #333;
+    }
+    .badge-cancelled {
+      background-color: #f44336;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      display: inline-block;
+    }
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Booking Cancelled</h2>
+    </div>
+    <div class="content">
+      <p>Hello {{recipientName}},</p>
+      <p>The booking for <strong>{{propertyName}}</strong> has been cancelled.</p>
+
+      <div class="info-box">
+        <strong>Booking Details</strong>
+        <div class="info-row">
+          <span class="info-label">Booking Number:</span>
+          <span class="info-value">{{bookingNumber}}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Status:</span>
+          <span class="info-value"><span class="badge-cancelled">Cancelled</span></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Guest Name:</span>
+          <span class="info-value">{{guestName}}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Property:</span>
+          <span class="info-value">{{propertyName}}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Check-in:</span>
+          <span class="info-value">{{checkInDate}}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Check-out:</span>
+          <span class="info-value">{{checkOutDate}}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Total Amount:</span>
+          <span class="info-value">${{totalAmount}}</span>
+        </div>
+        {{#if reason}}
+        <div class="info-row">
+          <span class="info-label">Reason:</span>
+          <span class="info-value">{{reason}}</span>
+        </div>
+        {{/if}}
+      </div>
+
+      <p style="font-size: 14px; color: #666;">
+        {{#if isVendor}}
+        This booking has been cancelled. The dates are now available for other guests.
+        {{else}}
+        Your booking has been cancelled. Please contact the property owner for more information.
+        {{/if}}
+      </p>
+    </div>
+    <div class="footer">
+      <p>© {{currentYear}} Property Management. All rights reserved.</p>
+      <p>This is an automated message, please do not reply.</p>
+    </div>
+  </div>
+</body>
+</html>

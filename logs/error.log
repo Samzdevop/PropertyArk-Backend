@@ -6089,3 +6089,189 @@
 2026-07-13 13:39:57 [31merror[39m [31mSMTP transporter verification failed: Invalid login: 525 5.7.1 Unauthorized IP address[39m
 2026-08-04 03:39:49 [31merror[39m [31mInternal Server Error Multipart: Boundary not found[39m
 2026-08-04 03:40:38 [31merror[39m [31mInternal Server Error Multipart: Boundary not found[39m
+2026-08-04 11:18:27 [31merror[39m [31mInternal Server Error Vendor not found[39m
+2026-08-04 12:46:59 [31merror[39m [31mProperty not found or not available Property not found or not available[39m
+2026-08-04 12:51:22 [31merror[39m [31mProperty not found or not available Property not found or not available[39m
+2026-08-04 12:52:27 [31merror[39m [31mProperty not found or not available Property not found or not available[39m
+2026-08-04 12:53:23 [31merror[39m [31mUnexpected end of JSON input Unexpected end of JSON input[39m
+2026-08-04 12:54:06 [31merror[39m [31mProperty not found or not available Property not found or not available[39m
+2026-08-04 12:57:25 [31merror[39m [31mProperty not found or not available Property not found or not available[39m
+2026-08-04 12:58:24 [31merror[39m [31mSMTP transporter verification failed: connect ETIMEDOUT 172.246.243.66:587[39m
+2026-08-04 12:58:24 [31merror[39m [31mNodemailer email sending failed: connect ETIMEDOUT 172.246.243.66:587 connect ETIMEDOUT 172.246.243.66:587[39m
+2026-08-04 12:58:24 [31merror[39m [31mFailed to send email: Failed to send email: connect ETIMEDOUT 172.246.243.66:587[39m
+2026-08-04 12:58:24 [31merror[39m [31mFailed to send inquiry notifications: Failed to send email[39m
+2026-08-05 16:51:49 [31merror[39m [31mProperty not found or not available Property not found or not available[39m
+2026-08-05 16:52:21 [31merror[39m [31mPrisma error: [39m
+[31mInvalid `prisma.vendorAvailability.findFirst()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\services\vendor.service.ts:488:50[39m
+
+[31m  485 targetDate.setHours(0, 0, 0, 0);[39m
+[31m  486 const timeStr = this.formatTime(dateTime);[39m
+[31m  487 [39m
+[31m→ 488 const slot = await prisma.vendorAvailability.findFirst([39m
+[31mThe table `public.VendorAvailability` does not exist in the current database. [39m
+[31mInvalid `prisma.vendorAvailability.findFirst()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\services\vendor.service.ts:488:50[39m
+
+[31m  485 targetDate.setHours(0, 0, 0, 0);[39m
+[31m  486 const timeStr = this.formatTime(dateTime);[39m
+[31m  487 [39m
+[31m→ 488 const slot = await prisma.vendorAvailability.findFirst([39m
+[31mThe table `public.VendorAvailability` does not exist in the current database.[39m
+2026-08-05 16:53:37 [31merror[39m [31mPrisma error: [39m
+[31mInvalid `prisma.vendorAvailability.findFirst()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\services\vendor.service.ts:488:50[39m
+
+[31m  485 targetDate.setHours(0, 0, 0, 0);[39m
+[31m  486 const timeStr = this.formatTime(dateTime);[39m
+[31m  487 [39m
+[31m→ 488 const slot = await prisma.vendorAvailability.findFirst([39m
+[31mThe table `public.VendorAvailability` does not exist in the current database. [39m
+[31mInvalid `prisma.vendorAvailability.findFirst()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\services\vendor.service.ts:488:50[39m
+
+[31m  485 targetDate.setHours(0, 0, 0, 0);[39m
+[31m  486 const timeStr = this.formatTime(dateTime);[39m
+[31m  487 [39m
+[31m→ 488 const slot = await prisma.vendorAvailability.findFirst([39m
+[31mThe table `public.VendorAvailability` does not exist in the current database.[39m
+2026-08-05 17:00:30 [31merror[39m [31mVendor is not available at the proposed date and time Vendor is not available at the proposed date and time[39m
+2026-08-06 00:02:52 [31merror[39m [31mFailed to send inquiry notifications: ENOENT: no such file or directory, open 'C:\Users\HomePC\Desktop\PropertyArk-Backend\src\views\inquiry-confirmation.hbs'[39m
+2026-08-07 04:27:22 [31merror[39m [31mProperty not found or not available for shortlet Property not found or not available for shortlet[39m
+2026-08-07 04:27:47 [31merror[39m [31mDatabase validation error: [39m
+[31mInvalid `prisma.shortletBooking.create()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\services\shortletBooking.service.ts:149:50[39m
+
+[31m  146 }[39m
+[31m  147 [39m
+[31m  148 // Create booking[39m
+[31m→ 149 const booking = await prisma.shortletBooking.create({[39m
+[31m        data: {[39m
+[31m          bookingNumber: "BKG-2026-2034",[39m
+[31m          propertyId: "cmrirxisj00hn94i43tsgq86y",[39m
+[31m          vendorId: "cmrirxiga000694i41cjrz7s6",[39m
+[31m          guestLastName: "Doe",[39m
+[31m          guestEmail: "john.doe@example.com",[39m
+[31m          guestPhone: "+1234567890",[39m
+[31m          adultCount: 2,[39m
+[31m          childCount: 1,[39m
+[31m          checkInDate: new Date("2026-08-20T14:00:00.000Z"),[39m
+[31m          checkOutDate: new Date("2026-08-25T11:00:00.000Z"),[39m
+[31m          totalNights: 5,[39m
+[31m          totalAmount: 1785,[39m
+[31m          paymentMethod: "TRANSFER",[39m
+[31m          status: "PENDING",[39m
+[31m          userId: null,[39m
+[31m      +   guestFirstName: String[39m
+[31m        },[39m
+[31m        include: {[39m
+[31m          property: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              name: true,[39m
+[31m              address: true,[39m
+[31m              city: true,[39m
+[31m              state: true,[39m
+[31m              shortletAmount: true,[39m
+[31m              media: {[39m
+[31m                take: 1,[39m
+[31m                where: {[39m
+[31m                  isPrimary: true[39m
+[31m                },[39m
+[31m                select: {[39m
+[31m                  url: true[39m
+[31m                }[39m
+[31m              }[39m
+[31m            }[39m
+[31m          },[39m
+[31m          vendor: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              email: true,[39m
+[31m              phone: true[39m
+[31m            }[39m
+[31m          },[39m
+[31m          user: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              email: true,[39m
+[31m              phone: true[39m
+[31m            }[39m
+[31m          }[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mArgument `guestFirstName` is missing. [39m
+[31mInvalid `prisma.shortletBooking.create()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\services\shortletBooking.service.ts:149:50[39m
+
+[31m  146 }[39m
+[31m  147 [39m
+[31m  148 // Create booking[39m
+[31m→ 149 const booking = await prisma.shortletBooking.create({[39m
+[31m        data: {[39m
+[31m          bookingNumber: "BKG-2026-2034",[39m
+[31m          propertyId: "cmrirxisj00hn94i43tsgq86y",[39m
+[31m          vendorId: "cmrirxiga000694i41cjrz7s6",[39m
+[31m          guestLastName: "Doe",[39m
+[31m          guestEmail: "john.doe@example.com",[39m
+[31m          guestPhone: "+1234567890",[39m
+[31m          adultCount: 2,[39m
+[31m          childCount: 1,[39m
+[31m          checkInDate: new Date("2026-08-20T14:00:00.000Z"),[39m
+[31m          checkOutDate: new Date("2026-08-25T11:00:00.000Z"),[39m
+[31m          totalNights: 5,[39m
+[31m          totalAmount: 1785,[39m
+[31m          paymentMethod: "TRANSFER",[39m
+[31m          status: "PENDING",[39m
+[31m          userId: null,[39m
+[31m      +   guestFirstName: String[39m
+[31m        },[39m
+[31m        include: {[39m
+[31m          property: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              name: true,[39m
+[31m              address: true,[39m
+[31m              city: true,[39m
+[31m              state: true,[39m
+[31m              shortletAmount: true,[39m
+[31m              media: {[39m
+[31m                take: 1,[39m
+[31m                where: {[39m
+[31m                  isPrimary: true[39m
+[31m                },[39m
+[31m                select: {[39m
+[31m                  url: true[39m
+[31m                }[39m
+[31m              }[39m
+[31m            }[39m
+[31m          },[39m
+[31m          vendor: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              email: true,[39m
+[31m              phone: true[39m
+[31m            }[39m
+[31m          },[39m
+[31m          user: {[39m
+[31m            select: {[39m
+[31m              id: true,[39m
+[31m              fullName: true,[39m
+[31m              email: true,[39m
+[31m              phone: true[39m
+[31m            }[39m
+[31m          }[39m
+[31m        }[39m
+[31m      })[39m
+
+[31mArgument `guestFirstName` is missing.[39m
+2026-08-07 04:53:01 [31merror[39m [31mProperty is already booked for the selected dates Property is already booked for the selected dates[39m
+2026-08-07 04:53:43 [31merror[39m [31mProperty is already booked for the selected dates Property is already booked for the selected dates[39m
+2026-08-07 04:53:54 [31merror[39m [31mProperty is already booked for the selected dates Property is already booked for the selected dates[39m
+2026-08-07 04:57:02 [31merror[39m [31mProperty is already booked for the selected dates Property is already booked for the selected dates[39m
+2026-08-07 04:57:15 [31merror[39m [31mProperty is already booked for the selected dates Property is already booked for the selected dates[39m
+2026-08-08 10:00:02 [31merror[39m [31mInvalid role. Allowed: VENDOR, USER, STAFF Invalid role. Allowed: VENDOR, USER, STAFF[39m

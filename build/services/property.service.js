@@ -10,6 +10,7 @@ const BadRequestError_1 = require("../errors/BadRequestError");
 const ForbiddenError_1 = require("../errors/ForbiddenError");
 const NotFoundError_1 = require("../errors/NotFoundError");
 const upload_1 = require("../config/upload");
+// import { VendorService } from "./vendor.service";
 class PropertyService {
     static parseAmenities(amenities) {
         if (!amenities)
@@ -148,19 +149,37 @@ class PropertyService {
                 { field: "videos", type: "VIDEO", container: upload_1.STORAGE_CONTAINERS.PROPERTY_VIDEOS },
                 { field: "documents", type: "DOCUMENT", container: upload_1.STORAGE_CONTAINERS.PROPERTY_DOCUMENTS }
             ];
+            const storageDriver = process.env.STORAGE_DRIVER || 'local';
             for (const config of uploadConfig) {
                 const fileGroup = files[config.field];
                 if (!fileGroup || fileGroup.length === 0)
                     continue;
-                const urls = await (0, upload_1.uploadMultipleToAzure)(fileGroup, config.container);
+                let urls = [];
+                if (storageDriver === 'azure') {
+                    // Azure: Upload to Azure blob storage
+                    urls = await (0, upload_1.uploadMultipleToAzure)(fileGroup, config.container);
+                }
+                else if (storageDriver === 's3') {
+                    // S3: Files already uploaded by multer-s3, get location from file
+                    urls = fileGroup.map((file) => file.location || `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${file.key}`);
+                }
+                else {
+                    // LOCAL: Files saved to disk, generate URL
+                    urls = fileGroup.map((file) => {
+                        // For local storage, multer saves files and provides filename
+                        const filename = file.filename || file.key || file.originalname;
+                        return `/uploads/${filename}`;
+                    });
+                }
                 urls.forEach((url, index) => {
+                    const file = fileGroup[index];
                     mediaData.push({
-                        name: fileGroup[index].originalname,
+                        name: file.originalname,
                         type: config.type,
-                        url,
-                        key: url.split("/").pop() || "",
-                        size: fileGroup[index].size,
-                        mimeType: fileGroup[index].mimetype,
+                        url: url,
+                        key: url.split('/').pop() || file.filename || file.originalname,
+                        size: file.size,
+                        mimeType: file.mimetype,
                         container: config.container,
                         propertyId: propertyId,
                         isPrimary: index === 0 && config.field === "photos"
@@ -169,6 +188,7 @@ class PropertyService {
             }
             if (mediaData.length > 0) {
                 await prisma_1.default.media.createMany({ data: mediaData });
+                console.log(`${mediaData.length} media files saved to database for property ${propertyId}`);
             }
         }
         catch (error) {
@@ -240,9 +260,44 @@ class PropertyService {
             }),
             prisma_1.default.property.count({ where })
         ]);
-        const enrichedProperties = properties.map((property) => ({
-            ...property,
-            priceDisplay: this.getPriceDisplay(property)
+        // const enrichedProperties = properties.map((property:any) => ({
+        //   ...property,
+        //   priceDisplay: this.getPriceDisplay(property)
+        // }));
+        const enrichedProperties = await Promise.all(properties.map(async (property) => {
+            let availability = [];
+            const vendorId = property.vendorId;
+            if (vendorId) {
+                const allSlots = await prisma_1.default.vendorAvailability.findMany({
+                    where: {
+                        vendorId: vendorId,
+                        isActive: true
+                    },
+                    orderBy: { date: 'asc' }
+                });
+                // Group by date
+                const groupedSlots = {};
+                allSlots.forEach(slot => {
+                    const dateKey = slot.date.toISOString().split('T')[0];
+                    if (!groupedSlots[dateKey]) {
+                        groupedSlots[dateKey] = [];
+                    }
+                    groupedSlots[dateKey].push({
+                        startTime: slot.startTime,
+                        endTime: slot.endTime,
+                        isActive: slot.isActive
+                    });
+                });
+                availability = Object.entries(groupedSlots).map(([date, slots]) => ({
+                    date,
+                    slots
+                }));
+            }
+            return {
+                ...property,
+                priceDisplay: this.getPriceDisplay(property),
+                availability: availability // Return ALL availability slots
+            };
         }));
         return {
             properties: enrichedProperties,
@@ -254,16 +309,204 @@ class PropertyService {
             }
         };
     }
+    static async getMyProperties(userId, role, queryParams) {
+        // Verify user is a vendor
+        if (role !== client_1.Role.VENDOR && role !== client_1.Role.ADMIN) {
+            throw new Error("Only vendors and admins can access this endpoint");
+        }
+        const { page = 1, limit = 10, status, listingStatus, listingType, search } = queryParams;
+        const skip = (Number(page) - 1) * Number(limit);
+        const take = Number(limit);
+        // Build where clause
+        const where = { vendorId: userId };
+        if (status)
+            where.status = status;
+        if (listingStatus)
+            where.listingStatus = listingStatus;
+        if (listingType)
+            where.listingType = listingType;
+        if (search) {
+            where.OR = [
+                { name: { contains: search, mode: 'insensitive' } },
+                { description: { contains: search, mode: 'insensitive' } },
+                { address: { contains: search, mode: 'insensitive' } },
+                { city: { contains: search, mode: 'insensitive' } },
+                { state: { contains: search, mode: 'insensitive' } }
+            ];
+        }
+        // Get all properties (for statistics) and paginated properties
+        const [allProperties, properties, total] = await Promise.all([
+            prisma_1.default.property.findMany({
+                where: { vendorId: userId },
+                select: {
+                    id: true,
+                    status: true,
+                    listingStatus: true,
+                    listingType: true,
+                    rentAmount: true,
+                    salePrice: true,
+                    landFee: true,
+                    shortletAmount: true,
+                    viewCount: true,
+                    inquiryCount: true,
+                    createdAt: true
+                }
+            }),
+            prisma_1.default.property.findMany({
+                where,
+                skip,
+                take,
+                orderBy: { createdAt: 'desc' },
+                include: {
+                    media: {
+                        orderBy: { isPrimary: 'desc' },
+                        take: 10
+                    },
+                    vendor: {
+                        select: {
+                            id: true,
+                            fullName: true,
+                            email: true,
+                            phone: true,
+                            avatar: true
+                        }
+                    },
+                    // staff: {
+                    //   select: {
+                    //     id: true,
+                    //     fullName: true,
+                    //     email: true,
+                    //     employeeId: true,
+                    //     department: true
+                    //   }
+                    // },
+                    _count: {
+                        select: {
+                            media: true,
+                            inquiries: true,
+                            favorites: true
+                        }
+                    }
+                }
+            }),
+            prisma_1.default.property.count({ where })
+        ]);
+        // Calculate statistics
+        const totalProperties = allProperties.length;
+        const activeListings = allProperties.filter(p => p.listingStatus === client_1.PropertyListingStatus.ACTIVE).length;
+        const pendingApproval = allProperties.filter(p => p.listingStatus === client_1.PropertyListingStatus.PENDING).length;
+        const rejectedListings = allProperties.filter(p => p.listingStatus === client_1.PropertyListingStatus.REJECTED).length;
+        // Calculate occupancy rate (properties with OCCUPIED or RENTED status)
+        const occupiedProperties = allProperties.filter(p => p.status === client_1.PropertyStatus.OCCUPIED ||
+            p.status === client_1.PropertyStatus.RENTED).length;
+        const occupancyRate = totalProperties > 0
+            ? Math.round((occupiedProperties / totalProperties) * 100)
+            : 0;
+        // Calculate sold rate
+        const soldProperties = allProperties.filter(p => p.status === client_1.PropertyStatus.SOLD).length;
+        const soldRate = totalProperties > 0
+            ? Math.round((soldProperties / totalProperties) * 100)
+            : 0;
+        // Total properties summary
+        const totalPropertiesSummary = [
+            { TotalListing: totalProperties },
+            { "Active Listing": activeListings },
+            { "Pending Approval": pendingApproval },
+            { "Occupancy rate": `${occupancyRate}%` },
+            { "Sold rate": `${soldRate}%` }
+        ];
+        // Format properties for response
+        const formattedProperties = properties.map(property => ({
+            id: property.id,
+            name: property.name,
+            description: property.description,
+            type: property.type,
+            listingType: property.listingType,
+            status: property.status,
+            listingStatus: property.listingStatus,
+            address: property.address,
+            city: property.city,
+            state: property.state,
+            country: property.country,
+            zipCode: property.zipCode,
+            price: this.getPriceDisplay(property),
+            amenities: property.amenities,
+            size: property.size,
+            sizeUnit: property.sizeUnit,
+            bedrooms: property.bedrooms,
+            bathrooms: property.bathrooms,
+            yearBuilt: property.yearBuilt,
+            viewCount: property.viewCount,
+            inquiryCount: property.inquiryCount,
+            createdAt: property.createdAt,
+            updatedAt: property.updatedAt,
+            media: property.media.map(m => ({
+                id: m.id,
+                name: m.name,
+                type: m.type,
+                url: m.url,
+                isPrimary: m.isPrimary
+            })),
+            vendor: property.vendor,
+            // staff: property.staff,
+            _count: {
+                media: property._count.media,
+                inquiries: property._count.inquiries,
+                favorites: property._count.favorites
+            }
+        }));
+        return {
+            totalProperties: totalPropertiesSummary,
+            properties: formattedProperties,
+            pagination: {
+                page: Number(page),
+                limit: Number(limit),
+                total,
+                pages: Math.ceil(total / Number(limit))
+            }
+        };
+    }
+    static async getPropertyCounts(vendorId) {
+        const [total, active, pending, rejected] = await Promise.all([
+            prisma_1.default.property.count({ where: { vendorId } }),
+            prisma_1.default.property.count({
+                where: {
+                    vendorId,
+                    listingStatus: client_1.PropertyListingStatus.ACTIVE
+                }
+            }),
+            prisma_1.default.property.count({
+                where: {
+                    vendorId,
+                    listingStatus: client_1.PropertyListingStatus.PENDING
+                }
+            }),
+            prisma_1.default.property.count({
+                where: {
+                    vendorId,
+                    listingStatus: client_1.PropertyListingStatus.REJECTED
+                }
+            })
+        ]);
+        return { total, active, pending, rejected };
+    }
+    static async getPropertiesByListingType(vendorId) {
+        return prisma_1.default.property.groupBy({
+            by: ['listingType'],
+            where: { vendorId },
+            _count: true
+        });
+    }
     static getPriceDisplay(property) {
         switch (property.listingType) {
             case client_1.ListingType.FOR_RENT:
-                return property.rentAmount ? `$${property.rentAmount.toLocaleString()}/month` : 'Contact for price';
+                return property.rentAmount ? `${property.rentAmount.toLocaleString()}/month` : 'Contact for price';
             case client_1.ListingType.FOR_SALE:
-                return property.salePrice ? `$${property.salePrice.toLocaleString()}` : 'Contact for price';
+                return property.salePrice ? `${property.salePrice.toLocaleString()}` : 'Contact for price';
             case client_1.ListingType.FOR_LAND:
-                return property.landFee ? `$${property.landFee.toLocaleString()}` : 'Contact for price';
+                return property.landFee ? `${property.landFee.toLocaleString()}` : 'Contact for price';
             case client_1.ListingType.FOR_SHORTLET:
-                return property.shortletAmount ? `$${property.shortletAmount.toLocaleString()}/night` : 'Contact for price';
+                return property.shortletAmount ? `${property.shortletAmount.toLocaleString()}/night` : 'Contact for price';
             default:
                 return 'Contact for price';
         }
@@ -306,9 +549,54 @@ class PropertyService {
         if (role === client_1.Role.VENDOR && property.vendorId !== userId) {
             throw new ForbiddenError_1.ForbiddenError("You don't have access to this property");
         }
+        // let availability = null;
+        // if (property.vendor && property.listingStatus === PropertyListingStatus.ACTIVE) {
+        //   // Get upcoming availability (next 7 days)
+        //   const today = new Date();
+        //   today.setHours(0, 0, 0, 0);
+        //   const nextWeek = new Date(today);
+        //   nextWeek.setDate(nextWeek.getDate() + 7);
+        //   availability = await VendorService.getVendorAvailabilitySlots(
+        //     property.vendorId,
+        //     {
+        //       startDate: today,
+        //       endDate: nextWeek
+        //     }
+        //   );
+        // }
+        let availability = [];
+        if (property.vendor && property.listingStatus === client_1.PropertyListingStatus.ACTIVE) {
+            // Get ALL availability slots for this vendor
+            const allSlots = await prisma_1.default.vendorAvailability.findMany({
+                where: {
+                    vendorId: property.vendorId,
+                    isActive: true
+                },
+                orderBy: { date: 'asc' }
+            });
+            // Group by date
+            const groupedSlots = {};
+            allSlots.forEach(slot => {
+                const dateKey = slot.date.toISOString().split('T')[0];
+                if (!groupedSlots[dateKey]) {
+                    groupedSlots[dateKey] = [];
+                }
+                groupedSlots[dateKey].push({
+                    startTime: slot.startTime,
+                    endTime: slot.endTime,
+                    isActive: slot.isActive
+                });
+            });
+            // Convert to array format
+            availability = Object.entries(groupedSlots).map(([date, slots]) => ({
+                date,
+                slots
+            }));
+        }
         return {
             ...property,
-            priceDisplay: this.getPriceDisplay(property)
+            priceDisplay: this.getPriceDisplay(property),
+            availability: availability
         };
     }
     static async getPublicPropertyById(propertyId) {
@@ -343,9 +631,52 @@ class PropertyService {
         if (!property) {
             throw new NotFoundError_1.NotFoundError("Property not found or not available");
         }
+        // let availability = null;
+        // if (property.vendor) {
+        //   // Get upcoming availability (next 7 days)
+        //   const today = new Date();
+        //   today.setHours(0, 0, 0, 0);
+        //   const nextWeek = new Date(today);
+        //   nextWeek.setDate(nextWeek.getDate() + 7);
+        //   availability = await VendorService.getVendorAvailabilitySlots(
+        //     property.vendorId,
+        //     {
+        //       startDate: today,
+        //       endDate: nextWeek
+        //     }
+        //   );
+        // }
+        let availability = [];
+        if (property.vendor) {
+            const allSlots = await prisma_1.default.vendorAvailability.findMany({
+                where: {
+                    vendorId: property.vendorId,
+                    isActive: true
+                },
+                orderBy: { date: 'asc' }
+            });
+            // Group by date
+            const groupedSlots = {};
+            allSlots.forEach(slot => {
+                const dateKey = slot.date.toISOString().split('T')[0];
+                if (!groupedSlots[dateKey]) {
+                    groupedSlots[dateKey] = [];
+                }
+                groupedSlots[dateKey].push({
+                    startTime: slot.startTime,
+                    endTime: slot.endTime,
+                    isActive: slot.isActive
+                });
+            });
+            availability = Object.entries(groupedSlots).map(([date, slots]) => ({
+                date,
+                slots
+            }));
+        }
         return {
             ...property,
-            priceDisplay: this.getPriceDisplay(property)
+            priceDisplay: this.getPriceDisplay(property),
+            availability: availability
         };
     }
     static async updateProperty(userId, role, propertyId, data, files) {
@@ -567,9 +898,43 @@ class PropertyService {
             }),
             prisma_1.default.property.count({ where })
         ]);
-        const enrichedProperties = properties.map((property) => ({
-            ...property,
-            priceDisplay: this.getPriceDisplay(property)
+        // const enrichedProperties = properties.map((property: any) => ({
+        //   ...property,
+        //   priceDisplay: this.getPriceDisplay(property)
+        // }));
+        const enrichedProperties = await Promise.all(properties.map(async (property) => {
+            let availability = [];
+            if (property.vendor) {
+                const allSlots = await prisma_1.default.vendorAvailability.findMany({
+                    where: {
+                        vendorId: property.vendorId,
+                        isActive: true
+                    },
+                    orderBy: { date: 'asc' }
+                });
+                // Group by date
+                const groupedSlots = {};
+                allSlots.forEach(slot => {
+                    const dateKey = slot.date.toISOString().split('T')[0];
+                    if (!groupedSlots[dateKey]) {
+                        groupedSlots[dateKey] = [];
+                    }
+                    groupedSlots[dateKey].push({
+                        startTime: slot.startTime,
+                        endTime: slot.endTime,
+                        isActive: slot.isActive
+                    });
+                });
+                availability = Object.entries(groupedSlots).map(([date, slots]) => ({
+                    date,
+                    slots
+                }));
+            }
+            return {
+                ...property,
+                priceDisplay: this.getPriceDisplay(property),
+                availability: availability
+            };
         }));
         return {
             properties: enrichedProperties,

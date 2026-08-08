@@ -14,14 +14,15 @@ export const createInquiry = async (
 ): Promise<void> => {
   try {
     const user = req.user as any;
-    const { propertyId, name, location, message, meetingType } = req.body;
+    const { propertyId, name, location, message, meetingType, proposedDate  } = req.body;
 
     const inquiry = await InquiryService.createInquiry(user.id, {
       propertyId,
       name,
       location,
       message,
-      meetingType
+      meetingType,
+      proposedDate
     });
 
     await logActivity(

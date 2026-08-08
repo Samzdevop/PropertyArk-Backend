@@ -16,12 +16,13 @@ import {
   getMediaById,
   updateMedia,
   bulkDeleteMedia,
-  reviewProperty
+  reviewProperty,
+  getMyProperties
 } from "../contollers/property.controller";
 import { authenticateJWT } from "../middlewares/errorHandler.middleware";
 import { requireRoles } from "../middlewares/roleCheck.middleware";
 import { validateRequest } from "../middlewares/validateRequest.middleware";
-import { bulkDeleteMediaSchema, createPropertySchema, reviewPropertySchema, updateMediaSchema, updatePropertySchema } from "../schemas/property.schemas";
+import { bulkDeleteMediaSchema, createPropertySchema, myPropertiesQuerySchema, reviewPropertySchema, updateMediaSchema, updatePropertySchema } from "../schemas/property.schemas";
 import { trackPropertyView } from "../middlewares/trackView.middleware";
 
 export const propertyRouter = Router();
@@ -43,6 +44,14 @@ propertyRouter.get(
   '/',
   authenticateJWT,
   getAllProperties
+);
+
+propertyRouter.get(
+  '/my-properties',
+  authenticateJWT,
+  requireRoles(['VENDOR', 'ADMIN']),
+  validateRequest(myPropertiesQuerySchema),
+  getMyProperties
 );
 
 propertyRouter.get(

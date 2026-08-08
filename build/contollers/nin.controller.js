@@ -37,7 +37,6 @@ const verifyVendorNIN = async (req, res, next) => {
                     ninRejectionReason: null
                 }
             });
-            // Create notification for vendor
             await prisma_1.default.notification.create({
                 data: {
                     userId: vendorId,

@@ -306,6 +306,68 @@ export const reviewProperty = async (
 };
 
 
+export const getMyProperties = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const user = req.user as any;
+
+    if (user.role !== Role.VENDOR && user.role !== Role.ADMIN) {
+      throw new ForbiddenError("Only vendors and admins can access this endpoint");
+    }
+
+    const {
+      page = 1,
+      limit = 10,
+      status,
+      listingStatus,
+      listingType,
+      search
+    } = req.query;
+
+    const result = await PropertyService.getMyProperties(
+      user.id,
+      user.role,
+      {
+        page: Number(page),
+        limit: Number(limit),
+        status: status as string,
+        listingStatus: listingStatus as string,
+        listingType: listingType as string,
+        search: search as string
+      }
+    );
+
+    // Attach base URLs to media
+    const propertiesWithUrls = attachBaseUrlUploads(
+      serializeDates(result.properties),
+      req
+    );
+
+    await logActivity(
+      user.id,
+      'VIEW_MY_PROPERTIES',
+      'PROPERTY',
+      'my-properties',
+      {
+        totalProperties: result.totalProperties.find((p:any) => p.TotalListing !== undefined)?.TotalListing || 0,
+        page: result.pagination.page
+      },
+      req
+    );
+
+    sendSuccessResponse(res, "My Properties retrieved successfully", {
+      totalProperties: result.totalProperties,
+      properties: propertiesWithUrls,
+      pagination: result.pagination
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const getAvailableProperties = async (
   req: Request,
   res: Response,
@@ -320,6 +382,7 @@ export const getAvailableProperties = async (
       bedrooms,
       minPrice,
       maxPrice,
+      status,
       page = 1,
       limit = 12
     } = req.query;
@@ -332,6 +395,7 @@ export const getAvailableProperties = async (
       bedrooms: bedrooms as string,
       minPrice: minPrice as string,
       maxPrice: maxPrice as string,
+      status: status as string,
       page: Number(page),
       limit: Number(limit)
     });

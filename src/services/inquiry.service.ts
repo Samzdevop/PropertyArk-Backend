@@ -1,4 +1,3 @@
-// services/inquiry.service.ts
 import prisma from "../prisma";
 import { NotFoundError } from "../errors/NotFoundError";
 import { ForbiddenError } from "../errors/ForbiddenError";
@@ -8,6 +7,7 @@ import Logger from "../config/logger";
 import { sendGraphMail } from "./mail.services";
 import { render } from "../utils/mailTemplate";
 import { MailInterface } from "../interfaces/mail.interfaces";
+import { VendorService } from "./vendor.service";
 
 export class InquiryService {
 
@@ -25,9 +25,10 @@ export class InquiryService {
       location: string;
       message: string;
       meetingType: MeetingType;
+      proposedDate: string;
     }
   ): Promise<any> {
-    const { propertyId, name, location, message, meetingType } = data;
+    const { propertyId, name, location, message, meetingType, proposedDate  } = data;
 
     const property = await prisma.property.findUnique({
       where: { 
@@ -54,18 +55,45 @@ export class InquiryService {
       throw new BadRequestError("Property has no vendor associated");
     }
 
+    const inquiryData: any = {
+      inquiryNumber: this.generateInquiryNumber(),
+      userId,
+      propertyId,
+      vendorId: property.vendorId,
+      name,
+      location,
+      message,
+      meetingType,
+      status: InquiryStatus.PENDING
+    };  
+
+    if (proposedDate) {
+      const proposedDateTime = new Date(proposedDate);
+      if (isNaN(proposedDateTime.getTime())) {
+        throw new BadRequestError("Invalid proposed date format");
+      }
+
+      if (proposedDateTime < new Date()) {
+        throw new BadRequestError("Proposed date must be in the future");
+      }
+
+     const isAvailable = await VendorService.isAvailable(
+      property.vendorId,
+      proposedDateTime
+    );
+
+    // if (!isAvailable) {
+    //   throw new BadRequestError("Vendor is not available at the proposed date and time");
+    // }
+     if (!isAvailable) {
+        inquiryData.proposedDate = proposedDateTime;
+      } else {
+        inquiryData.proposedDate = proposedDateTime;
+      }
+    }
+
     const inquiry = await prisma.inquiry.create({
-      data: {
-        inquiryNumber: this.generateInquiryNumber(),
-        userId,
-        propertyId,
-        vendorId: property.vendorId,
-        name,
-        location,
-        message,
-        meetingType,
-        status: InquiryStatus.PENDING
-      },
+      data: inquiryData,
       include: {
         user: {
           select: {
@@ -387,9 +415,10 @@ export class InquiryService {
     data: {
       status: 'ACCEPTED' | 'DECLINED';
       reason?: string;
+      scheduledDate?: string;
     }
   ): Promise<any> {
-    const { status, reason } = data;
+    const { status, reason, scheduledDate } = data;
 
     const inquiry = await prisma.inquiry.findUnique({
       where: { id: inquiryId },
@@ -443,6 +472,42 @@ export class InquiryService {
       updateData.responseNote = reason;
     }
 
+    if (status === 'ACCEPTED') {
+      if (!scheduledDate) {
+        throw new BadRequestError("Scheduled date is required when accepting an inquiry");
+      }
+
+      const scheduledDateTime = new Date(scheduledDate);
+      if (isNaN(scheduledDateTime.getTime())) {
+        throw new BadRequestError("Invalid scheduled date format");
+      }
+
+      // Validate scheduled date is in the future
+      if (scheduledDateTime < new Date()) {
+        throw new BadRequestError("Scheduled date must be in the future");
+      }
+
+      // Check vendor availability
+      const isAvailable = await VendorService.isAvailable(
+        vendorId,
+        scheduledDateTime
+      );
+
+      //  if (!isAvailable) {
+      //   throw new BadRequestError("You are not available at the scheduled date and time. Please set your availability first.");
+      // }
+      // updateData.scheduledDate = scheduledDateTime;
+
+      if (!isAvailable) {
+        updateData.scheduledDate = scheduledDateTime;
+        if (!updateData.responseNote) {
+          updateData.responseNote = "Scheduled outside of regular availability hours";
+        }
+      } else {
+        updateData.scheduledDate = scheduledDateTime;
+      }
+    }
+
     const updatedInquiry = await prisma.inquiry.update({
       where: { id: inquiryId },
       data: updateData,
@@ -465,7 +530,6 @@ export class InquiryService {
       }
     });
 
-    // Send notification to user
     await this.sendReviewNotification(updatedInquiry, status, reason);
 
     Logger.info(`Inquiry ${inquiry.inquiryNumber} ${status.toLowerCase()} by vendor ${vendorId}`);
@@ -475,10 +539,20 @@ export class InquiryService {
   private static async sendReviewNotification(
     inquiry: any,
     status: 'ACCEPTED' | 'DECLINED',
-    reason?: string
+    reason?: string,
+    scheduledDate?: string
   ): Promise<void> {
     try {
       const isAccepted = status === 'ACCEPTED';
+      let message = isAccepted
+        ? `Your inquiry about "${inquiry.property.name}" has been accepted`
+        : `Your inquiry about "${inquiry.property.name}" has been declined${reason ? `: ${reason}` : ''}`;
+
+      if (isAccepted && scheduledDate) {
+        const date = new Date(scheduledDate);
+        message += ` for ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`;
+      }
+
       await prisma.notification.create({
         data: {
           userId: inquiry.userId,
@@ -492,12 +566,12 @@ export class InquiryService {
             propertyId: inquiry.property.id,
             inquiryNumber: inquiry.inquiryNumber,
             status,
-            ...(reason && { reason })
+            ...(reason && { reason }),
+            ...(scheduledDate && { scheduledDate })
           }
         }
       });
 
-      // Email notification
       if (inquiry.user.email) {
         const templateName = isAccepted ? 'inquiry-accepted' : 'inquiry-declined';
         const subject = isAccepted
@@ -510,6 +584,9 @@ export class InquiryService {
           propertyName: inquiry.property.name,
           status: status,
           ...(reason && { reason }),
+          ...(scheduledDate && { 
+            scheduledDate: new Date(scheduledDate).toLocaleString() 
+          }),
           currentYear: new Date().getFullYear(),
           dashboardUrl: `${process.env.FRONTEND_URL}/dashboard`
         });
