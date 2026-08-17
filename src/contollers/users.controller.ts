@@ -9,6 +9,8 @@ import { logActivity } from './activity.controller';
 import { userSelect } from '../prisma/selects';
 import { Role } from '@prisma/client';
 import { UserService } from '../services/user.service';
+import { attachBaseUrlUploads } from '../utils/attachBaseUrl.utils';
+import { serializeDates } from '../utils/serialize.utils';
 
 
 
@@ -340,3 +342,98 @@ export const changePassword = async (
   }
 };
 
+export const getUserDashboard = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const user = req.user as any;
+
+    const dashboardData = await UserService.getUserDashboardStats(user.id);
+    const dataWithUrls = attachBaseUrlUploads(
+      serializeDates(dashboardData),
+      req
+    );
+
+    await logActivity(
+      user.id,
+      'VIEW_USER_DASHBOARD',
+      'DASHBOARD',
+      'user',
+      {
+        savedProperties: dashboardData.userStats.savedProperties,
+        activeInquiries: dashboardData.userStats.activeInquiries
+      },
+      req
+    );
+
+    sendSuccessResponse(res, "User dashboard retrieved successfully", dataWithUrls);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+export const getUserInquiriesStats = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const user = req.user as any;
+
+    const stats = await UserService.getUserInquiriesStats(user.id);
+
+    await logActivity(
+      user.id,
+      'VIEW_USER_INQUIRIES_STATS',
+      'INQUIRY',
+      'stats',
+      {
+        total: stats.stats.total,
+        pending: stats.stats.pending,
+        completed: stats.stats.completed
+      },
+      req
+    );
+
+    sendSuccessResponse(res, "User inquiries statistics retrieved successfully", stats);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+export const completeInquiry = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const user = req.user as any;
+    const { inquiryId } = req.params;
+
+    const inquiry = await UserService.completeInquiry(
+      inquiryId as string,
+      user.id
+    );
+
+    await logActivity(
+      user.id,
+      'COMPLETE_INQUIRY',
+      'INQUIRY',
+      inquiryId as string,
+      {
+        inquiryNumber: inquiry.inquiryNumber,
+        propertyName: inquiry.property.name,
+        status: inquiry.status
+      },
+      req
+    );
+
+    sendSuccessResponse(res, "Inquiry marked as completed successfully", inquiry);
+  } catch (error) {
+    next(error);
+  }
+};

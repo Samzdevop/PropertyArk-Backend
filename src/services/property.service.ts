@@ -1,5 +1,5 @@
 import prisma from "../prisma";
-import { Role, PropertyListingStatus, ListingType, PropertyStatus, MediaType, VerificationStatus } from "@prisma/client";
+import { Role, PropertyListingStatus, ListingType, PropertyStatus, MediaType, VerificationStatus, BookingStatus } from "@prisma/client";
 import { BadRequestError } from "../errors/BadRequestError";
 import { ForbiddenError } from "../errors/ForbiddenError";
 import { NotFoundError } from "../errors/NotFoundError";
@@ -337,10 +337,16 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
           }));
         }
 
+        let bookedSlots: any[] = [];
+        if (property.listingType === ListingType.FOR_SHORTLET) {
+          bookedSlots = await this.getBookedSlots(property.id);
+        }
+
          return {
           ...property,
           priceDisplay: this.getPriceDisplay(property),
-          availability: availability // Return ALL availability slots
+          availability: availability, 
+          bookedSlots: bookedSlots
         };
       })
     );
@@ -592,6 +598,44 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
     }
   }
 
+
+  private static async getBookedSlots(propertyId: string): Promise<any[]> {
+    // Get all APPROVED and CHECKED_IN bookings for this property
+    const bookings = await prisma.shortletBooking.findMany({
+      where: {
+        propertyId,
+        status: {
+          in: [BookingStatus.APPROVED, BookingStatus.CHECKED_IN]
+        }
+      },
+      select: {
+        id: true,
+        bookingNumber: true,
+        checkInDate: true,
+        checkOutDate: true,
+        status: true,
+        guestFirstName: true,
+        guestLastName: true,
+        guestEmail: true,
+        guestPhone: true
+      },
+      orderBy: { checkInDate: 'asc' }
+    });
+
+    // Format booked slots
+    return bookings.map(booking => ({
+      id: booking.id,
+      bookingNumber: booking.bookingNumber,
+      checkInDate: booking.checkInDate,
+      checkOutDate: booking.checkOutDate,
+      status: booking.status,
+      guestName: `${booking.guestFirstName} ${booking.guestLastName}`,
+      guestEmail: booking.guestEmail,
+      guestPhone: booking.guestPhone
+    }));
+  }
+
+
   static async getPropertyById(userId: string, role: Role, propertyId: string) {
     const property = await prisma.property.findUnique({
       where: { id: propertyId },
@@ -684,10 +728,16 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
       }));
     }
 
+    let bookedSlots: any[] = [];
+    if (property.listingType === ListingType.FOR_SHORTLET) {
+      bookedSlots = await this.getBookedSlots(propertyId);
+    }
+
     return {
       ...property,
       priceDisplay: this.getPriceDisplay(property),
-      availability: availability 
+      availability: availability,
+      bookedSlots: bookedSlots  
     };
   }
 
@@ -772,10 +822,16 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
         slots
       }));
     }
+    let bookedSlots: any[] = [];
+    if (property.listingType === ListingType.FOR_SHORTLET) {
+      bookedSlots = await this.getBookedSlots(propertyId);
+    }
+
     return {
       ...property,
       priceDisplay: this.getPriceDisplay(property),
-      availability: availability 
+      availability: availability,
+      bookedSlots: bookedSlots
     };
   }
 
@@ -805,6 +861,7 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
     }
 
     const wasApproved = property.listingStatus === PropertyListingStatus.ACTIVE;
+    const wasRejected = property.listingStatus === PropertyListingStatus.REJECTED;
     const updateData: any = { ...data };
 
     if (data.status !== undefined) {
@@ -838,7 +895,7 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
     }
 
     // If property was approved and user is not admin, set back to pending
-    if (wasApproved && role !== Role.ADMIN) {
+    if ((wasApproved || wasRejected) && role !== Role.ADMIN) {
       updateData.listingStatus = PropertyListingStatus.PENDING;
       updateData.reviewedBy = null;
       updateData.reviewedAt = null;
@@ -874,14 +931,22 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
     });
 
     // If property was reset to pending, notify the vendor
-    if (wasApproved && role !== Role.ADMIN) {
+    if ((wasApproved || wasRejected) && role !== Role.ADMIN) {
+      const statusMessage = wasApproved 
+        ? 'updated and requires admin approval again'
+        : 'resubmitted for admin review';
+
       await prisma.notification.create({
         data: {
           userId: property.vendorId,
           type: 'GENERAL',
           title: 'Property Update Requires Approval',
-          message: `Your property "${property.name}" has been updated and requires admin approval again.`,
-          data: { propertyId: property.id }
+          message: `Your property "${property.name}" has been ${statusMessage}.`,
+          data: { 
+            propertyId: property.id,
+            previousStatus: property.listingStatus,
+            newStatus: PropertyListingStatus.PENDING
+           }
         }
       });
     }
@@ -1062,10 +1127,16 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
             }));
           }
 
+          let bookedSlots: any[] = [];
+          if (property.listingType === ListingType.FOR_SHORTLET) {
+            bookedSlots = await this.getBookedSlots(property.id);
+          }
+
         return {
           ...property,
           priceDisplay: this.getPriceDisplay(property),
-          availability: availability 
+          availability: availability,
+          bookedSlots: bookedSlots
         };
       })
     );

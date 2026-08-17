@@ -41,6 +41,12 @@ export const changePasswordSchema = z.object({
   }),
 });
 
+export const completeInquirySchema = z.object({
+  params: z.object({
+    inquiryId: z.string().cuid("Invalid inquiry ID")
+  })
+});
+
 // export const adminUpdateUserSchema = z.object({
 //   body: z.object({
 //     fullName: z.string().min(1, 'Full name is required').optional(),

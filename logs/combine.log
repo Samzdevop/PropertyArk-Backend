@@ -39112,3 +39112,78 @@
 [32m[39m
 2026-08-08 10:00:15 [32minfo[39m [32mGET /api/v1/users/?page=1&limit=40 200 13.449 ms - 6185[39m
 [32m[39m
+2026-08-08 10:17:46 [32minfo[39m [32mGET /api/v1/users/ 200 906.409 ms - 3815[39m
+[32m[39m
+2026-08-08 10:18:14 [32minfo[39m [32mGET /api/v1/users/?page=1&limit=40 200 36.992 ms - 6185[39m
+[32m[39m
+2026-08-08 10:32:42 [32minfo[39m [32mPOST /api/v1/auth/login 200 742.255 ms - 632[39m
+[32m[39m
+2026-08-08 10:33:28 [37mdebug[39m [37mActivity logged: VIEW_NOTIFICATION_STATS on NOTIFICATION by cmrirxif2000094i4f8lbor4s[39m
+2026-08-08 10:33:28 [32minfo[39m [32mGET /api/v1/notifications/admin/stats 200 1119.352 ms - 438[39m
+[32m[39m
+2026-08-08 10:39:02 [32minfo[39m [32mGET /api/v1/properties 200 3221.113 ms - 47060[39m
+[32m[39m
+2026-08-08 10:39:53 [32minfo[39m [32mPOST /api/v1/auth/login 200 358.399 ms - 619[39m
+[32m[39m
+2026-08-08 10:43:27 [31merror[39m [31mProperty not found or not available for shortlet Property not found or not available for shortlet[39m
+2026-08-08 10:43:27 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 404 345.730 ms - 76[39m
+[32m[39m
+2026-08-08 10:44:29 [32minfo[39m [32mNodemailer transporter initialized with Brevo SMTP[39m
+2026-08-08 10:44:51 [31merror[39m [31mSMTP transporter verification failed: connect ETIMEDOUT 172.246.243.66:587[39m
+2026-08-08 10:44:51 [31merror[39m [31mNodemailer email sending failed: connect ETIMEDOUT 172.246.243.66:587 connect ETIMEDOUT 172.246.243.66:587[39m
+2026-08-08 10:44:51 [31merror[39m [31mFailed to send email: Failed to send email: connect ETIMEDOUT 172.246.243.66:587[39m
+2026-08-08 10:44:51 [31merror[39m [31mFailed to send booking notifications: Failed to send email[39m
+2026-08-08 10:44:51 [32minfo[39m [32mBooking BKG-2026-2505 created for property cmrirxitc00j094i4jefyylid[39m
+2026-08-08 10:44:51 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 201 22146.740 ms - 1149[39m
+[32m[39m
+2026-08-08 10:47:26 [31merror[39m [31mProperty is already booked for the selected dates Property is already booked for the selected dates[39m
+2026-08-08 10:47:26 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 400 545.996 ms - 77[39m
+[32m[39m
+2026-08-08 10:47:50 [32minfo[39m [32mNodemailer transporter initialized with Brevo SMTP[39m
+2026-08-08 10:48:11 [31merror[39m [31mSMTP transporter verification failed: connect ETIMEDOUT 172.246.243.66:587[39m
+2026-08-08 10:49:38 [31merror[39m [31mProperty is already booked for the selected dates Property is already booked for the selected dates[39m
+2026-08-08 10:49:38 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 400 412.653 ms - 77[39m
+[32m[39m
+2026-08-08 10:49:50 [31merror[39m [31mProperty is already booked for the selected dates Property is already booked for the selected dates[39m
+2026-08-08 10:49:50 [32minfo[39m [32mPOST /api/v1/shortlet-bookings 400 21.299 ms - 77[39m
+[32m[39m
+2026-08-08 10:50:06 [32minfo[39m [32mNodemailer transporter initialized with Brevo SMTP[39m
+2026-08-08 10:50:27 [31merror[39m [31mSMTP transporter verification failed: connect ETIMEDOUT 172.246.243.66:587[39m
+2026-08-08 10:52:27 [32minfo[39m [32mPOST /api/v1/auth/login 200 706.734 ms - 643[39m
+[32m[39m
+2026-08-08 10:52:46 [37mdebug[39m [37mActivity logged: VIEW_BOOKING_STATS on BOOKING by cmrirxiga000694i41cjrz7s6[39m
+2026-08-08 10:52:46 [32minfo[39m [32mGET /api/v1/shortlet-bookings/vendor-stats 200 206.656 ms - 4549[39m
+[32m[39m
+2026-08-08 11:15:07 [32minfo[39m [32mPOST /api/v1/auth/login 200 1348.797 ms - 643[39m
+[32m[39m
+2026-08-08 11:15:50 [37mdebug[39m [37mActivity logged: VIEW_MY_PROPERTIES on PROPERTY by cmrirxiga000694i41cjrz7s6[39m
+2026-08-08 11:15:50 [32minfo[39m [32mGET /api/v1/properties/my-properties 200 766.031 ms - 22581[39m
+[32m[39m
+2026-08-08 17:45:46 [32minfo[39m [32mGET /api/v1/properties/available 200 548.567 ms - 19085[39m
+[32m[39m
+2026-08-08 19:09:21 [32minfo[39m [32mPOST /api/v1/auth/login 200 647.882 ms - 619[39m
+[32m[39m
+2026-08-08 19:10:04 [37mdebug[39m [37mActivity logged: VIEW_USER_INQUIRIES on INQUIRY by cmrirxige000794i4gamejrwk[39m
+2026-08-08 19:10:04 [32minfo[39m [32mGET /api/v1/inquiries/my?page=1&limit=20 200 349.937 ms - 2109[39m
+[32m[39m
+2026-08-08 21:25:30 [32minfo[39m [32mPOST /api/v1/auth/login 200 518.646 ms - 619[39m
+[32m[39m
+2026-08-08 21:26:11 [37mdebug[39m [37mActivity logged: VIEW_USER_DASHBOARD on DASHBOARD by cmrirxige000794i4gamejrwk[39m
+2026-08-08 21:26:11 [32minfo[39m [32mGET /api/v1/users/dashboard 200 412.609 ms - 8522[39m
+[32m[39m
+2026-08-08 21:29:55 [37mdebug[39m [37mActivity logged: VIEW_USER_INQUIRIES_STATS on INQUIRY by cmrirxige000794i4gamejrwk[39m
+2026-08-08 21:29:55 [32minfo[39m [32mGET /api/v1/users/inquiries/stats 200 451.894 ms - 1208[39m
+[32m[39m
+2026-08-08 21:34:03 [32minfo[39m [32mGET /api/v1/users/cmsh65972000194ioom7cuspm/complete 404 30.649 ms - 152[39m
+[32m[39m
+2026-08-08 21:35:25 [32minfo[39m [32mGET /api/v1/users/cmsh65972000194ioom7cuspm/complete 404 5.970 ms - 152[39m
+[32m[39m
+2026-08-08 21:36:03 [31merror[39m [31mOnly accepted inquiries can be marked as completed Only accepted inquiries can be marked as completed[39m
+2026-08-08 21:36:03 [32minfo[39m [32mPATCH /api/v1/users/cmsh65972000194ioom7cuspm/complete 400 338.533 ms - 78[39m
+[32m[39m
+2026-08-08 21:42:04 [32minfo[39m [32mGET /api/v1/properties 200 783.253 ms - 47204[39m
+[32m[39m
+2026-08-17 06:05:42 [32minfo[39m [32mGET /api/v1/properties/available 200 705.211 ms - 19170[39m
+[32m[39m
+2026-08-17 06:08:30 [32minfo[39m [32mGET /api/v1/properties/available?page=2 200 19.062 ms - 152[39m
+[32m[39m

@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { authenticateJWT } from '../middlewares/errorHandler.middleware';
 import { validateRequest } from '../middlewares/validateRequest.middleware';
-import { changePasswordSchema, updateUserSchema } from '../schemas/users.schemas';
+import { changePasswordSchema, completeInquirySchema, updateUserSchema } from '../schemas/users.schemas';
 import { requireRoles } from '../middlewares/roleCheck.middleware';
-import { changePassword, deleteUser, getAllUsers, getProfile } from '../contollers/users.controller';
+import { changePassword, completeInquiry, deleteUser, getAllUsers, getProfile, getUserDashboard, getUserInquiriesStats } from '../contollers/users.controller';
 
 export const usersRouter = Router();
 
@@ -25,6 +25,30 @@ usersRouter.get(
 	authenticateJWT,
 	requireRoles(['ADMIN']),
 	getAllUsers
+);
+
+usersRouter.get(
+  '/dashboard',
+  authenticateJWT,
+  requireRoles(['USER']),
+  getUserDashboard
+);
+
+// Get user inquiries statistics
+usersRouter.get(
+  '/inquiries/stats',
+  authenticateJWT,
+  requireRoles(['USER']),
+  getUserInquiriesStats
+);
+
+// Complete inquiry (only when status is ACCEPTED)
+usersRouter.patch(
+  '/:inquiryId/complete',
+  authenticateJWT,
+  requireRoles(['USER']),
+  validateRequest(completeInquirySchema),
+  completeInquiry
 );
 
 // usersRouter.get(

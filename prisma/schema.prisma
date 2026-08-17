@@ -469,6 +469,8 @@ model Inquiry {
   scheduledDate DateTime?
 
   status       InquiryStatus @default(PENDING)
+  isCompleted  Boolean       @default(false)
+  completedAt  DateTime?
   responseNote String?
 
   viewedAt    DateTime?
