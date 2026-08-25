@@ -39187,3 +39187,9 @@
 [32m[39m
 2026-08-17 06:08:30 [32minfo[39m [32mGET /api/v1/properties/available?page=2 200 19.062 ms - 152[39m
 [32m[39m
+2026-08-25 12:57:58 [32minfo[39m [32mPOST /api/v1/auth/login 200 555.697 ms - 632[39m
+[32m[39m
+2026-08-25 12:58:41 [32minfo[39m [32mGET /api/v1/properties 200 290.845 ms - 47264[39m
+[32m[39m
+2026-08-25 13:04:22 [32minfo[39m [32mGET /api/v1/properties/available 200 408.803 ms - 19170[39m
+[32m[39m
