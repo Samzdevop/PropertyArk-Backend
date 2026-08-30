@@ -44,8 +44,26 @@ export const changePasswordSchema = z.object({
 export const completeInquirySchema = z.object({
   params: z.object({
     inquiryId: z.string().cuid("Invalid inquiry ID")
-  })
+  }),
+  body: z.object({
+    satisfactionStatus: z.enum(['SATISFIED', 'NOT_SATISFIED', 'OTHERS'], {
+      errorMap: () => ({ message: "Satisfaction status must be SATISFIED, NOT_SATISFIED, or OTHERS" })
+    }),
+    satisfactionComment: z.string().optional()
+  }).refine(
+    (data) => {
+      if (data.satisfactionStatus === 'OTHERS' && !data.satisfactionComment) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: "Comment is required when satisfaction status is OTHERS",
+      path: ["satisfactionComment"]
+    }
+  )
 });
+
 
 // export const adminUpdateUserSchema = z.object({
 //   body: z.object({

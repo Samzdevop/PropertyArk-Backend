@@ -206,7 +206,8 @@ export class InquiryService {
   }
 
   static async getVendorInquiries(
-    vendorId: string,
+    userId: string,
+    role: Role,
     filters: {
       status?: InquiryStatus;
       propertyId?: string;
@@ -218,7 +219,16 @@ export class InquiryService {
     const skip = (page - 1) * limit;
     const take = limit;
 
-    const where: any = { vendorId };
+    const where: any = { };
+
+     if (role === Role.VENDOR) {
+      where.vendorId = userId;
+    } 
+    else if (role === Role.ADMIN) {
+    } 
+    else {
+      throw new ForbiddenError("Only vendors and admins can view inquiries");
+    }
 
     if (status) {
       where.status = status;
@@ -236,6 +246,15 @@ export class InquiryService {
         orderBy: { createdAt: 'desc' },
         include: {
           user: {
+            select: {
+              id: true,
+              fullName: true,
+              email: true,
+              phone: true,
+              avatar: true
+            }
+          },
+          vendor: {
             select: {
               id: true,
               fullName: true,
@@ -264,10 +283,33 @@ export class InquiryService {
       prisma.inquiry.count({ where }),
       prisma.inquiry.groupBy({
         by: ['status'],
-        where: { vendorId },
+        where: { vendorId: userId },
         _count: true
       })
     ]);
+
+    const formattedInquiries = inquiries.map(inquiry => ({
+      id: inquiry.id,
+      inquiryNumber: inquiry.inquiryNumber,
+      name: inquiry.name,
+      location: inquiry.location,
+      message: inquiry.message,
+      meetingType: inquiry.meetingType,
+      proposedDate: inquiry.proposedDate,
+      scheduledDate: inquiry.scheduledDate,
+      status: inquiry.status,
+      isCompleted: inquiry.isCompleted,
+      completedAt: inquiry.completedAt,
+      satisfactionStatus: inquiry.satisfactionStatus,
+      satisfactionComment: inquiry.satisfactionComment,
+      createdAt: inquiry.createdAt,
+      respondedAt: inquiry.respondedAt,
+      viewedAt: inquiry.viewedAt,
+      user: inquiry.user,
+      vendor: inquiry.vendor, 
+      property: inquiry.property
+    }));
+
 
     const statusCounts = counts.reduce((acc: any, item: any) => {
       acc[item.status] = item._count;
@@ -275,7 +317,7 @@ export class InquiryService {
     }, {});
 
     return {
-      inquiries,
+      inquiries: formattedInquiries,
       pagination: {
         page,
         limit,
@@ -288,6 +330,139 @@ export class InquiryService {
         declined: statusCounts.DECLINED || 0,
         total
       }
+    };
+  }
+
+
+  static async getAdminInquiryStats(): Promise<any> {
+    const now = new Date();
+    const [total, pending, accepted, declined, completed, reported] = await Promise.all([
+      prisma.inquiry.count(),
+      prisma.inquiry.count({ 
+        where: { 
+          status: InquiryStatus.PENDING 
+        } 
+      }),
+      prisma.inquiry.count({
+        where: {
+          status: InquiryStatus.ACCEPTED
+        }
+      }),
+      prisma.inquiry.count({
+        where: {
+          status: InquiryStatus.DECLINED
+        }
+      }),
+      prisma.inquiry.count({
+        where: {
+          isCompleted: true
+        }
+      }),
+      prisma.inquiry.count({
+        where: {
+          isCompleted: true,
+          satisfactionStatus: {
+            in: ['NOT_SATISFIED', 'OTHERS']
+          }
+        }
+      })
+    ]);
+
+    // Upcoming inquiries (ACCEPTED with scheduledDate in future)
+    const upcoming = await prisma.inquiry.count({
+      where: {
+        status: InquiryStatus.ACCEPTED,
+        scheduledDate: { gte: now },
+        isCompleted: false
+      }
+    });
+
+    const reportedInquiries = await prisma.inquiry.findMany({
+      where: {
+          isCompleted: true,
+          satisfactionStatus: {
+          in: ['NOT_SATISFIED', 'OTHERS']
+        }
+      },
+      take: 20,
+      orderBy: { completedAt: 'desc' },
+      include: {
+        user: {
+          select: {
+            id: true,
+            fullName: true,
+            email: true,
+            phone: true,
+            avatar: true
+          }
+        },
+        vendor: {
+          select: {
+            id: true,
+            fullName: true,
+            email: true,
+            phone: true,
+            avatar: true
+          }
+        },
+        property: {
+          select: {
+            id: true,
+            name: true,
+            address: true,
+            city: true,
+            state: true,
+            listingType: true
+          }
+        }
+      }
+    });
+
+    return {
+      stats: {
+        total,
+        pending,
+        upcoming,
+        accepted,
+        declined,
+        completed,
+        reported
+      },
+      reportedInquiries: reportedInquiries.map(inquiry => ({
+        id: inquiry.id,
+        inquiryNumber: inquiry.inquiryNumber,
+        name: inquiry.name,
+        location: inquiry.location,
+        message: inquiry.message,
+        meetingType: inquiry.meetingType,
+        status: inquiry.status,
+        satisfactionStatus: inquiry.satisfactionStatus,
+        satisfactionComment: inquiry.satisfactionComment,
+        completedAt: inquiry.completedAt,
+        createdAt: inquiry.createdAt,
+        user: {
+          id: inquiry.user.id,
+          fullName: inquiry.user.fullName,
+          email: inquiry.user.email,
+          phone: inquiry.user.phone,
+          avatar: inquiry.user.avatar
+        },
+        vendor: {
+          id: inquiry.vendor.id,
+          fullName: inquiry.vendor.fullName,
+          email: inquiry.vendor.email,
+          phone: inquiry.vendor.phone,
+          avatar: inquiry.vendor.avatar
+        },
+        property: {
+          id: inquiry.property.id,
+          name: inquiry.property.name,
+          address: inquiry.property.address,
+          city: inquiry.property.city,
+          state: inquiry.property.state,
+          listingType: inquiry.property.listingType
+        }
+      }))
     };
   }
 

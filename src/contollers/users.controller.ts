@@ -413,10 +413,12 @@ export const completeInquiry = async (
   try {
     const user = req.user as any;
     const { inquiryId } = req.params;
+    const { satisfactionStatus, satisfactionComment } = req.body;
 
     const inquiry = await UserService.completeInquiry(
       inquiryId as string,
-      user.id
+      user.id,
+      { satisfactionStatus, satisfactionComment }
     );
 
     await logActivity(
@@ -426,6 +428,7 @@ export const completeInquiry = async (
       inquiryId as string,
       {
         inquiryNumber: inquiry.inquiryNumber,
+        satisfactionStatus: inquiry.satisfactionStatus, 
         propertyName: inquiry.property.name,
         status: inquiry.status
       },

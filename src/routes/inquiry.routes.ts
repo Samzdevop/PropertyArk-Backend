@@ -8,7 +8,8 @@ import {
   getUserInquiries,
   getInquiryById,
   reviewInquiry,
-  getInquiryStats
+  getInquiryStats,
+  getAdminInquiryStats
 } from "../contollers/inquiry.controller";
 import { validateRequest } from "../middlewares/validateRequest.middleware";
 import {
@@ -28,6 +29,13 @@ inquiryRouter.post(
   createInquiry
 );
 
+inquiryRouter.get(
+  '/admin/stats',
+  authenticateJWT,
+  requireRoles(['ADMIN']),
+  getAdminInquiryStats
+);
+
 // Get vendor inquiries (Vendor/Admin only)
 inquiryRouter.get(
   '/vendor',
@@ -44,6 +52,7 @@ inquiryRouter.get(
   requireRoles(['VENDOR', 'ADMIN']),
   getInquiryStats
 );
+
 
 // Get user inquiries
 inquiryRouter.get(

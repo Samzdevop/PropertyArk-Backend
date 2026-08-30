@@ -6286,3 +6286,6 @@
 2026-08-08 10:49:50 [31merror[39m [31mProperty is already booked for the selected dates Property is already booked for the selected dates[39m
 2026-08-08 10:50:27 [31merror[39m [31mSMTP transporter verification failed: connect ETIMEDOUT 172.246.243.66:587[39m
 2026-08-08 21:36:03 [31merror[39m [31mOnly accepted inquiries can be marked as completed Only accepted inquiries can be marked as completed[39m
+2026-08-29 20:41:50 [31merror[39m [31mProposed date must be in the future Proposed date must be in the future[39m
+2026-08-29 20:42:22 [31merror[39m [31mProposed date must be in the future Proposed date must be in the future[39m
+2026-08-29 20:42:52 [31merror[39m [31mFailed to send inquiry notifications: ENOENT: no such file or directory, open 'C:\Users\HomePC\Desktop\PropertyArk-Backend\src\views\inquiry-confirmation.hbs'[39m

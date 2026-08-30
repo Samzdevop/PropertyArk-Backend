@@ -86,6 +86,12 @@ enum NotificationType {
   GENERAL
 }
 
+enum SatisfactionStatus {
+  SATISFIED
+  NOT_SATISFIED
+  OTHERS
+}
+
 enum InquiryStatus {
   PENDING
   ACCEPTED
@@ -464,6 +470,9 @@ model Inquiry {
   location    String
   message     String
   meetingType MeetingType
+
+  satisfactionStatus  SatisfactionStatus?
+  satisfactionComment String?
 
   proposedDate  DateTime?
   scheduledDate DateTime?

@@ -44,9 +44,7 @@ export const createInquiry = async (
   }
 };
 
-/**
- * Get vendor inquiries
- */
+
 export const getVendorInquiries = async (
   req: Request,
   res: Response,
@@ -63,6 +61,7 @@ export const getVendorInquiries = async (
 
     const result = await InquiryService.getVendorInquiries(
       user.id,
+      user.role,
       {
         status: status as any,
         propertyId: propertyId as string,
@@ -76,7 +75,7 @@ export const getVendorInquiries = async (
       'VIEW_VENDOR_INQUIRIES',
       'INQUIRY',
       'list',
-      { filters: { status, propertyId }, total: result.pagination.total },
+      { filters: { status, propertyId }, role: user.role, total: result.pagination.total },
       req
     );
 
@@ -86,9 +85,42 @@ export const getVendorInquiries = async (
   }
 };
 
-/**
- * Get user inquiries
- */
+
+export const getAdminInquiryStats = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const user = req.user as any;
+
+    if (user.role !== Role.ADMIN) {
+      throw new ForbiddenError("Only admins can view admin inquiry statistics");
+    }
+
+    const stats = await InquiryService.getAdminInquiryStats();
+
+    await logActivity(
+      user.id,
+      'VIEW_ADMIN_INQUIRY_STATS',
+      'INQUIRY',
+      'stats',
+      {
+        total: stats.stats.total,
+        pending: stats.stats.pending,
+        completed: stats.stats.completed,
+        reported: stats.stats.reported
+      },
+      req
+    );
+
+    sendSuccessResponse(res, "Admin inquiry statistics retrieved successfully", stats);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 export const getUserInquiries = async (
   req: Request,
   res: Response,

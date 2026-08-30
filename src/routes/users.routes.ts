@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { authenticateJWT } from '../middlewares/errorHandler.middleware';
 import { validateRequest } from '../middlewares/validateRequest.middleware';
-import { changePasswordSchema, completeInquirySchema, updateUserSchema } from '../schemas/users.schemas';
+import { changePasswordSchema, completeInquirySchema } from '../schemas/users.schemas';
 import { requireRoles } from '../middlewares/roleCheck.middleware';
 import { changePassword, completeInquiry, deleteUser, getAllUsers, getProfile, getUserDashboard, getUserInquiriesStats } from '../contollers/users.controller';
 

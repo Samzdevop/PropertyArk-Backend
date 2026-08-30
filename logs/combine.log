@@ -39193,3 +39193,91 @@
 [32m[39m
 2026-08-25 13:04:22 [32minfo[39m [32mGET /api/v1/properties/available 200 408.803 ms - 19170[39m
 [32m[39m
+2026-08-29 19:27:29 [32minfo[39m [32mPOST /api/v1/auth/login 422 92.781 ms - 236[39m
+[32m[39m
+2026-08-29 19:28:15 [32minfo[39m [32mPOST /api/v1/auth/login 200 722.946 ms - 632[39m
+[32m[39m
+2026-08-29 19:28:30 [32minfo[39m [32mPOST /api/v1/auth/login 200 128.243 ms - 632[39m
+[32m[39m
+2026-08-29 19:32:25 [32minfo[39m [32mGET /api/v1/inquiries/vendor/stats 401 6.886 ms - 66[39m
+[32m[39m
+2026-08-29 19:32:57 [37mdebug[39m [37mActivity logged: VIEW_INQUIRY_STATS on INQUIRY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-29 19:32:57 [32minfo[39m [32mGET /api/v1/inquiries/vendor/stats 200 244.638 ms - 143[39m
+[32m[39m
+2026-08-29 20:32:34 [32minfo[39m [32mPOST /api/v1/inquiries/vendor 404 77.563 ms - 128[39m
+[32m[39m
+2026-08-29 20:32:44 [32minfo[39m [32mGET /api/v1/inquiries/vendor 401 19.657 ms - 66[39m
+[32m[39m
+2026-08-29 20:32:52 [32minfo[39m [32mPOST /api/v1/auth/login 200 558.216 ms - 632[39m
+[32m[39m
+2026-08-29 20:33:18 [37mdebug[39m [37mActivity logged: VIEW_VENDOR_INQUIRIES on INQUIRY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-29 20:33:18 [32minfo[39m [32mGET /api/v1/inquiries/vendor 200 329.227 ms - 206[39m
+[32m[39m
+2026-08-29 20:35:48 [32minfo[39m [32mGET /api/v1/properties/available 200 477.404 ms - 19170[39m
+[32m[39m
+2026-08-29 20:38:32 [32minfo[39m [32mPOST /api/v1/auth/login 200 445.499 ms - 619[39m
+[32m[39m
+2026-08-29 20:40:12 [32minfo[39m [32mPOST /api/v1/inquiries 422 107.143 ms - 354[39m
+[32m[39m
+2026-08-29 20:41:50 [31merror[39m [31mProposed date must be in the future Proposed date must be in the future[39m
+2026-08-29 20:41:50 [32minfo[39m [32mPOST /api/v1/inquiries 400 359.117 ms - 63[39m
+[32m[39m
+2026-08-29 20:42:22 [31merror[39m [31mProposed date must be in the future Proposed date must be in the future[39m
+2026-08-29 20:42:22 [32minfo[39m [32mPOST /api/v1/inquiries 400 86.604 ms - 63[39m
+[32m[39m
+2026-08-29 20:42:42 [32minfo[39m [32mNodemailer transporter initialized with Brevo SMTP[39m
+2026-08-29 20:42:49 [32minfo[39m [32mSMTP transporter verified successfully[39m
+2026-08-29 20:42:52 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to brown.investments@vendors.com. MessageId: <a012f98d-fe92-bf76-bd01-6b2adfdbce8d@gmail.com>[39m
+2026-08-29 20:42:52 [32minfo[39m [32mEmail sent successfully to brown.investments@vendors.com[39m
+2026-08-29 20:42:52 [32minfo[39m [32mInquiry notification email sent to vendor brown.investments@vendors.com[39m
+2026-08-29 20:42:52 [31merror[39m [31mFailed to send inquiry notifications: ENOENT: no such file or directory, open 'C:\Users\HomePC\Desktop\PropertyArk-Backend\src\views\inquiry-confirmation.hbs'[39m
+2026-08-29 20:42:52 [32minfo[39m [32mInquiry INQ-2026-6152 created by user cmrirxige000794i4gamejrwk for property cmrirxisj00hn94i43tsgq86y[39m
+2026-08-29 20:42:52 [37mdebug[39m [37mActivity logged: CREATE_INQUIRY on INQUIRY by cmrirxige000794i4gamejrwk[39m
+2026-08-29 20:42:52 [32minfo[39m [32mPOST /api/v1/inquiries 201 10136.436 ms - 983[39m
+[32m[39m
+2026-08-29 20:43:34 [37mdebug[39m [37mActivity logged: VIEW_VENDOR_INQUIRIES on INQUIRY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-29 20:43:34 [32minfo[39m [32mGET /api/v1/inquiries/vendor 200 396.203 ms - 206[39m
+[32m[39m
+2026-08-29 20:46:30 [37mdebug[39m [37mActivity logged: VIEW_VENDOR_INQUIRIES on INQUIRY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-29 20:46:30 [32minfo[39m [32mGET /api/v1/inquiries/vendor 200 119.599 ms - 206[39m
+[32m[39m
+2026-08-29 20:47:00 [32minfo[39m [32mGET /api/v1/inquiries/vendor/stats 401 20.024 ms - 64[39m
+[32m[39m
+2026-08-29 20:48:04 [37mdebug[39m [37mActivity logged: VIEW_INQUIRY_STATS on INQUIRY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-29 20:48:04 [32minfo[39m [32mGET /api/v1/inquiries/vendor/stats 200 306.779 ms - 143[39m
+[32m[39m
+2026-08-29 20:48:55 [32minfo[39m [32mPOST /api/v1/auth/login 200 177.533 ms - 643[39m
+[32m[39m
+2026-08-29 20:49:26 [37mdebug[39m [37mActivity logged: VIEW_INQUIRY_STATS on INQUIRY by cmrirxiga000694i41cjrz7s6[39m
+2026-08-29 20:49:26 [32minfo[39m [32mGET /api/v1/inquiries/vendor/stats 200 326.224 ms - 339[39m
+[32m[39m
+2026-08-29 20:50:00 [37mdebug[39m [37mActivity logged: VIEW_VENDOR_INQUIRIES on INQUIRY by cmrirxiga000694i41cjrz7s6[39m
+2026-08-29 20:50:00 [32minfo[39m [32mGET /api/v1/inquiries/vendor 200 73.244 ms - 2206[39m
+[32m[39m
+2026-08-29 22:42:14 [32minfo[39m [32mPOST /api/v1/auth/login 200 582.322 ms - 632[39m
+[32m[39m
+2026-08-29 22:42:54 [37mdebug[39m [37mActivity logged: VIEW_VENDOR_INQUIRIES on INQUIRY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-29 22:42:54 [32minfo[39m [32mGET /api/v1/inquiries/vendor 200 306.267 ms - 3433[39m
+[32m[39m
+2026-08-29 22:50:46 [32minfo[39m [32mGET /api/v1/inquiries/admin/stat 404 25.654 ms - 132[39m
+[32m[39m
+2026-08-29 22:52:45 [32minfo[39m [32mGET /api/v1/inquiries/admin/stats 401 23.037 ms - 66[39m
+[32m[39m
+2026-08-29 22:54:00 [32minfo[39m [32mGET /inquiries/admin/stats 404 0.499 ms - 126[39m
+[32m[39m
+2026-08-29 22:54:18 [32minfo[39m [32mGET /inquiries/admin/stats 404 0.743 ms - 126[39m
+[32m[39m
+2026-08-29 22:54:47 [37mdebug[39m [37mActivity logged: VIEW_ADMIN_INQUIRY_STATS on INQUIRY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-29 22:54:47 [32minfo[39m [32mGET /api/v1/inquiries/admin/stats 200 392.433 ms - 206[39m
+[32m[39m
+2026-08-29 23:11:36 [37mdebug[39m [37mActivity logged: VIEW_INQUIRY on INQUIRY by cmrirxif2000094i4f8lbor4s[39m
+2026-08-29 23:11:36 [32minfo[39m [32mGET /api/v1/inquiries/cmtf9kh0h000594lgiviq91ny 200 361.526 ms - 1323[39m
+[32m[39m
+2026-08-29 23:23:19 [37mdebug[39m [37mActivity logged: VIEW_BOOKING_STATS on BOOKING by cmrirxif2000094i4f8lbor4s[39m
+2026-08-29 23:23:19 [32minfo[39m [32mGET /api/v1/shortlet-bookings/vendor-stats 200 492.732 ms - 164[39m
+[32m[39m
+2026-08-29 23:24:11 [32minfo[39m [32mPOST /api/v1/auth/login 200 189.680 ms - 643[39m
+[32m[39m
+2026-08-29 23:24:38 [37mdebug[39m [37mActivity logged: VIEW_BOOKING_STATS on BOOKING by cmrirxiga000694i41cjrz7s6[39m
+2026-08-29 23:24:38 [32minfo[39m [32mGET /api/v1/shortlet-bookings/vendor-stats 200 44.741 ms - 4549[39m
+[32m[39m

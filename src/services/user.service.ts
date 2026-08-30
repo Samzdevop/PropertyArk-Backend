@@ -4,8 +4,11 @@ import { BadRequestError } from "../errors/BadRequestError";
 import { UnauthorizedError } from "../errors/UnauthorizedError";
 import Logger from "../config/logger";
 import { NotFoundError } from "../errors/NotFoundError";
-import { InquiryStatus, PropertyListingStatus, PropertyStatus } from "@prisma/client";
+import { InquiryStatus, PropertyListingStatus, PropertyStatus, SatisfactionStatus } from "@prisma/client";
 import { ForbiddenError } from "../errors/ForbiddenError";
+import { MailInterface } from "../interfaces/mail.interfaces";
+import { sendGraphMail } from "./mail.services";
+import { render } from "../utils/mailTemplate";
 
 export class UserService {
   static async changePassword(userId: string, currentPassword: string, newPassword: string) {
@@ -409,8 +412,14 @@ export class UserService {
 
   static async completeInquiry(
     inquiryId: string,
-    userId: string
+    userId: string,
+    data: {
+      satisfactionStatus: 'SATISFIED' | 'NOT_SATISFIED' | 'OTHERS';
+      satisfactionComment?: string;
+    }
   ): Promise<any> {
+     const { satisfactionStatus, satisfactionComment } = data;
+
     const inquiry = await prisma.inquiry.findUnique({
       where: { id: inquiryId },
       include: {
@@ -422,6 +431,13 @@ export class UserService {
           }
         },
         user: {
+          select: {
+            id: true,
+            fullName: true,
+            email: true
+          }
+        },
+        vendor: {
           select: {
             id: true,
             fullName: true,
@@ -447,11 +463,21 @@ export class UserService {
       throw new BadRequestError("Inquiry is already marked as completed");
     }
 
+    if (!satisfactionStatus || !['SATISFIED', 'NOT_SATISFIED', 'OTHERS'].includes(satisfactionStatus)) {
+      throw new BadRequestError("Satisfaction status is required. Must be: SATISFIED, NOT_SATISFIED, or OTHERS");
+    }
+
+    if (satisfactionStatus === 'OTHERS' && !satisfactionComment) {
+      throw new BadRequestError("Comment is required when satisfaction status is OTHERS");
+    }
+
     const updatedInquiry = await prisma.inquiry.update({
       where: { id: inquiryId },
       data: {
         isCompleted: true,
-        completedAt: new Date()
+        completedAt: new Date(),
+        satisfactionStatus: satisfactionStatus as SatisfactionStatus,
+        satisfactionComment: satisfactionComment || null
       },
       include: {
         property: {
@@ -474,7 +500,63 @@ export class UserService {
       }
     });
 
+    await this.sendCompletionNotification(updatedInquiry);
+    Logger.info(`Inquiry ${inquiry.inquiryNumber} completed by user ${userId}`);
+
     return updatedInquiry;
+  }
+
+  private static async sendCompletionNotification(inquiry: any): Promise<void> {
+    try {
+      const statusMap = {
+        SATISFIED: 'Satisfied 😊',
+        NOT_SATISFIED: 'Not Satisfied 😞',
+        OTHERS: 'Others'
+      };
+
+      await prisma.notification.create({
+        data: {
+          userId: inquiry.vendorId,
+          type: 'GENERAL',
+          title: 'Inquiry Completed',
+          message: `${inquiry.user.fullName} has completed their inquiry for "${inquiry.property.name}". Satisfaction: ${statusMap[inquiry.satisfactionStatus as keyof typeof statusMap]}`,
+          data: {
+            inquiryId: inquiry.id,
+            inquiryNumber: inquiry.inquiryNumber,
+            propertyId: inquiry.propertyId,
+            satisfactionStatus: inquiry.satisfactionStatus,
+            satisfactionComment: inquiry.satisfactionComment
+          }
+        }
+      });
+
+      if (inquiry.vendor.email) {
+        const emailHtml = await render('inquiry-completed', {
+          vendorName: inquiry.vendor.fullName,
+          inquiryNumber: inquiry.inquiryNumber,
+          propertyName: inquiry.property.name,
+          userName: inquiry.user.fullName,
+          satisfactionStatus: inquiry.satisfactionStatus,
+          satisfactionComment: inquiry.satisfactionComment || 'No additional comment',
+          currentYear: new Date().getFullYear(),
+          dashboardUrl: `${process.env.FRONTEND_URL}/vendor/inquiries`
+        });
+
+        const mailOptions: MailInterface = {
+          to: inquiry.vendor.email,
+          from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+          subject: `Inquiry Completed: ${inquiry.inquiryNumber}`,
+          text: `User ${inquiry.user.fullName} has completed their inquiry.`,
+          html: emailHtml
+        };
+
+        await sendGraphMail(mailOptions);
+        Logger.info(`Inquiry completion email sent to vendor ${inquiry.vendor.email}`);
+      }
+
+    } catch (error) {
+      Logger.error('Failed to send completion notification:', error);
+    }
   }
 
 }
