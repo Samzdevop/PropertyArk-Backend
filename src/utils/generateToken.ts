@@ -29,7 +29,7 @@ export const generateResetToken = (email: string): string => {
   return jwt.sign(
     { email, type: 'password_reset' },
     process.env.JWT_SECRET as string,
-    { expiresIn: '1h' } // Token expires in 1 hour
+    { expiresIn: '1h' } 
   );
 };
 

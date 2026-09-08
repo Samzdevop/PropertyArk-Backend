@@ -135,7 +135,7 @@ model User {
   ninPhotoUrl           String?
   ninVerificationStatus VerificationStatus @default(PENDING)
   ninVerifiedAt         DateTime?
-  ninVerifiedBy         String?
+  ninVerifiedBy         String?  
   ninRejectionReason    String?
   propertyViews         PropertyView[]
   favorites             Favorite[]

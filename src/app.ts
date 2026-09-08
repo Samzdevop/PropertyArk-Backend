@@ -65,6 +65,7 @@ app.use(helmet());
 const allowedOrigins = [
 	'http://localhost:3000',
 	'http://localhost:5173',
+	'https://propertyark.vercel.app',
 ]
 app.use(cors({
 	origin: function (origin, callback ) {

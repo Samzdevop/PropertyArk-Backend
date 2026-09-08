@@ -39,7 +39,7 @@ export const authenticateJWT = (
 				});
 			}
 
-			req.user = user; // Attach the user to the request object for downstream access
+			req.user = user;
 			return next();
 		}
 	)(req, res, next);

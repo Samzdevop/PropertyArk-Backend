@@ -358,6 +358,7 @@ export const login = async (
     }
 };
 
+
 export const verifyAccount = async (
     req: Request,
     res: Response,
