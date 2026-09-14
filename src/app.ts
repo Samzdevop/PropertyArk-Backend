@@ -10,7 +10,6 @@ import { errorHandler } from './middlewares/errorHandler.middleware';
 import { usersRouter } from './routes/users.routes';
 import passport from 'passport';
 import './config/passport';
-// import path from 'path';
 import { UPLOADS_PATH } from './config/upload';
 import { propertyRouter } from './routes/property.routes';
 import { ninRouter } from './routes/nin.routes';
@@ -23,6 +22,7 @@ import { viewStatsRouter } from './routes/viewStats.routes';
 import { shortletBookingRouter } from './routes/shortletBooking.routes';
 import { notificationRouter } from './routes/notification.routes';
 import { adminDashboardRouter } from './routes/adminDashboard.routes';
+import { creditPointRouter } from './routes/creditPoint.routes';
 
 export const app = express();
 
@@ -51,7 +51,7 @@ app.use(
     saveUninitialized: false,
     cookie: {
       secure: process.env.NODE_ENV === 'production',
-      maxAge: 1 * 60 * 60 * 1000, //  1hours
+      maxAge: 1 * 60 * 60 * 1000, 
 	  sameSite: 'lax',
     },
   })
@@ -114,6 +114,7 @@ app.use('/api/v1/view-stats', viewStatsRouter);
 app.use('/api/v1/shortlet-bookings', shortletBookingRouter);
 app.use('/api/v1/notifications', notificationRouter);
 app.use('/api/v1/admin', adminDashboardRouter);
+app.use('/api/v1/credit-points', creditPointRouter);
 
 
 

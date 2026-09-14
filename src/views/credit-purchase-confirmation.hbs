@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credit Points Purchase Confirmation</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background-color: #4CAF50; color: white; padding: 20px; text-align: center; border-radius: 5px 5px 0 0; }
+    .content { background-color: #f9f9f9; padding: 30px; border-radius: 0 0 5px 5px; border: 1px solid #ddd; border-top: none; }
+    .info-box { background-color: #e8f5e9; padding: 15px; margin: 20px 0; border-radius: 5px; }
+    .info-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e0e0e0; }
+    .info-label { font-weight: bold; color: #555; }
+    .info-value { color: #333; }
+    .button { display: inline-block; background-color: #4CAF50; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+    .footer { margin-top: 30px; text-align: center; font-size: 12px; color: #666; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Purchase Successful!</h2>
+    </div>
+    <div class="content">
+      <p>Hello {{userName}},</p>
+      <p>Your credit points purchase has been confirmed successfully!</p>
+
+      <div class="info-box">
+        <strong>Purchase Details</strong>
+        <div class="info-row">
+          <span class="info-label">Points Purchased:</span>
+          <span class="info-value">{{points}} points</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Amount Paid:</span>
+          <span class="info-value">{{currency}} {{amount}}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">New Balance:</span>
+          <span class="info-value">{{newBalance}} points</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Reference:</span>
+          <span class="info-value">{{reference}}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Date:</span>
+          <span class="info-value">{{purchaseDate}}</span>
+        </div>
+      </div>
+
+      <p>You can now use your credit points to:</p>
+      <ul>
+        <li>Create new properties</li>
+        <li>Feature your properties for more visibility</li>
+      </ul>
+
+      <div style="text-align: center;">
+        <a href="{{dashboardUrl}}" class="button">Go to Dashboard</a>
+      </div>
+    </div>
+    <div class="footer">
+      <p>© {{currentYear}} Property Management. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>

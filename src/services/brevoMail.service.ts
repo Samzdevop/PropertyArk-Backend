@@ -96,7 +96,6 @@ export const sendNodemailerMail = async (mail: MailInterface): Promise<void> => 
       html: mail.html,
       cc: mail.cc,
       bcc: mail.bcc,
-      // Optional: Add custom headers
       headers: {
         'X-Application': 'Property Management',
         'X-Environment': process.env.NODE_ENV || 'development',
@@ -112,7 +111,7 @@ export const sendNodemailerMail = async (mail: MailInterface): Promise<void> => 
     }
   } catch (error: any) {
     Logger.error(`Nodemailer email sending failed: ${error.message}`, error);
-    throw new Error(`Failed to send email: ${error.message}`);
+    throw new Error(`Failed to send email: ${error}`);
   }
 };
 
@@ -143,6 +142,6 @@ export const sendNodemailerTemplateMail = async (
     Logger.info(`Template email sent via Nodemailer to ${to}. Template: ${templateName}`);
   } catch (error: any) {
     Logger.error(`Nodemailer template email failed: ${error.message}`, error);
-    throw new Error(`Failed to send template email: ${error.message}`);
+    throw new Error(`Failed to send template email: ${error}`);
   }
 };

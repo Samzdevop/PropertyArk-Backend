@@ -11,6 +11,8 @@ const PropertyStatusEnum = z.enum([
   'RENTED'
 ]);
 
+const TimeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+
 export const createPropertySchema = z.object({
   body: z.object({
     name: z.string().min(1, 'Property name is required'),
@@ -34,6 +36,10 @@ export const createPropertySchema = z.object({
     salePrice: z.string().optional(),
     landFee: z.string().optional(),
     shortletAmount: z.string().optional(),
+    checkInTime: z.string().regex(TimeRegex, 'Invalid time format. Use HH:mm (e.g., 14:00)').optional(),
+    checkOutTime: z.string().regex(TimeRegex, 'Invalid time format. Use HH:mm (e.g., 11:00)').optional(),
+    houseRules: z.union([z.string(), z.array(z.string())]).optional(),
+    cancellationPolicy: z.string().optional(),
   }).refine((data) => {
     switch (data.listingType) {
       case 'FOR_RENT':
@@ -75,6 +81,10 @@ export const updatePropertySchema = z.object({
     salePrice: z.string().optional(),
     landFee: z.string().optional(),
     shortletAmount: z.string().optional(),
+    checkInTime: z.string().regex(TimeRegex, 'Invalid time format. Use HH:mm (e.g., 14:00)').optional(),
+    checkOutTime: z.string().regex(TimeRegex, 'Invalid time format. Use HH:mm (e.g., 11:00)').optional(),
+    houseRules: z.union([z.string(), z.array(z.string())]).optional(),
+    cancellationPolicy: z.string().optional(),
   }).partial()
 });
 

@@ -16,7 +16,7 @@ import { PasswordResetService } from "../services/passwordReset.service";
 import { uploadToAzure, STORAGE_CONTAINERS } from "../config/upload";
 import { Role, VerificationStatus } from "@prisma/client";
 import { userSelect } from "../prisma/selects";
-import { BadRequestError } from "../errors/BadRequestError";
+import { CreditPointService } from "../services/creditPoint.service";
 
 
 export const adminRegister = async (
@@ -82,7 +82,6 @@ export const register = async (
     const { email, fullName, password, location, phone, role } = req.body;
     const file = req.file;
 
-    // Validate role
     if (!role || (role !== 'USER' && role !== 'VENDOR')) {
       throw new ForbiddenError("Role must be either 'USER' or 'VENDOR'");
     }
@@ -92,7 +91,6 @@ export const register = async (
       throw new ForbiddenError("User already registered!");
     }
 
-    // If VENDOR, NIN photo is required
     if (role === 'VENDOR' && !file) {
       throw new ForbiddenError("NIN photo is required for vendor registration");
     }
@@ -148,6 +146,15 @@ export const register = async (
           uploadedById: user.id
         }
       });
+    }
+
+    if (role === 'VENDOR') {
+      try {
+        await CreditPointService.awardNewVendorBonus(user.id);
+        Logger.info(`New vendor bonus awarded to ${user.email}`);
+      } catch (error) {
+        Logger.error(`Failed to award new vendor bonus to ${user.email}:`, error);
+      }
     }
 
     // Send verification email

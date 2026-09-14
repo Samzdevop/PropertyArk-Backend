@@ -39281,3 +39281,50 @@
 2026-08-29 23:24:38 [37mdebug[39m [37mActivity logged: VIEW_BOOKING_STATS on BOOKING by cmrirxiga000694i41cjrz7s6[39m
 2026-08-29 23:24:38 [32minfo[39m [32mGET /api/v1/shortlet-bookings/vendor-stats 200 44.741 ms - 4549[39m
 [32m[39m
+2026-09-13 08:46:39 [31merror[39m [31mUser already registered! User already registered![39m
+2026-09-13 08:46:39 [32minfo[39m [32mPOST /api/v1/auth/reg 403 376.175 ms - 52[39m
+[32m[39m
+2026-09-13 08:48:07 [32minfo[39m [32mPOST /api/v1/auth/login 200 281.106 ms - 632[39m
+[32m[39m
+2026-09-13 08:51:58 [32minfo[39m [32mGET /api/v1/users/?page=1&limit=40 401 12.305 ms - 66[39m
+[32m[39m
+2026-09-13 08:52:11 [32minfo[39m [32mGET /api/v1/users/?page=1&limit=40 200 367.440 ms - 6185[39m
+[32m[39m
+2026-09-13 08:53:31 [32minfo[39m [32mDELETE /api/v1/users/cmrw15spz000094o4h7q3ej14 204 186.225 ms - -[39m
+[32m[39m
+2026-09-13 08:53:47 [32minfo[39m [32mNodemailer transporter initialized with Brevo SMTP[39m
+2026-09-13 08:53:50 [32minfo[39m [32mSMTP transporter verified successfully[39m
+2026-09-13 08:53:51 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to samuellchuks@gmail.com. MessageId: <e58b5b8c-0404-124a-fb4b-b60ba41d999e@gmail.com>[39m
+2026-09-13 08:53:51 [32minfo[39m [32mEmail sent successfully to samuellchuks@gmail.com[39m
+2026-09-13 08:53:51 [32minfo[39m [32mVerification email sent to samuellchuks@gmail.com[39m
+2026-09-13 08:53:51 [32minfo[39m [32mPOST /api/v1/auth/reg 201 4984.207 ms - 120[39m
+[32m[39m
+2026-09-13 09:01:57 [32minfo[39m [32mDELETE /api/v1/users/cmrkt9amd000194sofs9p8b90 204 426.379 ms - -[39m
+[32m[39m
+2026-09-13 09:03:08 [32minfo[39m [32mNodemailer transporter initialized with Brevo SMTP[39m
+2026-09-13 09:03:10 [32minfo[39m [32mSMTP transporter verified successfully[39m
+2026-09-13 09:03:11 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to ebus7569@gmail.com. MessageId: <19d4f87b-a406-82f7-c63f-5def5a8a3eef@gmail.com>[39m
+2026-09-13 09:03:11 [32minfo[39m [32mEmail sent successfully to ebus7569@gmail.com[39m
+2026-09-13 09:03:11 [32minfo[39m [32mVerification email sent to ebus7569@gmail.com[39m
+2026-09-13 09:03:11 [32minfo[39m [32mPOST /api/v1/auth/reg 201 3952.740 ms - 120[39m
+[32m[39m
+2026-09-13 09:18:17 [32minfo[39m [32mNodemailer transporter initialized with Brevo SMTP[39m
+2026-09-13 09:18:19 [32minfo[39m [32mSMTP transporter verified successfully[39m
+2026-09-13 09:18:20 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to samxploit442@vendors.com. MessageId: <c22be599-0d9c-966b-ab57-8708eaa5e080@gmail.com>[39m
+2026-09-13 09:18:20 [32minfo[39m [32mEmail sent successfully to samxploit442@vendors.com[39m
+2026-09-13 09:18:20 [32minfo[39m [32mVerification email sent to samxploit442@vendors.com[39m
+2026-09-13 09:18:20 [32minfo[39m [32mPOST /api/v1/auth/reg 201 4009.384 ms - 195[39m
+[32m[39m
+2026-09-13 09:20:53 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to samxploit442@gmail.com. MessageId: <42f22e99-78d3-9e49-3e9e-d83120901a51@gmail.com>[39m
+2026-09-13 09:20:53 [32minfo[39m [32mEmail sent successfully to samxploit442@gmail.com[39m
+2026-09-13 09:20:53 [32minfo[39m [32mVerification email sent to samxploit442@gmail.com[39m
+2026-09-13 09:20:53 [32minfo[39m [32mPOST /api/v1/auth/reg 201 2282.629 ms - 195[39m
+[32m[39m
+2026-09-13 11:01:02 [32minfo[39m [32mPOST /api/v1/auth/login 200 693.739 ms - 632[39m
+[32m[39m
+2026-09-13 11:01:43 [32minfo[39m [32mPATCH /api/v1/users/cmrut3uka0000gj1ss8n32csl 200 121.571 ms - 447[39m
+[32m[39m
+2026-09-13 11:02:14 [32minfo[39m [32mPOST /api/v1/auth/login 200 355.806 ms - 611[39m
+[32m[39m
+2026-09-13 11:02:29 [32minfo[39m [32mPATCH /api/v1/users/cmrut3uka0000gj1ss8n32csl 200 40.594 ms - 458[39m
+[32m[39m

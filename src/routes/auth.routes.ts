@@ -62,7 +62,7 @@ authRouter.get(
     const role = req.query.role as string || 'USER';
     passport.authenticate('google', {
       scope: ['profile', 'email'],
-      state: role, // Pass role as state
+      state: role,
     })(req, res, next);
   }
 );

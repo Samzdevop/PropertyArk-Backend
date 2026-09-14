@@ -116,6 +116,29 @@ enum NotificationPriority {
   URGENT
 }
 
+enum CreditTransactionType {
+  PURCHASE
+  PROPERTY_CREATION
+  FEATURE_PROPERTY
+  REFUND
+  ADMIN_ADJUSTMENT
+  EXPIRY
+}
+
+enum CreditTransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  ABANDONED
+}
+
 model User {
   id                    String             @id @default(cuid())
   email                 String             @unique
@@ -135,7 +158,7 @@ model User {
   ninPhotoUrl           String?
   ninVerificationStatus VerificationStatus @default(PENDING)
   ninVerifiedAt         DateTime?
-  ninVerifiedBy         String?  
+  ninVerifiedBy         String?
   ninRejectionReason    String?
   propertyViews         PropertyView[]
   favorites             Favorite[]
@@ -159,12 +182,60 @@ model User {
   passwordResetExpiresAt DateTime?
   vendorAvailabilities   VendorAvailability[]
 
+  creditPoints          Int                 @default(0)
+  creditPointsUsed      Int                 @default(0)
+  creditPointsPurchased Int                 @default(0)
+  creditTransactions    CreditTransaction[] @relation("UserCreditTransactions")
+  propertyCreations     CreditTransaction[] @relation("PropertyCreations")
+  creditPurchases       CreditPurchase[]
+
   @@index([email])
   @@index([role])
   @@index([isVerified])
   @@index([isSuspended])
   @@index([ninVerificationStatus])
   @@index([employeeId])
+}
+
+model CreditTransaction {
+  id                String                  @id @default(cuid())
+  transactionNumber String                  @unique
+  userId            String
+  user              User                    @relation("UserCreditTransactions", fields: [userId], references: [id], onDelete: Cascade)
+  type              CreditTransactionType
+  status            CreditTransactionStatus @default(PENDING)
+  points            Int
+  balanceBefore     Int
+  balanceAfter      Int
+
+  amountPaid       Decimal?       @db.Decimal(14, 2)
+  currency         String         @default("NGN")
+  paymentReference String? // Paystack reference
+  paymentStatus    PaymentStatus?
+  paymentMethod    String? // "paystack", "card", "bank_transfer"
+  propertyId       String?
+  property         Property?      @relation(fields: [propertyId], references: [id])
+
+  description String?
+  metadata    Json?
+
+  expiresAt DateTime? // When this credit expires (for purchases)
+  expiredAt DateTime? // When this credit was expired
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  propertyCreator   User?           @relation("PropertyCreations", fields: [propertyCreatorId], references: [id])
+  propertyCreatorId String?
+  creditPurchase    CreditPurchase?
+
+  @@index([userId])
+  @@index([propertyCreatorId])
+  @@index([type])
+  @@index([status])
+  @@index([paymentReference])
+  @@index([createdAt])
+  @@index([expiresAt])
 }
 
 model Property {
@@ -179,6 +250,11 @@ model Property {
   salePrice      Float?
   landFee        Float?
   shortletAmount Float?
+
+  checkInTime        String?
+  checkOutTime       String?
+  houseRules         Json?
+  cancellationPolicy String?
 
   address   String
   city      String
@@ -206,10 +282,15 @@ model Property {
   media            Media[]
   shortletBookings ShortletBooking[]
 
+  isFeatured         Boolean             @default(false)
+  featuredAt         DateTime?
+  featuredUntil      DateTime?
+  featuredBy         String?
+  creditTransactions CreditTransaction[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // Admin who approved/rejected
   reviewedBy      String?
   reviewedAt      DateTime?
   rejectionReason String?
@@ -220,6 +301,50 @@ model Property {
   @@index([listingType])
   @@index([listingStatus])
   @@index([city, state])
+}
+
+model CreditPointSettings {
+  id                          String @id @default(cuid())
+  newVendorBonusPoints        Int    @default(10)
+  newVendorBonusExpiryDays    Int    @default(30)
+  propertyCreationCost        Int    @default(5)
+  featurePropertyCost         Int    @default(10)
+  featurePropertyDurationDays Int    @default(30)
+  minimumPurchasePoints       Int    @default(10)
+  pricePerPoint               Float  @default(500)
+  currency                    String @default("NGN")
+
+  isActive  Boolean  @default(true)
+  updatedBy String
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
+model CreditPurchase {
+  id             String @id @default(cuid())
+  purchaseNumber String @unique
+  userId         String
+  user           User   @relation(fields: [userId], references: [id])
+
+  points                   Int
+  amountPaid               Decimal            @db.Decimal(14, 2)
+  currency                 String             @default("NGN")
+  paystackReference        String             @unique
+  paystackAccessCode       String?
+  paystackAuthorizationUrl String?
+  paymentStatus            PaymentStatus      @default(PENDING)
+  creditTransactionId      String?            @unique
+  creditTransaction        CreditTransaction? @relation(fields: [creditTransactionId], references: [id])
+  metadata                 Json?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  paidAt    DateTime?
+
+  @@index([userId])
+  @@index([paystackReference])
+  @@index([paymentStatus])
+  @@index([createdAt])
 }
 
 model PropertyView {

@@ -4,9 +4,59 @@ import { BadRequestError } from "../errors/BadRequestError";
 import { ForbiddenError } from "../errors/ForbiddenError";
 import { NotFoundError } from "../errors/NotFoundError";
 import { uploadMultipleToAzure, deleteFile, STORAGE_CONTAINERS } from "../config/upload";
+import { CreditPointService } from "./creditPoint.service";
 // import { VendorService } from "./vendor.service";
 
 export class PropertyService {
+
+  static parseHouseRules(houseRules: any): string[] {
+    if (!houseRules) return [];
+    if (Array.isArray(houseRules)) {
+      return houseRules.filter(Boolean).map((r: any) => String(r).trim());
+    }
+
+    if (typeof houseRules === "string") {
+      const trimmed = houseRules.trim();
+      if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
+        try {
+          const parsed = JSON.parse(trimmed);
+          if (Array.isArray(parsed)) {
+            return parsed.filter(Boolean).map((r: any) => String(r).trim());
+          }
+        } catch {
+          
+        }
+      }
+
+      if (trimmed.includes(",")) {
+        return trimmed.split(",").map((i: string) => i.trim()).filter(Boolean);
+      }
+      return [trimmed];
+    }
+
+    return [];
+  }
+
+  private static isValidTime(time: string): boolean {
+    const regex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+    return regex.test(time);
+  }
+
+  static validateShortletFields(data: any, listingType: string): void {
+    if (listingType !== ListingType.FOR_SHORTLET) {
+      return; 
+    }
+
+    const { checkInTime, checkOutTime } = data;
+
+    if (checkInTime && !this.isValidTime(checkInTime)) {
+      throw new BadRequestError("Invalid check-in time format. Use HH:mm (e.g., 14:00)");
+    }
+
+    if (checkOutTime && !this.isValidTime(checkOutTime)) {
+      throw new BadRequestError("Invalid check-out time format. Use HH:mm (e.g., 11:00)");
+    }
+  }
 
   static parseAmenities(amenities: any): string[] {
     if (!amenities) return [];
@@ -65,6 +115,152 @@ export class PropertyService {
   }
 
 
+  // static async createProperty(
+  //   userId: string,
+  //   userRole: Role,
+  //   data: any,
+  //   files: any
+  // ) {
+  //   const {
+  //     name, description, type, listingType, address, city, state, country, zipCode,
+  //     size, sizeUnit, bedrooms, bathrooms, yearBuilt, amenities,
+  //     rentAmount, salePrice, landFee, shortletAmount, staffId, status, 
+  //     checkInTime, checkOutTime, houseRules, cancellationPolicy
+  //   } = data;
+
+  //   let propertyStatus: PropertyStatus;
+
+  //   if (!status) {
+  //     throw new BadRequestError(
+  //       `Status is required. Valid values: ${Object.values(PropertyStatus).join(', ')}`
+  //     );
+  //   }
+
+  //   if (!this.validateStatus(status)) {
+  //     throw new BadRequestError(
+  //       `Invalid status "${status}". Must be one of: ${Object.values(PropertyStatus).join(', ')}`
+  //     );
+  //   }
+
+  //   propertyStatus = status as PropertyStatus;
+
+  //   this.validatePropertyPricing({ listingType, rentAmount, salePrice, landFee, shortletAmount });
+
+  //   this.validateShortletFields({ checkInTime, checkOutTime }, listingType);
+
+  //   const parsedAmenities = this.parseAmenities(amenities);
+  //   const parsedHouseRules = this.parseHouseRules(houseRules);
+
+  //   let vendorId = userId;
+  //   let staffIdToUse = staffId || null;
+
+  //   if (userRole === Role.STAFF) {
+  //     if (!staffId) {
+  //       throw new BadRequestError("Vendor ID is required when creating property as staff");
+  //     }
+  //     const vendor = await prisma.user.findUnique({
+  //       where: { id: staffId, role: Role.VENDOR }
+  //     });
+  //     if (!vendor) {
+  //       throw new NotFoundError("Vendor not found");
+  //     }
+  //     vendorId = staffId;
+  //     staffIdToUse = userId;
+  //   }
+
+  //   if (userRole === Role.VENDOR) {
+  //     const vendor = await prisma.user.findUnique({
+  //       where: { 
+  //         id: userId,
+  //         role: Role.VENDOR 
+  //       },
+  //       select: { ninVerificationStatus: true }
+  //     });
+
+  //     if (!vendor) {
+  //       throw new NotFoundError("Vendor not found");
+  //     }
+  //     if (vendor.ninVerificationStatus !== VerificationStatus.VERIFIED) {
+  //       throw new ForbiddenError("Your NIN must be verified before you can list properties");
+  //     }
+
+  //     const check = await CreditPointService.canCreateProperty(userId);
+  //     if (!check.canCreate) {
+  //       throw new BadRequestError(check.message);
+  //     }
+  //     vendorId = userId;
+  //   }
+
+  //   const propertyData: any = {
+  //     name,
+  //     description,
+  //     type,
+  //     listingType,
+  //     status: propertyStatus,
+  //     listingStatus: PropertyListingStatus.PENDING,
+  //     address,
+  //     city,
+  //     state,
+  //     country,
+  //     zipCode,
+  //     size: size ? parseFloat(size) : null,
+  //     sizeUnit: sizeUnit || 'sqft',
+  //     bedrooms: bedrooms ? parseInt(bedrooms) : null,
+  //     bathrooms: bathrooms ? parseFloat(bathrooms) : null,
+  //     yearBuilt: yearBuilt ? parseInt(yearBuilt) : null,
+  //     amenities: parsedAmenities,
+  //     vendorId: vendorId,
+  //     staffId: staffIdToUse
+  //   };
+
+  //   if (listingType === ListingType.FOR_SHORTLET) {
+  //     propertyData.checkInTime = checkInTime || null;
+  //     propertyData.checkOutTime = checkOutTime || null;
+  //     propertyData.houseRules = parsedHouseRules.length > 0 ? parsedHouseRules : null;
+  //     propertyData.cancellationPolicy = cancellationPolicy || null;
+  //   }
+
+  //   switch (listingType) {
+  //     case ListingType.FOR_RENT:
+  //       propertyData.rentAmount = parseFloat(rentAmount);
+  //       break;
+  //     case ListingType.FOR_SALE:
+  //       propertyData.salePrice = parseFloat(salePrice);
+  //       break;
+  //     case ListingType.FOR_LAND:
+  //       propertyData.landFee = parseFloat(landFee);
+  //       break;
+  //     case ListingType.FOR_SHORTLET:
+  //       propertyData.shortletAmount = parseFloat(shortletAmount);
+  //       break;
+  //   }
+
+  //   const property = await prisma.property.create({
+  //     data: propertyData
+  //   });
+
+  //   if (userRole === Role.VENDOR) {
+  //     try {
+  //       await CreditPointService.deductCreditPoints(
+  //         userId,
+  //         (await CreditPointService.getSettings()).propertyCreationCost,
+  //         'PROPERTY_CREATION',
+  //         `Created property: ${property.name}`,
+  //         { propertyId: property.id }
+  //       );
+  //     } catch (error) {
+  //       // If point deduction fails, delete the property to maintain consistency
+  //       await prisma.property.delete({ where: { id: property.id } });
+  //       throw error;
+  //     }
+  //   }
+
+  //   if (files && Object.keys(files).length > 0) {
+  //     this.uploadPropertyMediaInBackground(property.id, files);
+  //   }
+  //   return property;
+  // }
+
   static async createProperty(
     userId: string,
     userRole: Role,
@@ -72,9 +268,31 @@ export class PropertyService {
     files: any
   ) {
     const {
-      name, description, type, listingType, address, city, state, country, zipCode,
-      size, sizeUnit, bedrooms, bathrooms, yearBuilt, amenities,
-      rentAmount, salePrice, landFee, shortletAmount, staffId, status
+      name,
+      description,
+      type,
+      listingType,
+      address,
+      city,
+      state,
+      country,
+      zipCode,
+      size,
+      sizeUnit,
+      bedrooms,
+      bathrooms,
+      yearBuilt,
+      amenities,
+      rentAmount,
+      salePrice,
+      landFee,
+      shortletAmount,
+      staffId,
+      status,
+      checkInTime,
+      checkOutTime,
+      houseRules,
+      cancellationPolicy
     } = data;
 
     let propertyStatus: PropertyStatus;
@@ -93,34 +311,81 @@ export class PropertyService {
 
     propertyStatus = status as PropertyStatus;
 
-    this.validatePropertyPricing({ listingType, rentAmount, salePrice, landFee, shortletAmount });
+    this.validatePropertyPricing({
+      listingType,
+      rentAmount,
+      salePrice,
+      landFee,
+      shortletAmount
+    });
+
+    this.validateShortletFields(
+      {
+        checkInTime,
+        checkOutTime
+      },
+      listingType
+    );
 
     const parsedAmenities = this.parseAmenities(amenities);
+    const parsedHouseRules = this.parseHouseRules(houseRules);
+
     let vendorId = userId;
     let staffIdToUse = staffId || null;
 
+    // STAFF creating property for a VENDOR
     if (userRole === Role.STAFF) {
       if (!staffId) {
-        throw new BadRequestError("Vendor ID is required when creating property as staff");
+        throw new BadRequestError(
+          "Vendor ID is required when creating property as staff"
+        );
       }
+
       const vendor = await prisma.user.findUnique({
-        where: { id: staffId, role: Role.VENDOR }
+        where: {
+          id: staffId,
+          role: Role.VENDOR
+        }
       });
+
       if (!vendor) {
         throw new NotFoundError("Vendor not found");
       }
+
       vendorId = staffId;
       staffIdToUse = userId;
     }
 
+    // VENDOR creating their own property
     if (userRole === Role.VENDOR) {
       const vendor = await prisma.user.findUnique({
-        where: { id: userId },
-        select: { ninVerificationStatus: true }
+        where: {
+          id: userId,
+          role: Role.VENDOR
+        },
+        select: {
+          ninVerificationStatus: true
+        }
       });
-      if (!vendor || vendor.ninVerificationStatus !== VerificationStatus.VERIFIED) {
-        throw new ForbiddenError("Your NIN must be verified before you can list properties");
+
+      if (!vendor) {
+        throw new NotFoundError("Vendor not found");
       }
+
+      // NIN verification check
+      if (vendor.ninVerificationStatus !== VerificationStatus.VERIFIED) {
+        throw new ForbiddenError(
+          "Your NIN must be verified before you can list properties"
+        );
+      }
+
+      // Credit point check
+      const check = await CreditPointService.canCreateProperty(userId);
+
+      if (!check.canCreate) {
+        throw new BadRequestError(check.message);
+      }
+
       vendorId = userId;
     }
 
@@ -137,25 +402,36 @@ export class PropertyService {
       country,
       zipCode,
       size: size ? parseFloat(size) : null,
-      sizeUnit: sizeUnit || 'sqft',
+      sizeUnit: sizeUnit || "sqft",
       bedrooms: bedrooms ? parseInt(bedrooms) : null,
       bathrooms: bathrooms ? parseFloat(bathrooms) : null,
       yearBuilt: yearBuilt ? parseInt(yearBuilt) : null,
       amenities: parsedAmenities,
-      vendorId: vendorId,
+      vendorId,
       staffId: staffIdToUse
     };
+
+    if (listingType === ListingType.FOR_SHORTLET) {
+      propertyData.checkInTime = checkInTime || null;
+      propertyData.checkOutTime = checkOutTime || null;
+      propertyData.houseRules =
+        parsedHouseRules.length > 0 ? parsedHouseRules : null;
+      propertyData.cancellationPolicy = cancellationPolicy || null;
+    }
 
     switch (listingType) {
       case ListingType.FOR_RENT:
         propertyData.rentAmount = parseFloat(rentAmount);
         break;
+
       case ListingType.FOR_SALE:
         propertyData.salePrice = parseFloat(salePrice);
         break;
+
       case ListingType.FOR_LAND:
         propertyData.landFee = parseFloat(landFee);
         break;
+
       case ListingType.FOR_SHORTLET:
         propertyData.shortletAmount = parseFloat(shortletAmount);
         break;
@@ -164,6 +440,32 @@ export class PropertyService {
     const property = await prisma.property.create({
       data: propertyData
     });
+
+    // Deduct credit points for vendor property creation
+    if (userRole === Role.VENDOR) {
+      try {
+        const settings = await CreditPointService.getSettings();
+
+        await CreditPointService.deductCreditPoints(
+          userId,
+          settings.propertyCreationCost,
+          "PROPERTY_CREATION",
+          `Created property: ${property.name}`,
+          {
+            propertyId: property.id
+          }
+        );
+      } catch (error) {
+        // Roll back property if credit deduction fails
+        await prisma.property.delete({
+          where: {
+            id: property.id
+          }
+        });
+
+        throw error;
+      }
+    }
 
     if (files && Object.keys(files).length > 0) {
       this.uploadPropertyMediaInBackground(property.id, files);
@@ -192,7 +494,6 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
       let urls: string[] = [];
 
       if (storageDriver === 'azure') {
-        // Azure: Upload to Azure blob storage
         urls = await uploadMultipleToAzure(fileGroup, config.container);
       } else if (storageDriver === 's3') {
         // S3: Files already uploaded by multer-s3, get location from file
@@ -873,6 +1174,18 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
       updateData.status = data.status as PropertyStatus;
     }
 
+    const listingType = data.listingType || property.listingType;
+
+    if (listingType === ListingType.FOR_SHORTLET) {
+      this.validateShortletFields(
+        {
+          checkInTime: data.checkInTime !== undefined ? data.checkInTime : property.checkInTime,
+          checkOutTime: data.checkOutTime !== undefined ? data.checkOutTime : property.checkOutTime
+        },
+        listingType
+      );
+    }
+
     if (data.name !== undefined) updateData.name = data.name;
     if (data.description !== undefined) updateData.description = data.description;
     if (data.type !== undefined) updateData.type = data.type;
@@ -892,6 +1205,22 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
     if (data.yearBuilt !== undefined) updateData.yearBuilt = data.yearBuilt ? parseInt(data.yearBuilt) : null;
     if (data.amenities !== undefined) {
       updateData.amenities = this.parseAmenities(data.amenities);
+    }
+
+    if (listingType === ListingType.FOR_SHORTLET) {
+      if (data.checkInTime !== undefined) {
+        updateData.checkInTime = data.checkInTime || null;
+      }
+      if (data.checkOutTime !== undefined) {
+        updateData.checkOutTime = data.checkOutTime || null;
+      }
+      if (data.houseRules !== undefined) {
+        const parsedRules = this.parseHouseRules(data.houseRules);
+        updateData.houseRules = parsedRules.length > 0 ? parsedRules : null;
+      }
+      if (data.cancellationPolicy !== undefined) {
+        updateData.cancellationPolicy = data.cancellationPolicy || null;
+      }
     }
 
     // If property was approved and user is not admin, set back to pending
@@ -940,7 +1269,7 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
         data: {
           userId: property.vendorId,
           type: 'GENERAL',
-          title: 'Property Update Requires Approval',
+          title: wasApproved ? 'Property Update Requires Approval' : 'Property Resubmitted for Review',
           message: `Your property "${property.name}" has been ${statusMessage}.`,
           data: { 
             propertyId: property.id,

@@ -6289,3 +6289,4 @@
 2026-08-29 20:41:50 [31merror[39m [31mProposed date must be in the future Proposed date must be in the future[39m
 2026-08-29 20:42:22 [31merror[39m [31mProposed date must be in the future Proposed date must be in the future[39m
 2026-08-29 20:42:52 [31merror[39m [31mFailed to send inquiry notifications: ENOENT: no such file or directory, open 'C:\Users\HomePC\Desktop\PropertyArk-Backend\src\views\inquiry-confirmation.hbs'[39m
+2026-09-13 08:46:39 [31merror[39m [31mUser already registered! User already registered![39m
