@@ -4,7 +4,7 @@ import { validateRequest } from '../middlewares/validateRequest.middleware';
 import { changePasswordSchema, completeInquirySchema } from '../schemas/users.schemas';
 import { requireRoles } from '../middlewares/roleCheck.middleware';
 import { changePassword, completeInquiry, deleteUser, getAllUsers, getProfile, getUserDashboard, getUserInquiriesStats, removeAvatar, updateAvatar, updateProfile } from '../contollers/users.controller';
-import { uploadAvatar } from '@/config/upload';
+import { uploadAvatar } from '../config/upload';
 
 export const usersRouter = Router();
 
