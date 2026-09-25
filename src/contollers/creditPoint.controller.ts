@@ -9,6 +9,7 @@ import { BadRequestError } from "../errors/BadRequestError";
 import { Role } from "@prisma/client";
 
 
+
 export const getSettings = async (
   req: Request,
   res: Response,

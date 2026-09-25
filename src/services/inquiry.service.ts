@@ -705,7 +705,7 @@ export class InquiryService {
       }
     });
 
-    await this.sendReviewNotification(updatedInquiry, status, reason);
+    await this.sendReviewNotification(updatedInquiry, status, reason, scheduledDate  );
 
     Logger.info(`Inquiry ${inquiry.inquiryNumber} ${status.toLowerCase()} by vendor ${vendorId}`);
     return updatedInquiry;

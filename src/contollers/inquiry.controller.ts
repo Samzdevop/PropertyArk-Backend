@@ -195,7 +195,7 @@ export const reviewInquiry = async (
   try {
     const { id } = req.params;
     const user = req.user as any;
-    const { status, reason } = req.body;
+    const { status, reason, scheduledDate  } = req.body;
 
     if (!status || (status !== 'ACCEPTED' && status !== 'DECLINED')) {
       throw new BadRequestError("Status must be 'ACCEPTED' or 'DECLINED'");
@@ -204,7 +204,7 @@ export const reviewInquiry = async (
     const inquiry = await InquiryService.reviewInquiry(
       id as string,
       user.id,
-      { status, reason }
+      { status, reason, scheduledDate }
     );
 
     await logActivity(
@@ -215,7 +215,8 @@ export const reviewInquiry = async (
       {
         inquiryNumber: inquiry.inquiryNumber,
         status,
-        ...(reason && { reason })
+        ...(reason && { reason }),
+        ...(scheduledDate && { scheduledDate })
       },
       req
     );

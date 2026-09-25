@@ -39328,3 +39328,188 @@
 [32m[39m
 2026-09-13 11:02:29 [32minfo[39m [32mPATCH /api/v1/users/cmrut3uka0000gj1ss8n32csl 200 40.594 ms - 458[39m
 [32m[39m
+2026-09-23 11:23:59 [31merror[39m [31mEncryption failed: CHAT_MASTER_KEY must be 64 hex characters (32 bytes)[39m
+2026-09-23 11:26:16 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-09-23 11:26:16 [32minfo[39m [32mNew DEK created: key_1790187976590_9bc77638[39m
+2026-09-24 04:29:27 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-09-24 04:29:27 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-09-24 04:29:27 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-09-24 04:29:27 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-09-24 04:30:27 [32minfo[39m [32mRunning key rotation job...[39m
+2026-09-24 04:30:27 [32minfo[39m [32mPrimary key is still valid (0 days old)[39m
+2026-09-24 04:30:27 [32minfo[39m [32mKey rotation job completed[39m
+2026-09-24 04:36:05 [32minfo[39m [32mSIGINT received. Starting graceful shutdown...[39m
+2026-09-24 04:36:39 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-09-24 04:36:39 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-09-24 04:36:39 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-09-24 04:36:39 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-09-24 04:37:39 [32minfo[39m [32mRunning key rotation job...[39m
+2026-09-24 04:37:39 [32minfo[39m [32mPrimary key is still valid (0 days old)[39m
+2026-09-24 04:37:39 [32minfo[39m [32mKey rotation job completed[39m
+2026-09-24 05:49:34 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-09-24 05:49:34 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-09-24 05:49:34 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-09-24 05:49:34 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-09-24 05:50:34 [32minfo[39m [32mRunning key rotation job...[39m
+2026-09-24 05:50:35 [32minfo[39m [32mPrimary key is still valid (0 days old)[39m
+2026-09-24 05:50:36 [32minfo[39m [32mKey rotation job completed[39m
+2026-09-24 09:09:31 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-09-24 09:09:31 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-09-24 09:09:31 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-09-24 09:09:31 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-09-24 09:10:21 [32minfo[39m [32mGET / 200 6.830 ms - 66[39m
+[32m[39m
+2026-09-24 09:10:24 [32minfo[39m [32mGET /favicon.ico 404 1.487 ms - 116[39m
+[32m[39m
+2026-09-24 09:10:31 [32minfo[39m [32mRunning key rotation job...[39m
+2026-09-24 09:10:31 [32minfo[39m [32mPrimary key is still valid (0 days old)[39m
+2026-09-24 09:10:32 [32minfo[39m [32mKey rotation job completed[39m
+2026-09-24 09:11:15 [32minfo[39m [32mPOST /api/v1/auth/login 200 328.589 ms - 622[39m
+[32m[39m
+2026-09-24 09:14:44 [31merror[39m [31mUser not found User not found[39m
+2026-09-24 09:14:44 [32minfo[39m [32mPOST /api/v1/auth/login 404 384.714 ms - 42[39m
+[32m[39m
+2026-09-24 19:21:49 [31merror[39m [31mUser not found User not found[39m
+2026-09-24 19:21:49 [32minfo[39m [32mPOST /api/v1/auth/login 404 687.446 ms - 42[39m
+[32m[39m
+2026-09-24 19:22:05 [31merror[39m [31mUser not found User not found[39m
+2026-09-24 19:22:05 [32minfo[39m [32mPOST /api/v1/auth/login 404 82.384 ms - 42[39m
+[32m[39m
+2026-09-24 19:32:07 [32minfo[39m [32mSIGINT received. Starting graceful shutdown...[39m
+2026-09-24 19:32:47 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-09-24 19:32:47 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-09-24 19:32:47 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-09-24 19:32:47 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-09-24 19:33:47 [32minfo[39m [32mRunning key rotation job...[39m
+2026-09-24 19:33:47 [31merror[39m [31mKey rotation job failed: [39m
+[31mInvalid `prisma.encryptionKey.findFirst()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\jobs\keyRotation.job.ts:21:53[39m
+
+[31m  18 Logger.info('Running key rotation job...');[39m
+[31m  19 [39m
+[31m  20 // Check if rotation is needed[39m
+[31m→ 21 const primaryKey = await prisma.encryptionKey.findFirst([39m
+[31mThe table `public.EncryptionKey` does not exist in the current database.[39m
+2026-09-24 19:44:11 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-09-24 19:44:11 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-09-24 19:44:11 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-09-24 19:44:11 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-09-24 19:44:29 [32minfo[39m [32mPOST /api/v1/auth/login 200 472.884 ms - 582[39m
+[32m[39m
+2026-09-24 19:45:11 [32minfo[39m [32mRunning key rotation job...[39m
+2026-09-24 19:45:11 [33mwarn[39m [33mNo primary key found, creating one...[39m
+2026-09-24 19:45:11 [32minfo[39m [32mNew DEK created: key_1790304311504_617e52f6[39m
+2026-09-24 19:47:25 [37mdebug[39m [37mActivity logged: VIEW_VENDOR_INQUIRIES on INQUIRY by cmrutvnuk0003gj1s3fti1upb[39m
+2026-09-24 19:47:25 [32minfo[39m [32mGET /api/v1/inquiries/vendor 200 318.783 ms - 15450[39m
+[32m[39m
+2026-09-24 19:47:44 [37mdebug[39m [37mActivity logged: VIEW_VENDOR_INQUIRIES on INQUIRY by cmrutvnuk0003gj1s3fti1upb[39m
+2026-09-24 19:47:44 [32minfo[39m [32mGET /api/v1/inquiries/vendor 200 103.132 ms - 15450[39m
+[32m[39m
+2026-09-24 19:50:19 [32minfo[39m [32mPATCH /api/v1/inquiries/cmu83v4oa001fgk1snzgc1yg9/review 401 14.687 ms - 64[39m
+[32m[39m
+2026-09-24 19:50:44 [31merror[39m [31mScheduled date is required when accepting an inquiry Scheduled date is required when accepting an inquiry[39m
+2026-09-24 19:50:44 [32minfo[39m [32mPATCH /api/v1/inquiries/cmu83v4oa001fgk1snzgc1yg9/review 400 194.624 ms - 80[39m
+[32m[39m
+2026-09-24 19:51:25 [31merror[39m [31mScheduled date is required when accepting an inquiry Scheduled date is required when accepting an inquiry[39m
+2026-09-24 19:51:25 [32minfo[39m [32mPATCH /api/v1/inquiries/cmu83v4oa001fgk1snzgc1yg9/review 400 25.856 ms - 80[39m
+[32m[39m
+2026-09-24 19:51:58 [31merror[39m [31mScheduled date is required when accepting an inquiry Scheduled date is required when accepting an inquiry[39m
+2026-09-24 19:51:58 [32minfo[39m [32mPATCH /api/v1/inquiries/cmu83v4oa001fgk1snzgc1yg9/review 400 19.415 ms - 80[39m
+[32m[39m
+2026-09-24 19:52:13 [32minfo[39m [32mPATCH /api/v1/inquiries/cmu83v4oa001fgk1snzgc1yg9/review 422 29.926 ms - 205[39m
+[32m[39m
+2026-09-24 19:52:29 [31merror[39m [31mScheduled date is required when accepting an inquiry Scheduled date is required when accepting an inquiry[39m
+2026-09-24 19:52:29 [32minfo[39m [32mPATCH /api/v1/inquiries/cmu83v4oa001fgk1snzgc1yg9/review 400 206.119 ms - 80[39m
+[32m[39m
+2026-09-24 19:53:01 [31merror[39m [31mScheduled date is required when accepting an inquiry Scheduled date is required when accepting an inquiry[39m
+2026-09-24 19:53:01 [32minfo[39m [32mPATCH /api/v1/inquiries/cmu83v4oa001fgk1snzgc1yg9/review 400 22.578 ms - 80[39m
+[32m[39m
+2026-09-24 19:58:28 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-09-24 19:58:28 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-09-24 19:58:28 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-09-24 19:58:28 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-09-24 19:58:48 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-09-24 19:58:48 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-09-24 19:58:48 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-09-24 19:58:48 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-09-24 19:59:05 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-09-24 19:59:05 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-09-24 19:59:05 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-09-24 19:59:05 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-09-24 19:59:53 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-09-24 19:59:54 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-09-24 19:59:54 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-09-24 19:59:54 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-09-24 20:00:31 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-09-24 20:00:31 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-09-24 20:00:31 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-09-24 20:00:31 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-09-24 20:01:18 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-09-24 20:01:18 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-09-24 20:01:18 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-09-24 20:01:18 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-09-24 20:02:05 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-09-24 20:02:05 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-09-24 20:02:05 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-09-24 20:02:05 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-09-24 20:03:05 [32minfo[39m [32mRunning key rotation job...[39m
+2026-09-24 20:03:06 [32minfo[39m [32mPrimary key is still valid (0 days old)[39m
+2026-09-24 20:03:06 [32minfo[39m [32mKey rotation job completed[39m
+2026-09-24 20:05:23 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-09-24 20:05:23 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-09-24 20:05:23 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-09-24 20:05:23 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-09-24 20:06:23 [32minfo[39m [32mRunning key rotation job...[39m
+2026-09-24 20:06:24 [32minfo[39m [32mPrimary key is still valid (0 days old)[39m
+2026-09-24 20:06:24 [32minfo[39m [32mKey rotation job completed[39m
+2026-09-24 20:13:18 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-09-24 20:13:18 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-09-24 20:13:18 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-09-24 20:13:18 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-09-24 20:13:42 [31merror[39m [31mScheduled date must be in the future Scheduled date must be in the future[39m
+2026-09-24 20:13:42 [32minfo[39m [32mPATCH /api/v1/inquiries/cmu83v4oa001fgk1snzgc1yg9/review 400 388.960 ms - 64[39m
+[32m[39m
+2026-09-24 20:14:13 [31merror[39m [31mScheduled date must be in the future Scheduled date must be in the future[39m
+2026-09-24 20:14:13 [32minfo[39m [32mPATCH /api/v1/inquiries/cmu83v4oa001fgk1snzgc1yg9/review 400 21.596 ms - 64[39m
+[32m[39m
+2026-09-24 20:14:18 [32minfo[39m [32mRunning key rotation job...[39m
+2026-09-24 20:14:18 [32minfo[39m [32mPrimary key is still valid (0 days old)[39m
+2026-09-24 20:14:18 [32minfo[39m [32mKey rotation job completed[39m
+2026-09-24 20:14:38 [31merror[39m [31mScheduled date must be in the future Scheduled date must be in the future[39m
+2026-09-24 20:14:38 [32minfo[39m [32mPATCH /api/v1/inquiries/cmu83v4oa001fgk1snzgc1yg9/review 400 24.186 ms - 64[39m
+[32m[39m
+2026-09-24 20:15:02 [31merror[39m [31mScheduled date must be in the future Scheduled date must be in the future[39m
+2026-09-24 20:15:02 [32minfo[39m [32mPATCH /api/v1/inquiries/cmu83v4oa001fgk1snzgc1yg9/review 400 14.607 ms - 64[39m
+[32m[39m
+2026-09-24 20:15:21 [31merror[39m [31mFailed to send inquiry review notification: ENOENT: no such file or directory, open 'C:\Users\HomePC\Desktop\PropertyArk-Backend\src\views\inquiry-accepted.hbs'[39m
+2026-09-24 20:15:21 [32minfo[39m [32mInquiry INQ-2026-1979 accepted by vendor cmrutvnuk0003gj1s3fti1upb[39m
+2026-09-24 20:15:21 [37mdebug[39m [37mActivity logged: ACCEPT_INQUIRY on INQUIRY by cmrutvnuk0003gj1s3fti1upb[39m
+2026-09-24 20:15:21 [32minfo[39m [32mPATCH /api/v1/inquiries/cmu83v4oa001fgk1snzgc1yg9/review 200 306.852 ms - 1075[39m
+[32m[39m
+2026-09-24 20:40:14 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-09-24 20:40:14 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-09-24 20:40:14 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-09-24 20:40:14 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-09-24 20:40:41 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-09-24 20:40:41 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-09-24 20:40:41 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-09-24 20:40:41 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-09-24 20:41:41 [32minfo[39m [32mRunning key rotation job...[39m
+2026-09-24 20:41:41 [32minfo[39m [32mPrimary key is still valid (0 days old)[39m
+2026-09-24 20:41:41 [32minfo[39m [32mKey rotation job completed[39m
+2026-09-24 20:42:54 [31merror[39m [31mExpected double-quoted property name in JSON at position 40 (line 3 column 1) Expected double-quoted property name in JSON at position 40 (line 3 column 1)[39m
+2026-09-24 20:45:46 [33mwarn[39m [33mPassword reset requested for non-existent email: samzdevop@gmail.com[39m
+2026-09-24 20:45:46 [32minfo[39m [32mPOST /api/v1/auth/forgot-password 200 199.842 ms - 134[39m
+[32m[39m
+2026-09-24 20:46:46 [31merror[39m [31mFailed to send password reset email to Samzdevop@gmail.com: ENOENT: no such file or directory, open 'C:\Users\HomePC\Desktop\PropertyArk-Backend\src\views\password-reset-request.hbs'[39m
+2026-09-24 20:46:46 [31merror[39m [31mFailed to send reset email. Please try again. Failed to send reset email. Please try again.[39m
+2026-09-24 20:46:46 [32minfo[39m [32mPOST /api/v1/auth/forgot-password 400 256.788 ms - 73[39m
+[32m[39m
+2026-09-24 20:49:16 [32minfo[39m [32mNodemailer transporter initialized with Brevo SMTP[39m
+2026-09-24 20:49:17 [32minfo[39m [32mSMTP transporter verified successfully[39m
+2026-09-24 20:49:18 [32minfo[39m [32mEmail sent successfully via Brevo SMTP to Samzdevop@gmail.com. MessageId: <e2c76a17-ba8a-4192-d66c-f0c8e9a46e95@gmail.com>[39m
+2026-09-24 20:49:18 [32minfo[39m [32mEmail sent successfully to Samzdevop@gmail.com[39m
+2026-09-24 20:49:18 [32minfo[39m [32mPassword reset email sent to: Samzdevop@gmail.com[39m
+2026-09-24 20:49:18 [32minfo[39m [32mPOST /api/v1/auth/forgot-password 200 2368.298 ms - 134[39m
+[32m[39m
+2026-09-24 20:50:24 [32minfo[39m [32mSIGINT received. Starting graceful shutdown...[39m

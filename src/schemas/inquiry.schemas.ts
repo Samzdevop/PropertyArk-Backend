@@ -1,5 +1,25 @@
 import { z } from 'zod';
 
+
+const isValidDateString = (val: string): boolean => {
+  if (!val) return false;
+  
+  const isoDate = new Date(val);
+  if (!isNaN(isoDate.getTime())) {
+    return true;
+  }
+  
+  const simpleDateRegex = /^\d{4}-\d{2}-\d{2}$/;
+  if (simpleDateRegex.test(val)) {
+    const parts = val.split('-').map(Number);
+    const testDate = new Date(parts[0], parts[1] - 1, parts[2]);
+    return !isNaN(testDate.getTime());
+  }
+  
+  return false;
+};
+
+
 export const createInquirySchema = z.object({
   body: z.object({
     propertyId: z.string().cuid('Invalid property ID'),
@@ -9,7 +29,10 @@ export const createInquirySchema = z.object({
     meetingType: z.enum(['VIDEO_CALL', 'IN_PERSON'], {
       errorMap: () => ({ message: "Meeting type must be 'VIDEO_CALL' or 'IN_PERSON'" })
     }),
-    proposedDate: z.string().datetime().optional()
+    proposedDate: z.string().refine(
+      (val) => isValidDateString(val),
+      { message: "Invalid proposed date. Use YYYY-MM-DD or ISO format" }
+    ).optional()
   })
 });
 
@@ -20,7 +43,10 @@ export const reviewInquirySchema = z.object({
   body: z.object({
     status: z.enum(['ACCEPTED', 'DECLINED']),
     reason: z.string().optional(),
-    scheduledDate: z.string().datetime().optional()
+    scheduledDate: z.string().refine(
+      (val) => isValidDateString(val),
+      { message: "Invalid scheduled date. Use YYYY-MM-DD or ISO format (2026-09-24T14:00:00.000Z)" }
+    ).optional()
   }).refine(
     (data) => {
       if (data.status === 'DECLINED' && !data.reason) {

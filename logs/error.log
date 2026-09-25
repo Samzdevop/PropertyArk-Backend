@@ -6290,3 +6290,29 @@
 2026-08-29 20:42:22 [31merror[39m [31mProposed date must be in the future Proposed date must be in the future[39m
 2026-08-29 20:42:52 [31merror[39m [31mFailed to send inquiry notifications: ENOENT: no such file or directory, open 'C:\Users\HomePC\Desktop\PropertyArk-Backend\src\views\inquiry-confirmation.hbs'[39m
 2026-09-13 08:46:39 [31merror[39m [31mUser already registered! User already registered![39m
+2026-09-23 11:23:59 [31merror[39m [31mEncryption failed: CHAT_MASTER_KEY must be 64 hex characters (32 bytes)[39m
+2026-09-24 09:14:44 [31merror[39m [31mUser not found User not found[39m
+2026-09-24 19:21:49 [31merror[39m [31mUser not found User not found[39m
+2026-09-24 19:22:05 [31merror[39m [31mUser not found User not found[39m
+2026-09-24 19:33:47 [31merror[39m [31mKey rotation job failed: [39m
+[31mInvalid `prisma.encryptionKey.findFirst()` invocation in[39m
+[31mC:\Users\HomePC\Desktop\PropertyArk-Backend\src\jobs\keyRotation.job.ts:21:53[39m
+
+[31m  18 Logger.info('Running key rotation job...');[39m
+[31m  19 [39m
+[31m  20 // Check if rotation is needed[39m
+[31m→ 21 const primaryKey = await prisma.encryptionKey.findFirst([39m
+[31mThe table `public.EncryptionKey` does not exist in the current database.[39m
+2026-09-24 19:50:44 [31merror[39m [31mScheduled date is required when accepting an inquiry Scheduled date is required when accepting an inquiry[39m
+2026-09-24 19:51:25 [31merror[39m [31mScheduled date is required when accepting an inquiry Scheduled date is required when accepting an inquiry[39m
+2026-09-24 19:51:58 [31merror[39m [31mScheduled date is required when accepting an inquiry Scheduled date is required when accepting an inquiry[39m
+2026-09-24 19:52:29 [31merror[39m [31mScheduled date is required when accepting an inquiry Scheduled date is required when accepting an inquiry[39m
+2026-09-24 19:53:01 [31merror[39m [31mScheduled date is required when accepting an inquiry Scheduled date is required when accepting an inquiry[39m
+2026-09-24 20:13:42 [31merror[39m [31mScheduled date must be in the future Scheduled date must be in the future[39m
+2026-09-24 20:14:13 [31merror[39m [31mScheduled date must be in the future Scheduled date must be in the future[39m
+2026-09-24 20:14:38 [31merror[39m [31mScheduled date must be in the future Scheduled date must be in the future[39m
+2026-09-24 20:15:02 [31merror[39m [31mScheduled date must be in the future Scheduled date must be in the future[39m
+2026-09-24 20:15:21 [31merror[39m [31mFailed to send inquiry review notification: ENOENT: no such file or directory, open 'C:\Users\HomePC\Desktop\PropertyArk-Backend\src\views\inquiry-accepted.hbs'[39m
+2026-09-24 20:42:54 [31merror[39m [31mExpected double-quoted property name in JSON at position 40 (line 3 column 1) Expected double-quoted property name in JSON at position 40 (line 3 column 1)[39m
+2026-09-24 20:46:46 [31merror[39m [31mFailed to send password reset email to Samzdevop@gmail.com: ENOENT: no such file or directory, open 'C:\Users\HomePC\Desktop\PropertyArk-Backend\src\views\password-reset-request.hbs'[39m
+2026-09-24 20:46:46 [31merror[39m [31mFailed to send reset email. Please try again. Failed to send reset email. Please try again.[39m

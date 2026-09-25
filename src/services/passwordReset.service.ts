@@ -49,7 +49,7 @@ export class PasswordResetService {
       }
     });
 
-    const frontendUrl = process.env.FRONTEND_URL || 'https://properties.molaprise.com';
+    const frontendUrl = process.env.FRONTEND_URL || 'https://propertyark.vercel.app';
     const resetUrl = `${frontendUrl}/reset-password?email=${encodeURIComponent(email)}&token=${rawToken}`;
 
     try {

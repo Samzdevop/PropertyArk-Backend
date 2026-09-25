@@ -139,6 +139,32 @@ enum PaymentStatus {
   ABANDONED
 }
 
+enum ChatType {
+  DIRECT // User <-> User, Vendor <-> Vendor, User <-> Vendor
+  SUPPORT // User/Vendor <-> Admin/Staff
+}
+
+enum ChatSessionStatus {
+  ACTIVE
+  ENDED
+  TRANSFERRED
+}
+
+enum ChatRequestStatus {
+  PENDING
+  ASSIGNED
+  RESOLVED
+  CANCELLED
+  EXPIRED
+}
+
+enum ChatParticipantRole {
+  USER
+  VENDOR
+  STAFF
+  ADMIN
+}
+
 model User {
   id                    String             @id @default(cuid())
   email                 String             @unique
@@ -181,6 +207,14 @@ model User {
   passwordResetToken     String?
   passwordResetExpiresAt DateTime?
   vendorAvailabilities   VendorAvailability[]
+
+  chatSessionsInitiated ChatSession[]     @relation("ChatInitiator")
+  chatSessionsAssigned  ChatSession[]     @relation("ChatAssignedTo")
+  chatMessages          ChatMessage[]
+  chatRequests          ChatRequest[]
+  assignedChatRequests  ChatRequest[]     @relation("ChatRequestStaff")
+  chatParticipants      ChatParticipant[]
+  staffStatus           StaffStatus?      @relation("StaffStatus")
 
   creditPoints          Int                 @default(0)
   creditPointsUsed      Int                 @default(0)
@@ -255,6 +289,8 @@ model Property {
   checkOutTime       String?
   houseRules         Json?
   cancellationPolicy String?
+
+  chatSessions ChatSession[]
 
   address   String
   city      String
@@ -618,4 +654,174 @@ model Inquiry {
   @@index([vendorId])
   @@index([status])
   @@index([createdAt])
+}
+
+model ChatParticipant {
+  id        String              @id @default(cuid())
+  sessionId String
+  session   ChatSession         @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      ChatParticipantRole
+  joinedAt  DateTime            @default(now())
+  leftAt    DateTime?
+  isActive  Boolean             @default(true)
+
+  @@unique([sessionId, userId])
+  @@index([userId])
+  @@index([sessionId])
+}
+
+model ChatSession {
+  id            String            @id @default(cuid())
+  sessionNumber String            @unique
+  type          ChatType
+  status        ChatSessionStatus @default(ACTIVE)
+  agoraChannel  String            @unique // Agora channel name
+
+  // Who initiated
+  initiatorId   String
+  initiator     User                @relation("ChatInitiator", fields: [initiatorId], references: [id])
+  initiatorRole ChatParticipantRole
+
+  // For support chats - the assigned staff/admin
+  assignedToId String?
+  assignedTo   User?   @relation("ChatAssignedTo", fields: [assignedToId], references: [id])
+
+  // Related property (if applicable)
+  propertyId String?
+  property   Property? @relation(fields: [propertyId], references: [id])
+
+  // Session metadata
+  subject       String?
+  lastMessage   String?
+  lastMessageAt DateTime?
+
+  participants ChatParticipant[]
+  messages     ChatMessage[]
+  request      ChatRequest?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  endedAt   DateTime?
+  endedBy   String?
+
+  @@index([initiatorId])
+  @@index([assignedToId])
+  @@index([status])
+  @@index([type])
+  @@index([agoraChannel])
+  @@index([createdAt])
+}
+
+model ChatMessage {
+  id         String              @id @default(cuid())
+  sessionId  String
+  session    ChatSession         @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  senderId   String
+  sender     User                @relation(fields: [senderId], references: [id])
+  senderRole ChatParticipantRole
+
+  //Encrypted fields
+  content      String // Encrypted content
+  encryptedKey String? // Data Encryption Key (DEK) encrypted with KEK
+  iv           String // Initialization Vector
+  authTag      String // Authentication tag for GCM
+
+  // Metadata
+  messageType     String  @default("text")
+  metadata        String? // Encrypted metadata (JSON string)
+  metadataIv      String? // IV for metadata encryption
+  metadataAuthTag String?
+  contentHash     String?
+  agoraMsgId      String?
+
+  // Status
+  isRead    Boolean   @default(false)
+  readAt    DateTime?
+  isDeleted Boolean   @default(false)
+  deletedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([sessionId])
+  @@index([senderId])
+  @@index([createdAt])
+  @@index([isRead])
+  @@index([contentHash])
+}
+
+model EncryptionKey {
+  id           String  @id @default(cuid())
+  keyId        String  @unique
+  encryptedKey String
+  algorithm    String  @default("aes-256-gcm")
+  isActive     Boolean @default(true)
+  isPrimary    Boolean @default(false)
+
+  rotatedAt DateTime?
+  expiresAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isActive])
+  @@index([isPrimary])
+}
+
+model ChatRequest {
+  id            String      @id @default(cuid())
+  requestNumber String      @unique
+  sessionId     String      @unique
+  session       ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  userId   String
+  user     User                @relation(fields: [userId], references: [id])
+  userRole ChatParticipantRole
+
+  subject     String
+  description String?
+  priority    String  @default("NORMAL") // LOW, NORMAL, HIGH, URGENT
+
+  status ChatRequestStatus @default(PENDING)
+
+  // Assignment tracking
+  assignedStaffId String?
+  assignedStaff   User?     @relation("ChatRequestStaff", fields: [assignedStaffId], references: [id])
+  assignedAt      DateTime?
+  resolvedAt      DateTime?
+  cancelledAt     DateTime?
+
+  // Transfer history
+  transferHistory Json? // Track transfers between staff
+  resolutionNote  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([assignedStaffId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model StaffStatus {
+  id      String @id @default(cuid())
+  staffId String @unique
+  staff   User   @relation("StaffStatus", fields: [staffId], references: [id], onDelete: Cascade)
+
+  isOnline    Boolean @default(false)
+  isAvailable Boolean @default(true) // Can take new chats
+  activeChats Int     @default(0)
+  maxChats    Int     @default(3) // Max concurrent chats
+
+  lastSeen DateTime @default(now())
+  socketId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isOnline])
+  @@index([isAvailable])
 }
