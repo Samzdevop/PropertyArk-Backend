@@ -23,6 +23,7 @@ import { shortletBookingRouter } from './routes/shortletBooking.routes';
 import { notificationRouter } from './routes/notification.routes';
 import { adminDashboardRouter } from './routes/adminDashboard.routes';
 import { creditPointRouter } from './routes/creditPoint.routes';
+import { chatRouter } from './routes/chat.routes';
 
 export const app = express();
 
@@ -115,6 +116,7 @@ app.use('/api/v1/shortlet-bookings', shortletBookingRouter);
 app.use('/api/v1/notifications', notificationRouter);
 app.use('/api/v1/admin', adminDashboardRouter);
 app.use('/api/v1/credit-points', creditPointRouter);
+app.use('/api/v1/chat', chatRouter);
 
 
 
