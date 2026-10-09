@@ -67,6 +67,7 @@ const allowedOrigins = [
 	'http://localhost:3000',
 	'http://localhost:5173',
 	'https://propertyark.vercel.app',
+	'https://www.propertyark.ng',
 ]
 app.use(cors({
 	origin: function (origin, callback ) {
