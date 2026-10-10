@@ -8,10 +8,14 @@ export const userSelect = {
     isVerified: true,
     avatar: true,
     location: true,
+    isDeleted: true,      
+    deletedAt: true,        
+    deletionReason: true,  
     createdAt: true,
     updatedAt: true,
     lastLogin: true,
     googleId: true,
+
     
 }
 

@@ -75,6 +75,68 @@ export const updateProfile = async (
   }
 };
 
+
+export const adminUpdateUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const adminUser = req.user as any;
+    const { userId } = req.params;
+    const { fullName, phone, location, role, isSuspended, isVerified } = req.body;
+
+    const targetUser = await prisma.user.findUnique({
+      where: { id: userId as string },
+    });
+
+    if (!targetUser) {
+      throw new NotFoundError('User not found');
+    }
+
+    if (userId === adminUser.id && role && role !== 'ADMIN') {
+      throw new BadRequestError('You cannot change your own role');
+    }
+
+    if (targetUser.role === 'ADMIN' && adminUser.id !== userId) {
+      throw new ForbiddenError('Cannot modify other admin accounts');
+    }
+
+    // Build update data
+    const updateData: any = {};
+    if (fullName !== undefined) updateData.fullName = fullName;
+    if (phone !== undefined) updateData.phone = phone;
+    if (location !== undefined) updateData.location = location;
+    if (role !== undefined) updateData.role = role;
+    if (isSuspended !== undefined) updateData.isSuspended = isSuspended;
+    if (isVerified !== undefined) updateData.isVerified = isVerified;
+
+    const updatedUser = await prisma.user.update({
+      where: { id: userId as string },
+      data: updateData,
+      select: userSelect,
+    });
+
+    await logActivity(
+      adminUser.id,
+      'ADMIN_UPDATE_USER',
+      'USER',
+      userId as string,
+      {
+        targetUserEmail: targetUser.email,
+        updates: Object.keys(updateData),
+      },
+      req
+    );
+
+    sendSuccessResponse(res, 'User updated successfully', {
+      user: updatedUser,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const getAllUsers = async (
   req: Request,
   res: Response,
@@ -199,6 +261,65 @@ export const deleteUser = async (
 	}
 };
 
+
+export const selfDeleteAccount = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const user = req.user as any;
+    const { password, reason, confirmationPhrase } = req.body;
+
+    const result = await UserService.selfDeleteAccount(user.id, {
+      password,
+      reason,
+      confirmationPhrase,
+    });
+
+    await logActivity(
+      user.id,
+      'SELF_DELETE_ACCOUNT',
+      'USER',
+      user.id,
+      {
+        originalEmail: result.originalEmail,
+        reason: reason || 'User requested account deletion',
+        creditPointsLost: result.creditPointsLost,
+      },
+      req
+    );
+
+    sendSuccessResponse(
+      res,
+      "Your account has been deleted successfully. We're sorry to see you go.",
+      {
+        deletedAt: result.user.deletedAt,
+      }
+    );
+  } catch (error) {
+    next(error);
+  }
+};
+
+// export const getDeletionInfo = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ): Promise<void> => {
+//   try {
+//     const user = req.user as any;
+
+//     const info = await UserService.getDeletionInfo(user.id);
+
+//     sendSuccessResponse(
+//       res,
+//       "Deletion info retrieved successfully",
+//       info
+//     );
+//   } catch (error) {
+//     next(error);
+//   }
 
 
 

@@ -39513,3 +39513,82 @@
 2026-09-24 20:49:18 [32minfo[39m [32mPOST /api/v1/auth/forgot-password 200 2368.298 ms - 134[39m
 [32m[39m
 2026-09-24 20:50:24 [32minfo[39m [32mSIGINT received. Starting graceful shutdown...[39m
+2026-10-10 15:44:56 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-10-10 15:44:56 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-10-10 15:44:56 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-10-10 15:44:56 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-10-10 15:45:56 [32minfo[39m [32mRunning key rotation job...[39m
+2026-10-10 15:45:56 [32minfo[39m [32mPrimary key is still valid (15 days old)[39m
+2026-10-10 15:45:56 [32minfo[39m [32mKey rotation job completed[39m
+2026-10-10 15:46:35 [32minfo[39m [32mPOST /api/v1/auth/login 200 216.436 ms - 634[39m
+[32m[39m
+2026-10-10 15:46:59 [32minfo[39m [32mPATCH /api/v1/users/update 401 3.583 ms - 66[39m
+[32m[39m
+2026-10-10 15:48:14 [32minfo[39m [32mPATCH /api/v1/users/update 200 87.184 ms - 465[39m
+[32m[39m
+2026-10-10 15:48:45 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-10-10 15:48:45 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-10-10 15:48:45 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-10-10 15:48:45 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-10-10 15:48:57 [32minfo[39m [32mPATCH /api/v1/users/update 403 91.142 ms - 73[39m
+[32m[39m
+2026-10-10 15:49:45 [32minfo[39m [32mRunning key rotation job...[39m
+2026-10-10 15:49:45 [32minfo[39m [32mPrimary key is still valid (15 days old)[39m
+2026-10-10 15:49:45 [32minfo[39m [32mKey rotation job completed[39m
+2026-10-10 15:50:52 [32minfo[39m [32mPATCH /api/v1/users/cmu5hnpdq0000i61sg7p10y46 403 5.279 ms - 73[39m
+[32m[39m
+2026-10-10 15:51:06 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-10-10 15:51:06 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-10-10 15:51:06 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-10-10 15:51:06 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-10-10 15:52:06 [32minfo[39m [32mRunning key rotation job...[39m
+2026-10-10 15:52:06 [32minfo[39m [32mPrimary key is still valid (15 days old)[39m
+2026-10-10 15:52:07 [32minfo[39m [32mKey rotation job completed[39m
+2026-10-10 15:56:29 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-10-10 15:56:29 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-10-10 15:56:29 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-10-10 15:56:29 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-10-10 15:56:59 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-10-10 15:56:59 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-10-10 15:56:59 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-10-10 15:56:59 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-10-10 15:57:13 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-10-10 15:57:13 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-10-10 15:57:13 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-10-10 15:57:13 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-10-10 15:57:25 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-10-10 15:57:25 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-10-10 15:57:25 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-10-10 15:57:25 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-10-10 15:57:43 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-10-10 15:57:43 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-10-10 15:57:43 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-10-10 15:57:43 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-10-10 15:57:49 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-10-10 15:57:49 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-10-10 15:57:49 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-10-10 15:57:49 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-10-10 15:58:27 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-10-10 15:58:27 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-10-10 15:58:27 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-10-10 15:58:27 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-10-10 15:58:32 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-10-10 15:58:32 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-10-10 15:58:32 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-10-10 15:58:32 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-10-10 15:58:51 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-10-10 15:58:51 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-10-10 15:58:51 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-10-10 15:58:51 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-10-10 15:58:58 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-10-10 15:58:58 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-10-10 15:58:58 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-10-10 15:58:58 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-10-10 16:02:19 [32minfo[39m [32mKey manager initialized successfully[39m
+2026-10-10 16:02:19 [32minfo[39m [32mEncryption initialized successfully[39m
+2026-10-10 16:02:19 [32minfo[39m [32mSocket.IO server initialized[39m
+2026-10-10 16:02:19 [32minfo[39m [32mKey rotation job scheduled (daily)[39m
+2026-10-10 16:03:19 [32minfo[39m [32mRunning key rotation job...[39m
+2026-10-10 16:03:19 [32minfo[39m [32mPrimary key is still valid (15 days old)[39m
+2026-10-10 16:03:19 [32minfo[39m [32mKey rotation job completed[39m
+2026-10-10 16:15:38 [32minfo[39m [32mSIGINT received. Starting graceful shutdown...[39m

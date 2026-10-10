@@ -345,6 +345,10 @@ export const login = async (
         );
         if (!isPasswordValid) throw new UnauthorizedError("Invalid credentials");
 
+        if (user.isDeleted) {
+          throw new UnauthorizedError("Account no longer exists");
+        }
+
         if (!user.isVerified) throw new UnauthorizedError("Account not verified! Please verify your email.");
 
         if (user.isSuspended) {

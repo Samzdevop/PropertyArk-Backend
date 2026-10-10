@@ -15,6 +15,26 @@ export const updateUserSchema = z.object({
   }),
 });
 
+
+export const selfDeleteAccountSchema = z.object({
+  body: z.object({
+    password: z
+      .string()
+      .min(8, 'Password must be at least 8 characters long')
+      .optional(),
+    reason: z
+      .string()
+      .max(500, 'Reason must be less than 500 characters')
+      .optional(),
+    confirmationPhrase: z
+      .string()
+      .refine(
+        (val) => val === 'DELETE MY ACCOUNT',
+        { message: 'Please type "DELETE MY ACCOUNT" exactly to confirm' }
+      ),
+  }),
+});
+
 // export const updateProfileSchema = z.object({
 //   body: z.object({
 //     fullName: z.string().min(1, 'Full name is required').optional(),

@@ -4,7 +4,7 @@ import { BadRequestError } from "../errors/BadRequestError";
 import { UnauthorizedError } from "../errors/UnauthorizedError";
 import Logger from "../config/logger";
 import { NotFoundError } from "../errors/NotFoundError";
-import { InquiryStatus, PropertyListingStatus, PropertyStatus, SatisfactionStatus } from "@prisma/client";
+import { InquiryStatus, PropertyListingStatus, PropertyStatus, Role, SatisfactionStatus } from "@prisma/client";
 import { ForbiddenError } from "../errors/ForbiddenError";
 import { MailInterface } from "../interfaces/mail.interfaces";
 import { sendGraphMail } from "./mail.services";
@@ -559,4 +559,275 @@ export class UserService {
     }
   }
 
+
+  static async selfDeleteAccount(
+    userId: string,
+    data: {
+      password?: string;
+      reason?: string;
+      confirmationPhrase: string;
+    }
+  ): Promise<any> {
+    const { password, reason, confirmationPhrase } = data;
+
+    // Verify user exists
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        email: true,
+        fullName: true,
+        role: true,
+        password: true,
+        googleId: true,
+        isDeleted: true,
+        creditPoints: true,
+      },
+    });
+
+    if (!user) {
+      throw new NotFoundError("User not found");
+    }
+
+    if (user.isDeleted) {
+      throw new BadRequestError("Account is already deleted");
+    }
+
+    // Prevent admins from self-deleting
+    if (user.role === Role.ADMIN) {
+      throw new ForbiddenError(
+        "Admin accounts cannot be self-deleted. Please contact support."
+      );
+    }
+
+    // ✅ Confirmation phrase check (safety mechanism)
+    const requiredPhrase = "DELETE MY ACCOUNT";
+    if (confirmationPhrase !== requiredPhrase) {
+      throw new BadRequestError(
+        `Please type "${requiredPhrase}" exactly to confirm account deletion`
+      );
+    }
+
+    // ✅ Password verification (for password-based accounts)
+    if (user.password && !user.googleId) {
+      if (!password) {
+        throw new BadRequestError(
+          "Password is required to delete your account"
+        );
+      }
+
+      const isPasswordValid = await verify(user.password, password);
+      if (!isPasswordValid) {
+        throw new UnauthorizedError("Incorrect password");
+      }
+    }
+
+    const blockingConditions = await this.checkDeletionBlockers(userId, user.role);
+    if (blockingConditions.length > 0) {
+      throw new BadRequestError(
+        `Cannot delete account. Please resolve the following first: ${blockingConditions.join(", ")}`
+      );
+    }
+
+
+    const deletedUser = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        isDeleted: true,
+        isSuspended: true,
+        isVerified: false,
+        deletedAt: new Date(),
+        deletedBy: userId, // "self"
+        deletionReason: reason || "User requested account deletion",
+        email: `${user.email}`,
+        fullName: `${user.fullName}`,
+        phone: null,
+        avatar: null,
+        location: null,
+        googleId: null,
+        password: null,
+        ninPhotoUrl: null,
+        ninRejectionReason: null,
+        passwordResetToken: null,
+        passwordResetExpiresAt: null,
+        verificationCode: null,
+        verificationExpires: null,
+      },
+      select: {
+        id: true,
+        email: true,
+        fullName: true,
+        role: true,
+        isDeleted: true,
+        deletedAt: true,
+      },
+    });
+
+    Logger.info(
+      `User ${user.email} (${user.id}) self-deleted their account`
+    );
+
+    return {
+      user: deletedUser,
+      originalEmail: user.email,
+      creditPointsLost: user.creditPoints,
+    };
+  }
+
+  private static async checkDeletionBlockers(
+    userId: string,
+    role: Role
+  ): Promise<string[]> {
+    const blockers: string[] = [];
+
+
+    if (role === Role.VENDOR) {
+      const activeProperties = await prisma.property.count({
+        where: {
+          vendorId: userId,
+          listingStatus: "ACTIVE",
+        },
+      });
+
+      if (activeProperties > 0) {
+        blockers.push(
+          `${activeProperties} active property listing(s). Please remove or deactivate them first`
+        );
+      }
+
+      const pendingBookings = await prisma.shortletBooking.count({
+        where: {
+          vendorId: userId,
+          status: {
+            in: ["PENDING", "APPROVED", "CHECKED_IN"],
+          },
+        },
+      });
+
+      if (pendingBookings > 0) {
+        blockers.push(
+          `${pendingBookings} active booking(s). Please resolve them first`
+        );
+      }
+    }
+
+    if (role === Role.USER) {
+      const pendingInquiries = await prisma.inquiry.count({
+        where: {
+          userId,
+          status: "PENDING",
+        },
+      });
+
+      if (pendingInquiries > 0) {
+        blockers.push(
+          `${pendingInquiries} pending inquiry(ies). Please wait for them to be resolved`
+        );
+      }
+    }
+
+    const openSupportChats = await prisma.chatRequest.count({
+      where: {
+        userId,
+        status: {
+          in: ["PENDING", "ASSIGNED"],
+        },
+      },
+    });
+
+    if (openSupportChats > 0) {
+      blockers.push(
+        `${openSupportChats} open support request(s). Please wait for resolution`
+      );
+    }
+
+    return blockers;
+  }
+
+  
+  // static async getDeletionInfo(userId: string): Promise<any> {
+  //   const user = await prisma.user.findUnique({
+  //     where: { id: userId },
+  //     select: {
+  //       id: true,
+  //       role: true,
+  //       creditPoints: true,
+  //       isDeleted: true,
+  //     },
+  //   });
+
+  //   if (!user) {
+  //     throw new NotFoundError("User not found");
+  //   }
+
+  //   if (user.isDeleted) {
+  //     throw new BadRequestError("Account is already deleted");
+  //   }
+
+  //   if (user.role === Role.ADMIN) {
+  //     throw new ForbiddenError("Admin accounts cannot be self-deleted");
+  //   }
+
+  //   // Get data that will be affected
+  //   const [
+  //     activeProperties,
+  //     pendingInquiries,
+  //     activeBookings,
+  //     openChats,
+  //     favoritesCount,
+  //     chatMessagesCount,
+  //   ] = await Promise.all([
+  //     user.role === Role.VENDOR
+  //       ? prisma.property.count({
+  //           where: { vendorId: userId, listingStatus: "ACTIVE" },
+  //         })
+  //       : 0,
+  //     prisma.inquiry.count({
+  //       where: { userId, status: "PENDING" },
+  //     }),
+  //     prisma.shortletBooking.count({
+  //       where: {
+  //         OR: [
+  //           { userId },
+  //           { vendorId: userId },
+  //         ],
+  //         status: { in: ["PENDING", "APPROVED", "CHECKED_IN"] },
+  //       },
+  //     }),
+  //     prisma.chatRequest.count({
+  //       where: {
+  //         userId,
+  //         status: { in: ["PENDING", "ASSIGNED"] },
+  //       },
+  //     }),
+  //     prisma.favorite.count({ where: { userId } }),
+  //     prisma.chatMessage.count({ where: { senderId: userId } }),
+  //   ]);
+
+  //   const blockers = await this.checkDeletionBlockers(userId, user.role);
+
+  //   return {
+  //     canDelete: blockers.length === 0,
+  //     blockers,
+  //     willLose: {
+  //       creditPoints: user.creditPoints,
+  //       favorites: favoritesCount,
+  //       chatMessages: chatMessagesCount,
+  //       activeProperties,
+  //     },
+  //     warnings: [
+  //       "This action cannot be undone",
+  //       "Your email cannot be reused on this platform",
+  //       "All your chat history will be preserved for the other party but you will lose access",
+  //       user.creditPoints > 0
+  //         ? `You will lose ${user.creditPoints} credit points`
+  //         : null,
+  //       activeProperties > 0
+  //         ? `Your ${activeProperties} active properties will be removed from the platform`
+  //         : null,
+  //     ].filter(Boolean),
+  //     requiresPassword: true,
+  //     confirmationPhrase: "DELETE MY ACCOUNT",
+  //   };
+  // }
 }

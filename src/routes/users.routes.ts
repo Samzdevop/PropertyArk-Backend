@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { authenticateJWT } from '../middlewares/errorHandler.middleware';
 import { validateRequest } from '../middlewares/validateRequest.middleware';
-import { changePasswordSchema, completeInquirySchema } from '../schemas/users.schemas';
+import { changePasswordSchema, completeInquirySchema, selfDeleteAccountSchema, updateUserSchema } from '../schemas/users.schemas';
 import { requireRoles } from '../middlewares/roleCheck.middleware';
-import { changePassword, completeInquiry, deleteUser, getAllUsers, getProfile, getUserDashboard, getUserInquiriesStats, removeAvatar, updateAvatar, updateProfile } from '../contollers/users.controller';
+import { adminUpdateUser, changePassword, completeInquiry, deleteUser, getAllUsers, getProfile, getUserDashboard, getUserInquiriesStats, removeAvatar, selfDeleteAccount, updateAvatar, updateProfile } from '../contollers/users.controller';
 import { uploadAvatar } from '../config/upload';
 
 export const usersRouter = Router();
@@ -14,6 +14,15 @@ usersRouter.get(
 	getProfile
 );
 
+
+usersRouter.patch(
+  '/update',                    // ← Explicit route
+  authenticateJWT,
+  validateRequest(updateUserSchema),
+  updateProfile
+);
+
+
 usersRouter.patch(
 	'/change-password',
 	authenticateJWT,
@@ -21,19 +30,6 @@ usersRouter.patch(
 	changePassword
 );
  
-usersRouter.get(
-	'/', 
-	authenticateJWT,
-	requireRoles(['ADMIN']),
-	getAllUsers
-);
-
-usersRouter.get(
-  '/dashboard',
-  authenticateJWT,
-  requireRoles(['USER']),
-  getUserDashboard
-);
 
 usersRouter.patch(
 	'/avatar',
@@ -47,7 +43,13 @@ usersRouter.delete(
 	removeAvatar
 );
 
-// Get user inquiries statistics
+usersRouter.get(
+  '/dashboard',
+  authenticateJWT,
+  requireRoles(['USER']),
+  getUserDashboard
+);
+
 usersRouter.get(
   '/inquiries/stats',
   authenticateJWT,
@@ -55,7 +57,7 @@ usersRouter.get(
   getUserInquiriesStats
 );
 
-// Complete inquiry (only when status is ACCEPTED)
+
 usersRouter.patch(
   '/:inquiryId/complete',
   authenticateJWT,
@@ -64,11 +66,26 @@ usersRouter.patch(
   completeInquiry
 );
 
-usersRouter.patch(
-	'/:userId',
-	authenticateJWT, 
+usersRouter.delete(
+  '/account',
+  authenticateJWT,
+  validateRequest(selfDeleteAccountSchema),
+  selfDeleteAccount
+);
+
+
+usersRouter.get(
+	'/', 
+	authenticateJWT,
 	requireRoles(['ADMIN']),
-	updateProfile
+	getAllUsers
+);
+
+usersRouter.patch(
+  '/:userId',
+  authenticateJWT, 
+  requireRoles(['ADMIN']),
+  adminUpdateUser    
 );
 
 usersRouter.delete(
