@@ -17,6 +17,7 @@ import { uploadToAzure, STORAGE_CONTAINERS } from "../config/upload";
 import { Role, VerificationStatus } from "@prisma/client";
 import { userSelect } from "../prisma/selects";
 import { CreditPointService } from "../services/creditPoint.service";
+import { WelcomeService } from "../services/welcome.service";
 
 
 export const adminRegister = async (
@@ -101,7 +102,6 @@ export const register = async (
     let ninPhotoUrl = null;
     let ninVerificationStatus = VerificationStatus.PENDING;
 
-    // Build user data based on role
     const userData: any = {
       email,
       password: hashedPassword,
@@ -114,9 +114,7 @@ export const register = async (
       verificationExpires: new Date(Date.now() + 30 * 60 * 1000),
     };
 
-    // If VENDOR, handle NIN upload
     if (role === 'VENDOR' && file) {
-      // Upload NIN photo
       if (process.env.STORAGE_DRIVER === 'azure') {
         ninPhotoUrl = await uploadToAzure(file, STORAGE_CONTAINERS.NIN_DOCUMENTS);
       } else {
@@ -131,7 +129,6 @@ export const register = async (
       data: userData
     });
 
-    // If VENDOR, create NIN document record
     if (role === 'VENDOR' && file && ninPhotoUrl) {
       await prisma.document.create({
         data: {
@@ -156,8 +153,7 @@ export const register = async (
         Logger.error(`Failed to award new vendor bonus to ${user.email}:`, error);
       }
     }
-
-    // Send verification email
+    
     try {
       const html = await render("verification", {
         fullName,
@@ -223,7 +219,7 @@ export const staffRegister = async (
     const hashedPassword = await hash(password);
     const verificationCode = generateVerificationCode();
 
-    await prisma.user.create({
+    const newStaff = await prisma.user.create({
       data: {
         email,
         password: hashedPassword,
@@ -240,6 +236,13 @@ export const staffRegister = async (
     });
 
     try {
+      await WelcomeService.sendWelcomeNotification(newStaff.id, newStaff.role);
+    } catch (error) {
+      Logger.error(`Failed to send welcome notification to ${email}:`, error);
+    }
+
+
+    try {
       const html = await render("verification", {
         fullName,
         verificationCode,
@@ -248,7 +251,7 @@ export const staffRegister = async (
 
       const mailOptions: MailInterface = {
         to: email,
-        from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+        from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
         subject: "Verify your Staff Account",
         text: `Your verification code is ${verificationCode}`,
         html,
@@ -397,6 +400,13 @@ export const verifyAccount = async (
                 verificationExpires: null,
             },
         });
+
+        try {
+          await WelcomeService.sendWelcomeNotification(user.id, user.role);
+          Logger.info(`Welcome notification sent to newly verified user: ${email}`);
+        } catch (error) {
+          Logger.error(`Failed to send welcome notification to ${email}:`, error);
+        }
         sendSuccessResponse(res, "Account verification successful");
     } catch (error) {
       next(error);
