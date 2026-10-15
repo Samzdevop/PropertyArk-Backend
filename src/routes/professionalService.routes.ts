@@ -8,7 +8,7 @@ import {
   createProfessionalServiceSchema,
   getProfessionalServicesQuerySchema,
 } from "../schemas/professionalService.schemas";
-import { createRequest, deleteRequest, getAllRequests, getRequestById } from "@/contollers/professionalService.controller";
+import { createRequest, deleteRequest, getAllRequests, getRequestById } from "../contollers/professionalService.controller";
 
 export const professionalServiceRouter = Router();
 
