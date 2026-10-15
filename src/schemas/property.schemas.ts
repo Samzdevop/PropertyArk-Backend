@@ -12,6 +12,7 @@ const PropertyStatusEnum = z.enum([
 ]);
 
 const TimeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+const RentDurationEnum = z.enum(['MONTHLY', 'YEARLY']);
 
 export const createPropertySchema = z.object({
   body: z.object({
@@ -36,6 +37,10 @@ export const createPropertySchema = z.object({
     salePrice: z.string().optional(),
     landFee: z.string().optional(),
     shortletAmount: z.string().optional(),
+    propertyLandMark: z.string().optional(),
+    distance: z.string().optional(),
+    furnished: z.union([z.boolean(), z.string()]).optional(),
+    rentDuration: RentDurationEnum.optional(),
     checkInTime: z.string().regex(TimeRegex, 'Invalid time format. Use HH:mm (e.g., 14:00)').optional(),
     checkOutTime: z.string().regex(TimeRegex, 'Invalid time format. Use HH:mm (e.g., 11:00)').optional(),
     houseRules: z.union([z.string(), z.array(z.string())]).optional(),
@@ -81,6 +86,10 @@ export const updatePropertySchema = z.object({
     salePrice: z.string().optional(),
     landFee: z.string().optional(),
     shortletAmount: z.string().optional(),
+    propertyLandMark: z.string().optional(),
+    distance: z.string().optional(),
+    furnished: z.union([z.boolean(), z.string()]).optional(),
+    rentDuration: RentDurationEnum.optional(),
     checkInTime: z.string().regex(TimeRegex, 'Invalid time format. Use HH:mm (e.g., 14:00)').optional(),
     checkOutTime: z.string().regex(TimeRegex, 'Invalid time format. Use HH:mm (e.g., 11:00)').optional(),
     houseRules: z.union([z.string(), z.array(z.string())]).optional(),

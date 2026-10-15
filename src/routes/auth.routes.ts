@@ -71,11 +71,11 @@ authRouter.get(
   '/google/callback',
   (req, res, next) => {
     passport.authenticate('google', {
-      session: false, // We don't want to use session, we use JWT
+      session: false,
       failureRedirect: '/auth/failure',
     }, (err: any, data: any) => {
       if (err || !data) {
-        console.error('❌ Google Auth Error:', err?.message || 'No data');
+        console.error(' Google Auth Error:', err?.message || 'No data');
         return res.redirect(`${process.env.FRONTEND_URL}/login?error=google_auth_failed`);
       }
 

@@ -1,5 +1,5 @@
 import prisma from "../prisma";
-import { Role, PropertyListingStatus, ListingType, PropertyStatus, MediaType, VerificationStatus, BookingStatus } from "@prisma/client";
+import { Role, PropertyListingStatus, ListingType, PropertyStatus, MediaType, VerificationStatus, BookingStatus, RentDuration } from "@prisma/client";
 import { BadRequestError } from "../errors/BadRequestError";
 import { ForbiddenError } from "../errors/ForbiddenError";
 import { NotFoundError } from "../errors/NotFoundError";
@@ -40,6 +40,20 @@ export class PropertyService {
   private static isValidTime(time: string): boolean {
     const regex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
     return regex.test(time);
+  }
+
+  private static parseBoolean(value: any, defaultValue: boolean = false): boolean {
+    if (value === undefined || value === null || value === '') {
+      return defaultValue;
+    }
+    if (typeof value === 'boolean') return value;
+    if (typeof value === 'string') {
+      const lower = value.toLowerCase();
+      if (lower === 'true' || lower === '1') return true;
+      if (lower === 'false' || lower === '0') return false;
+    }
+    if (typeof value === 'number') return value !== 0;
+    return defaultValue;
   }
 
   static validateShortletFields(data: any, listingType: string): void {
@@ -261,6 +275,8 @@ export class PropertyService {
   //   return property;
   // }
 
+  
+
   static async createProperty(
     userId: string,
     userRole: Role,
@@ -292,7 +308,11 @@ export class PropertyService {
       checkInTime,
       checkOutTime,
       houseRules,
-      cancellationPolicy
+      cancellationPolicy,
+      propertyLandMark, 
+      distance, 
+      furnished,
+      rentDuration
     } = data;
 
     let propertyStatus: PropertyStatus;
@@ -408,8 +428,27 @@ export class PropertyService {
       yearBuilt: yearBuilt ? parseInt(yearBuilt) : null,
       amenities: parsedAmenities,
       vendorId,
-      staffId: staffIdToUse
+      staffId: staffIdToUse,
+      propertyLandMark: propertyLandMark || null,
+      distance: distance || null,
+      furnished: this.parseBoolean(furnished, false ),
     };
+
+    if (listingType === ListingType.FOR_RENT) {
+      if (rentDuration) {
+        const validDurations = ['MONTHLY', 'YEARLY'];
+        if (!validDurations.includes(rentDuration)) {
+          throw new BadRequestError(
+            `Invalid rent duration. Must be: ${validDurations.join(', ')}`
+          );
+        }
+        propertyData.rentDuration = rentDuration as RentDuration;
+      } else {
+        propertyData.rentDuration = RentDuration.MONTHLY; // default
+      }
+    } else {
+      propertyData.rentDuration = null;
+    }
 
     if (listingType === ListingType.FOR_SHORTLET) {
       propertyData.checkInTime = checkInTime || null;
@@ -1165,6 +1204,16 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
     const wasRejected = property.listingStatus === PropertyListingStatus.REJECTED;
     const updateData: any = { ...data };
 
+    if (data.propertyLandMark !== undefined) {
+      updateData.propertyLandMark = data.propertyLandMark || null;
+    }
+    if (data.distance !== undefined) {
+      updateData.distance = data.distance || null;
+    }
+    if (data.furnished !== undefined) {
+      updateData.furnished = this.parseBoolean(data.furnished, true);
+    }
+
     if (data.status !== undefined) {
       if (!this.validateStatus(data.status)) {
         throw new BadRequestError(
@@ -1175,6 +1224,20 @@ private static async uploadPropertyMediaInBackground(propertyId: string, files: 
     }
 
     const listingType = data.listingType || property.listingType;
+
+      if (listingType === ListingType.FOR_RENT) {
+        if (data.rentDuration !== undefined) {
+          const validDurations = ['MONTHLY', 'YEARLY'];
+          if (!validDurations.includes(data.rentDuration)) {
+            throw new BadRequestError(
+              `Invalid rent duration. Must be: ${validDurations.join(', ')}`
+            );
+          }
+          updateData.rentDuration = data.rentDuration as RentDuration;
+        }
+      } else if (data.listingType !== undefined) {
+        updateData.rentDuration = null;
+      }
 
     if (listingType === ListingType.FOR_SHORTLET) {
       this.validateShortletFields(

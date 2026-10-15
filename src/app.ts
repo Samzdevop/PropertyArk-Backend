@@ -24,6 +24,9 @@ import { notificationRouter } from './routes/notification.routes';
 import { adminDashboardRouter } from './routes/adminDashboard.routes';
 import { creditPointRouter } from './routes/creditPoint.routes';
 import { chatRouter } from './routes/chat.routes';
+import { professionalServiceRouter } from './routes/professionalService.routes';
+import { contactRouter } from './routes/contact.routes';
+import { newsletterRouter } from './routes/newsletter.routes';
 
 export const app = express();
 
@@ -118,6 +121,9 @@ app.use('/api/v1/notifications', notificationRouter);
 app.use('/api/v1/admin', adminDashboardRouter);
 app.use('/api/v1/credit-points', creditPointRouter);
 app.use('/api/v1/chat', chatRouter);
+app.use('/api/v1/professional-services', professionalServiceRouter);
+app.use('/api/v1/contacts', contactRouter);
+app.use('/api/v1/newsletter', newsletterRouter);
 
 
 

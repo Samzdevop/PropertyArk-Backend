@@ -66,8 +66,8 @@ propertyRouter.post(
   authenticateJWT,
   requireRoles(['ADMIN', 'VENDOR', 'STAFF']),
   upload.fields([
-    { name: 'photos', maxCount: 10 },
-    { name: 'videos', maxCount: 5 },
+    { name: 'photos', maxCount: 50 },
+    { name: 'videos', maxCount: 10 },
     { name: 'documents', maxCount: 10 }
   ]),
   validateRequest(createPropertySchema),
@@ -80,8 +80,8 @@ propertyRouter.patch(
   authenticateJWT,
   requireRoles(['ADMIN', 'VENDOR', 'STAFF']),
   upload.fields([
-    { name: 'photos', maxCount: 10 },
-    { name: 'videos', maxCount: 5 },
+    { name: 'photos', maxCount: 50 },
+    { name: 'videos', maxCount: 10 },
     { name: 'documents', maxCount: 10 }
   ]),
   validateRequest(updatePropertySchema),
@@ -110,8 +110,8 @@ propertyRouter.post(
   authenticateJWT,
   requireRoles(['ADMIN', 'VENDOR', 'STAFF']),
   upload.fields([
-    { name: 'photos', maxCount: 10 },
-    { name: 'videos', maxCount: 5 },
+    { name: 'photos', maxCount: 50 },
+    { name: 'videos', maxCount: 10 },
     { name: 'documents', maxCount: 10 }
   ]),
   uploadPropertyMedia

@@ -31,6 +31,26 @@ enum PropertyStatus {
   RENTED
 }
 
+enum RentDuration {
+  MONTHLY
+  YEARLY
+}
+
+enum ServiceType {
+  ACCOUNTANT
+  LEGAL
+  MORTAGE_BROKER
+  INSURANCE
+  PROPERTY_DEVELOPER
+}
+
+enum ContactStatus {
+  UNREAD
+  READ
+  REPLIED
+  ARCHIVED
+}
+
 enum PropertyListingStatus {
   PENDING
   ACTIVE
@@ -166,35 +186,36 @@ enum ChatParticipantRole {
 }
 
 model User {
-  id                    String             @id @default(cuid())
-  email                 String             @unique
+  id                    String                @id @default(cuid())
+  email                 String                @unique
   password              String?
   fullName              String
-  googleId              String?            @unique
+  googleId              String?               @unique
   phone                 String?
   avatar                String?
   location              String?
-  role                  Role               @default(USER)
-  isVerified            Boolean            @default(false)
-  isSuspended           Boolean            @default(false)
-  isDeleted             Boolean            @default(false)
-  deletedAt             DateTime?          
-  deletedBy             String?           
-  deletionReason        String?  
+  role                  Role                  @default(USER)
+  isVerified            Boolean               @default(false)
+  isSuspended           Boolean               @default(false)
+  isDeleted             Boolean               @default(false)
+  deletedAt             DateTime?
+  deletedBy             String?
+  deletionReason        String?
   lastLogin             DateTime?
   verificationCode      String?
   verificationExpires   DateTime?
   ninPhotoUrl           String?
-  ninVerificationStatus VerificationStatus @default(PENDING)
+  ninVerificationStatus VerificationStatus    @default(PENDING)
   ninVerifiedAt         DateTime?
   ninVerifiedBy         String?
   ninRejectionReason    String?
   propertyViews         PropertyView[]
   favorites             Favorite[]
-  inquiries             Inquiry[]          @relation("UserInquiries")
-  vendorInquiries       Inquiry[]          @relation("VendorInquiries")
-  employeeId            String?            @unique
+  inquiries             Inquiry[]             @relation("UserInquiries")
+  vendorInquiries       Inquiry[]             @relation("VendorInquiries")
+  employeeId            String?               @unique
   department            String?
+  professionalServices  ProfessionalService[]
 
   createdAt              DateTime          @default(now())
   updatedAt              DateTime          @updatedAt
@@ -288,6 +309,11 @@ model Property {
   landFee        Float?
   shortletAmount Float?
 
+  propertyLandMark String?
+  distance         String?
+  furnished        Boolean       @default(false)
+  rentDuration     RentDuration?
+
   checkInTime        String?
   checkOutTime       String?
   houseRules         Json?
@@ -340,6 +366,72 @@ model Property {
   @@index([listingType])
   @@index([listingStatus])
   @@index([city, state])
+}
+
+model ProfessionalService {
+  id                String        @id @default(cuid())
+  requestNumber     String        @unique
+  userId            String?
+  user              User?         @relation(fields: [userId], references: [id])
+  fullName          String
+  email             String
+  phone             String?
+  serviceType       ServiceType
+  consultationDate  DateTime
+  propertyReference String?
+  message           String
+  status            ContactStatus @default(UNREAD)
+  adminNotes        String?
+  respondedAt       DateTime?
+  respondedBy       String?
+  documents         Document[]    @relation("ProfessionalServiceDocuments")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([email])
+  @@index([serviceType])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model NewsletterSubscriber {
+  id                String    @id @default(cuid())
+  name              String
+  email             String    @unique
+  isSubscribed      Boolean   @default(true)
+  subscribedAt      DateTime  @default(now())
+  unsubscribedAt    DateTime?
+  unsubscribeReason String?
+  unsubscribeToken  String    @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([isSubscribed])
+  @@index([createdAt])
+}
+
+model Contact {
+  id            String        @id @default(cuid())
+  contactNumber String        @unique
+  fullName      String
+  email         String
+  subject       String
+  message       String
+  status        ContactStatus @default(UNREAD)
+  adminNotes    String?
+  repliedAt     DateTime?
+  repliedBy     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
 }
 
 model CreditPointSettings {
@@ -437,12 +529,12 @@ model Document {
   propertyId String?
   property   Property? @relation(fields: [propertyId], references: [id])
 
-  uploadedById String
-  uploadedBy   User   @relation("UploadedBy", fields: [uploadedById], references: [id], onDelete: Cascade)
-
-  // For NIN documents
-  vendorId String?
-  vendor   User?   @relation("VendorNIN", fields: [vendorId], references: [id])
+  uploadedById          String
+  uploadedBy            User                 @relation("UploadedBy", fields: [uploadedById], references: [id], onDelete: Cascade)
+  vendorId              String?
+  vendor                User?                @relation("VendorNIN", fields: [vendorId], references: [id])
+  professionalServiceId String?
+  professionalService   ProfessionalService? @relation("ProfessionalServiceDocuments", fields: [professionalServiceId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
