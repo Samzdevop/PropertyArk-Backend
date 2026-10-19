@@ -37,11 +37,27 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         env:
           IMAGE_TAG: ${{ github.sha }}
+        shell: bash
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          set -euo pipefail
+
+          if aws ecr describe-images \
+            --repository-name "$ECR_REPOSITORY" \
+            --image-ids "imageTag=$IMAGE_TAG" \
+            --region "$AWS_REGION" >/dev/null 2>&1; then
+
+            echo "Image tag $IMAGE_TAG already exists in ECR."
+            echo "Reusing the existing image."
+
+          else
+            echo "Building image with tag $IMAGE_TAG..."
+
+            docker build \
+              -t "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" \
+              .
+
+            docker push "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          fi
 
       - name: Configure AWS credentials (Deploy Role)
         uses: aws-actions/configure-aws-credentials@v4
@@ -53,38 +69,68 @@ jobs:
         env:
           IMAGE_TAG: ${{ github.sha }}
           EC2_INSTANCE_ID: ${{ secrets.EC2_INSTANCE_ID }}
+        shell: bash
         run: |
+          set -euo pipefail
+
+          if [ -z "$EC2_INSTANCE_ID" ]; then
+            echo "ERROR: EC2_INSTANCE_ID GitHub secret is missing."
+            exit 1
+          fi
+
+          echo "Starting deployment of image: $IMAGE_TAG"
+
           COMMAND_ID=$(aws ssm send-command \
             --instance-ids "$EC2_INSTANCE_ID" \
             --document-name "AWS-RunShellScript" \
-            --comment "Deploy $IMAGE_TAG" \
+            --comment "Deploy PropertyArk backend $IMAGE_TAG" \
             --parameters "commands=[
-              'cd /home/ubuntu',
-              'export AWS_REGION=$AWS_REGION',
-              'export ECR_REGISTRY=$ECR_REGISTRY',
-              'export ECR_REPOSITORY=$ECR_REPOSITORY',
-              'export IMAGE_TAG=$IMAGE_TAG',
-              'sudo -E /home/ubuntu/deploy.sh'
+              \"cd /home/ubuntu && export AWS_REGION='$AWS_REGION' ECR_REGISTRY='$ECR_REGISTRY' ECR_REPOSITORY='$ECR_REPOSITORY' IMAGE_TAG='$IMAGE_TAG' && sudo -E /home/ubuntu/deploy.sh\"
             ]" \
+            --region "$AWS_REGION" \
             --query "Command.CommandId" \
             --output text)
 
           echo "SSM Command ID: $COMMAND_ID"
 
-          aws ssm wait command-executed \
+          # Wait for SSM to finish. Do not hide deployment failures.
+          if ! aws ssm wait command-executed \
             --command-id "$COMMAND_ID" \
-            --instance-id "$EC2_INSTANCE_ID" || true
+            --instance-id "$EC2_INSTANCE_ID" \
+            --region "$AWS_REGION"; then
+            echo "SSM command did not complete successfully."
+          fi
+
+          echo "----- SSM INVOCATION STATUS -----"
+
+          STATUS=$(aws ssm get-command-invocation \
+            --command-id "$COMMAND_ID" \
+            --instance-id "$EC2_INSTANCE_ID" \
+            --region "$AWS_REGION" \
+            --query "Status" \
+            --output text)
+
+          echo "Deployment status: $STATUS"
 
           echo "----- STDOUT -----"
           aws ssm get-command-invocation \
             --command-id "$COMMAND_ID" \
             --instance-id "$EC2_INSTANCE_ID" \
+            --region "$AWS_REGION" \
             --query "StandardOutputContent" \
-            --output text
+            --output text || true
 
           echo "----- STDERR -----"
           aws ssm get-command-invocation \
             --command-id "$COMMAND_ID" \
             --instance-id "$EC2_INSTANCE_ID" \
+            --region "$AWS_REGION" \
             --query "StandardErrorContent" \
-            --output text
+            --output text || true
+
+          if [ "$STATUS" != "Success" ]; then
+            echo "ERROR: PropertyArk backend deployment failed."
+            exit 1
+          fi
+
+          echo "PropertyArk backend deployed successfully."
