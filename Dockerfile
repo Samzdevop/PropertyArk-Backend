@@ -47,4 +47,4 @@ COPY --from=builder /app/package.json ./package.json
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "yarn prisma migrate deploy && node build/server.js"]
+CMD ["sh", "-c", "yarn prisma migrate deploy && node build/index.js"]
