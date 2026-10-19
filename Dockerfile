@@ -35,7 +35,6 @@ RUN yarn prisma generate
 
 # Stage 3: Runtime
 FROM node:22-alpine AS runtime
-
 WORKDIR /app
 
 ENV NODE_ENV=production
