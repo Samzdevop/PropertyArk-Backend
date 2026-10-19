@@ -1,6 +1,6 @@
 
 # Stage 1: Build
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 
 WORKDIR /app
 
@@ -19,7 +19,7 @@ RUN yarn build
 
 
 # Stage 2: Production dependencies
-FROM node:20-alpine AS production-deps
+FROM node:22-alpine AS production-deps
 
 WORKDIR /app
 
@@ -34,7 +34,7 @@ RUN yarn prisma generate
 
 
 # Stage 3: Runtime
-FROM node:20-alpine AS runtime
+FROM node:22-alpine AS runtime
 
 WORKDIR /app
 
