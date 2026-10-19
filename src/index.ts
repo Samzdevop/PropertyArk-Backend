@@ -57,7 +57,7 @@ const gracefulShutdown = async (signal: string): Promise<void> => {
   }
 };
 
-// Initialize encryption
+
 try {
   KeyManager.initialize();
   Logger.info('Encryption initialized successfully');
@@ -68,12 +68,10 @@ try {
 
 server = app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  
-  // Start key rotation job
   KeyRotationJob.start();
 });
 
-// Initialize Socket.IO
+
 SocketService.initialize(server);
 
 process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
