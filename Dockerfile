@@ -1,26 +1,50 @@
-# Use a lightweight Node image
-FROM node:20-alpine
 
-# Set working directory
+# Stage 1: Build
+FROM node:20-alpine AS builder
+
 WORKDIR /app
 
-# Copy package files and Prisma schema first for better layer caching
-COPY package*.json ./
+RUN corepack enable
+
+COPY package.json yarn.lock ./
 COPY prisma ./prisma/
 
-# Install dependencies and generate Prisma Client
-RUN npm ci --only=production
-RUN npx prisma generate
+RUN yarn install --frozen-lockfile
 
-# Copy the rest of your application code
+RUN yarn prisma generate
+
 COPY . .
 
-# Build the TypeScript project (if applicable)
-RUN npm run build
+RUN yarn build
 
-# Expose the application port
+
+# Stage 2: Production dependencies
+FROM node:20-alpine AS production-deps
+
+WORKDIR /app
+
+RUN corepack enable
+
+COPY package.json yarn.lock ./
+COPY prisma ./prisma/
+
+RUN yarn install --frozen-lockfile --production=true
+
+RUN yarn prisma generate
+
+
+# Stage 3: Runtime
+FROM node:20-alpine AS runtime
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+COPY --from=production-deps /app/node_modules ./node_modules
+COPY --from=production-deps /app/prisma ./prisma
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package.json ./package.json
+
 EXPOSE 3000
 
-# Command to run migrations and start the app
-# Note: 'prisma migrate deploy' is safe for production
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/server.js"]
+CMD ["sh", "-c", "yarn prisma migrate deploy && node dist/server.js"]
