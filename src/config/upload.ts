@@ -2,7 +2,7 @@ import multer, { StorageEngine } from 'multer';
 import fs from 'fs';
 import path from 'path';
 import { BlobServiceClient } from '@azure/storage-blob';
-import { S3Client } from '@aws-sdk/client-s3';
+import { DeleteObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import multerS3 from 'multer-s3';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -30,10 +30,10 @@ let storage: StorageEngine;
 const getS3Client = () => {
   return new S3Client({
     region: process.env.AWS_REGION!,
-    credentials: {
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-    }
+    // credentials: {
+    //   accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+    //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+    // }
   });
 };
 
@@ -62,7 +62,7 @@ if (storageConfig.driver === 's3') {
   storage = multerS3({
     s3,
     bucket: process.env.AWS_BUCKET_NAME || '',
-    acl: 'public-read',
+    // acl: 'public-read',
     contentType: multerS3.AUTO_CONTENT_TYPE,
     key: (_req, file, cb) => {
       const fileName = generateSafeFileName(file.originalname);
@@ -158,9 +158,11 @@ export const deleteFile = async (key: string, container?: string) => {
       const blockBlobClient = containerClient.getBlockBlobClient(key);
       await blockBlobClient.deleteIfExists();
     } else if (storageDriver === 's3') {
-      // S3 delete implementation
       const s3 = getS3Client();
-      // Add delete command
+      await s3.send(new DeleteObjectCommand({
+        Bucket: process.env.AWS_BUCKET_NAME!,
+        Key: key
+      }));
     } else {
       const filePath = path.join(UPLOADS_PATH, key);
       if (fs.existsSync(filePath)) {
