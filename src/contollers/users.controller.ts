@@ -336,24 +336,25 @@ export const updateAvatar = async (
       throw new BadRequestError("No file uploaded");
     }
 
-    console.log('Avatar upload details:', {
-      originalname: file.originalname,
-      mimetype: file.mimetype,
-      size: file.size,
-      key: (file as any).key,
-      location: (file as any).location,
-    });
+    // console.log('Avatar upload details:', {
+    //   originalname: file.originalname,
+    //   mimetype: file.mimetype,
+    //   size: file.size,
+    //   key: (file as any).key,
+    //   location: (file as any).location,
+    // });
     const currentUser = await prisma.user.findUnique({
       where: { id: userId },
       select: { avatar: true }
     });
+    if (!currentUser) {
+      throw new BadRequestError("User not found");
+    }
 
     const driver = process.env.STORAGE_DRIVER || 'local';
     const container = STORAGE_CONTAINERS.USER_AVATARS;
     let avatarUrl: string;
-    // const avatarUrl = process.env.STORAGE_DRIVER === 'azure'
-    //   ? await uploadToAzure(file, container)
-    //   : `/uploads/${file.filename}`;
+
     if (driver === 'azure') {
       avatarUrl = await uploadToAzure(file, container);
     } else if (driver === 's3') {
@@ -374,27 +375,39 @@ export const updateAvatar = async (
       }
     });
 
-    // if (currentUser?.avatar && !currentUser.avatar.includes('randomuser.me') && !currentUser.avatar.includes('ui-avatars')) {
-    //   const oldKey = currentUser.avatar.split('/').pop();
-    //   if (oldKey) {
-    //     await deleteFile(oldKey, container).catch(err => 
-    //       console.error('Failed to delete old avatar:', err)
-    //     );
-    //   }
-    // }
+    const oldAvatarUrl = currentUser.avatar;
     if (
-      currentUser?.avatar &&
-      !currentUser.avatar.includes('randomuser.me') &&
-      !currentUser.avatar.includes('ui-avatars')
+      oldAvatarUrl &&
+      !oldAvatarUrl.includes('randomuser.me') &&
+      !oldAvatarUrl.includes('ui-avatars')
     ) {
-      const oldKey = currentUser.avatar.split('/').pop();
-      if (oldKey) {
-        await deleteFile(oldKey, container).catch(err =>
-          console.error('Failed to delete old avatar:', err)
-        );
+      try {
+        if (driver === 's3') {
+          const parsedUrl = new URL(oldAvatarUrl);
+
+          const oldKey = decodeURIComponent(
+            parsedUrl.pathname.replace(/^\/+/, '')
+          );
+          if (oldKey.startsWith(`${STORAGE_CONTAINERS.USER_AVATARS}/`)) {
+            await deleteFile(oldKey, container);
+            console.log('Previous avatar deleted from S3:', oldKey);
+          } else {
+            console.warn(
+              'Skipping deletion: avatar is outside user-avatars/',
+              oldKey
+            );
+          }
+        } else {
+          const oldKey = oldAvatarUrl.split('/').pop();
+
+          if (oldKey) {
+            await deleteFile(oldKey, container);
+          }
+        }
+      } catch (err) {
+        console.error('Failed to delete previous avatar:', err);
       }
     }
-
     await logActivity(
       userId,
       'UPDATE_AVATAR',
