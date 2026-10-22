@@ -27,3 +27,21 @@ export const calculatePurchaseSchema = z.object({
     points: z.string().transform(val => parseInt(val))
   })
 });
+
+export const adminGiftCreditPointsSchema = z.object({
+  body: z.object({
+    vendorIds: z
+      .array(z.string().cuid('Invalid vendor ID'))
+      .optional(),
+    points: z
+      .number({ invalid_type_error: 'Points must be a number' })
+      .int('Points must be a whole number')
+      .positive('Points must be greater than 0'),
+    name: z
+      .string()
+      .min(1, 'Credit grant name is required')
+      .max(200, 'Name too long'),
+    expiresAt: z.string().datetime().optional(),
+    reason: z.string().max(500).optional()
+  })
+});

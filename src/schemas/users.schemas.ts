@@ -85,6 +85,14 @@ export const completeInquirySchema = z.object({
 });
 
 
+export const switchRoleSchema = z.object({
+  body: z.object({
+    role: z.enum(['USER', 'VENDOR'], {
+      errorMap: () => ({ message: "Role must be either 'USER' or 'VENDOR'" }),
+    }),
+  }),
+});
+
 // export const adminUpdateUserSchema = z.object({
 //   body: z.object({
 //     fullName: z.string().min(1, 'Full name is required').optional(),

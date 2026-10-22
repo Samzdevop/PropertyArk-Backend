@@ -625,4 +625,124 @@ export class CreditPointService {
 
     return result.count;
   }
+
+  static async adminGiftCreditPoints(
+    adminId: string,
+    data: {
+      vendorIds?: string[];        
+      points: number;
+      name: string;                
+      expiresAt?: string;          
+      reason?: string;
+    }
+  ): Promise<any> {
+    const { vendorIds, points, name, expiresAt, reason } = data;
+    const admin = await prisma.user.findUnique({
+      where: { id: adminId },
+      select: { id: true, role: true, fullName: true }
+    });
+    if (!admin || admin.role !== Role.ADMIN) {
+      throw new ForbiddenError("Only admins can gift credit points");
+    }
+    if (!points || points <= 0) {
+      throw new BadRequestError("Points must be greater than 0");
+    }
+    if (!name || name.trim().length === 0) {
+      throw new BadRequestError("A name for the credit grant is required");
+    }
+    let targetVendors: { id: string; email: string; fullName: string; creditPoints: number }[] = [];
+
+    if (vendorIds && vendorIds.length > 0) {
+      targetVendors = await prisma.user.findMany({
+        where: {
+          id: { in: vendorIds },
+          role: Role.VENDOR,
+          isVerified: true,
+          isSuspended: false,
+          isDeleted: false
+        },
+        select: { id: true, email: true, fullName: true, creditPoints: true }
+      });
+      if (targetVendors.length !== vendorIds.length) {
+        const foundIds = targetVendors.map(v => v.id);
+        const missing = vendorIds.filter(id => !foundIds.includes(id));
+        throw new NotFoundError(
+          `Some vendor IDs were not found, not vendors, or not eligible: ${missing.join(', ')}`
+        );
+      }
+    } else {
+      targetVendors = await prisma.user.findMany({
+        where: {
+          role: Role.VENDOR,
+          isVerified: true,
+          isSuspended: false,
+          isDeleted: false
+        },
+        select: { id: true, email: true, fullName: true, creditPoints: true }
+      });
+      if (targetVendors.length === 0) {
+        throw new NotFoundError("No eligible vendors found to receive credit points");
+      }
+    }
+    const expiryDate = expiresAt ? new Date(expiresAt) : null;
+    if (expiryDate && isNaN(expiryDate.getTime())) {
+      throw new BadRequestError("Invalid expiresAt date format");
+    }
+    const grantId = `GRANT-${Date.now()}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+    const results = await prisma.$transaction(async (tx) => {
+      const createdTransactions = [];
+      for (const vendor of targetVendors) {
+        const balanceBefore = vendor.creditPoints;
+        const balanceAfter = balanceBefore + points;
+        await tx.user.update({
+          where: { id: vendor.id },
+          data: {
+            creditPoints: balanceAfter,
+            creditPointsPurchased: { increment: points }
+          }
+        });
+        const transaction = await tx.creditTransaction.create({
+          data: {
+            transactionNumber: this.generateTransactionNumber(),
+            userId: vendor.id,
+            type: CreditTransactionType.ADMIN_ADJUSTMENT,
+            status: CreditTransactionStatus.COMPLETED,
+            points,
+            balanceBefore,
+            balanceAfter,
+            description: `Admin credit grant: ${name}${reason ? ` — ${reason}` : ''}`,
+            metadata: {
+              grantId,
+              grantName: name,
+              grantedBy: admin.id,
+              grantedByName: admin.fullName,
+              reason: reason || null
+            },
+            expiresAt: expiryDate
+          }
+        });
+        createdTransactions.push({
+          transactionId: transaction.id,
+          vendorId: vendor.id,
+          vendorEmail: vendor.email,
+          vendorName: vendor.fullName,
+          points,
+          balanceBefore,
+          balanceAfter
+        });
+      }
+      return createdTransactions;
+    });
+    // Logger.info(
+    //   `Admin ${admin.email} gifted ${points} points to ${targetVendors.length} vendor(s). Grant: ${grantId}`
+    // );
+    return {
+      grantId,
+      name,
+      points,
+      expiresAt: expiryDate,
+      vendorCount: targetVendors.length,
+      transactions: results
+    };
+  }
 }

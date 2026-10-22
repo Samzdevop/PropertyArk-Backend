@@ -316,3 +316,45 @@ export const cleanupExpiredFeatured = async (
     next(error);
   }
 };
+
+export const adminGiftCreditPoints = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const user = req.user as any;
+    if (user.role !== Role.ADMIN) {
+      throw new ForbiddenError("Only admins can gift credit points");
+    }
+    const { vendorIds, points, name, expiresAt, reason } = req.body;
+    const result = await CreditPointService.adminGiftCreditPoints(user.id, {
+      vendorIds,
+      points: Number(points),
+      name,
+      expiresAt,
+      reason
+    });
+    await logActivity(
+      user.id,
+      'ADMIN_GIFT_CREDIT_POINTS',
+      'CREDIT_POINT',
+      result.grantId,
+      {
+        grantId: result.grantId,
+        name: result.name,
+        points: result.points,
+        vendorCount: result.vendorCount,
+        targetAll: !vendorIds || vendorIds.length === 0
+      },
+      req
+    );
+    sendSuccessResponse(
+      res,
+      `Successfully gifted ${result.points} points to ${result.vendorCount} vendor(s)`,
+      result
+    );
+  } catch (error) {
+    next(error);
+  }
+};

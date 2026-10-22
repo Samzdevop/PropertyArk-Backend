@@ -2,8 +2,8 @@ import { Router } from "express";
 import { authenticateJWT } from "../middlewares/errorHandler.middleware";
 import { requireRoles } from "../middlewares/roleCheck.middleware";
 import { validateRequest } from "../middlewares/validateRequest.middleware";
-import { calculatePurchase, cleanupExpiredFeatured, featureProperty, getFeaturedProperties, getMyCreditInfo, getSettings, initializePurchase, paystackWebhook, unfeatureProperty, updateSettings, verifyPurchase } from "../contollers/creditPoint.controller";
-import { calculatePurchaseSchema, initializePurchaseSchema, updateSettingsSchema } from "../schemas/creditPoint.schemas";
+import { adminGiftCreditPoints, calculatePurchase, cleanupExpiredFeatured, featureProperty, getFeaturedProperties, getMyCreditInfo, getSettings, initializePurchase, paystackWebhook, unfeatureProperty, updateSettings, verifyPurchase } from "../contollers/creditPoint.controller";
+import { adminGiftCreditPointsSchema, calculatePurchaseSchema, initializePurchaseSchema, updateSettingsSchema } from "../schemas/creditPoint.schemas";
 
 export const creditPointRouter = Router();
 
@@ -83,3 +83,13 @@ creditPointRouter.post(
   requireRoles(['ADMIN']),
   cleanupExpiredFeatured
 );
+
+
+creditPointRouter.post(
+  '/admin-gift',
+  authenticateJWT,
+  requireRoles(['ADMIN']),
+  validateRequest(adminGiftCreditPointsSchema),
+  adminGiftCreditPoints
+);
+

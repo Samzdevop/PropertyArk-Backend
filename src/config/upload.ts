@@ -143,7 +143,7 @@ export const uploadMultipleToAzure = async (files: Express.Multer.File[], contai
   return Promise.all(uploadPromises);
 };
 
-// Get file URL
+
 export const getFileUrl = (filename: string, container?: string): string => {
   switch (storageDriver) {
     case 'azure':
@@ -155,7 +155,7 @@ export const getFileUrl = (filename: string, container?: string): string => {
   }
 };
 
-// Delete file
+
 export const deleteFile = async (key: string, container?: string) => {
   try {
     if (storageDriver === 'azure') {
@@ -181,7 +181,7 @@ export const deleteFile = async (key: string, container?: string) => {
   }
 };
 
-// Single file upload for avatar
+
 export const uploadAvatar = multer({
   storage,
   fileFilter: (_req, file, cb) => {
@@ -199,7 +199,7 @@ export const uploadAvatar = multer({
   limits: { fileSize: 5 * 1024 * 1024 }
 });
 
-// NIN upload (single file)
+
 export const uploadNIN = multer({
   storage,
   fileFilter: (_req, file, cb) => {

@@ -569,8 +569,6 @@ export class UserService {
     }
   ): Promise<any> {
     const { password, reason, confirmationPhrase } = data;
-
-    // Verify user exists
     const user = await prisma.user.findUnique({
       where: { id: userId },
       select: {
@@ -584,16 +582,12 @@ export class UserService {
         creditPoints: true,
       },
     });
-
     if (!user) {
       throw new NotFoundError("User not found");
     }
-
     if (user.isDeleted) {
       throw new BadRequestError("Account is already deleted");
     }
-
-    // Prevent admins from self-deleting
     if (user.role === Role.ADMIN) {
       throw new ForbiddenError(
         "Admin accounts cannot be self-deleted. Please contact support."
@@ -744,7 +738,65 @@ export class UserService {
     return blockers;
   }
 
-  
+
+  static async validateRoleSwitch(
+    userId: string,
+    targetRole: 'USER' | 'VENDOR'
+  ): Promise<{
+    id: string;
+    email: string;
+    fullName: string;
+    role: Role;
+    ninVerificationStatus: string;
+    creditPoints: number;
+  }> {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        email: true,
+        fullName: true,
+        role: true,
+        isDeleted: true,
+        isSuspended: true,
+        ninVerificationStatus: true,
+        creditPoints: true,
+      },
+    });
+    if (!user) {
+      throw new NotFoundError("User not found");
+    }
+    if (user.isDeleted) {
+      throw new BadRequestError("Deleted accounts cannot switch roles");
+    }
+    if (user.isSuspended) {
+      throw new ForbiddenError("Suspended accounts cannot switch roles");
+    }
+
+    if (user.role !== Role.USER && user.role !== Role.VENDOR) {
+      throw new ForbiddenError(
+        "Only users and vendors can switch roles. Admins and staff cannot."
+      );
+    }
+    if (!['USER', 'VENDOR'].includes(targetRole)) {
+      throw new BadRequestError("Target role must be either USER or VENDOR");
+    }
+    if (user.role === targetRole) {
+      throw new BadRequestError(
+        `You are already a ${targetRole.toLowerCase()}`
+      );
+    }
+
+    return {
+      id: user.id,
+      email: user.email,
+      fullName: user.fullName,
+      role: user.role,
+      ninVerificationStatus: user.ninVerificationStatus,
+      creditPoints: user.creditPoints,
+    };
+  }
+
   // static async getDeletionInfo(userId: string): Promise<any> {
   //   const user = await prisma.user.findUnique({
   //     where: { id: userId },

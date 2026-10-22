@@ -7,10 +7,11 @@ import { BadRequestError } from '../errors/BadRequestError';
 import { deleteFile, STORAGE_CONTAINERS, uploadToAzure } from '../config/upload';
 import { logActivity } from './activity.controller';
 import { userSelect } from '../prisma/selects';
-import { Role } from '@prisma/client';
+import { CreditTransactionStatus, CreditTransactionType, Role } from '@prisma/client';
 import { UserService } from '../services/user.service';
 import { attachBaseUrlUploads } from '../utils/attachBaseUrl.utils';
 import { serializeDates } from '../utils/serialize.utils';
+import Logger from '@/config/logger';
 
 
 
@@ -599,6 +600,164 @@ export const completeInquiry = async (
     );
 
     sendSuccessResponse(res, "Inquiry marked as completed successfully", inquiry);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+export const switchRole = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const user = req.user as any;
+    const { role } = req.body as { role: 'USER' | 'VENDOR' };
+    const dbUser = await UserService.validateRoleSwitch(user.id, role);
+    const updatedUser = await prisma.user.update({
+      where: { id: user.id },
+      data: { role: role === 'VENDOR' ? Role.VENDOR : Role.USER },
+      select: {
+        id: true,
+        email: true,
+        fullName: true,
+        role: true,
+        ninVerificationStatus: true,
+        creditPoints: true,
+      },
+    });
+    let welcomeBonus: { points: number; grantId: string } | null = null;
+    if (dbUser.role === Role.USER && role === 'VENDOR') {
+      const alreadyGotBonus = await prisma.creditTransaction.findFirst({
+        where: {
+          userId: user.id,
+          type: CreditTransactionType.ADMIN_ADJUSTMENT,
+          OR: [
+            { description: { startsWith: 'Welcome bonus for new vendor' } },
+            {
+              metadata: {
+                path: ['isWelcomeBonus'],
+                equals: true,
+              },
+            },
+          ],
+        },
+      });
+
+      if (!alreadyGotBonus) {
+        const settings = await prisma.creditPointSettings.findFirst({
+          where: { isActive: true },
+        });
+
+        const bonusPoints = settings?.newVendorBonusPoints ?? 0;
+
+        if (bonusPoints > 0) {
+          const expiresAt = settings?.newVendorBonusExpiryDays
+            ? new Date(
+                Date.now() +
+                  settings.newVendorBonusExpiryDays * 24 * 60 * 60 * 1000
+              )
+            : null;
+
+          const grantId = `WLCM-${Date.now()}-${Math.random()
+            .toString(36)
+            .substring(2, 8)
+            .toUpperCase()}`;
+
+          const result = await prisma.$transaction(async (tx) => {
+            const balanceBefore = updatedUser.creditPoints;
+            const balanceAfter = balanceBefore + bonusPoints;
+
+            await tx.user.update({
+              where: { id: user.id },
+              data: {
+                creditPoints: balanceAfter,
+                creditPointsPurchased: { increment: bonusPoints },
+              },
+            });
+
+            const transaction = await tx.creditTransaction.create({
+              data: {
+                transactionNumber: `CRT-${Date.now()}-${Math.random()
+                  .toString(36)
+                  .substring(2, 8)}`,
+                userId: user.id,
+                type: CreditTransactionType.ADMIN_ADJUSTMENT,
+                status: CreditTransactionStatus.COMPLETED,
+                points: bonusPoints,
+                balanceBefore,
+                balanceAfter,
+                description: `Welcome bonus for new vendor (${bonusPoints} points)`,
+                metadata: {
+                  isWelcomeBonus: true,
+                  grantId,
+                  grantedBy: 'system',
+                  trigger: 'first_vendor_switch',
+                },
+                expiresAt,
+              },
+            });
+
+            return { transaction, balanceAfter };
+          });
+
+          welcomeBonus = {
+            points: bonusPoints,
+            grantId,
+          };
+
+          // Reflect the new balance in the response snapshot
+          updatedUser.creditPoints = result.balanceAfter;
+
+          Logger.info(
+            `Welcome bonus awarded to ${dbUser.email} on first vendor switch: ${bonusPoints} points`
+          );
+        }
+      }
+    }
+
+    // 4. In-app notification
+    await prisma.notification.create({
+      data: {
+        userId: user.id,
+        type: 'GENERAL',
+        title: 'Account Role Updated',
+        message: `Your account role was changed from ${dbUser.role} to ${role}.${
+          welcomeBonus
+            ? ` A welcome bonus of ${welcomeBonus.points} credit points has been added.`
+            : ''
+        } All your data has been preserved.`,
+        data: {
+          previousRole: dbUser.role,
+          newRole: role,
+          ...(welcomeBonus && { welcomeBonus }),
+        },
+      },
+    });
+
+    // 5. Activity log
+    await logActivity(
+      user.id,
+      'SWITCH_ROLE',
+      'USER',
+      user.id,
+      {
+        previousRole: dbUser.role,
+        newRole: role,
+        ...(welcomeBonus && { welcomeBonus }),
+      },
+      req
+    );
+
+    sendSuccessResponse(
+      res,
+      `Role switched to ${role.toLowerCase()} successfully`,
+      {
+        user: updatedUser,
+        ...(welcomeBonus && { welcomeBonus }),
+      }
+    );
   } catch (error) {
     next(error);
   }

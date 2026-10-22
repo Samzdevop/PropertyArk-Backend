@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { authenticateJWT } from '../middlewares/errorHandler.middleware';
 import { validateRequest } from '../middlewares/validateRequest.middleware';
-import { changePasswordSchema, completeInquirySchema, selfDeleteAccountSchema, updateUserSchema } from '../schemas/users.schemas';
+import { changePasswordSchema, completeInquirySchema, selfDeleteAccountSchema, switchRoleSchema, updateUserSchema } from '../schemas/users.schemas';
 import { requireRoles } from '../middlewares/roleCheck.middleware';
-import { adminUpdateUser, changePassword, completeInquiry, deleteUser, getAllUsers, getProfile, getUserDashboard, getUserInquiriesStats, removeAvatar, selfDeleteAccount, updateAvatar, updateProfile } from '../contollers/users.controller';
+import { adminUpdateUser, changePassword, completeInquiry, deleteUser, getAllUsers, getProfile, getUserDashboard, getUserInquiriesStats, removeAvatar, selfDeleteAccount, switchRole, updateAvatar, updateProfile } from '../contollers/users.controller';
 import { uploadAvatar } from '../config/upload';
 
 export const usersRouter = Router();
@@ -93,4 +93,13 @@ usersRouter.delete(
 	authenticateJWT,
 	requireRoles(['ADMIN']),
 	deleteUser
+);
+
+
+usersRouter.patch(
+  '/switch-role',
+  authenticateJWT,
+  requireRoles(['USER', 'VENDOR']),
+  validateRequest(switchRoleSchema),
+  switchRole
 );
