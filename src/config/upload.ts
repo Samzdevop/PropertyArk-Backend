@@ -63,7 +63,10 @@ if (storageConfig.driver === 's3') {
     s3,
     bucket: process.env.AWS_BUCKET_NAME || '',
     // acl: 'public-read',
-    contentType: multerS3.AUTO_CONTENT_TYPE,
+    // contentType: multerS3.AUTO_CONTENT_TYPE,
+    contentType: (_req, file, cb) => {
+      cb(null, file.mimetype);
+    },
     key: (_req, file, cb) => {
       const fileName = generateSafeFileName(file.originalname);
       cb(null, fileName);

@@ -336,6 +336,13 @@ export const updateAvatar = async (
       throw new BadRequestError("No file uploaded");
     }
 
+    console.log('Avatar upload details:', {
+      originalname: file.originalname,
+      mimetype: file.mimetype,
+      size: file.size,
+      key: (file as any).key,
+      location: (file as any).location,
+    });
     const currentUser = await prisma.user.findUnique({
       where: { id: userId },
       select: { avatar: true }
