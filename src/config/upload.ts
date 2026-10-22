@@ -69,6 +69,10 @@ if (storageConfig.driver === 's3') {
     },
     key: (_req, file, cb) => {
       const fileName = generateSafeFileName(file.originalname);
+      if (file.fieldname === 'avatar') {
+        cb(null, `${STORAGE_CONTAINERS.USER_AVATARS}/${fileName}`);
+        return;
+      }
       cb(null, fileName);
     },
     metadata: (_req, file, cb) => {
