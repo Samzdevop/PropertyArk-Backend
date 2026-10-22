@@ -109,13 +109,26 @@ export class ProfessionalServiceService {
         let url: string;
         let key: string;
 
+        // if (storageDriver === 'azure') {
+        //   const urls = await uploadMultipleToAzure([file], container);
+        //   url = urls[0];
+        //   key = url.split('/').pop() || file.originalname;
+        // } else if (storageDriver === 's3') {
+        //   url = (file as any).location || `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${(file as any).key}`;
+        //   key = (file as any).key || file.originalname;
+        // } else {
+        //   url = `/uploads/${file.filename}`;
+        //   key = file.filename;
+        // }
+
         if (storageDriver === 'azure') {
           const urls = await uploadMultipleToAzure([file], container);
           url = urls[0];
           key = url.split('/').pop() || file.originalname;
         } else if (storageDriver === 's3') {
-          url = (file as any).location || `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${(file as any).key}`;
-          key = (file as any).key || file.originalname;
+          const s3File = file as any;
+          url = s3File.location || `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${s3File.key}`;
+          key = s3File.key || file.originalname;
         } else {
           url = `/uploads/${file.filename}`;
           key = file.filename;

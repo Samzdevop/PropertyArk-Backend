@@ -114,16 +114,35 @@ export const register = async (
       verificationExpires: new Date(Date.now() + 30 * 60 * 1000),
     };
 
-    if (role === 'VENDOR' && file) {
-      if (process.env.STORAGE_DRIVER === 'azure') {
-        ninPhotoUrl = await uploadToAzure(file, STORAGE_CONTAINERS.NIN_DOCUMENTS);
-      } else {
-        ninPhotoUrl = `/uploads/${file.filename}`;
-      }
 
-      userData.ninPhotoUrl = ninPhotoUrl;
-      userData.ninVerificationStatus = VerificationStatus.PENDING;
+    if (role === 'VENDOR' && file) {
+    const driver = process.env.STORAGE_DRIVER || 'local';
+
+    if (driver === 'azure') {
+      ninPhotoUrl = await uploadToAzure(file, STORAGE_CONTAINERS.NIN_DOCUMENTS);
+    } else if (driver === 's3') {
+      const s3File = file as any;
+      ninPhotoUrl =
+        s3File.location ||
+        `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${s3File.key}`;
+    } else {
+      ninPhotoUrl = `/uploads/${file.filename}`;
     }
+
+    userData.ninPhotoUrl = ninPhotoUrl;
+    userData.ninVerificationStatus = VerificationStatus.PENDING;
+  }
+
+    // if (role === 'VENDOR' && file) {
+    //   if (process.env.STORAGE_DRIVER === 'azure') {
+    //     ninPhotoUrl = await uploadToAzure(file, STORAGE_CONTAINERS.NIN_DOCUMENTS);
+    //   } else {
+    //     ninPhotoUrl = `/uploads/${file.filename}`;
+    //   }
+
+    //   userData.ninPhotoUrl = ninPhotoUrl;
+    //   userData.ninVerificationStatus = VerificationStatus.PENDING;
+    // }
 
     const user = await prisma.user.create({
       data: userData

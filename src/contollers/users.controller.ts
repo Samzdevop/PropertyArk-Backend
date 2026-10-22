@@ -341,10 +341,20 @@ export const updateAvatar = async (
       select: { avatar: true }
     });
 
+    const driver = process.env.STORAGE_DRIVER || 'local';
     const container = STORAGE_CONTAINERS.USER_AVATARS;
-    const avatarUrl = process.env.STORAGE_DRIVER === 'azure'
-      ? await uploadToAzure(file, container)
-      : `/uploads/${file.filename}`;
+    let avatarUrl: string;
+    // const avatarUrl = process.env.STORAGE_DRIVER === 'azure'
+    //   ? await uploadToAzure(file, container)
+    //   : `/uploads/${file.filename}`;
+    if (driver === 'azure') {
+      avatarUrl = await uploadToAzure(file, container);
+    } else if (driver === 's3') {
+      const s3File = file as any;
+      avatarUrl = s3File.location || `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${s3File.key}`;
+    } else {
+      avatarUrl = `/uploads/${file.filename}`;
+    }
 
     const updatedUser = await prisma.user.update({
       where: { id: userId },
@@ -357,10 +367,22 @@ export const updateAvatar = async (
       }
     });
 
-    if (currentUser?.avatar && !currentUser.avatar.includes('randomuser.me') && !currentUser.avatar.includes('ui-avatars')) {
+    // if (currentUser?.avatar && !currentUser.avatar.includes('randomuser.me') && !currentUser.avatar.includes('ui-avatars')) {
+    //   const oldKey = currentUser.avatar.split('/').pop();
+    //   if (oldKey) {
+    //     await deleteFile(oldKey, container).catch(err => 
+    //       console.error('Failed to delete old avatar:', err)
+    //     );
+    //   }
+    // }
+    if (
+      currentUser?.avatar &&
+      !currentUser.avatar.includes('randomuser.me') &&
+      !currentUser.avatar.includes('ui-avatars')
+    ) {
       const oldKey = currentUser.avatar.split('/').pop();
       if (oldKey) {
-        await deleteFile(oldKey, container).catch(err => 
+        await deleteFile(oldKey, container).catch(err =>
           console.error('Failed to delete old avatar:', err)
         );
       }

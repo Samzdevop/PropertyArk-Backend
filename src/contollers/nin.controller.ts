@@ -6,7 +6,7 @@ import { ForbiddenError } from "../errors/ForbiddenError";
 import { BadRequestError } from "../errors/BadRequestError";
 import { Role, VerificationStatus } from "@prisma/client";
 import { logActivity } from "../contollers/activity.controller";
-import { STORAGE_CONTAINERS } from "../config/upload";
+import { STORAGE_CONTAINERS, uploadToAzure } from "../config/upload";
 
 
 export const verifyVendorNIN = async (
@@ -193,9 +193,23 @@ export const uploadNIN = async (
     }
 
     // Upload logic handled by multer, just update database
-    const ninPhotoUrl = process.env.STORAGE_DRIVER === 'azure'
-      ? file.url
-      : `/uploads/${file.filename}`;
+    // const ninPhotoUrl = process.env.STORAGE_DRIVER === 'azure'
+    //   ? file.url
+    //   : `/uploads/${file.filename}`;
+
+    const driver = process.env.STORAGE_DRIVER || 'local';
+    let ninPhotoUrl: string;
+
+    if (driver === 'azure') {
+      ninPhotoUrl = await uploadToAzure(file, STORAGE_CONTAINERS.NIN_DOCUMENTS);
+    } else if (driver === 's3') {
+      const s3File = file as any;
+      ninPhotoUrl =
+        s3File.location ||
+        `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${s3File.key}`;
+    } else {
+      ninPhotoUrl = `/uploads/${file.filename}`;
+    }
 
     const updatedUser = await prisma.user.update({
       where: { id: user.id },
