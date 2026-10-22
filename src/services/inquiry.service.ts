@@ -165,7 +165,7 @@ export class InquiryService {
 
         const mailOptions: MailInterface = {
           to: property.vendor.email,
-          from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+          from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
           subject: `New Inquiry: ${inquiry.inquiryNumber} - ${property.name}`,
           text: `You have a new inquiry from ${inquiry.name} about ${property.name}`,
           html: emailHtml
@@ -191,7 +191,7 @@ export class InquiryService {
 
         const mailOptions: MailInterface = {
           to: inquiry.user.email,
-          from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+          from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
           subject: `Inquiry Confirmation: ${inquiry.inquiryNumber}`,
           text: `Your inquiry about ${property.name} has been sent successfully.`,
           html: emailHtml
@@ -768,7 +768,7 @@ export class InquiryService {
 
         const mailOptions: MailInterface = {
           to: inquiry.user.email,
-          from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+          from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
           subject,
           text: `Your inquiry ${inquiry.inquiryNumber} has been ${status.toLowerCase()}`,
           html: emailHtml

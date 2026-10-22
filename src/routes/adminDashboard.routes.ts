@@ -16,7 +16,7 @@ adminDashboardRouter.get(
   getNINStats
 );
 
-// Property management statistics
+// Property Ark statistics
 adminDashboardRouter.get(
   '/property-stats',
   authenticateJWT,

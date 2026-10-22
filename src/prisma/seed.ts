@@ -174,7 +174,7 @@ async function main() {
 
   const staffMembers = [];
   const staffNames = [
-    { fullName: 'Sarah Johnson', email: 'sarah.johnson@property.com', department: 'Property Management' },
+    { fullName: 'Sarah Johnson', email: 'sarah.johnson@property.com', department: 'Property Ark' },
     { fullName: 'Michael Chen', email: 'michael.chen@property.com', department: 'Sales' },
   ];
 

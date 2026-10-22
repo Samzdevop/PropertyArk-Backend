@@ -544,7 +544,7 @@ export class UserService {
 
         const mailOptions: MailInterface = {
           to: inquiry.vendor.email,
-          from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+          from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
           subject: `Inquiry Completed: ${inquiry.inquiryNumber}`,
           text: `User ${inquiry.user.fullName} has completed their inquiry.`,
           html: emailHtml

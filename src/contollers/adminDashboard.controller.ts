@@ -51,7 +51,7 @@ export const getPropertyManagementStats = async (
     const user = req.user as any;
 
     if (user.role !== Role.ADMIN) {
-      throw new ForbiddenError("Only admins can view property management statistics");
+      throw new ForbiddenError("Only admins can view property Ark statistics");
     }
 
     const { page = 1, limit = 20, status, listingType, search } = req.query;
@@ -85,7 +85,7 @@ export const getPropertyManagementStats = async (
       req
     );
 
-    sendSuccessResponse(res, "Property management statistics retrieved successfully", {
+    sendSuccessResponse(res, "Property Ark statistics retrieved successfully", {
       stats: result.stats,
       properties: propertiesWithUrls,
       pagination: result.pagination

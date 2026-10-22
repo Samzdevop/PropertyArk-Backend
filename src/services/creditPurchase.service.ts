@@ -237,7 +237,7 @@ export class CreditPurchaseService {
 
       const mailOptions: MailInterface = {
         to: data.user.email,
-        from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+        from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
         subject: `Credit Points Purchase Successful - ${data.purchase.purchaseNumber}`,
         text: `You have successfully purchased ${data.purchase.points} credit points.`,
         html: emailHtml

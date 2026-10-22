@@ -237,7 +237,7 @@ export class ShortletBookingService {
 
         const vendorMailOptions: MailInterface = {
           to: booking.vendor.email,
-          from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+          from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
           subject: `New Booking Request: ${booking.bookingNumber}`,
           text: `You have a new booking request for ${booking.property.name}`,
           html: vendorEmailHtml
@@ -265,7 +265,7 @@ export class ShortletBookingService {
 
       const guestMailOptions: MailInterface = {
         to: booking.guestEmail,
-        from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+        from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
         subject: `Booking Confirmation: ${booking.bookingNumber}`,
         text: `Your booking for ${booking.property.name} has been received`,
         html: guestEmailHtml
@@ -497,7 +497,7 @@ export class ShortletBookingService {
 
       const guestMailOptions: MailInterface = {
         to: booking.guestEmail,
-        from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+        from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
         subject: `Booking Approved: ${booking.bookingNumber}`,
         text: `Your booking for ${booking.property.name} has been approved`,
         html: guestEmailHtml

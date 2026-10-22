@@ -58,8 +58,8 @@ export const adminRegister = async (
 
     const mailOptions: MailInterface = {
       to: email,
-      from: `"Property Management" ${process.env.SENDER_EMAIL}`,
-      subject: "Verify your Property Management Account",
+      from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
+      subject: "Verify your Property Ark Account",
       text: `Your verification code is ${verificationCode}`,
       html,
     };
@@ -182,8 +182,8 @@ export const register = async (
 
       const mailOptions: MailInterface = {
         to: email,
-        from: `"Property Management" ${process.env.SENDER_EMAIL}`,
-        subject: "Verify your Property Management Account",
+        from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
+        subject: "Verify your Property Ark Account",
         text: `Your verification code is ${verificationCode}`,
         html,
       };
@@ -462,7 +462,7 @@ export const requestVerificationCode = async (
 
     const mailOptions: MailInterface = {
       to: email,
-      from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+      from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
       subject: "Account Verification Code",
       text: `Your verification code is ${verificationCode}`,
       html,

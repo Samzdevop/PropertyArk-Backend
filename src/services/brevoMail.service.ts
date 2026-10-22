@@ -97,7 +97,7 @@ export const sendNodemailerMail = async (mail: MailInterface): Promise<void> => 
       cc: mail.cc,
       bcc: mail.bcc,
       headers: {
-        'X-Application': 'Property Management',
+        'X-Application': 'Property Ark',
         'X-Environment': process.env.NODE_ENV || 'development',
       },
     };

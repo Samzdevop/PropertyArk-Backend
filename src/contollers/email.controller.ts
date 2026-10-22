@@ -38,8 +38,8 @@ export const testEmail = async (
 
     const mailOptions: MailInterface = {
       to: email,
-      from: `"Property Management" ${process.env.SENDER_EMAIL}`,
-      subject: "SMTP Test - Property Management",
+      from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
+      subject: "SMTP Test - Property Ark",
       text: "This is a test email to verify SMTP integration is working.",
       html,
     };
@@ -78,8 +78,8 @@ export const getEmailStatus = async (
       port: parseInt(process.env.SMTP_PORT || '587'),
       secure: process.env.SMTP_SECURE === 'true',
       username: process.env.SMTP_USERNAME ? '***' : 'not set',
-      senderEmail: process.env.SENDER_EMAIL || 'noreply@propertymanagement.com',
-      senderName: process.env.SENDER_NAME || 'Property Management',
+      senderEmail: process.env.SENDER_EMAIL || 'noreply@propertyark.com',
+      senderName: process.env.SENDER_NAME || 'Property Ark',
     };
 
     // Test connection

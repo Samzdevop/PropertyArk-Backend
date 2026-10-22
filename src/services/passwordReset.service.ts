@@ -62,7 +62,7 @@ export class PasswordResetService {
 
       await sendGraphMail({
         to: email,
-        from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+        from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
         subject: "Password Reset Request",
         text: `Click the following link to reset your password: ${resetUrl}. This link expires in 30 minutes.`,
         html: emailHtml
@@ -123,7 +123,7 @@ export class PasswordResetService {
 
       await sendGraphMail({
         to: email,
-        from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+        from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
         subject: "Password Reset Successful",
         text: "Your password has been successfully reset.",
         html: emailHtml
