@@ -195,7 +195,7 @@ class ShortletBookingService {
                 });
                 const vendorMailOptions = {
                     to: booking.vendor.email,
-                    from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+                    from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
                     subject: `New Booking Request: ${booking.bookingNumber}`,
                     text: `You have a new booking request for ${booking.property.name}`,
                     html: vendorEmailHtml
@@ -220,7 +220,7 @@ class ShortletBookingService {
             });
             const guestMailOptions = {
                 to: booking.guestEmail,
-                from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+                from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
                 subject: `Booking Confirmation: ${booking.bookingNumber}`,
                 text: `Your booking for ${booking.property.name} has been received`,
                 html: guestEmailHtml
@@ -433,7 +433,7 @@ class ShortletBookingService {
             });
             const guestMailOptions = {
                 to: booking.guestEmail,
-                from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+                from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
                 subject: `Booking Approved: ${booking.bookingNumber}`,
                 text: `Your booking for ${booking.property.name} has been approved`,
                 html: guestEmailHtml

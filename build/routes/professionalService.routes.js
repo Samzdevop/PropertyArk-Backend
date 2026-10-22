@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.professionalServiceRouter = void 0;
+const express_1 = require("express");
+const errorHandler_middleware_1 = require("../middlewares/errorHandler.middleware");
+const roleCheck_middleware_1 = require("../middlewares/roleCheck.middleware");
+const upload_1 = require("../config/upload");
+const validateRequest_middleware_1 = require("../middlewares/validateRequest.middleware");
+const professionalService_schemas_1 = require("../schemas/professionalService.schemas");
+const professionalService_controller_1 = require("../contollers/professionalService.controller");
+exports.professionalServiceRouter = (0, express_1.Router)();
+exports.professionalServiceRouter.post('/', upload_1.upload.array('documents', 10), (0, validateRequest_middleware_1.validateRequest)(professionalService_schemas_1.createProfessionalServiceSchema), professionalService_controller_1.createRequest);
+exports.professionalServiceRouter.get('/:id', professionalService_controller_1.getRequestById);
+exports.professionalServiceRouter.get('/', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['ADMIN']), (0, validateRequest_middleware_1.validateRequest)(professionalService_schemas_1.getProfessionalServicesQuerySchema), professionalService_controller_1.getAllRequests);
+exports.professionalServiceRouter.delete('/:id', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['ADMIN']), professionalService_controller_1.deleteRequest);

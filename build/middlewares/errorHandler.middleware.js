@@ -30,7 +30,7 @@ const authenticateJWT = (req, res, next) => {
                 details: info?.message || 'Invalid or missing token',
             });
         }
-        req.user = user; // Attach the user to the request object for downstream access
+        req.user = user;
         return next();
     })(req, res, next);
 };

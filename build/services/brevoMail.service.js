@@ -125,9 +125,8 @@ const sendNodemailerMail = async (mail) => {
             html: mail.html,
             cc: mail.cc,
             bcc: mail.bcc,
-            // Optional: Add custom headers
             headers: {
-                'X-Application': 'Property Management',
+                'X-Application': 'Property Ark',
                 'X-Environment': process.env.NODE_ENV || 'development',
             },
         };
@@ -139,7 +138,7 @@ const sendNodemailerMail = async (mail) => {
     }
     catch (error) {
         logger_1.default.error(`Nodemailer email sending failed: ${error.message}`, error);
-        throw new Error(`Failed to send email: ${error.message}`);
+        throw new Error(`Failed to send email: ${error}`);
     }
 };
 exports.sendNodemailerMail = sendNodemailerMail;
@@ -160,7 +159,7 @@ const sendNodemailerTemplateMail = async (to, templateName, templateData, subjec
     }
     catch (error) {
         logger_1.default.error(`Nodemailer template email failed: ${error.message}`, error);
-        throw new Error(`Failed to send template email: ${error.message}`);
+        throw new Error(`Failed to send template email: ${error}`);
     }
 };
 exports.sendNodemailerTemplateMail = sendNodemailerTemplateMail;

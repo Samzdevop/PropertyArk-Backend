@@ -17,8 +17,7 @@ const generateToken = (user) => {
 };
 exports.default = generateToken;
 const generateResetToken = (email) => {
-    return jsonwebtoken_1.default.sign({ email, type: 'password_reset' }, process.env.JWT_SECRET, { expiresIn: '1h' } // Token expires in 1 hour
-    );
+    return jsonwebtoken_1.default.sign({ email, type: 'password_reset' }, process.env.JWT_SECRET, { expiresIn: '1h' });
 };
 exports.generateResetToken = generateResetToken;
 // Add this function to verify reset token

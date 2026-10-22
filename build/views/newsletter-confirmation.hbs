@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #1C96C1 0%, #157a9e 100%); color: white; padding: 30px; text-align: center; border-radius: 5px 5px 0 0; }
+    .content { background-color: #f9f9f9; padding: 30px; border-radius: 0 0 5px 5px; border: 1px solid #ddd; border-top: none; }
+    .info-box { background-color: #e3f2fd; padding: 15px; margin: 20px 0; border-radius: 5px; }
+    .button { display: inline-block; background-color: #1C96C1; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+    .unsubscribe { font-size: 12px; color: #666; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; }
+    .unsubscribe a { color: #1C96C1; }
+    .footer { margin-top: 30px; text-align: center; font-size: 12px; color: #666; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>🎉 Thank You for Subscribing!</h2>
+    </div>
+    <div class="content">
+      <p>Hello {{name}},</p>
+      <p>You're now subscribed to the PropertyArk newsletter! We're thrilled to have you with us.</p>
+
+      <div class="info-box">
+        <strong>What you'll receive:</strong>
+        <ul>
+          <li>Latest property listings and market updates</li>
+          <li>Exclusive offers and promotions</li>
+          <li>Real estate tips and insights</li>
+          <li>Platform news and feature announcements</li>
+        </ul>
+      </div>
+
+      <p>We send emails about once or twice a month — no spam, we promise!</p>
+
+      <p>Welcome aboard,<br><strong>The PropertyArk Team</strong></p>
+
+      <div class="unsubscribe">
+        <p>Don't want to receive these emails anymore? You can 
+          <a href="{{unsubscribeUrl}}">unsubscribe here</a> anytime.
+        </p>
+      </div>
+    </div>
+    <div class="footer">
+      <p>© {{currentYear}} PropertyArk. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>

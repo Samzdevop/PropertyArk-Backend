@@ -29,10 +29,10 @@ let storage;
 const getS3Client = () => {
     return new client_s3_1.S3Client({
         region: process.env.AWS_REGION,
-        credentials: {
-            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-        }
+        // credentials: {
+        //   accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+        //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+        // }
     });
 };
 // Azure Client
@@ -58,10 +58,17 @@ if (storageConfig.driver === 's3') {
     storage = (0, multer_s3_1.default)({
         s3,
         bucket: process.env.AWS_BUCKET_NAME || '',
-        acl: 'public-read',
-        contentType: multer_s3_1.default.AUTO_CONTENT_TYPE,
+        // acl: 'public-read',
+        // contentType: multerS3.AUTO_CONTENT_TYPE,
+        contentType: (_req, file, cb) => {
+            cb(null, file.mimetype);
+        },
         key: (_req, file, cb) => {
             const fileName = generateSafeFileName(file.originalname);
+            if (file.fieldname === 'avatar') {
+                cb(null, `${exports.STORAGE_CONTAINERS.USER_AVATARS}/${fileName}`);
+                return;
+            }
             cb(null, fileName);
         },
         metadata: (_req, file, cb) => {
@@ -132,7 +139,6 @@ const uploadMultipleToAzure = async (files, container) => {
     return Promise.all(uploadPromises);
 };
 exports.uploadMultipleToAzure = uploadMultipleToAzure;
-// Get file URL
 const getFileUrl = (filename, container) => {
     switch (storageDriver) {
         case 'azure':
@@ -144,7 +150,6 @@ const getFileUrl = (filename, container) => {
     }
 };
 exports.getFileUrl = getFileUrl;
-// Delete file
 const deleteFile = async (key, container) => {
     try {
         if (storageDriver === 'azure') {
@@ -155,9 +160,11 @@ const deleteFile = async (key, container) => {
             await blockBlobClient.deleteIfExists();
         }
         else if (storageDriver === 's3') {
-            // S3 delete implementation
             const s3 = getS3Client();
-            // Add delete command
+            await s3.send(new client_s3_1.DeleteObjectCommand({
+                Bucket: process.env.AWS_BUCKET_NAME,
+                Key: key
+            }));
         }
         else {
             const filePath = path_1.default.join(exports.UPLOADS_PATH, key);
@@ -171,7 +178,6 @@ const deleteFile = async (key, container) => {
     }
 };
 exports.deleteFile = deleteFile;
-// Single file upload for avatar
 exports.uploadAvatar = (0, multer_1.default)({
     storage,
     fileFilter: (_req, file, cb) => {
@@ -187,7 +193,6 @@ exports.uploadAvatar = (0, multer_1.default)({
     },
     limits: { fileSize: 5 * 1024 * 1024 }
 });
-// NIN upload (single file)
 exports.uploadNIN = (0, multer_1.default)({
     storage,
     fileFilter: (_req, file, cb) => {

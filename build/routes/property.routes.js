@@ -16,20 +16,20 @@ exports.propertyRouter.get('/', errorHandler_middleware_1.authenticateJWT, prope
 exports.propertyRouter.get('/my-properties', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['VENDOR', 'ADMIN']), (0, validateRequest_middleware_1.validateRequest)(property_schemas_1.myPropertiesQuerySchema), property_controller_1.getMyProperties);
 exports.propertyRouter.get('/:id', errorHandler_middleware_1.authenticateJWT, trackView_middleware_1.trackPropertyView, property_controller_1.getPropertyById);
 exports.propertyRouter.post('/', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['ADMIN', 'VENDOR', 'STAFF']), upload_1.upload.fields([
-    { name: 'photos', maxCount: 10 },
-    { name: 'videos', maxCount: 5 },
+    { name: 'photos', maxCount: 50 },
+    { name: 'videos', maxCount: 10 },
     { name: 'documents', maxCount: 10 }
 ]), (0, validateRequest_middleware_1.validateRequest)(property_schemas_1.createPropertySchema), property_controller_1.createProperty);
 exports.propertyRouter.patch('/:id', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['ADMIN', 'VENDOR', 'STAFF']), upload_1.upload.fields([
-    { name: 'photos', maxCount: 10 },
-    { name: 'videos', maxCount: 5 },
+    { name: 'photos', maxCount: 50 },
+    { name: 'videos', maxCount: 10 },
     { name: 'documents', maxCount: 10 }
 ]), (0, validateRequest_middleware_1.validateRequest)(property_schemas_1.updatePropertySchema), property_controller_1.updateProperty);
 exports.propertyRouter.patch('/:id/review', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['ADMIN']), (0, validateRequest_middleware_1.validateRequest)(property_schemas_1.reviewPropertySchema), property_controller_1.reviewProperty);
 exports.propertyRouter.delete('/:id', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['ADMIN', 'VENDOR', 'STAFF']), property_controller_1.deleteProperty);
 exports.propertyRouter.post('/:id/media', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['ADMIN', 'VENDOR', 'STAFF']), upload_1.upload.fields([
-    { name: 'photos', maxCount: 10 },
-    { name: 'videos', maxCount: 5 },
+    { name: 'photos', maxCount: 50 },
+    { name: 'videos', maxCount: 10 },
     { name: 'documents', maxCount: 10 }
 ]), property_controller_1.uploadPropertyMedia);
 exports.propertyRouter.get('/:id/media', errorHandler_middleware_1.authenticateJWT, property_controller_1.getPropertyMedia);

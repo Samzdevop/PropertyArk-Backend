@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.contactRouter = void 0;
+const express_1 = require("express");
+const errorHandler_middleware_1 = require("../middlewares/errorHandler.middleware");
+const roleCheck_middleware_1 = require("../middlewares/roleCheck.middleware");
+const validateRequest_middleware_1 = require("../middlewares/validateRequest.middleware");
+const contact_controller_1 = require("../contollers/contact.controller");
+const contact_schemas_1 = require("../schemas/contact.schemas");
+exports.contactRouter = (0, express_1.Router)();
+exports.contactRouter.post('/', (0, validateRequest_middleware_1.validateRequest)(contact_schemas_1.createContactSchema), contact_controller_1.createContact);
+exports.contactRouter.get('/', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['ADMIN']), (0, validateRequest_middleware_1.validateRequest)(contact_schemas_1.getContactsQuerySchema), contact_controller_1.getAllContacts);
+exports.contactRouter.get('/:id', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['ADMIN']), contact_controller_1.getContactById);
+exports.contactRouter.delete('/:id', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['ADMIN']), contact_controller_1.deleteContact);

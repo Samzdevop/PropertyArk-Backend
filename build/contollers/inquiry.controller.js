@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getInquiryStats = exports.reviewInquiry = exports.getInquiryById = exports.getUserInquiries = exports.getVendorInquiries = exports.createInquiry = void 0;
+exports.getInquiryStats = exports.reviewInquiry = exports.getInquiryById = exports.getUserInquiries = exports.getAdminInquiryStats = exports.getVendorInquiries = exports.createInquiry = void 0;
 const sendSuccessResponse_1 = require("../utils/sendSuccessResponse");
 const inquiry_service_1 = require("../services/inquiry.service");
 const activity_controller_1 = require("./activity.controller");
@@ -31,9 +31,6 @@ const createInquiry = async (req, res, next) => {
     }
 };
 exports.createInquiry = createInquiry;
-/**
- * Get vendor inquiries
- */
 const getVendorInquiries = async (req, res, next) => {
     try {
         const user = req.user;
@@ -41,13 +38,13 @@ const getVendorInquiries = async (req, res, next) => {
             throw new ForbiddenError_1.ForbiddenError("Only vendors and admins can view vendor inquiries");
         }
         const { status, propertyId, page = 1, limit = 20 } = req.query;
-        const result = await inquiry_service_1.InquiryService.getVendorInquiries(user.id, {
+        const result = await inquiry_service_1.InquiryService.getVendorInquiries(user.id, user.role, {
             status: status,
             propertyId: propertyId,
             page: Number(page),
             limit: Number(limit)
         });
-        await (0, activity_controller_1.logActivity)(user.id, 'VIEW_VENDOR_INQUIRIES', 'INQUIRY', 'list', { filters: { status, propertyId }, total: result.pagination.total }, req);
+        await (0, activity_controller_1.logActivity)(user.id, 'VIEW_VENDOR_INQUIRIES', 'INQUIRY', 'list', { filters: { status, propertyId }, role: user.role, total: result.pagination.total }, req);
         (0, sendSuccessResponse_1.sendSuccessResponse)(res, "Vendor inquiries retrieved successfully", result);
     }
     catch (error) {
@@ -55,9 +52,26 @@ const getVendorInquiries = async (req, res, next) => {
     }
 };
 exports.getVendorInquiries = getVendorInquiries;
-/**
- * Get user inquiries
- */
+const getAdminInquiryStats = async (req, res, next) => {
+    try {
+        const user = req.user;
+        if (user.role !== client_1.Role.ADMIN) {
+            throw new ForbiddenError_1.ForbiddenError("Only admins can view admin inquiry statistics");
+        }
+        const stats = await inquiry_service_1.InquiryService.getAdminInquiryStats();
+        await (0, activity_controller_1.logActivity)(user.id, 'VIEW_ADMIN_INQUIRY_STATS', 'INQUIRY', 'stats', {
+            total: stats.stats.total,
+            pending: stats.stats.pending,
+            completed: stats.stats.completed,
+            reported: stats.stats.reported
+        }, req);
+        (0, sendSuccessResponse_1.sendSuccessResponse)(res, "Admin inquiry statistics retrieved successfully", stats);
+    }
+    catch (error) {
+        next(error);
+    }
+};
+exports.getAdminInquiryStats = getAdminInquiryStats;
 const getUserInquiries = async (req, res, next) => {
     try {
         const user = req.user;
@@ -94,15 +108,16 @@ const reviewInquiry = async (req, res, next) => {
     try {
         const { id } = req.params;
         const user = req.user;
-        const { status, reason } = req.body;
+        const { status, reason, scheduledDate } = req.body;
         if (!status || (status !== 'ACCEPTED' && status !== 'DECLINED')) {
             throw new BadRequestError_1.BadRequestError("Status must be 'ACCEPTED' or 'DECLINED'");
         }
-        const inquiry = await inquiry_service_1.InquiryService.reviewInquiry(id, user.id, { status, reason });
+        const inquiry = await inquiry_service_1.InquiryService.reviewInquiry(id, user.id, { status, reason, scheduledDate });
         await (0, activity_controller_1.logActivity)(user.id, status === 'ACCEPTED' ? 'ACCEPT_INQUIRY' : 'DECLINE_INQUIRY', 'INQUIRY', id, {
             inquiryNumber: inquiry.inquiryNumber,
             status,
-            ...(reason && { reason })
+            ...(reason && { reason }),
+            ...(scheduledDate && { scheduledDate })
         }, req);
         (0, sendSuccessResponse_1.sendSuccessResponse)(res, `Inquiry ${status.toLowerCase()} successfully`, inquiry);
     }

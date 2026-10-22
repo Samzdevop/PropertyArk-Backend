@@ -213,7 +213,7 @@ class NotificationService {
             });
             const mailOptions = {
                 to: user.email,
-                from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+                from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
                 subject: `Notification: ${title}`,
                 text: message,
                 html: emailHtml

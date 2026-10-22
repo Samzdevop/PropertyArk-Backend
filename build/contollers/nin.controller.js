@@ -152,9 +152,23 @@ const uploadNIN = async (req, res, next) => {
             throw new BadRequestError_1.BadRequestError("NIN photo file is required");
         }
         // Upload logic handled by multer, just update database
-        const ninPhotoUrl = process.env.STORAGE_DRIVER === 'azure'
-            ? file.url
-            : `/uploads/${file.filename}`;
+        // const ninPhotoUrl = process.env.STORAGE_DRIVER === 'azure'
+        //   ? file.url
+        //   : `/uploads/${file.filename}`;
+        const driver = process.env.STORAGE_DRIVER || 'local';
+        let ninPhotoUrl;
+        if (driver === 'azure') {
+            ninPhotoUrl = await (0, upload_1.uploadToAzure)(file, upload_1.STORAGE_CONTAINERS.NIN_DOCUMENTS);
+        }
+        else if (driver === 's3') {
+            const s3File = file;
+            ninPhotoUrl =
+                s3File.location ||
+                    `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${s3File.key}`;
+        }
+        else {
+            ninPhotoUrl = `/uploads/${file.filename}`;
+        }
         const updatedUser = await prisma_1.default.user.update({
             where: { id: user.id },
             data: {

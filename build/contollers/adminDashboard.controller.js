@@ -31,7 +31,7 @@ const getPropertyManagementStats = async (req, res, next) => {
     try {
         const user = req.user;
         if (user.role !== client_1.Role.ADMIN) {
-            throw new ForbiddenError_1.ForbiddenError("Only admins can view property management statistics");
+            throw new ForbiddenError_1.ForbiddenError("Only admins can view property Ark statistics");
         }
         const { page = 1, limit = 20, status, listingType, search } = req.query;
         const result = await adminDashboard_service_1.AdminDashboardService.getPropertyManagementStats(Number(page), Number(limit), {
@@ -46,7 +46,7 @@ const getPropertyManagementStats = async (req, res, next) => {
             pendingReviews: result.stats.pendingReviews,
             activeListings: result.stats.activeListings
         }, req);
-        (0, sendSuccessResponse_1.sendSuccessResponse)(res, "Property management statistics retrieved successfully", {
+        (0, sendSuccessResponse_1.sendSuccessResponse)(res, "Property Ark statistics retrieved successfully", {
             stats: result.stats,
             properties: propertiesWithUrls,
             pagination: result.pagination

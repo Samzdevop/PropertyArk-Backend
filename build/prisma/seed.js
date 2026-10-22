@@ -155,7 +155,7 @@ async function main() {
     console.log('\nCreating Staff members...');
     const staffMembers = [];
     const staffNames = [
-        { fullName: 'Sarah Johnson', email: 'sarah.johnson@property.com', department: 'Property Management' },
+        { fullName: 'Sarah Johnson', email: 'sarah.johnson@property.com', department: 'Property Ark' },
         { fullName: 'Michael Chen', email: 'michael.chen@property.com', department: 'Sales' },
     ];
     for (let i = 0; i < staffNames.length; i++) {

@@ -12,6 +12,8 @@ const PropertyStatusEnum = zod_1.z.enum([
     'SOLD',
     'RENTED'
 ]);
+const TimeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+const RentDurationEnum = zod_1.z.enum(['MONTHLY', 'YEARLY']);
 exports.createPropertySchema = zod_1.z.object({
     body: zod_1.z.object({
         name: zod_1.z.string().min(1, 'Property name is required'),
@@ -35,6 +37,14 @@ exports.createPropertySchema = zod_1.z.object({
         salePrice: zod_1.z.string().optional(),
         landFee: zod_1.z.string().optional(),
         shortletAmount: zod_1.z.string().optional(),
+        propertyLandMark: zod_1.z.string().optional(),
+        distance: zod_1.z.string().optional(),
+        furnished: zod_1.z.union([zod_1.z.boolean(), zod_1.z.string()]).optional(),
+        rentDuration: RentDurationEnum.optional(),
+        checkInTime: zod_1.z.string().regex(TimeRegex, 'Invalid time format. Use HH:mm (e.g., 14:00)').optional(),
+        checkOutTime: zod_1.z.string().regex(TimeRegex, 'Invalid time format. Use HH:mm (e.g., 11:00)').optional(),
+        houseRules: zod_1.z.union([zod_1.z.string(), zod_1.z.array(zod_1.z.string())]).optional(),
+        cancellationPolicy: zod_1.z.string().optional(),
     }).refine((data) => {
         switch (data.listingType) {
             case 'FOR_RENT':
@@ -75,6 +85,14 @@ exports.updatePropertySchema = zod_1.z.object({
         salePrice: zod_1.z.string().optional(),
         landFee: zod_1.z.string().optional(),
         shortletAmount: zod_1.z.string().optional(),
+        propertyLandMark: zod_1.z.string().optional(),
+        distance: zod_1.z.string().optional(),
+        furnished: zod_1.z.union([zod_1.z.boolean(), zod_1.z.string()]).optional(),
+        rentDuration: RentDurationEnum.optional(),
+        checkInTime: zod_1.z.string().regex(TimeRegex, 'Invalid time format. Use HH:mm (e.g., 14:00)').optional(),
+        checkOutTime: zod_1.z.string().regex(TimeRegex, 'Invalid time format. Use HH:mm (e.g., 11:00)').optional(),
+        houseRules: zod_1.z.union([zod_1.z.string(), zod_1.z.array(zod_1.z.string())]).optional(),
+        cancellationPolicy: zod_1.z.string().optional(),
     }).partial()
 });
 exports.reviewPropertySchema = zod_1.z.object({

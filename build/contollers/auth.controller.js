@@ -20,6 +20,8 @@ const passwordReset_service_1 = require("../services/passwordReset.service");
 const upload_1 = require("../config/upload");
 const client_1 = require("@prisma/client");
 const selects_1 = require("../prisma/selects");
+const creditPoint_service_1 = require("../services/creditPoint.service");
+const welcome_service_1 = require("../services/welcome.service");
 const adminRegister = async (req, res, next) => {
     try {
         const { email, fullName, password, phone, location } = req.body;
@@ -49,8 +51,8 @@ const adminRegister = async (req, res, next) => {
         });
         const mailOptions = {
             to: email,
-            from: `"Property Management" ${process.env.SENDER_EMAIL}`,
-            subject: "Verify your Property Management Account",
+            from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
+            subject: "Verify your Property Ark Account",
             text: `Your verification code is ${verificationCode}`,
             html,
         };
@@ -67,7 +69,6 @@ const register = async (req, res, next) => {
     try {
         const { email, fullName, password, location, phone, role } = req.body;
         const file = req.file;
-        // Validate role
         if (!role || (role !== 'USER' && role !== 'VENDOR')) {
             throw new ForbiddenError_1.ForbiddenError("Role must be either 'USER' or 'VENDOR'");
         }
@@ -75,7 +76,6 @@ const register = async (req, res, next) => {
         if (existingUser) {
             throw new ForbiddenError_1.ForbiddenError("User already registered!");
         }
-        // If VENDOR, NIN photo is required
         if (role === 'VENDOR' && !file) {
             throw new ForbiddenError_1.ForbiddenError("NIN photo is required for vendor registration");
         }
@@ -83,7 +83,6 @@ const register = async (req, res, next) => {
         const verificationCode = (0, generateVerificationCode_1.generateVerificationCode)();
         let ninPhotoUrl = null;
         let ninVerificationStatus = client_1.VerificationStatus.PENDING;
-        // Build user data based on role
         const userData = {
             email,
             password: hashedPassword,
@@ -95,11 +94,16 @@ const register = async (req, res, next) => {
             verificationCode,
             verificationExpires: new Date(Date.now() + 30 * 60 * 1000),
         };
-        // If VENDOR, handle NIN upload
         if (role === 'VENDOR' && file) {
-            // Upload NIN photo
-            if (process.env.STORAGE_DRIVER === 'azure') {
+            const driver = process.env.STORAGE_DRIVER || 'local';
+            if (driver === 'azure') {
                 ninPhotoUrl = await (0, upload_1.uploadToAzure)(file, upload_1.STORAGE_CONTAINERS.NIN_DOCUMENTS);
+            }
+            else if (driver === 's3') {
+                const s3File = file;
+                ninPhotoUrl =
+                    s3File.location ||
+                        `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${s3File.key}`;
             }
             else {
                 ninPhotoUrl = `/uploads/${file.filename}`;
@@ -107,10 +111,18 @@ const register = async (req, res, next) => {
             userData.ninPhotoUrl = ninPhotoUrl;
             userData.ninVerificationStatus = client_1.VerificationStatus.PENDING;
         }
+        // if (role === 'VENDOR' && file) {
+        //   if (process.env.STORAGE_DRIVER === 'azure') {
+        //     ninPhotoUrl = await uploadToAzure(file, STORAGE_CONTAINERS.NIN_DOCUMENTS);
+        //   } else {
+        //     ninPhotoUrl = `/uploads/${file.filename}`;
+        //   }
+        //   userData.ninPhotoUrl = ninPhotoUrl;
+        //   userData.ninVerificationStatus = VerificationStatus.PENDING;
+        // }
         const user = await prisma_1.default.user.create({
             data: userData
         });
-        // If VENDOR, create NIN document record
         if (role === 'VENDOR' && file && ninPhotoUrl) {
             await prisma_1.default.document.create({
                 data: {
@@ -126,7 +138,15 @@ const register = async (req, res, next) => {
                 }
             });
         }
-        // Send verification email
+        if (role === 'VENDOR') {
+            try {
+                await creditPoint_service_1.CreditPointService.awardNewVendorBonus(user.id);
+                logger_1.default.info(`New vendor bonus awarded to ${user.email}`);
+            }
+            catch (error) {
+                logger_1.default.error(`Failed to award new vendor bonus to ${user.email}:`, error);
+            }
+        }
         try {
             const html = await (0, mailTemplate_1.render)("verification", {
                 fullName,
@@ -135,8 +155,8 @@ const register = async (req, res, next) => {
             });
             const mailOptions = {
                 to: email,
-                from: `"Property Management" ${process.env.SENDER_EMAIL}`,
-                subject: "Verify your Property Management Account",
+                from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
+                subject: "Verify your Property Ark Account",
                 text: `Your verification code is ${verificationCode}`,
                 html,
             };
@@ -178,7 +198,7 @@ const staffRegister = async (req, res, next) => {
         }
         const hashedPassword = await (0, argon2_1.hash)(password);
         const verificationCode = (0, generateVerificationCode_1.generateVerificationCode)();
-        await prisma_1.default.user.create({
+        const newStaff = await prisma_1.default.user.create({
             data: {
                 email,
                 password: hashedPassword,
@@ -194,6 +214,12 @@ const staffRegister = async (req, res, next) => {
             }
         });
         try {
+            await welcome_service_1.WelcomeService.sendWelcomeNotification(newStaff.id, newStaff.role);
+        }
+        catch (error) {
+            logger_1.default.error(`Failed to send welcome notification to ${email}:`, error);
+        }
+        try {
             const html = await (0, mailTemplate_1.render)("verification", {
                 fullName,
                 verificationCode,
@@ -201,7 +227,7 @@ const staffRegister = async (req, res, next) => {
             });
             const mailOptions = {
                 to: email,
-                from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+                from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
                 subject: "Verify your Staff Account",
                 text: `Your verification code is ${verificationCode}`,
                 html,
@@ -275,6 +301,9 @@ const login = async (req, res, next) => {
         const isPasswordValid = await (0, argon2_1.verify)(user.password || "$passwordless", password);
         if (!isPasswordValid)
             throw new UnauthorizedError_1.UnauthorizedError("Invalid credentials");
+        if (user.isDeleted) {
+            throw new UnauthorizedError_1.UnauthorizedError("Account no longer exists");
+        }
         if (!user.isVerified)
             throw new UnauthorizedError_1.UnauthorizedError("Account not verified! Please verify your email.");
         if (user.isSuspended) {
@@ -315,6 +344,13 @@ const verifyAccount = async (req, res, next) => {
                 verificationExpires: null,
             },
         });
+        try {
+            await welcome_service_1.WelcomeService.sendWelcomeNotification(user.id, user.role);
+            logger_1.default.info(`Welcome notification sent to newly verified user: ${email}`);
+        }
+        catch (error) {
+            logger_1.default.error(`Failed to send welcome notification to ${email}:`, error);
+        }
         (0, sendSuccessResponse_1.sendSuccessResponse)(res, "Account verification successful");
     }
     catch (error) {
@@ -343,7 +379,7 @@ const requestVerificationCode = async (req, res, next) => {
         });
         const mailOptions = {
             to: email,
-            from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+            from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
             subject: "Account Verification Code",
             text: `Your verification code is ${verificationCode}`,
             html,

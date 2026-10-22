@@ -47,7 +47,7 @@ class PasswordResetService {
                 passwordResetExpiresAt: expiresAt
             }
         });
-        const frontendUrl = process.env.FRONTEND_URL || 'https://properties.molaprise.com';
+        const frontendUrl = process.env.FRONTEND_URL || 'https://propertyark.vercel.app';
         const resetUrl = `${frontendUrl}/reset-password?email=${encodeURIComponent(email)}&token=${rawToken}`;
         try {
             const emailHtml = await (0, mailTemplate_1.render)('password-reset-request', {
@@ -58,7 +58,7 @@ class PasswordResetService {
             });
             await (0, mail_services_1.sendGraphMail)({
                 to: email,
-                from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+                from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
                 subject: "Password Reset Request",
                 text: `Click the following link to reset your password: ${resetUrl}. This link expires in 30 minutes.`,
                 html: emailHtml
@@ -111,7 +111,7 @@ class PasswordResetService {
             });
             await (0, mail_services_1.sendGraphMail)({
                 to: email,
-                from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+                from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
                 subject: "Password Reset Successful",
                 text: "Your password has been successfully reset.",
                 html: emailHtml

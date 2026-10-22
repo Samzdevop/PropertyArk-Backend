@@ -16,7 +16,6 @@ const errorHandler_middleware_1 = require("./middlewares/errorHandler.middleware
 const users_routes_1 = require("./routes/users.routes");
 const passport_1 = __importDefault(require("passport"));
 require("./config/passport");
-// import path from 'path';
 const upload_1 = require("./config/upload");
 const property_routes_1 = require("./routes/property.routes");
 const nin_routes_1 = require("./routes/nin.routes");
@@ -29,6 +28,11 @@ const viewStats_routes_1 = require("./routes/viewStats.routes");
 const shortletBooking_routes_1 = require("./routes/shortletBooking.routes");
 const notification_routes_1 = require("./routes/notification.routes");
 const adminDashboard_routes_1 = require("./routes/adminDashboard.routes");
+const creditPoint_routes_1 = require("./routes/creditPoint.routes");
+const chat_routes_1 = require("./routes/chat.routes");
+const professionalService_routes_1 = require("./routes/professionalService.routes");
+const contact_routes_1 = require("./routes/contact.routes");
+const newsletter_routes_1 = require("./routes/newsletter.routes");
 exports.app = (0, express_1.default)();
 // const isProduction = process.env.NODE_ENV === 'production';
 // app.use(
@@ -52,7 +56,7 @@ exports.app.use((0, express_session_1.default)({
     saveUninitialized: false,
     cookie: {
         secure: process.env.NODE_ENV === 'production',
-        maxAge: 1 * 60 * 60 * 1000, //  1hours
+        maxAge: 1 * 60 * 60 * 1000,
         sameSite: 'lax',
     },
 }));
@@ -62,6 +66,8 @@ exports.app.use((0, helmet_1.default)());
 const allowedOrigins = [
     'http://localhost:3000',
     'http://localhost:5173',
+    'https://propertyark.vercel.app',
+    'https://www.propertyark.ng',
 ];
 exports.app.use((0, cors_1.default)({
     origin: function (origin, callback) {
@@ -104,5 +110,10 @@ exports.app.use('/api/v1/view-stats', viewStats_routes_1.viewStatsRouter);
 exports.app.use('/api/v1/shortlet-bookings', shortletBooking_routes_1.shortletBookingRouter);
 exports.app.use('/api/v1/notifications', notification_routes_1.notificationRouter);
 exports.app.use('/api/v1/admin', adminDashboard_routes_1.adminDashboardRouter);
+exports.app.use('/api/v1/credit-points', creditPoint_routes_1.creditPointRouter);
+exports.app.use('/api/v1/chat', chat_routes_1.chatRouter);
+exports.app.use('/api/v1/professional-services', professionalService_routes_1.professionalServiceRouter);
+exports.app.use('/api/v1/contacts', contact_routes_1.contactRouter);
+exports.app.use('/api/v1/newsletter', newsletter_routes_1.newsletterRouter);
 exports.app.use(notFoundRoute_middleware_1.notFoundHandler);
 exports.app.use(errorHandler_middleware_1.errorHandler);

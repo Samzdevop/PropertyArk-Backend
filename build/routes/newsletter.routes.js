@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.newsletterRouter = void 0;
+const express_1 = require("express");
+const errorHandler_middleware_1 = require("../middlewares/errorHandler.middleware");
+const roleCheck_middleware_1 = require("../middlewares/roleCheck.middleware");
+const validateRequest_middleware_1 = require("../middlewares/validateRequest.middleware");
+const newsletter_controller_1 = require("../contollers/newsletter.controller");
+const newsletter_schemas_1 = require("../schemas/newsletter.schemas");
+exports.newsletterRouter = (0, express_1.Router)();
+exports.newsletterRouter.post('/subscribe', (0, validateRequest_middleware_1.validateRequest)(newsletter_schemas_1.subscribeSchema), newsletter_controller_1.subscribe);
+exports.newsletterRouter.get('/unsubscribe', newsletter_controller_1.unsubscribeByToken);
+exports.newsletterRouter.post('/unsubscribe', (0, validateRequest_middleware_1.validateRequest)(newsletter_schemas_1.unsubscribeByEmailSchema), newsletter_controller_1.unsubscribeByEmail);
+exports.newsletterRouter.get('/subscribers', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['ADMIN']), (0, validateRequest_middleware_1.validateRequest)(newsletter_schemas_1.getSubscribersQuerySchema), newsletter_controller_1.getAllSubscribers);
+exports.newsletterRouter.delete('/subscribers/:id', errorHandler_middleware_1.authenticateJWT, (0, roleCheck_middleware_1.requireRoles)(['ADMIN']), newsletter_controller_1.deleteSubscriber);

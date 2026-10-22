@@ -21,16 +21,16 @@ exports.authRouter.get('/google', (req, res, next) => {
     const role = req.query.role || 'USER';
     passport_1.default.authenticate('google', {
         scope: ['profile', 'email'],
-        state: role, // Pass role as state
+        state: role,
     })(req, res, next);
 });
 exports.authRouter.get('/google/callback', (req, res, next) => {
     passport_1.default.authenticate('google', {
-        session: false, // We don't want to use session, we use JWT
+        session: false,
         failureRedirect: '/auth/failure',
     }, (err, data) => {
         if (err || !data) {
-            console.error('❌ Google Auth Error:', err?.message || 'No data');
+            console.error(' Google Auth Error:', err?.message || 'No data');
             return res.redirect(`${process.env.FRONTEND_URL}/login?error=google_auth_failed`);
         }
         const { user, token } = data;

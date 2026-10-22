@@ -140,7 +140,7 @@ class InquiryService {
                 });
                 const mailOptions = {
                     to: property.vendor.email,
-                    from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+                    from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
                     subject: `New Inquiry: ${inquiry.inquiryNumber} - ${property.name}`,
                     text: `You have a new inquiry from ${inquiry.name} about ${property.name}`,
                     html: emailHtml
@@ -163,7 +163,7 @@ class InquiryService {
                 });
                 const mailOptions = {
                     to: inquiry.user.email,
-                    from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+                    from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
                     subject: `Inquiry Confirmation: ${inquiry.inquiryNumber}`,
                     text: `Your inquiry about ${property.name} has been sent successfully.`,
                     html: emailHtml
@@ -176,11 +176,19 @@ class InquiryService {
             logger_1.default.error('Failed to send inquiry notifications:', error);
         }
     }
-    static async getVendorInquiries(vendorId, filters) {
+    static async getVendorInquiries(userId, role, filters) {
         const { status, propertyId, page = 1, limit = 20 } = filters;
         const skip = (page - 1) * limit;
         const take = limit;
-        const where = { vendorId };
+        const where = {};
+        if (role === client_1.Role.VENDOR) {
+            where.vendorId = userId;
+        }
+        else if (role === client_1.Role.ADMIN) {
+        }
+        else {
+            throw new ForbiddenError_1.ForbiddenError("Only vendors and admins can view inquiries");
+        }
         if (status) {
             where.status = status;
         }
@@ -195,6 +203,15 @@ class InquiryService {
                 orderBy: { createdAt: 'desc' },
                 include: {
                     user: {
+                        select: {
+                            id: true,
+                            fullName: true,
+                            email: true,
+                            phone: true,
+                            avatar: true
+                        }
+                    },
+                    vendor: {
                         select: {
                             id: true,
                             fullName: true,
@@ -223,16 +240,37 @@ class InquiryService {
             prisma_1.default.inquiry.count({ where }),
             prisma_1.default.inquiry.groupBy({
                 by: ['status'],
-                where: { vendorId },
+                where: { vendorId: userId },
                 _count: true
             })
         ]);
+        const formattedInquiries = inquiries.map(inquiry => ({
+            id: inquiry.id,
+            inquiryNumber: inquiry.inquiryNumber,
+            name: inquiry.name,
+            location: inquiry.location,
+            message: inquiry.message,
+            meetingType: inquiry.meetingType,
+            proposedDate: inquiry.proposedDate,
+            scheduledDate: inquiry.scheduledDate,
+            status: inquiry.status,
+            isCompleted: inquiry.isCompleted,
+            completedAt: inquiry.completedAt,
+            satisfactionStatus: inquiry.satisfactionStatus,
+            satisfactionComment: inquiry.satisfactionComment,
+            createdAt: inquiry.createdAt,
+            respondedAt: inquiry.respondedAt,
+            viewedAt: inquiry.viewedAt,
+            user: inquiry.user,
+            vendor: inquiry.vendor,
+            property: inquiry.property
+        }));
         const statusCounts = counts.reduce((acc, item) => {
             acc[item.status] = item._count;
             return acc;
         }, {});
         return {
-            inquiries,
+            inquiries: formattedInquiries,
             pagination: {
                 page,
                 limit,
@@ -245,6 +283,134 @@ class InquiryService {
                 declined: statusCounts.DECLINED || 0,
                 total
             }
+        };
+    }
+    static async getAdminInquiryStats() {
+        const now = new Date();
+        const [total, pending, accepted, declined, completed, reported] = await Promise.all([
+            prisma_1.default.inquiry.count(),
+            prisma_1.default.inquiry.count({
+                where: {
+                    status: client_1.InquiryStatus.PENDING
+                }
+            }),
+            prisma_1.default.inquiry.count({
+                where: {
+                    status: client_1.InquiryStatus.ACCEPTED
+                }
+            }),
+            prisma_1.default.inquiry.count({
+                where: {
+                    status: client_1.InquiryStatus.DECLINED
+                }
+            }),
+            prisma_1.default.inquiry.count({
+                where: {
+                    isCompleted: true
+                }
+            }),
+            prisma_1.default.inquiry.count({
+                where: {
+                    isCompleted: true,
+                    satisfactionStatus: {
+                        in: ['NOT_SATISFIED', 'OTHERS']
+                    }
+                }
+            })
+        ]);
+        // Upcoming inquiries (ACCEPTED with scheduledDate in future)
+        const upcoming = await prisma_1.default.inquiry.count({
+            where: {
+                status: client_1.InquiryStatus.ACCEPTED,
+                scheduledDate: { gte: now },
+                isCompleted: false
+            }
+        });
+        const reportedInquiries = await prisma_1.default.inquiry.findMany({
+            where: {
+                isCompleted: true,
+                satisfactionStatus: {
+                    in: ['NOT_SATISFIED', 'OTHERS']
+                }
+            },
+            take: 20,
+            orderBy: { completedAt: 'desc' },
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        fullName: true,
+                        email: true,
+                        phone: true,
+                        avatar: true
+                    }
+                },
+                vendor: {
+                    select: {
+                        id: true,
+                        fullName: true,
+                        email: true,
+                        phone: true,
+                        avatar: true
+                    }
+                },
+                property: {
+                    select: {
+                        id: true,
+                        name: true,
+                        address: true,
+                        city: true,
+                        state: true,
+                        listingType: true
+                    }
+                }
+            }
+        });
+        return {
+            stats: {
+                total,
+                pending,
+                upcoming,
+                accepted,
+                declined,
+                completed,
+                reported
+            },
+            reportedInquiries: reportedInquiries.map(inquiry => ({
+                id: inquiry.id,
+                inquiryNumber: inquiry.inquiryNumber,
+                name: inquiry.name,
+                location: inquiry.location,
+                message: inquiry.message,
+                meetingType: inquiry.meetingType,
+                status: inquiry.status,
+                satisfactionStatus: inquiry.satisfactionStatus,
+                satisfactionComment: inquiry.satisfactionComment,
+                completedAt: inquiry.completedAt,
+                createdAt: inquiry.createdAt,
+                user: {
+                    id: inquiry.user.id,
+                    fullName: inquiry.user.fullName,
+                    email: inquiry.user.email,
+                    phone: inquiry.user.phone,
+                    avatar: inquiry.user.avatar
+                },
+                vendor: {
+                    id: inquiry.vendor.id,
+                    fullName: inquiry.vendor.fullName,
+                    email: inquiry.vendor.email,
+                    phone: inquiry.vendor.phone,
+                    avatar: inquiry.vendor.avatar
+                },
+                property: {
+                    id: inquiry.property.id,
+                    name: inquiry.property.name,
+                    address: inquiry.property.address,
+                    city: inquiry.property.city,
+                    state: inquiry.property.state,
+                    listingType: inquiry.property.listingType
+                }
+            }))
         };
     }
     static async getUserInquiries(userId, page = 1, limit = 20) {
@@ -448,7 +614,7 @@ class InquiryService {
                 }
             }
         });
-        await this.sendReviewNotification(updatedInquiry, status, reason);
+        await this.sendReviewNotification(updatedInquiry, status, reason, scheduledDate);
         logger_1.default.info(`Inquiry ${inquiry.inquiryNumber} ${status.toLowerCase()} by vendor ${vendorId}`);
         return updatedInquiry;
     }
@@ -499,7 +665,7 @@ class InquiryService {
                 });
                 const mailOptions = {
                     to: inquiry.user.email,
-                    from: `"Property Management" ${process.env.SENDER_EMAIL}`,
+                    from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
                     subject,
                     text: `Your inquiry ${inquiry.inquiryNumber} has been ${status.toLowerCase()}`,
                     html: emailHtml

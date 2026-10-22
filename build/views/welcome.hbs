@@ -1,45 +1,179 @@
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Account Verification</title>
-  </head>
-  <body>
-    <div
-      style="
-						width: 400px;
-						height: 100%;
-						text-align: center;
-						justify-self: center;
-						margin: auto;
-					"
-    >
-      <div style="width: 100%">
-        <div style="width: 400px; display: inline-block; text-align: justify">
-          Hello
-          {{fullName}},
-          <br />
-          <br />
-
-          Welcome to Agritech Limited.
-          <br /><br />
-
-          We are delighted to have you here
-          <br />
-          <br />
-
-          This OTP will verify your email address, and then you'll officially be
-          a part of the Agritech community.
-          <br /><br />
-
-          <br />
-          See you there!
-          <br /><br />
-          Best regards,<br />
-          The PropertyArk Team
-        </div>
-      </div>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+    }
+    .header {
+      background: linear-gradient(135deg, #1C96C1 0%, #157a9e 100%);
+      color: white;
+      padding: 40px 30px;
+      text-align: center;
+      border-radius: 8px 8px 0 0;
+    }
+    .header h1 {
+      margin: 0 0 10px;
+      font-size: 28px;
+      font-weight: 700;
+    }
+    .header p {
+      margin: 0;
+      font-size: 15px;
+      opacity: 0.95;
+    }
+    .content {
+      background-color: #ffffff;
+      padding: 40px 30px;
+      border-radius: 0 0 8px 8px;
+      border: 1px solid #e0e0e0;
+      border-top: none;
+    }
+    .greeting {
+      font-size: 18px;
+      color: #1C96C1;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .message {
+      font-size: 15px;
+      color: #555;
+      margin: 20px 0;
+      line-height: 1.7;
+    }
+    .benefits-box {
+      background-color: #f0f9fc;
+      border-left: 4px solid #1C96C1;
+      padding: 20px 25px;
+      margin: 25px 0;
+      border-radius: 6px;
+    }
+    .benefits-box h3 {
+      margin: 0 0 15px;
+      color: #1C96C1;
+      font-size: 16px;
+    }
+    .benefits-box ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .benefits-box li {
+      padding: 6px 0;
+      color: #444;
+      font-size: 14px;
+    }
+    .benefits-box li::marker {
+      color: #1C96C1;
+      font-weight: bold;
+    }
+    .button-container {
+      text-align: center;
+      margin: 35px 0 25px;
+    }
+    .button {
+      display: inline-block;
+      background: linear-gradient(135deg, #1C96C1 0%, #157a9e 100%);
+      color: white !important;
+      padding: 16px 45px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(28, 150, 193, 0.3);
+    }
+    .button:hover {
+      opacity: 0.9;
+    }
+    .help-box {
+      background-color: #fff8e1;
+      border-left: 4px solid #ffc107;
+      padding: 15px 20px;
+      margin: 25px 0;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .help-box strong {
+      color: #f57c00;
+    }
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+      padding: 20px;
+      border-top: 1px solid #e0e0e0;
+    }
+    .footer p {
+      margin: 5px 0;
+    }
+    .social-links {
+      margin: 15px 0;
+    }
+    .social-links a {
+      color: #1C96C1;
+      text-decoration: none;
+      margin: 0 8px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Welcome to PropertyArk! 🎉</h1>
+      <p>Your journey starts here</p>
     </div>
-  </body>
+    <div class="content">
+      <div class="greeting">Hello {{fullName}},</div>
+
+      <p class="message">{{message}}</p>
+
+      {{#if benefits.length}}
+        <div class="benefits-box">
+          <h3>What you can do now:</h3>
+          <ul>
+            {{#each benefits}}
+              <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+      {{/if}}
+
+      <div class="button-container">
+        <a href="{{actionUrl}}" class="button">{{actionLabel}}</a>
+      </div>
+
+      <div class="help-box">
+        <strong>💡 Need help?</strong> Check out our help center or reply to this email — we're here to support you.
+      </div>
+
+      <p class="message">
+        We're excited to have you on board. If you have any questions, don't hesitate to reach out.
+      </p>
+
+      <p class="message" style="margin-top: 30px;">
+        Welcome aboard,<br>
+        <strong>The PropertyArk Team</strong>
+      </p>
+    </div>
+    <div class="footer">
+      <p>© {{currentYear}} PropertyArk. All rights reserved.</p>
+      <p>This is an automated message — please do not reply to this email.</p>
+    </div>
+  </div>
+</body>
 </html>

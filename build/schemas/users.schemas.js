@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.changePasswordSchema = exports.updateUserSchema = void 0;
+exports.switchRoleSchema = exports.completeInquirySchema = exports.changePasswordSchema = exports.selfDeleteAccountSchema = exports.updateUserSchema = void 0;
 const zod_1 = require("zod");
 const phoneFormat_1 = require("../utils/phoneFormat");
 exports.updateUserSchema = zod_1.z.object({
@@ -14,6 +14,21 @@ exports.updateUserSchema = zod_1.z.object({
             message: "Phone must be in valid international format (+XXX...) or local Nigerian format (0XXX...)"
         })
             .optional(),
+    }),
+});
+exports.selfDeleteAccountSchema = zod_1.z.object({
+    body: zod_1.z.object({
+        password: zod_1.z
+            .string()
+            .min(8, 'Password must be at least 8 characters long')
+            .optional(),
+        reason: zod_1.z
+            .string()
+            .max(500, 'Reason must be less than 500 characters')
+            .optional(),
+        confirmationPhrase: zod_1.z
+            .string()
+            .refine((val) => val === 'DELETE MY ACCOUNT', { message: 'Please type "DELETE MY ACCOUNT" exactly to confirm' }),
     }),
 });
 // export const updateProfileSchema = z.object({
@@ -38,6 +53,32 @@ exports.changePasswordSchema = zod_1.z.object({
     }).refine((data) => data.newPassword === data.confirmPassword, {
         message: "New password and confirmation do not match",
         path: ["confirmPassword"],
+    }),
+});
+exports.completeInquirySchema = zod_1.z.object({
+    params: zod_1.z.object({
+        inquiryId: zod_1.z.string().cuid("Invalid inquiry ID")
+    }),
+    body: zod_1.z.object({
+        satisfactionStatus: zod_1.z.enum(['SATISFIED', 'NOT_SATISFIED', 'OTHERS'], {
+            errorMap: () => ({ message: "Satisfaction status must be SATISFIED, NOT_SATISFIED, or OTHERS" })
+        }),
+        satisfactionComment: zod_1.z.string().optional()
+    }).refine((data) => {
+        if (data.satisfactionStatus === 'OTHERS' && !data.satisfactionComment) {
+            return false;
+        }
+        return true;
+    }, {
+        message: "Comment is required when satisfaction status is OTHERS",
+        path: ["satisfactionComment"]
+    })
+});
+exports.switchRoleSchema = zod_1.z.object({
+    body: zod_1.z.object({
+        role: zod_1.z.enum(['USER', 'VENDOR'], {
+            errorMap: () => ({ message: "Role must be either 'USER' or 'VENDOR'" }),
+        }),
     }),
 });
 // export const adminUpdateUserSchema = z.object({

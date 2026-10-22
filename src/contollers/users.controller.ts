@@ -11,7 +11,7 @@ import { CreditTransactionStatus, CreditTransactionType, Role } from '@prisma/cl
 import { UserService } from '../services/user.service';
 import { attachBaseUrlUploads } from '../utils/attachBaseUrl.utils';
 import { serializeDates } from '../utils/serialize.utils';
-import Logger from '@/config/logger';
+import Logger from '../config/logger';
 
 
 

@@ -29,8 +29,8 @@ const testEmail = async (req, res, next) => {
         });
         const mailOptions = {
             to: email,
-            from: `"Property Management" ${process.env.SENDER_EMAIL}`,
-            subject: "SMTP Test - Property Management",
+            from: `"Property Ark" ${process.env.SENDER_EMAIL}`,
+            subject: "SMTP Test - Property Ark",
             text: "This is a test email to verify SMTP integration is working.",
             html,
         };
@@ -62,8 +62,8 @@ const getEmailStatus = async (req, res, next) => {
             port: parseInt(process.env.SMTP_PORT || '587'),
             secure: process.env.SMTP_SECURE === 'true',
             username: process.env.SMTP_USERNAME ? '***' : 'not set',
-            senderEmail: process.env.SENDER_EMAIL || 'noreply@propertymanagement.com',
-            senderName: process.env.SENDER_NAME || 'Property Management',
+            senderEmail: process.env.SENDER_EMAIL || 'noreply@propertyark.com',
+            senderName: process.env.SENDER_NAME || 'Property Ark',
         };
         // Test connection
         const isConnected = await (0, mail_services_1.testSMTPConnection)();
