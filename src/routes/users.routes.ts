@@ -30,6 +30,13 @@ usersRouter.patch(
 	changePassword
 );
  
+usersRouter.patch(
+  '/switch-role',
+  authenticateJWT,
+  requireRoles(['USER', 'VENDOR']),
+  validateRequest(switchRoleSchema),
+  switchRole
+);
 
 usersRouter.patch(
 	'/avatar',
@@ -93,13 +100,4 @@ usersRouter.delete(
 	authenticateJWT,
 	requireRoles(['ADMIN']),
 	deleteUser
-);
-
-
-usersRouter.patch(
-  '/switch-role',
-  authenticateJWT,
-  requireRoles(['USER', 'VENDOR']),
-  validateRequest(switchRoleSchema),
-  switchRole
 );
